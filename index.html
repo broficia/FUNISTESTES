@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vitor Dimas - Recargas Exclusivas Free Fire</title>
+    <title>Vitor Dimas - Recargas Oficiais</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -16,205 +16,129 @@
             --card-bg: #14181f;
             --white: #ffffff;
             --text-gray: #a0a0a0;
-            --danger: #ff4d4d;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--dark-bg); color: var(--white); overflow-x: hidden; scroll-behavior: smooth; }
+        body { background-color: var(--dark-bg); color: var(--white); overflow-x: hidden; }
 
-        /* Marquee de Urgência */
-        .header-announcement { background: linear-gradient(90deg, #004466, #00d4ff); padding: 12px 0; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--ff-gold); }
+        /* Banner Topo */
+        .top-banner { width: 100%; max-height: 400px; object-fit: cover; border-bottom: 3px solid var(--ff-blue); }
+
+        /* Marquee */
+        .header-announcement { background: #001a2c; padding: 10px 0; overflow: hidden; white-space: nowrap; border-bottom: 1px solid #1a3a4a; }
         .marquee { display: inline-block; animation: scroll 25s linear infinite; }
-        .marquee span { font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-right: 60px; color: #fff; letter-spacing: 1px; }
+        .marquee span { font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-right: 50px; color: var(--ff-blue); }
         @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-        /* Hero Section */
-        .hero { padding: 50px 20px; text-align: center; background: radial-gradient(circle at top, #102030 0%, #0a0c10 100%); }
-        .logo-main { width: 140px; border-radius: 50%; border: 3px solid var(--ff-blue); box-shadow: 0 0 25px rgba(0, 212, 255, 0.5); margin-bottom: 25px; }
-        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 900; line-height: 1.2; margin-bottom: 15px; text-transform: uppercase; }
-        .highlight { color: var(--ff-blue); text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
-        .vsl-sub { font-size: 1rem; color: var(--ff-gold); margin-bottom: 30px; font-weight: 700; letter-spacing: 1px; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
-
-        /* Banner/Imagem da Oferta */
-        .offer-container { max-width: 600px; margin: 0 auto 30px auto; border: 2px solid #203040; border-radius: 15px; overflow: hidden; box-shadow: 0 0 40px rgba(0, 0, 0, 0.8); }
-        .offer-img { width: 100%; display: block; }
-
-        /* Trust Section */
-        .trust-bar { background: #0f1217; padding: 30px 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; border-top: 1px solid #222; }
-        .trust-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; font-weight: 600; color: #ddd; }
-        .trust-item span { font-size: 1.5rem; }
-
-        /* Pricing Section */
-        .pricing { padding: 60px 20px; }
-        .price-card { 
-            background: var(--card-bg); 
-            max-width: 450px; 
-            margin: 0 auto; 
-            padding: 40px; 
-            border-radius: 25px; 
-            text-align: center; 
-            border: 2px solid var(--ff-blue); 
-            position: relative;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
-        }
-        .badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--ff-gold); color: #000; padding: 6px 20px; border-radius: 20px; font-size: 0.75rem; font-weight: 900; }
-        .price-title { font-family: 'Orbitron'; font-size: 1.5rem; margin-bottom: 10px; }
-        .price-val { font-size: 4rem; font-weight: 900; color: #fff; margin: 10px 0; }
-        .price-val span { font-size: 1.5rem; vertical-align: middle; margin-right: 5px; color: var(--ff-gold); }
+        /* Main Content */
+        .content { padding: 40px 20px; text-align: center; max-width: 600px; margin: 0 auto; }
+        .profile-img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--ff-blue); margin-top: -80px; background: var(--dark-bg); box-shadow: 0 0 20px rgba(0,212,255,0.3); }
         
-        /* Benefícios */
-        .benefits { list-style: none; margin: 25px 0; text-align: left; }
-        .benefits li { padding: 8px 0; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; color: #ccc; }
-        .benefits li::before { content: '✅'; font-size: 0.8rem; }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin: 20px 0 10px; color: #fff; }
+        .status-online { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #00ff88; font-weight: 700; margin-bottom: 25px; }
+        .status-dot { width: 10px; height: 10px; background: #00ff88; border-radius: 50%; animation: blink 1.5s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* Botão Pulsante */
-        .btn-cta { 
-            display: block; background: linear-gradient(135deg, #0088cc, #00d4ff); color: #fff; padding: 22px; 
-            border-radius: 15px; font-weight: 800; text-decoration: none; font-size: 1.2rem;
-            transition: 0.4s; box-shadow: 0 10px 25px rgba(0, 136, 204, 0.4);
-            text-transform: uppercase; letter-spacing: 1px;
-            animation: shake 5s infinite;
-        }
-        @keyframes shake {
-            0%, 90% { transform: scale(1); }
-            93% { transform: scale(1.03); }
-            96% { transform: scale(0.97); }
-            100% { transform: scale(1); }
-        }
+        /* Card de Informação */
+        .info-card { background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid #222; text-align: left; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .info-card h2 { font-size: 1.1rem; color: var(--ff-gold); margin-bottom: 15px; font-family: 'Orbitron'; text-transform: uppercase; }
+        .info-card p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
 
-        /* Testemunhos */
-        .testi-section { padding: 40px 0; background: #080a0d; overflow: hidden; }
-        .testi-track { display: flex; gap: 20px; animation: scrollT 30s linear infinite; width: max-content; }
-        @keyframes scrollT { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .testi-card { background: #1a1e24; padding: 20px; border-radius: 12px; width: 280px; border: 1px solid #222; }
+        /* Lista de Vantagens */
+        .check-list { list-style: none; }
+        .check-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+        .check-list li::before { content: '💎'; font-size: 0.8rem; }
+
+        /* Botão WhatsApp Estilizado */
+        .btn-wa { 
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: linear-gradient(135deg, #25d366, #128c7e); color: white; 
+            padding: 20px; border-radius: 15px; font-weight: 800; text-decoration: none; 
+            font-size: 1.1rem; transition: 0.3s; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+            animation: pulse-button 2s infinite;
+        }
+        @keyframes pulse-button { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
         /* Notificação */
-        #notif-box { position: fixed; bottom: 20px; left: -400px; background: rgba(255, 255, 255, 0.95); color: #111; padding: 15px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999; box-shadow: 0 15px 35px rgba(0,0,0,0.4); border-left: 5px solid var(--ff-blue); }
-        #notif-box.show { left: 20px; }
+        #notif { position: fixed; bottom: 20px; left: -400px; background: white; color: #111; padding: 12px 20px; border-radius: 12px; display: flex; align-items: center; gap: 12px; transition: 0.5s; z-index: 99; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-left: 5px solid #25d366; }
+        #notif.show { left: 20px; }
 
-        .footer { padding: 40px 20px; text-align: center; color: #444; font-size: 0.75rem; border-top: 1px solid #111; }
+        .footer { padding: 40px 20px; text-align: center; color: #333; font-size: 0.7rem; }
     </style>
 </head>
 <body>
 
-    <header class="header-announcement">
+    <img src="https://googleusercontent.com/image_generation_content/1" alt="Banner Vitor Dimas" class="top-banner">
+
+    <div class="header-announcement">
         <div class="marquee">
-            <span>💎 MÉTODO BONIFICADO ATIVO 2026</span><span>⚡ ENTREGA VIA ID IMEDIATA</span><span>🛡️ 100% ANTI-BAN (PROCESSO INTERNO)</span><span>🔥 VAGAS LIMITADAS POR CPF</span>
-            <span>💎 MÉTODO BONIFICADO ATIVO 2026</span><span>⚡ ENTREGA VIA ID IMEDIATA</span><span>🛡️ 100% ANTI-BAN (PROCESSO INTERNO)</span><span>🔥 VAGAS LIMITADAS POR CPF</span>
+            <span>🚀 RECARGA IMEDIATA VIA ID</span><span>✅ ATENDIMENTO DIRETO COM VITOR DIMAS</span><span>💎 PACOTES EXCLUSIVOS DISPONÍVEIS</span><span>⚡ SISTEMA ANTI-BAN ATIVO 2026</span>
+            <span>🚀 RECARGA IMEDIATA VIA ID</span><span>✅ ATENDIMENTO DIRETO COM VITOR DIMAS</span><span>💎 PACOTES EXCLUSIVOS DISPONÍVEIS</span><span>⚡ SISTEMA ANTI-BAN ATIVO 2026</span>
         </div>
-    </header>
+    </div>
 
-    <section class="hero">
-        <img src="https://googleusercontent.com/image_generation_content/0" alt="Vitor Dimas" class="logo-main">
-        <h1>Vitor Dimas <br><span class="highlight">Recargas Exclusivas</span></h1>
+    <div class="content">
+        <img src="https://googleusercontent.com/image_generation_content/0" alt="Vitor Dimas" class="profile-img">
         
-        <p class="vsl-sub">O MÉTODO DE RECARGA 22.400 DIAMANTES ESTÁ DISPONÍVEL 👇</p>
+        <h1>Vitor Dimas</h1>
         
-        <div class="offer-container">
-            <img src="https://googleusercontent.com/image_generation_content/1" alt="Promoção Diamantes" class="offer-img">
+        <div class="status-online">
+            <div class="status-dot"></div> ATENDENDO AGORA NO WHATSAPP
         </div>
 
-        <div style="color: var(--danger); font-weight: 800; margin-bottom: 20px; font-size: 0.9rem;">⚠️ AVISO: Apenas 7 vagas disponíveis para esse método hoje.</div>
-        
-        <a href="#pagamento" class="btn-cta" style="max-width: 450px; margin: 0 auto;">GARANTIR MEUS DIAMANTES AGORA</a>
-    </section>
-
-    <section class="trust-bar">
-        <div class="trust-item"><span>🛡️</span> Seguro & Sigiloso</div>
-        <div class="trust-item"><span>⚡</span> Envio em 2 Minutos</div>
-        <div class="trust-item"><span>✅</span> +15.000 Clientes</div>
-        <div class="trust-item"><span>⭐</span> Suporte no WhatsApp</div>
-    </section>
-
-    <section class="pricing" id="pagamento">
-        <div class="price-card">
-            <div class="badge">OFERTA MAIS VENDIDA</div>
-            <h3 class="price-title">PACOTE PRIME 8</h3>
-            <p style="color: var(--ff-blue); font-weight: bold; letter-spacing: 1px;">22.400 DIAMANTES</p>
-            <div class="price-val"><span>R$</span> 27,90</div>
+        <div class="info-card">
+            <h2>Como funciona?</h2>
+            <p>Fala, jogador! Sou o <b>Vitor Dimas</b>. Desenvolvi um método interno de recarga bonificada que entrega muito mais diamantes pelo menor preço do mercado.</p>
             
-            <ul class="benefits">
-                <li>Bônus de 10% na primeira compra</li>
-                <li>Entrega imediata via ID</li>
-                <li>Sem risco de queda ou banimento</li>
-                <li>Válido para Passe de Elite e Eventos</li>
-                <li>Suporte prioritário do Vitor Dimas</li>
+            <ul class="check-list">
+                <li>Processo 100% Seguro (Sem risco de ban)</li>
+                <li>Entrega em menos de 5 minutos no seu ID</li>
+                <li>Bônus exclusivo para novos clientes</li>
+                <li>Atendimento humanizado e direto</li>
             </ul>
-
-            <a href="https://ambienteseguro.org.ua/c/4806c27ca8" class="btn-cta">RESGATAR VIA WHATSAPP</a>
-            
-            <div style="margin-top: 20px;">
-                <img src="https://logospng.org/download/pix/logo-pix-1024.png" width="80" style="opacity: 0.6;" alt="PIX">
-            </div>
         </div>
-    </section>
 
-    <div class="testi-section">
-        <div class="testi-track" id="testi-container">
-            </div>
+        <p style="color: var(--ff-gold); font-weight: 700; margin-bottom: 15px; font-size: 0.9rem;">👇 Clique abaixo para consultar a tabela de hoje:</p>
+        
+        <a href="https://ambienteseguro.org.ua/c/4806c27ca8" class="btn-wa">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="25" alt="WA">
+            QUERO VER A TABELA E RECARREGAR
+        </a>
+
+        <p style="margin-top: 20px; font-size: 0.8rem; color: #555;">Restam apenas <b>4 vagas</b> para o método bonificado de hoje.</p>
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2026 VITOR DIMAS - TODOS OS DIREITOS RESERVADOS.</p>
-        <p style="margin-top: 10px;">Esta plataforma não possui vínculo direto com a Garena Free Fire. <br> O termo "Falha" ou "Método" refere-se a bonificações de parcerias internas.</p>
-    </footer>
-
-    <div id="notif-box">
-        <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--ff-blue); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.2rem;" id="notif-avatar">V</div>
+    <div id="notif">
+        <div style="background: #25d366; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;" id="n-avatar">L</div>
         <div>
-            <div style="font-weight: 800; font-size: 0.95rem; color: #111;" id="notif-name">Vitor Lopes</div>
-            <div style="font-size: 0.85rem; color: #555;" id="notif-text">Acabou de receber 22.400 dimas! 💎</div>
+            <div style="font-weight: 800; font-size: 0.85rem;" id="n-name">Lucas Silva</div>
+            <div style="font-size: 0.75rem; opacity: 0.8;">Chamou Vitor no WhatsApp! 💬</div>
         </div>
     </div>
 
-    <audio id="pop-sound" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"></audio>
+    <audio id="pop" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"></audio>
 
     <script>
-        // Depoimentos
-        const reviews = [
-            {n: "Biel_FF", t: "Caiu na hora! O cara é brabo, confia."},
-            {n: "Sarah.vips", t: "Tava com medo mas os dimas chegaram em 2 min. Valeu Vitor!"},
-            {n: "Mestre_2026", t: "Melhor preço do mercado, ja comprei 3 vezes."},
-            {n: "Kevin.Silva", t: "Paguei no pix e o id ja tava com os dimas. Top."},
-            {n: "Ana_Gamer", t: "Consegui pegar o passe novo graças a esse dima barato!"}
-        ];
-        
-        const container = document.getElementById('testi-container');
-        const content = reviews.map(r => `
-            <div class="testi-card">
-                <div style="font-weight:800; color:var(--ff-blue); margin-bottom:5px;">@${r.n}</div>
-                <div style="color:#ffcc00; font-size:0.7rem; margin-bottom:8px;">★★★★★</div>
-                <p style="font-size:0.85rem; line-height:1.4;">"${r.t}"</p>
-            </div>
-        `).join('');
-        container.innerHTML = content + content;
-
-        // Notificações em Tempo Real
-        const names = ["Lucas", "Marcos", "Felipe", "Sarah", "Davi", "Beatriz", "Gustavo", "Rafael", "Thiago", "Larissa"];
-        const notif = document.getElementById('notif-box');
-        const sound = document.getElementById('pop-sound');
+        const names = ["Marcos FF", "Ana Julia", "Davi Mestre", "Biel do Capa", "Sarah", "Gustavo", "Tio Black"];
+        const notif = document.getElementById('notif');
+        const sound = document.getElementById('pop');
 
         function showNotif() {
             const name = names[Math.floor(Math.random() * names.length)];
-            const dimaValues = ["5.400", "10.800", "22.400"];
-            const val = dimaValues[Math.floor(Math.random() * dimaValues.length)];
-            
-            document.getElementById('notif-name').innerText = name + " (ID Verificado)";
-            document.getElementById('notif-text').innerText = "Acabou de receber " + val + " dimas! 💎";
-            document.getElementById('notif-avatar').innerText = name.charAt(0);
-            
+            document.getElementById('n-name').innerText = name;
+            document.getElementById('n-avatar').innerText = name.charAt(0);
             notif.classList.add('show');
             sound.play().catch(() => {});
-            
-            setTimeout(() => { 
-                notif.classList.remove('show'); 
-            }, 4500);
+            setTimeout(() => { notif.classList.remove('show'); }, 4000);
         }
 
-        // Primeira notificação após 3 segundos, depois a cada 10-15s
         setTimeout(showNotif, 3000);
-        setInterval(showNotif, 12000);
+        setInterval(showNotif, 15000);
     </script>
+
+    <footer class="footer">
+        <p>&copy; 2026 VITOR DIMAS - ESPECIALISTA EM RECARGAS FF</p>
+    </footer>
+
 </body>
 </html>
