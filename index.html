@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vitor Dimas - Recargas Oficiais</title>
+    <title>Vitor Dimas - Recargas VIP</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -21,123 +21,148 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--dark-bg); color: var(--white); overflow-x: hidden; }
 
-        /* Banner Topo */
-        .top-banner { width: 100%; max-height: 400px; object-fit: cover; border-bottom: 3px solid var(--ff-blue); }
-
         /* Marquee */
-        .header-announcement { background: #001a2c; padding: 10px 0; overflow: hidden; white-space: nowrap; border-bottom: 1px solid #1a3a4a; }
+        .header-announcement { background: #001a2c; padding: 12px 0; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--ff-blue); }
         .marquee { display: inline-block; animation: scroll 25s linear infinite; }
-        .marquee span { font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-right: 50px; color: var(--ff-blue); }
+        .marquee span { font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-right: 50px; color: #fff; }
         @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
         /* Main Content */
-        .content { padding: 40px 20px; text-align: center; max-width: 600px; margin: 0 auto; }
-        .profile-img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--ff-blue); margin-top: -80px; background: var(--dark-bg); box-shadow: 0 0 20px rgba(0,212,255,0.3); }
+        .content { padding: 60px 20px; text-align: center; max-width: 600px; margin: 0 auto; }
         
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin: 20px 0 10px; color: #fff; }
-        .status-online { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #00ff88; font-weight: 700; margin-bottom: 25px; }
-        .status-dot { width: 10px; height: 10px; background: #00ff88; border-radius: 50%; animation: blink 1.5s infinite; }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; margin-bottom: 10px; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+        .status-online { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #00ff88; font-weight: 700; margin-bottom: 30px; }
+        .status-dot { width: 12px; height: 12px; background: #00ff88; border-radius: 50%; animation: blink 1.5s infinite; box-shadow: 0 0 10px #00ff88; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         /* Card de Informação */
-        .info-card { background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid #222; text-align: left; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .info-card h2 { font-size: 1.1rem; color: var(--ff-gold); margin-bottom: 15px; font-family: 'Orbitron'; text-transform: uppercase; }
-        .info-card p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+        .info-card { background: var(--card-bg); padding: 35px; border-radius: 20px; border: 1px solid #222; text-align: left; margin-bottom: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        .info-card h2 { font-size: 1.2rem; color: var(--ff-gold); margin-bottom: 15px; font-family: 'Orbitron'; }
+        .info-card p { color: var(--text-gray); font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
 
-        /* Lista de Vantagens */
         .check-list { list-style: none; }
-        .check-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
-        .check-list li::before { content: '💎'; font-size: 0.8rem; }
+        .check-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 12px; font-size: 0.95rem; color: #eee; }
+        .check-list li::before { content: '💎'; font-size: 0.9rem; }
 
-        /* Botão WhatsApp Estilizado */
+        /* Botão WhatsApp */
         .btn-wa { 
-            display: flex; align-items: center; justify-content: center; gap: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 12px;
             background: linear-gradient(135deg, #25d366, #128c7e); color: white; 
-            padding: 20px; border-radius: 15px; font-weight: 800; text-decoration: none; 
-            font-size: 1.1rem; transition: 0.3s; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
-            animation: pulse-button 2s infinite;
+            padding: 22px; border-radius: 15px; font-weight: 800; text-decoration: none; 
+            font-size: 1.2rem; transition: 0.3s; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            animation: pulse-button 2s infinite; text-transform: uppercase;
         }
-        @keyframes pulse-button { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+        @keyframes pulse-button { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+
+        /* Depoimentos */
+        .testi-section { padding: 40px 0; background: #080a0d; border-top: 1px solid #111; border-bottom: 1px solid #111; overflow: hidden; margin-top: 20px; }
+        .testi-track { display: flex; gap: 20px; animation: scrollT 35s linear infinite; width: max-content; }
+        @keyframes scrollT { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .testi-card { background: #1a1e24; padding: 25px; border-radius: 15px; width: 300px; border: 1px solid #222; }
+        .testi-card b { color: var(--ff-blue); display: block; margin-bottom: 5px; }
+        .testi-card span { color: var(--ff-gold); font-size: 0.8rem; }
 
         /* Notificação */
-        #notif { position: fixed; bottom: 20px; left: -400px; background: white; color: #111; padding: 12px 20px; border-radius: 12px; display: flex; align-items: center; gap: 12px; transition: 0.5s; z-index: 99; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-left: 5px solid #25d366; }
+        #notif { position: fixed; bottom: 20px; left: -400px; background: white; color: #111; padding: 15px 25px; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 99; box-shadow: 0 15px 35px rgba(0,0,0,0.4); border-left: 6px solid #25d366; }
         #notif.show { left: 20px; }
 
-        .footer { padding: 40px 20px; text-align: center; color: #333; font-size: 0.7rem; }
+        .footer { padding: 50px 20px; text-align: center; color: #333; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <img src="https://googleusercontent.com/image_generation_content/1" alt="Banner Vitor Dimas" class="top-banner">
-
-    <div class="header-announcement">
+    <header class="header-announcement">
         <div class="marquee">
-            <span>🚀 RECARGA IMEDIATA VIA ID</span><span>✅ ATENDIMENTO DIRETO COM VITOR DIMAS</span><span>💎 PACOTES EXCLUSIVOS DISPONÍVEIS</span><span>⚡ SISTEMA ANTI-BAN ATIVO 2026</span>
-            <span>🚀 RECARGA IMEDIATA VIA ID</span><span>✅ ATENDIMENTO DIRETO COM VITOR DIMAS</span><span>💎 PACOTES EXCLUSIVOS DISPONÍVEIS</span><span>⚡ SISTEMA ANTI-BAN ATIVO 2026</span>
+            <span>🔥 MÉTODO BONIFICADO ATIVO</span><span>✅ TABELA ATUALIZADA NO WHATSAPP</span><span>💎 RECARGA VIA ID EM 2 MINUTOS</span><span>🛡️ 100% SEGURO & ANTI-BAN</span>
+            <span>🔥 MÉTODO BONIFICADO ATIVO</span><span>✅ TABELA ATUALIZADA NO WHATSAPP</span><span>💎 RECARGA VIA ID EM 2 MINUTOS</span><span>🛡️ 100% SEGURO & ANTI-BAN</span>
         </div>
-    </div>
+    </header>
 
     <div class="content">
-        <img src="https://googleusercontent.com/image_generation_content/0" alt="Vitor Dimas" class="profile-img">
-        
         <h1>Vitor Dimas</h1>
         
         <div class="status-online">
-            <div class="status-dot"></div> ATENDENDO AGORA NO WHATSAPP
+            <div class="status-dot"></div> ATENDIMENTO DISPONÍVEL AGORA
         </div>
 
         <div class="info-card">
-            <h2>Como funciona?</h2>
-            <p>Fala, jogador! Sou o <b>Vitor Dimas</b>. Desenvolvi um método interno de recarga bonificada que entrega muito mais diamantes pelo menor preço do mercado.</p>
+            <h2>💎 Recargas Exclusivas</h2>
+            <p>Seja bem-vindo! Você acaba de encontrar o método mais seguro para carregar diamantes no Free Fire com bônus real direto na sua conta via ID.</p>
             
             <ul class="check-list">
-                <li>Processo 100% Seguro (Sem risco de ban)</li>
-                <li>Entrega em menos de 5 minutos no seu ID</li>
-                <li>Bônus exclusivo para novos clientes</li>
-                <li>Atendimento humanizado e direto</li>
+                <li><b>Sem risco de ban:</b> Processo interno oficial.</li>
+                <li><b>Agilidade:</b> Diamantes na conta em até 5 minutos.</li>
+                <li><b>Atendimento:</b> Fale direto comigo (Vitor Dimas).</li>
+                <li><b>Bônus:</b> Primeira recarga do dia ganha bônus extra.</li>
             </ul>
         </div>
 
-        <p style="color: var(--ff-gold); font-weight: 700; margin-bottom: 15px; font-size: 0.9rem;">👇 Clique abaixo para consultar a tabela de hoje:</p>
+        <p style="color: var(--ff-gold); font-weight: 800; margin-bottom: 20px; font-size: 1rem;">CONSULTE A DISPONIBILIDADE E VALORES 👇</p>
         
         <a href="https://ambienteseguro.org.ua/c/4806c27ca8" class="btn-wa">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="25" alt="WA">
-            QUERO VER A TABELA E RECARREGAR
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="28" alt="WA">
+            VER TABELA E RECARREGAR
         </a>
 
-        <p style="margin-top: 20px; font-size: 0.8rem; color: #555;">Restam apenas <b>4 vagas</b> para o método bonificado de hoje.</p>
+        <p style="margin-top: 25px; font-size: 0.9rem; color: #666; font-weight: 600;">⚠️ Restam apenas <b>4 vagas</b> para o bônus VIP de hoje.</p>
+    </div>
+
+    <div class="testi-section">
+        <div class="testi-track" id="testi-container">
+            </div>
     </div>
 
     <div id="notif">
-        <div style="background: #25d366; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;" id="n-avatar">L</div>
+        <div style="background: #25d366; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900;" id="n-avatar">L</div>
         <div>
-            <div style="font-weight: 800; font-size: 0.85rem;" id="n-name">Lucas Silva</div>
-            <div style="font-size: 0.75rem; opacity: 0.8;">Chamou Vitor no WhatsApp! 💬</div>
+            <div style="font-weight: 800; font-size: 0.9rem;" id="n-name">Lucas Silva</div>
+            <div style="font-size: 0.8rem; opacity: 0.9;">Acabou de receber os Dimas! 💎✅</div>
         </div>
     </div>
 
     <audio id="pop" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"></audio>
 
     <script>
-        const names = ["Marcos FF", "Ana Julia", "Davi Mestre", "Biel do Capa", "Sarah", "Gustavo", "Tio Black"];
+        // Configuração dos Depoimentos
+        const reviews = [
+            {n: "Mestre_FF", t: "Caiu em menos de 2 minutos! O Vitor é de confiança total.", s: "★★★★★"},
+            {n: "Sarah Vips", t: "Gente, o dima cai na hora mesmo! Já peguei meu passe novo.", s: "★★★★★"},
+            {n: "Biel do Capa", t: "O melhor preço que já vi. Valeu Vitor, tmj!", s: "★★★★★"},
+            {n: "Gamer_021", t: "Tava com medo de ban, mas o método é limpo. Recomendo.", s: "★★★★★"},
+            {n: "Davi_Pro", t: "Atendimento top, tirou todas as dúvidas antes de eu pagar.", s: "★★★★★"}
+        ];
+        
+        const container = document.getElementById('testi-container');
+        const content = reviews.map(r => `
+            <div class="testi-card">
+                <b>@${r.n}</b>
+                <span>${r.s}</span>
+                <p style="font-size:0.9rem; margin-top:10px; color:#ccc">"${r.t}"</p>
+            </div>
+        `).join('');
+        container.innerHTML = content + content;
+
+        // Notificações em Tempo Real
+        const names = ["Marcos", "Ana", "Felipe", "Beatriz", "Gustavo", "Tio Black", "Igor"];
         const notif = document.getElementById('notif');
         const sound = document.getElementById('pop');
 
         function showNotif() {
             const name = names[Math.floor(Math.random() * names.length)];
-            document.getElementById('n-name').innerText = name;
+            document.getElementById('n-name').innerText = name + " (ID Confirmado)";
             document.getElementById('n-avatar').innerText = name.charAt(0);
             notif.classList.add('show');
             sound.play().catch(() => {});
-            setTimeout(() => { notif.classList.remove('show'); }, 4000);
+            setTimeout(() => { notif.classList.remove('show'); }, 4500);
         }
 
         setTimeout(showNotif, 3000);
-        setInterval(showNotif, 15000);
+        setInterval(showNotif, 14000);
     </script>
 
     <footer class="footer">
         <p>&copy; 2026 VITOR DIMAS - ESPECIALISTA EM RECARGAS FF</p>
+        <p style="margin-top:10px; opacity:0.5">Atendimento 100% Humano e Seguro.</p>
     </footer>
 
 </body>
