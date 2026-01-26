@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vitor Dimas - Recargas VIP</title>
+    <title>Vitor Dimas - Recargas Free Fire</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -12,37 +12,59 @@
         :root {
             --ff-blue: #00d4ff; 
             --ff-gold: #ffcc00;
-            --dark-bg: #0a0c10;
-            --card-bg: #14181f;
+            --dark-bg: #06080a;
+            --card-bg: rgba(20, 24, 31, 0.85); /* Efeito Glass */
             --white: #ffffff;
-            --text-gray: #a0a0a0;
+            --text-gray: #ccc;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--dark-bg); color: var(--white); overflow-x: hidden; }
+        
+        body { 
+            background-color: var(--dark-bg); 
+            /* Fundo com textura gamer */
+            background-image: linear-gradient(rgba(6, 8, 10, 0.9), rgba(6, 8, 10, 0.9)), url('https://e1.pxfuel.com/desktop-wallpaper/964/630/desktop-wallpaper-free-fire-blue-free-fire-backgrounds.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--white); 
+            overflow-x: hidden; 
+        }
 
-        /* Marquee */
-        .header-announcement { background: #001a2c; padding: 12px 0; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--ff-blue); }
+        /* Marquee Oficial */
+        .header-announcement { background: rgba(0, 26, 44, 0.9); padding: 12px 0; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--ff-blue); backdrop-filter: blur(5px); }
         .marquee { display: inline-block; animation: scroll 25s linear infinite; }
         .marquee span { font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-right: 50px; color: #fff; }
         @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+        /* Logos no Topo */
+        .top-logos { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; max-width: 800px; margin: 0 auto; }
+        .garena-logo { width: 80px; filter: grayscale(1) brightness(2); opacity: 0.7; }
+
         /* Main Content */
-        .content { padding: 60px 20px; text-align: center; max-width: 600px; margin: 0 auto; }
+        .content { padding: 40px 20px; text-align: center; max-width: 600px; margin: 0 auto; }
         
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; margin-bottom: 10px; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
-        .status-online { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #00ff88; font-weight: 700; margin-bottom: 30px; }
-        .status-dot { width: 12px; height: 12px; background: #00ff88; border-radius: 50%; animation: blink 1.5s infinite; box-shadow: 0 0 10px #00ff88; }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; margin-bottom: 10px; color: #fff; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px rgba(0, 212, 255, 0.5); }
+        .status-online { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #00ff88; font-weight: 700; margin-bottom: 30px; background: rgba(0, 255, 136, 0.1); padding: 5px 15px; border-radius: 20px; border: 1px solid rgba(0, 255, 136, 0.2); }
+        .status-dot { width: 10px; height: 10px; background: #00ff88; border-radius: 50%; animation: blink 1.5s infinite; box-shadow: 0 0 10px #00ff88; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         /* Card de Informação */
-        .info-card { background: var(--card-bg); padding: 35px; border-radius: 20px; border: 1px solid #222; text-align: left; margin-bottom: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        .info-card h2 { font-size: 1.2rem; color: var(--ff-gold); margin-bottom: 15px; font-family: 'Orbitron'; }
-        .info-card p { color: var(--text-gray); font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
+        .info-card { 
+            background: var(--card-bg); 
+            padding: 35px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            text-align: left; 
+            margin-bottom: 40px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+        }
+        .info-card h2 { font-size: 1.2rem; color: var(--ff-gold); margin-bottom: 15px; font-family: 'Orbitron'; text-transform: uppercase; border-left: 4px solid var(--ff-gold); padding-left: 15px; }
+        .info-card p { color: var(--text-gray); font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px; }
 
         .check-list { list-style: none; }
-        .check-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 12px; font-size: 0.95rem; color: #eee; }
-        .check-list li::before { content: '💎'; font-size: 0.9rem; }
+        .check-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 12px; font-size: 0.95rem; color: #fff; }
+        .check-list li::before { content: '✓'; color: var(--ff-blue); font-weight: 900; }
 
         /* Botão WhatsApp */
         .btn-wa { 
@@ -55,10 +77,10 @@
         @keyframes pulse-button { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
 
         /* Depoimentos */
-        .testi-section { padding: 40px 0; background: #080a0d; border-top: 1px solid #111; border-bottom: 1px solid #111; overflow: hidden; margin-top: 20px; }
+        .testi-section { padding: 40px 0; background: rgba(0, 0, 0, 0.5); border-top: 1px solid #222; border-bottom: 1px solid #222; overflow: hidden; margin-top: 20px; backdrop-filter: blur(5px); }
         .testi-track { display: flex; gap: 20px; animation: scrollT 35s linear infinite; width: max-content; }
         @keyframes scrollT { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .testi-card { background: #1a1e24; padding: 25px; border-radius: 15px; width: 300px; border: 1px solid #222; }
+        .testi-card { background: rgba(26, 30, 36, 0.9); padding: 25px; border-radius: 15px; width: 300px; border: 1px solid #333; }
         .testi-card b { color: var(--ff-blue); display: block; margin-bottom: 5px; }
         .testi-card span { color: var(--ff-gold); font-size: 0.8rem; }
 
@@ -66,49 +88,62 @@
         #notif { position: fixed; bottom: 20px; left: -400px; background: white; color: #111; padding: 15px 25px; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 99; box-shadow: 0 15px 35px rgba(0,0,0,0.4); border-left: 6px solid #25d366; }
         #notif.show { left: 20px; }
 
-        .footer { padding: 50px 20px; text-align: center; color: #333; font-size: 0.8rem; }
+        .footer { padding: 50px 20px; text-align: center; color: #555; font-size: 0.8rem; }
+        
+        /* Selo de Segurança */
+        .secure-badge { display: flex; align-items: center; justify-content: center; gap: 5px; margin-top: 20px; opacity: 0.6; font-size: 0.75rem; color: #fff; }
     </style>
 </head>
 <body>
 
     <header class="header-announcement">
         <div class="marquee">
-            <span>🔥 MÉTODO ATIVO</span><span>✅ TABELA ATUALIZADA NO WHATSAPP</span><span>💎 RECARGA VIA ID EM 2 MINUTOS</span><span>🛡️ 100% SEGURO & ANTI-BAN</span>
-            <span>🔥 MÉTODO ATIVO</span><span>✅ TABELA ATUALIZADA NO WHATSAPP</span><span>💎 RECARGA VIA ID EM 2 MINUTOS</span><span>🛡️ 100% SEGURO & ANTI-BAN</span>
+            <span>🔥 FALHA DETECTADA: 26.880 DIAMANTES</span><span>✅ RECARGA VIA ID IMEDIATA</span><span>🛡️ SISTEMA ANTI-BAN ATIVO 2026</span><span>⚡ FALE COM VITOR DIMAS</span>
+            <span>🔥 FALHA DETECTADA: 26.880 DIAMANTES</span><span>✅ RECARGA VIA ID IMEDIATA</span><span>🛡️ SISTEMA ANTI-BAN ATIVO 2026</span><span>⚡ FALE COM VITOR DIMAS</span>
         </div>
     </header>
+
+    <div class="top-logos">
+        <img src="https://logodownload.org/wp-content/uploads/2019/09/garena-logo.png" class="garena-logo" alt="Garena">
+        <div style="font-size: 0.6rem; color: #555; text-align: right;">FF-SERVER-BR<br>v. 1.104.x</div>
+    </div>
 
     <div class="content">
         <h1>Vitor Dimas</h1>
         
         <div class="status-online">
-            <div class="status-dot"></div> ATENDIMENTO DISPONÍVEL AGORA NO WHATSAPP        </div>
+            <div class="status-dot"></div> ATENDIMENTO DISPONÍVEL NO WHATSAPP
+        </div>
 
         <div class="info-card">
-            <h2>💎 Recargas Exclusivas</h2>
-            <p>Seja bem-vindo(a)! A falha encontrada ainda está ativa, mas pode sair do ar a qualquer momento. Ela funciona exclusivamente nas recargas de 26.880 diamantes no Free Fire, direto via ID. Aproveite enquanto está disponível falando comigo diretamente no meu WhatsApp!</p>
+            <h2>💎 Falha Interna Ativa</h2>
+            <p>Seja bem-vindo(a)! A falha encontrada ainda está ativa, mas pode sair do ar a qualquer momento. Ela funciona exclusivamente nas recargas de <b>26.880 diamantes</b> no Free Fire, direto via ID. Aproveite enquanto está disponível falando comigo diretamente no meu WhatsApp!</p>
             
             <ul class="check-list">
-                <li><b>Sem risco de ban:</b> Processo interno oficial.</li>
+                <li><b>Sem risco de ban:</b> Processo via ID seguro.</li>
                 <li><b>Agilidade:</b> Diamantes na conta em até 5 minutos.</li>
-                <li><b>Atendimento:</b> Fale direto comigo (Vitor Dimas).</li>
-                <li><b>Bônus:</b> Na sua primeira recarga ganha bônus extra.</li>
+                <li><b>Direto:</b> Fale com o especialista (Vitor Dimas).</li>
+                <li><b>Bônus:</b> Primeira recarga ganha bônus extra.</li>
             </ul>
         </div>
 
-        <p style="color: var(--ff-gold); font-weight: 800; margin-bottom: 20px; font-size: 1rem;">CONSULTE A DISPONIBILIDADE E VALORES 👇</p>
+        <p style="color: var(--ff-gold); font-weight: 800; margin-bottom: 20px; font-size: 1rem; text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);">CONSULTE O VALOR E DISPONIBILIDADE 👇</p>
         
         <a href="https://wa.me/message/ULEXJ2WNGPB4N1" class="btn-wa">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="28" alt="WA">
             VER TABELA E RECARREGAR
         </a>
 
-        <p style="margin-top: 25px; font-size: 0.9rem; color: #666; font-weight: 600;">⚠️ Restam apenas <b>4 vagas</b> para o bônus VIP de hoje.</p>
+        <div class="secure-badge">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+            CONEXÃO CRIPTOGRAFADA E SEGURA
+        </div>
+
+        <p style="margin-top: 25px; font-size: 0.9rem; color: #666; font-weight: 600;">⚠️ Restam apenas <b>4 vagas</b> para o método de hoje.</p>
     </div>
 
     <div class="testi-section">
-        <div class="testi-track" id="testi-container">
-            </div>
+        <div class="testi-track" id="testi-container"></div>
     </div>
 
     <div id="notif">
@@ -122,13 +157,12 @@
     <audio id="pop" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"></audio>
 
     <script>
-        // Configuração dos Depoimentos
         const reviews = [
-            {n: "Mestre_FF", t: "Caiu em menos de 2 minutos! O Vitor é de confiança total.", s: "★★★★★"},
-            {n: "Sarah Vips", t: "Gente, o dima cai na hora mesmo! Já peguei meu passe novo.", s: "★★★★★"},
-            {n: "Biel do Capa", t: "O melhor preço que já vi. Valeu Vitor, tmj!", s: "★★★★★"},
-            {n: "Gamer_021", t: "Tava com medo de ban, mas o método é limpo. Recomendo.", s: "★★★★★"},
-            {n: "Davi_Pro", t: "Atendimento top, tirou todas as dúvidas antes de eu pagar.", s: "★★★★★"}
+            {n: "Mestre_FF", t: "Caiu em menos de 2 minutos! O Vitor é fera.", s: "★★★★★"},
+            {n: "Sarah Vips", t: "Gente, os 26k caíram certinho! Valeu Vitor.", s: "★★★★★"},
+            {n: "Biel do Capa", t: "Melhor método. Já fiz 3 recargas hoje.", s: "★★★★★"},
+            {n: "Gamer_021", t: "Confiável demais, atendimento rápido no whats.", s: "★★★★★"},
+            {n: "Davi_Pro", t: "O bônus caiu na hora. Tmj Vitor!", s: "★★★★★"}
         ];
         
         const container = document.getElementById('testi-container');
@@ -141,14 +175,13 @@
         `).join('');
         container.innerHTML = content + content;
 
-        // Notificações em Tempo Real
         const names = ["Marcos", "Ana", "Felipe", "Beatriz", "Gustavo", "Tio Black", "Igor"];
         const notif = document.getElementById('notif');
         const sound = document.getElementById('pop');
 
         function showNotif() {
             const name = names[Math.floor(Math.random() * names.length)];
-            document.getElementById('n-name').innerText = name + " (ID Confirmado)";
+            document.getElementById('n-name').innerText = name + " (Recarga Confirmada)";
             document.getElementById('n-avatar').innerText = name.charAt(0);
             notif.classList.add('show');
             sound.play().catch(() => {});
@@ -161,7 +194,7 @@
 
     <footer class="footer">
         <p>&copy; 2026 VITOR DIMAS - ESPECIALISTA EM RECARGAS FF</p>
-        <p style="margin-top:10px; opacity:0.5">Atendimento 100% Humano e Seguro.</p>
+        <p style="margin-top:10px; opacity:0.3">Não possuímos vínculo direto com a Garena. Método exclusivo.</p>
     </footer>
 
 </body>
