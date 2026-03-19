@@ -5,219 +5,290 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunidade GoldBet VIP - Futebol & Green</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         body {
-            background: radial-gradient(circle, #0a1a0a 0%, #050505 100%);
+            background: radial-gradient(ellipse at 50% 0%, hsla(142,71%,45%,0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 50%, hsla(43,74%,49%,0.05) 0%, transparent 50%),
+                        hsl(120,30%,3%);
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Outfit', sans-serif;
             overflow-x: hidden;
         }
-        .btn-pulse { animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, hsl(43,74%,49%), hsl(43,90%,70%));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
+        .text-gradient-green {
+            background: linear-gradient(135deg, hsl(142,71%,45%), hsl(160,60%,55%));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .glass-card {
+            background: linear-gradient(135deg, hsla(120,15%,8%,0.8), hsla(120,15%,6%,0.9));
+            border: 1px solid hsl(120,10%,18%);
+            backdrop-filter: blur(20px);
+        }
+        .glow-green {
+            box-shadow: 0 0 30px hsla(142,71%,45%,0.3), 0 0 60px hsla(142,71%,45%,0.1);
+        }
+
+        .btn-cta {
+            background: linear-gradient(to right, hsl(142,71%,45%), hsl(142,71%,45%));
+            animation: pulse-glow 2s infinite;
+            position: relative; overflow: hidden;
+        }
+        .btn-cta::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px hsla(142,71%,45%,0.4), 0 0 40px hsla(142,71%,45%,0.2); }
+            50% { box-shadow: 0 0 30px hsla(142,71%,45%,0.6), 0 0 60px hsla(142,71%,45%,0.3); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes ping {
+            75%, 100% { transform: scale(2); opacity: 0; }
+        }
+
+        .progress-fill { transition: width 2.5s ease-out; }
+
+        /* Notification */
         .notif-entrou {
-            position: fixed; bottom: 20px; left: 20px; background: rgba(255, 255, 255, 0.95);
-            color: #333; padding: 10px 15px; border-radius: 50px; display: flex;
-            align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 100; display: none;
+            position: fixed; bottom: 20px; left: 20px;
+            background: rgba(255,255,255,0.95); color: #333;
+            padding: 10px 15px; border-radius: 50px;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            z-index: 100; transform: translateX(-120%);
+            transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
         }
-        .progress-fill { width: 0%; transition: width 2.5s ease-out; }
-        
-        /* Carrossel Automático Sem Pausa */
+        .notif-entrou.show { transform: translateX(0); }
+        .notif-entrou img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+
+        /* Carousel */
         .carousel-track {
             display: flex;
-            width: calc(300px * 16); /* Dobro dos cards para loop infinito */
             animation: scroll 40s linear infinite;
         }
         .carousel-track:hover { animation-play-state: paused; }
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-300px * 8)); }
+            100% { transform: translateX(-50%); }
         }
         .testimonial-card {
-            min-width: 280px; margin: 0 10px;
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px; padding: 20px;
+            min-width: 300px; margin: 0 12px; padding: 24px; border-radius: 16px;
+            background: linear-gradient(135deg, hsla(120,15%,8%,0.8), hsla(120,15%,6%,0.9));
+            border: 1px solid hsl(120,10%,18%); backdrop-filter: blur(20px); flex-shrink: 0;
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed; width: 4px; height: 4px; border-radius: 50%;
+            background: hsla(142,71%,45%,0.3); pointer-events: none;
+            animation: float-particle 4s ease-in-out infinite;
+        }
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0); opacity: 0.3; }
+            50% { transform: translateY(-20px); opacity: 0.7; }
+        }
+
+        /* Fade up animation */
+        .fade-up {
+            opacity: 0; transform: translateY(30px);
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
+        .delay-4 { animation-delay: 0.6s; }
+        .delay-5 { animation-delay: 0.75s; }
+
+        .logo-glow {
+            animation: logoIn 0.6s ease-out forwards;
+            opacity: 0; transform: scale(0.8);
+        }
+        @keyframes logoIn {
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center py-10 px-4">
+<body>
 
-    <!-- Notificação Fake -->
-    <div id="notification" class="notif-entrou animate__animated">
-        <img id="notif-img" src="" class="w-10 h-10 rounded-full border-2 border-green-500">
+    <!-- Particles -->
+    <div class="particle" style="left:15%;top:10%;animation-duration:3s"></div>
+    <div class="particle" style="left:30%;top:22%;animation-duration:4s"></div>
+    <div class="particle" style="left:45%;top:34%;animation-duration:5s"></div>
+    <div class="particle" style="left:60%;top:46%;animation-duration:6s"></div>
+    <div class="particle" style="left:75%;top:58%;animation-duration:7s"></div>
+    <div class="particle" style="left:90%;top:70%;animation-duration:8s"></div>
+
+    <!-- Notification -->
+    <div class="notif-entrou" id="notif">
+        <img id="notif-avatar" src="" alt="">
         <div>
-            <p class="text-xs font-bold" id="notif-text"></p>
-            <p class="text-[10px] text-gray-500">Acabou de entrar no grupo</p>
+            <p class="text-sm font-semibold" id="notif-name"></p>
+            <p class="text-xs text-gray-500">Acabou de entrar no grupo</p>
         </div>
     </div>
 
-    <div class="max-w-md w-full text-center space-y-6">
-        
-        <!-- Header / Logo -->
-        <div class="relative inline-block">
-            <div class="absolute -inset-1 bg-green-500 rounded-full blur opacity-30"></div>
-            <img src="https://cdn-icons-png.flaticon.com/512/33/33736.png" alt="Logo Futebol" class="relative w-24 mx-auto filter invert">
+    <div class="relative z-10 mx-auto max-w-2xl px-4 py-8 md:py-12">
+
+        <!-- Logo -->
+        <div class="logo-glow mx-auto mb-8 flex justify-center">
+            <div class="relative">
+                <div class="absolute -inset-2 rounded-full blur-xl" style="background: linear-gradient(to bottom right, hsla(142,71%,45%,0.3), hsla(43,74%,49%,0.2));"></div>
+                <img src="GOLD.PNG" alt="GoldBet VIP Logo" class="relative h-32 w-32 rounded-full border-2 object-cover shadow-2xl md:h-40 md:w-40" style="border-color: hsla(142,71%,45%,0.4);">
+            </div>
         </div>
 
-        <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter italic leading-none">
-            A MAIOR COMUNIDADE DE <br><span class="text-green-500 underline text-4xl">FUTEBOL</span> DO BRASIL
+        <!-- Badge AO VIVO -->
+        <div class="fade-up mb-6 flex justify-center">
+            <span class="inline-flex items-center gap-2.5 rounded-lg px-5 py-2.5 text-sm font-bold tracking-wide text-white shadow-lg" style="background:#dc2626;box-shadow:0 4px 15px rgba(220,38,38,0.3);">
+                <span class="relative flex" style="width:10px;height:10px;">
+                    <span class="absolute inline-flex h-full w-full rounded-full bg-white opacity-75" style="animation:ping 1s cubic-bezier(0,0,0.2,1) infinite;"></span>
+                    <span class="relative inline-flex rounded-full bg-white" style="width:10px;height:10px;"></span>
+                </span>
+                AO VIVO
+            </span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="fade-up delay-1 mb-6 text-center text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">
+            A MAIOR COMUNIDADE DE <span class="text-gradient-green">FUTEBOL</span> DO BRASIL
         </h1>
 
-        <p class="text-gray-300 text-lg leading-tight">
-            Receba análises diárias, palpites exclusivos, e resenha entre membros do grupo. 
-            <br><span class="text-green-400 font-bold underline">Últimas vagas para entrar no grupo!</span>
+        <!-- Subtitle -->
+        <p class="fade-up delay-2 mb-8 text-center text-base leading-relaxed md:text-lg" style="color:hsl(120,5%,55%);">
+            Receba análises diárias, palpites exclusivos, e resenha entre membros do grupo.
+            <span class="font-semibold" style="color:hsl(43,90%,70%);">Últimas vagas para entrar no grupo!</span>
         </p>
 
-        <!-- Barra de Progresso Animada -->
-        <div class="bg-white/5 border border-white/10 p-4 rounded-2xl space-y-3">
-            <div class="flex justify-between items-center text-[11px] font-bold">
-                <span class="text-red-500 animate-pulse text-xs">⚠️ GRUPO NO WHATSAPP QUASE CHEIO</span>
-                <span class="text-gray-400 uppercase tracking-widest"><span id="percent-text">0</span>% PREENCHIDAS</span>
-            </div>
-            <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden border border-white/5 text-left">
-                <div id="progress-bar" class="progress-fill h-full bg-gradient-to-r from-green-600 to-green-400 shadow-[0_0_10px_#22c55e]"></div>
+        <!-- Progress Bar -->
+        <div class="fade-up delay-3 mb-8">
+            <div class="glass-card glow-green rounded-2xl p-5">
+                <div class="mb-3 flex items-center justify-between">
+                    <span class="text-sm font-semibold" style="color:hsl(142,71%,45%);">⚠️ GRUPO NO WHATSAPP QUASE CHEIO</span>
+                    <span class="text-sm font-bold" style="color:hsl(43,90%,70%);" id="progress-text">0% PREENCHIDAS</span>
+                </div>
+                <div class="h-3 overflow-hidden rounded-full" style="background:hsl(120,10%,12%);">
+                    <div class="progress-fill h-full rounded-full" id="progress-bar" style="width:0%;background:linear-gradient(to right,hsl(142,71%,45%),hsl(142,71%,45%));"></div>
+                </div>
             </div>
         </div>
 
-        <!-- Card de Informação e Botão -->
-        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm">
-            <div class="flex justify-around mb-6">
-                <div class="text-center">
-                    <p class="text-2xl font-bold text-green-400">14.7k</p>
-                    <p class="text-[10px] uppercase text-gray-400 font-bold leading-none">Membros Ativos</p>
-                </div>
-                <div class="border-l border-white/10"></div>
-                <div class="text-center">
-                    <p class="text-2xl font-bold text-green-400">98%</p>
-                    <p class="text-[10px] uppercase text-gray-400 font-bold leading-none">Assertividade Média</p>
-                </div>
+        <!-- Stats -->
+        <div class="fade-up delay-4 mb-8 grid grid-cols-2 gap-4">
+            <div class="glass-card rounded-2xl p-5 text-center">
+                <p class="text-3xl font-extrabold text-gradient-green" style="font-family:'Space Grotesk',sans-serif;">14.7k</p>
+                <p class="mt-1 text-sm" style="color:hsl(120,5%,55%);">Membros Ativos</p>
             </div>
+            <div class="glass-card rounded-2xl p-5 text-center">
+                <p class="text-3xl font-extrabold text-gradient-gold" style="font-family:'Space Grotesk',sans-serif;">98%</p>
+                <p class="mt-1 text-sm" style="color:hsl(120,5%,55%);">Assertividade Média</p>
+            </div>
+        </div>
 
-            <a href="SEU_LINK_AQUI" class="btn-pulse inline-block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 rounded-xl text-xl uppercase transition-all transform active:scale-95 shadow-[0_0_20px_rgba(34,197,94,0.4)]">
-                Entrar no Grupo Agora!
+        <!-- CTA Button -->
+        <div class="fade-up delay-5 mb-4 flex flex-col items-center">
+            <a href="#" class="btn-cta w-full max-w-md rounded-2xl px-8 py-5 text-center text-lg font-bold shadow-2xl transition-all duration-300 hover:scale-105 block" style="color:hsl(120,30%,3%);font-family:'Space Grotesk',sans-serif;text-decoration:none;">
+                <span class="relative z-10">Entrar no Grupo Agora!</span>
             </a>
-            
-            <p class="text-[10px] mt-4 text-gray-400 italic font-bold uppercase tracking-widest">
-                🔓 Acesso 100% Gratuito ao grupo
-            </p>
+            <p class="mt-3 text-sm" style="color:hsl(120,5%,55%);">🔓 Acesso 100% Gratuito ao grupo</p>
         </div>
-
-        <!-- SEÇÃO DE DEPOIMENTOS AUTOMÁTICOS -->
-        <div class="py-4 overflow-hidden relative">
-            <h3 class="text-sm font-bold uppercase text-green-500 mb-4 italic">💬 O QUE DIZEM SOBRE A COMUNIDADE:</h3>
-            <div class="carousel-track" id="track">
-                <!-- 8 Depoimentos Originais -->
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <img src="https://i.pravatar.cc/150?u=1" class="w-10 h-10 rounded-full border-2 border-green-500">
-                        <div class="text-left font-bold text-sm">Felipe Almeida <p class="text-[10px] text-green-400 italic">"GoldBet é elite!"</p></div>
-                    </div>
-                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Melhor grupo que já entrei! As análises da GoldBet são certeiras e a resenha no grupo é livre, geral se ajuda."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <img src="https://i.pravatar.cc/150?u=2" class="w-10 h-10 rounded-full border-2 border-green-500">
-                        <div class="text-left font-bold text-sm">Julia Ramos <p class="text-[10px] text-green-400 italic">"Green garantido!"</p></div>
-                    </div>
-                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Gosto muito das lives e da liberdade de conversar com todos. O pessoal entende muito de futebol, ansiosa pra Copa!"</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <img src="https://i.pravatar.cc/150?u=3" class="w-10 h-10 rounded-full border-2 border-green-500">
-                        <div class="text-left font-bold text-sm">Marcos Paulo <p class="text-[10px] text-green-400 italic">"Resenha nota 10"</p></div>
-                    </div>
-                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Não é só aposta, é amizade. A gente discute os jogos, troca ideia sobre escalação... sensacional a GoldBet."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <img src="https://i.pravatar.cc/150?u=4" class="w-10 h-10 rounded-full border-2 border-green-500">
-                        <div class="text-left font-bold text-sm">Beatriz Souza <p class="text-[10px] text-green-400 italic">"Muito transparente"</p></div>
-                    </div>
-                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Adoro que o grupo é aberto. Você vê o que as outras pessoas estão pensando. As análises GoldBet são tops."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <img src="https://i.pravatar.cc/150?u=5" class="w-10 h-10 rounded-full border-2 border-green-500">
-                        <div class="text-left font-bold text-sm">Ricardo Silva <p class="text-[10px] text-green-400 italic">"Foco na Copa!"</p></div>
-                    </div>
-                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"O grupo ferve nas rodadas do Brasileirão e já estamos preparando tudo pra Copa 2026. Melhor comunidade."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <img src="https://i.pravatar.cc/150?u=6" class="w-10 h-10 rounded-full border-2 border-green-500">
-                        <div class="text-left font-bold text-sm">Ana Clara <p class="text-[10px] text-green-400 italic">"Super recomendo"</p></div>
-                    </div>
-                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Eu não entendia muito de odds, mas no grupo a galera explica tudo. A GoldBet me ajudou a lucrar de verdade."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <img src="https://i.pravatar.cc/150?u=7" class="w-10 h-10 rounded-full border-2 border-green-500">
-                        <div class="text-left font-bold text-sm">Thiago G. <p class="text-[10px] text-green-400 italic">"Palpites Monstros"</p></div>
-                    </div>
-                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Os palpites diários são muito bem fundamentados. E o melhor é que o grupo é grátis, sem enganação."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <img src="https://i.pravatar.cc/150?u=8" class="w-10 h-10 rounded-full border-2 border-green-500">
-                        <div class="text-left font-bold text-sm">Vanessa Oliveira <p class="text-[10px] text-green-400 italic">"Só Green!"</p></div>
-                    </div>
-                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Comunidade nota mil. Resenha, futebol e lucro. O que mais a gente quer? Só vem!"</p>
-                </div>
-                <!-- Fim da lista - O script vai duplicar isso visualmente para o loop -->
-            </div>
-        </div>
-
-        <p class="text-gray-500 text-[10px]">
-            &copy; 2026 Comunidade GoldBet - Todos os direitos reservados.
-        </p>
     </div>
 
-    <script>
-        // Clonar itens para o carrossel infinito sem "pulo"
-        const track = document.getElementById('track');
-        track.innerHTML += track.innerHTML;
+    <!-- Testimonials -->
+    <section class="py-16">
+        <h2 class="mb-10 text-center text-2xl font-bold md:text-3xl" style="font-family:'Space Grotesk',sans-serif;">
+            💬 <span class="text-gradient-gold">O QUE DIZEM SOBRE A COMUNIDADE:</span>
+        </h2>
+        <div class="overflow-hidden">
+            <div class="carousel-track" id="carousel-track"></div>
+        </div>
+    </section>
 
-        // Animação da Barra
-        window.addEventListener('load', () => {
-            const bar = document.getElementById('progress-bar');
-            const text = document.getElementById('percent-text');
-            setTimeout(() => {
-                bar.style.width = '94%';
-                let count = 0;
-                let interval = setInterval(() => {
-                    if (count >= 94) clearInterval(interval);
-                    else { count++; text.innerText = count; }
-                }, 25);
-            }, 500);
-        });
+    <!-- Footer -->
+    <footer class="py-6 text-center text-xs" style="border-top:1px solid hsla(120,10%,15%,0.3);color:hsl(120,5%,55%);">
+        © 2026 Comunidade GoldBet - Todos os direitos reservados.
+    </footer>
 
-        // Sistema de Notificações
-        const pessoas = [
-            { n: "Gustavo Rocha", i: "https://randomuser.me/api/portraits/men/11.jpg" },
-            { n: "Mariana Dias", i: "https://randomuser.me/api/portraits/women/12.jpg" },
-            { n: "Bruno Lopes", i: "https://randomuser.me/api/portraits/men/13.jpg" },
-            { n: "Camila Faria", i: "https://randomuser.me/api/portraits/women/14.jpg" }
-        ];
+<script>
+    // ===== AVATAR URLS (placeholder realistic faces) =====
+    const AVATAR_MALE = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face";
+    const AVATAR_FEMALE = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face";
 
-        function showNotification() {
-            const notif = document.getElementById('notification');
-            const randomPessoa = pessoas[Math.floor(Math.random() * pessoas.length)];
-            document.getElementById('notif-img').src = randomPessoa.i;
-            document.getElementById('notif-text').innerText = randomPessoa.n;
-            notif.style.display = 'flex';
-            notif.classList.remove('animate__fadeOutLeft');
-            notif.classList.add('animate__fadeInLeft');
-            setTimeout(() => {
-                notif.classList.replace('animate__fadeInLeft', 'animate__fadeOutLeft');
-            }, 4000);
-        }
-        setInterval(showNotification, 9000);
-        setTimeout(showNotification, 2500);
-    </script>
+    // ===== NOTIFICATIONS =====
+    const people = [
+        { name: "Lucas M.", g: "m" }, { name: "Fernanda S.", g: "f" },
+        { name: "Pedro H.", g: "m" }, { name: "Camila R.", g: "f" },
+        { name: "Gustavo L.", g: "m" }, { name: "Isabela F.", g: "f" },
+        { name: "Rafael C.", g: "m" }, { name: "Larissa T.", g: "f" },
+        { name: "Bruno A.", g: "m" }, { name: "Amanda P.", g: "f" },
+        { name: "Diego S.", g: "m" }, { name: "Natália B.", g: "f" },
+        { name: "Matheus O.", g: "m" }, { name: "Juliana K.", g: "f" },
+        { name: "André V.", g: "m" },
+    ];
+    const notif = document.getElementById("notif");
+    const notifName = document.getElementById("notif-name");
+    const notifAvatar = document.getElementById("notif-avatar");
+
+    function showNotif() {
+        const p = people[Math.floor(Math.random() * people.length)];
+        notifName.textContent = p.name;
+        notifAvatar.src = p.g === "f" ? AVATAR_FEMALE : AVATAR_MALE;
+        notif.classList.add("show");
+        setTimeout(() => notif.classList.remove("show"), 3500);
+    }
+    setTimeout(showNotif, 3000);
+    setInterval(showNotif, 7000);
+
+    // ===== PROGRESS BAR =====
+    setTimeout(() => {
+        document.getElementById("progress-bar").style.width = "87%";
+        document.getElementById("progress-text").textContent = "87% PREENCHIDAS";
+    }, 800);
+
+    // ===== TESTIMONIALS =====
+    const testimonials = [
+        { name: "Felipe Almeida", title: "GoldBet é elite!", text: "Melhor grupo que já entrei! As análises da GoldBet são certeiras e a resenha no grupo é livre, geral se ajuda.", g: "m" },
+        { name: "Julia Ramos", title: "Green garantido!", text: "Gosto muito das lives e da liberdade de conversar com todos. O pessoal entende muito de futebol, ansiosa pra Copa!", g: "f" },
+        { name: "Marcos Paulo", title: "Resenha nota 10", text: "Não é só aposta, é amizade. A gente discute os jogos, troca ideia sobre escalação... sensacional a GoldBet.", g: "m" },
+        { name: "Beatriz Souza", title: "Muito transparente", text: "Adoro que o grupo é aberto. Você vê o que as outras pessoas estão pensando. As análises GoldBet são tops.", g: "f" },
+        { name: "Ricardo Silva", title: "Foco na Copa!", text: "O grupo ferve nas rodadas do Brasileirão e já estamos preparando tudo pra Copa 2026. Melhor comunidade.", g: "m" },
+        { name: "Ana Clara", title: "Super recomendo", text: "Eu não entendia muito de odds, mas no grupo a galera explica tudo. A GoldBet me ajudou a lucrar de verdade.", g: "f" },
+        { name: "Thiago G.", title: "Palpites Monstros", text: "Os palpites diários são muito bem fundamentados. E o melhor é que o grupo é grátis, sem enganação.", g: "m" },
+        { name: "Vanessa Oliveira", title: "Só Green!", text: "Comunidade nota mil. Resenha, futebol e lucro. O que mais a gente quer? Só vem!", g: "f" },
+    ];
+
+    const track = document.getElementById("carousel-track");
+    const allCards = [...testimonials, ...testimonials];
+    allCards.forEach(t => {
+        const card = document.createElement("div");
+        card.className = "testimonial-card";
+        card.innerHTML = `
+            <div class="mb-4 flex items-center gap-3">
+                <img src="${t.g === 'f' ? AVATAR_FEMALE : AVATAR_MALE}" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid hsla(142,71%,45%,0.4);">
+                <div>
+                    <p class="font-semibold" style="color:hsl(0,0%,95%);">${t.name}</p>
+                    <p class="text-sm" style="color:hsl(43,90%,70%);">"${t.title}"</p>
+                </div>
+            </div>
+            <p class="text-sm leading-relaxed" style="color:hsl(120,5%,55%);">"${t.text}"</p>
+            <div class="mt-3 flex gap-1">⭐⭐⭐⭐⭐</div>
+        `;
+        track.appendChild(card);
+    });
+</script>
 </body>
 </html>
