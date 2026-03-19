@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidade GoldBet - Futebol & Green</title>
+    <title>Comunidade GoldBet VIP - Futebol & Green</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
@@ -27,16 +27,21 @@
         }
         .progress-fill { width: 0%; transition: width 2.5s ease-out; }
         
-        /* Estilo Carrossel */
-        .carousel-container {
-            display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-            gap: 15px; padding: 10px; scrollbar-width: none;
+        /* Carrossel Automático Sem Pausa */
+        .carousel-track {
+            display: flex;
+            width: calc(300px * 16); /* Dobro dos cards para loop infinito */
+            animation: scroll 40s linear infinite;
         }
-        .carousel-container::-webkit-scrollbar { display: none; }
+        .carousel-track:hover { animation-play-state: paused; }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-300px * 8)); }
+        }
         .testimonial-card {
-            min-width: 280px; scroll-snap-align: center;
+            min-width: 280px; margin: 0 10px;
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px; padding: 15px;
+            border-radius: 20px; padding: 20px;
         }
     </style>
 </head>
@@ -53,89 +58,131 @@
 
     <div class="max-w-md w-full text-center space-y-6">
         
-        <!-- Header -->
+        <!-- Header / Logo -->
         <div class="relative inline-block">
             <div class="absolute -inset-1 bg-green-500 rounded-full blur opacity-30"></div>
-            <img src="https://cdn-icons-png.flaticon.com/512/33/33736.png" alt="Logo" class="relative w-20 mx-auto filter invert">
+            <img src="https://cdn-icons-png.flaticon.com/512/33/33736.png" alt="Logo Futebol" class="relative w-24 mx-auto filter invert">
         </div>
 
-        <h1 class="text-3xl font-black uppercase italic leading-tight">
-            Comunidade <span class="text-green-500">GoldBet</span> <br>Futebol & Resenha
+        <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter italic leading-none">
+            A Maior Comunidade de <br><span class="text-green-500 underline text-4xl">GoldBet</span> do Brasil
         </h1>
 
-        <!-- Barra de Vagas -->
+        <p class="text-gray-300 text-lg leading-tight">
+            Receba análises diárias, palpites e resenha exclusiva. 
+            <br><span class="text-green-400 font-bold underline">Vagas limitadas para hoje!</span>
+        </p>
+
+        <!-- Barra de Progresso Animada -->
         <div class="bg-white/5 border border-white/10 p-4 rounded-2xl space-y-3">
-            <div class="flex justify-between items-center text-[10px] font-bold">
-                <span class="text-red-500 animate-pulse">⚠️ GRUPO QUASE CHEIO</span>
-                <span class="text-gray-400 uppercase"><span id="percent-text">0</span>% PREENCHIDAS</span>
+            <div class="flex justify-between items-center text-[11px] font-bold">
+                <span class="text-red-500 animate-pulse text-xs">⚠️ GRUPO NO WHATSAPP QUASE CHEIO</span>
+                <span class="text-gray-400 uppercase tracking-widest"><span id="percent-text">0</span>% PREENCHIDAS</span>
             </div>
-            <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
-                <div id="progress-bar" class="progress-fill h-full bg-green-500 shadow-[0_0_10px_#22c55e]"></div>
+            <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden border border-white/5 text-left">
+                <div id="progress-bar" class="progress-fill h-full bg-gradient-to-r from-green-600 to-green-400 shadow-[0_0_10px_#22c55e]"></div>
             </div>
         </div>
 
-        <!-- Botão CTA Principal -->
-        <div class="py-2">
-            <a href="SEU_LINK_AQUI" class="btn-pulse inline-block w-full bg-green-600 text-white font-black py-5 rounded-2xl text-xl uppercase shadow-lg shadow-green-900/50">
-                Acessar Grupo Grátis
+        <!-- Card de Informação e Botão -->
+        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm">
+            <div class="flex justify-around mb-6">
+                <div class="text-center">
+                    <p class="text-2xl font-bold text-green-400">14.7k</p>
+                    <p class="text-[10px] uppercase text-gray-400 font-bold leading-none">Membros Ativos</p>
+                </div>
+                <div class="border-l border-white/10"></div>
+                <div class="text-center">
+                    <p class="text-2xl font-bold text-green-400">92%</p>
+                    <p class="text-[10px] uppercase text-gray-400 font-bold leading-none">Assertividade Médica</p>
+                </div>
+            </div>
+
+            <a href="SEU_LINK_AQUI" class="btn-pulse inline-block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 rounded-xl text-xl uppercase transition-all transform active:scale-95 shadow-[0_0_20px_rgba(34,197,94,0.4)]">
+                Entrar no Grupo Agora!
             </a>
-        </div>
-
-        <!-- Seção de Depoimentos -->
-        <div class="space-y-4">
-            <h3 class="text-left text-xs font-bold uppercase tracking-widest text-gray-400 ml-2">O que dizem os membros:</h3>
-            <div class="carousel-container">
-                <!-- Depoimento 1 -->
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-10 h-10 rounded-full border border-green-500">
-                        <div class="text-left leading-none">
-                            <p class="text-sm font-bold">André Ramos</p>
-                            <p class="text-[10px] text-green-500">Membro há 4 meses</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-left text-gray-300 italic">"As análises da GoldBet são outro nível. O melhor é poder falar com a galera sobre os jogos da Copa livremente. Nota 10!"</p>
-                </div>
-                <!-- Depoimento 2 -->
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-10 h-10 rounded-full border border-green-500">
-                        <div class="text-left leading-none">
-                            <p class="text-sm font-bold">Carla Mendonça</p>
-                            <p class="text-[10px] text-green-500">Membro VIP</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-left text-gray-300 italic">"Finalmente um grupo que não é só robô enviando link. As lives de palpites ajudam muito e a comunidade é super unida."</p>
-                </div>
-                <!-- Depoimento 3 -->
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://randomuser.me/api/portraits/men/22.jpg" class="w-10 h-10 rounded-full border border-green-500">
-                        <div class="text-left leading-none">
-                            <p class="text-sm font-bold">João Pedro</p>
-                            <p class="text-[10px] text-green-500">Membro Ativo</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-left text-gray-300 italic">"Mano, a liberdade de conversar no grupo é o diferencial. A resenha sobre futebol rola solta e os greens na GoldBet são constantes."</p>
-                </div>
-            </div>
-            <p class="text-[10px] text-gray-500 italic">Arraste para o lado para ver mais ➔</p>
-        </div>
-
-        <!-- Footer -->
-        <div class="pt-6 border-t border-white/10">
-            <div class="flex justify-center gap-4 opacity-40 mb-4">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-5 filter grayscale">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_of_the_FIFA_World_Cup_2026.svg" class="w-8 filter grayscale">
-            </div>
-            <p class="text-gray-600 text-[10px] uppercase tracking-tighter">
-                Copyright &copy; 2026 - GoldBet Community - 100% Seguro
+            
+            <p class="text-[10px] mt-4 text-gray-400 italic font-bold uppercase tracking-widest">
+                🔓 Acesso 100% Gratuito hoje
             </p>
         </div>
+
+        <!-- SEÇÃO DE DEPOIMENTOS AUTOMÁTICOS -->
+        <div class="py-4 overflow-hidden relative">
+            <h3 class="text-sm font-bold uppercase text-green-500 mb-4 italic">💬 O QUE DIZEM NA COMUNIDADE:</h3>
+            <div class="carousel-track" id="track">
+                <!-- 8 Depoimentos Originais -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <img src="https://i.pravatar.cc/150?u=1" class="w-10 h-10 rounded-full border-2 border-green-500">
+                        <div class="text-left font-bold text-sm">Felipe Almeida <p class="text-[10px] text-green-400 italic">"GoldBet é elite!"</p></div>
+                    </div>
+                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Melhor grupo que já entrei! As análises da GoldBet são certeiras e a resenha no grupo é livre, geral se ajuda."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <img src="https://i.pravatar.cc/150?u=2" class="w-10 h-10 rounded-full border-2 border-green-500">
+                        <div class="text-left font-bold text-sm">Julia Ramos <p class="text-[10px] text-green-400 italic">"Green garantido!"</p></div>
+                    </div>
+                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Gosto muito das lives e da liberdade de conversar com todos. O pessoal entende muito de futebol, ansiosa pra Copa!"</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <img src="https://i.pravatar.cc/150?u=3" class="w-10 h-10 rounded-full border-2 border-green-500">
+                        <div class="text-left font-bold text-sm">Marcos Paulo <p class="text-[10px] text-green-400 italic">"Resenha nota 10"</p></div>
+                    </div>
+                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Não é só aposta, é amizade. A gente discute os jogos, troca ideia sobre escalação... sensacional a GoldBet."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <img src="https://i.pravatar.cc/150?u=4" class="w-10 h-10 rounded-full border-2 border-green-500">
+                        <div class="text-left font-bold text-sm">Beatriz Souza <p class="text-[10px] text-green-400 italic">"Muito transparente"</p></div>
+                    </div>
+                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Adoro que o grupo é aberto. Você vê o que as outras pessoas estão pensando. As análises GoldBet são tops."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <img src="https://i.pravatar.cc/150?u=5" class="w-10 h-10 rounded-full border-2 border-green-500">
+                        <div class="text-left font-bold text-sm">Ricardo Silva <p class="text-[10px] text-green-400 italic">"Foco na Copa!"</p></div>
+                    </div>
+                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"O grupo ferve nas rodadas do Brasileirão e já estamos preparando tudo pra Copa 2026. Melhor comunidade."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <img src="https://i.pravatar.cc/150?u=6" class="w-10 h-10 rounded-full border-2 border-green-500">
+                        <div class="text-left font-bold text-sm">Ana Clara <p class="text-[10px] text-green-400 italic">"Super recomendo"</p></div>
+                    </div>
+                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Eu não entendia muito de odds, mas no grupo a galera explica tudo. A GoldBet me ajudou a lucrar de verdade."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <img src="https://i.pravatar.cc/150?u=7" class="w-10 h-10 rounded-full border-2 border-green-500">
+                        <div class="text-left font-bold text-sm">Thiago G. <p class="text-[10px] text-green-400 italic">"Palpites Monstros"</p></div>
+                    </div>
+                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Os palpites diários são muito bem fundamentados. E o melhor é que o grupo é grátis, sem enganação."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <img src="https://i.pravatar.cc/150?u=8" class="w-10 h-10 rounded-full border-2 border-green-500">
+                        <div class="text-left font-bold text-sm">Vanessa Oliveira <p class="text-[10px] text-green-400 italic">"Só Green!"</p></div>
+                    </div>
+                    <p class="text-[11px] text-gray-300 text-left leading-relaxed italic">"Comunidade nota mil. Resenha, futebol e lucro. O que mais a gente quer? Só vem!"</p>
+                </div>
+                <!-- Fim da lista - O script vai duplicar isso visualmente para o loop -->
+            </div>
+        </div>
+
+        <p class="text-gray-500 text-[10px]">
+            &copy; 2026 Comunidade GoldBet - Todos os direitos reservados.
+        </p>
     </div>
 
     <script>
-        // Animação Barra
+        // Clonar itens para o carrossel infinito sem "pulo"
+        const track = document.getElementById('track');
+        track.innerHTML += track.innerHTML;
+
+        // Animação da Barra
         window.addEventListener('load', () => {
             const bar = document.getElementById('progress-bar');
             const text = document.getElementById('percent-text');
@@ -149,19 +196,19 @@
             }, 500);
         });
 
-        // Notificações
+        // Sistema de Notificações
         const pessoas = [
-            { nome: "Marcos Silva", img: "https://randomuser.me/api/portraits/men/15.jpg" },
-            { nome: "Juliana Lima", img: "https://randomuser.me/api/portraits/women/20.jpg" },
-            { nome: "Roberto Junior", img: "https://randomuser.me/api/portraits/men/25.jpg" },
-            { nome: "Alice Santos", img: "https://randomuser.me/api/portraits/women/30.jpg" }
+            { n: "Gustavo Rocha", i: "https://randomuser.me/api/portraits/men/11.jpg" },
+            { n: "Mariana Dias", i: "https://randomuser.me/api/portraits/women/12.jpg" },
+            { n: "Bruno Lopes", i: "https://randomuser.me/api/portraits/men/13.jpg" },
+            { n: "Camila Faria", i: "https://randomuser.me/api/portraits/women/14.jpg" }
         ];
 
         function showNotification() {
             const notif = document.getElementById('notification');
             const randomPessoa = pessoas[Math.floor(Math.random() * pessoas.length)];
-            document.getElementById('notif-img').src = randomPessoa.img;
-            document.getElementById('notif-text').innerText = randomPessoa.nome;
+            document.getElementById('notif-img').src = randomPessoa.i;
+            document.getElementById('notif-text').innerText = randomPessoa.n;
             notif.style.display = 'flex';
             notif.classList.remove('animate__fadeOutLeft');
             notif.classList.add('animate__fadeInLeft');
@@ -170,7 +217,7 @@
             }, 4000);
         }
         setInterval(showNotification, 9000);
-        setTimeout(showNotification, 2000);
+        setTimeout(showNotification, 2500);
     </script>
 </body>
 </html>
