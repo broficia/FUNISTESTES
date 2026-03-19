@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidade GoldBet - Futebol & Green</title>
+    <title>Comunidade VIP - Futebol & Green</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
@@ -35,6 +35,11 @@
             z-index: 100;
             display: none;
         }
+        /* Animação da Barra de Progresso */
+        .progress-fill {
+            width: 0%;
+            transition: width 2.5s ease-out;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
@@ -61,14 +66,25 @@
             A Maior Comunidade de <span class="text-green-500 underline">Futebol</span> do Brasil
         </h1>
 
-        <p class="text-gray-300 text-lg">
-            Receba análises diárias, palpites exclusivos, e resenha entre membros do grupo. 
-            <br><strong>Vagas limitadas para hoje!</strong>
+        <p class="text-gray-300 text-lg leading-tight">
+            Receba análises diárias, palpites e resenha exclusiva. 
+            <br><span class="text-green-400 font-bold">Acesso liberado via TikTok.</span>
         </p>
+
+        <!-- NOVO: Barra de Progresso de Vagas -->
+        <div class="bg-white/5 border border-white/10 p-4 rounded-2xl space-y-3">
+            <div class="flex justify-between items-center text-[11px] font-bold">
+                <span class="text-red-500 animate-pulse text-xs">⚠️ VAGAS QUASE ESGOTADAS</span>
+                <span class="text-gray-400 uppercase tracking-widest"><span id="percent-text">0</span>% PREENCHIDAS</span>
+            </div>
+            <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden border border-white/5">
+                <div id="progress-bar" class="progress-fill h-full bg-gradient-to-r from-green-600 to-green-400 shadow-[0_0_10px_#22c55e]"></div>
+            </div>
+        </div>
 
         <!-- Card de Informação -->
         <div class="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm">
-            <div class="flex justify-around mb-4">
+            <div class="flex justify-around mb-6">
                 <div class="text-center">
                     <p class="text-2xl font-bold text-green-400">14.7k</p>
                     <p class="text-[10px] uppercase text-gray-400">Membros</p>
@@ -86,17 +102,39 @@
             </a>
             
             <p class="text-[10px] mt-4 text-gray-400 italic">
-                *Você será redirecionado para o grupo no WhatsApp com segurança.
+                *Você será redirecionado para o WhatsApp com segurança.
             </p>
         </div>
 
         <!-- Rodapé -->
         <p class="text-gray-500 text-[10px]">
-            &copy; 2024 Comunidade GoldBet - Todos os direitos reservados.
+            &copy; 2026 Comunidade Green Futebol - Todos os direitos reservados.
         </p>
     </div>
 
     <script>
+        // Animação da Barra ao Carregar a página
+        window.addEventListener('load', () => {
+            const bar = document.getElementById('progress-bar');
+            const text = document.getElementById('percent-text');
+            
+            // Inicia animação visual da barra
+            setTimeout(() => {
+                bar.style.width = '92%';
+                
+                // Animação dos números subindo
+                let count = 0;
+                let interval = setInterval(() => {
+                    if (count >= 92) {
+                        clearInterval(interval);
+                    } else {
+                        count++;
+                        text.innerText = count;
+                    }
+                }, 20); // Velocidade do contador
+            }, 500);
+        });
+
         // Configuração das Notificações
         const pessoas = [
             { nome: "Ricardo Silva", img: "https://randomuser.me/api/portraits/men/1.jpg" },
@@ -104,7 +142,9 @@
             { nome: "Marcos Oliveira", img: "https://randomuser.me/api/portraits/men/3.jpg" },
             { nome: "Julia Santos", img: "https://randomuser.me/api/portraits/women/4.jpg" },
             { nome: "Felipe Costa", img: "https://randomuser.me/api/portraits/men/5.jpg" },
-            { nome: "Beatriz Lima", img: "https://randomuser.me/api/portraits/women/6.jpg" }
+            { nome: "Beatriz Lima", img: "https://randomuser.me/api/portraits/women/6.jpg" },
+            { nome: "Thiago Souza", img: "https://randomuser.me/api/portraits/men/8.jpg" },
+            { nome: "Fernanda Rocha", img: "https://randomuser.me/api/portraits/women/10.jpg" }
         ];
 
         function showNotification() {
@@ -127,9 +167,7 @@
             }, 4000);
         }
 
-        // Inicia o ciclo de notificações a cada 7-10 segundos
         setInterval(showNotification, 8000);
-        // Primeira notificação após 3 segundos
         setTimeout(showNotification, 3000);
     </script>
 </body>
