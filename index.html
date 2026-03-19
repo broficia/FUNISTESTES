@@ -3,134 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidade VIP - Futebol & Green</title>
+    <title>ACESSO EXCLUSIVO - VIP FOOTBALL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         body {
-            background: radial-gradient(circle, #0a1a0a 0%, #050505 100%);
+            background: #040b04;
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover;
+            background-position: center;
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
-        .btn-pulse {
-            animation: pulse 2s infinite;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        .btn-green {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            box-shadow: 0 10px 20px -5px rgba(34, 197, 94, 0.5);
         }
-        .notif-entrou {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            padding: 10px 15px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 100;
-            display: none;
+        .pulse-fast {
+            animation: pulseCustom 1.5s infinite;
+        }
+        @keyframes pulseCustom {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4">
+<body class="min-h-screen flex items-center justify-center p-4">
 
-    <!-- Notificação Fake -->
-    <div id="notification" class="notif-entrou animate__animated">
-        <img id="notif-img" src="" class="w-10 h-10 rounded-full border-2 border-green-500">
-        <div>
-            <p class="text-xs font-bold" id="notif-text"></p>
-            <p class="text-[10px] text-gray-500">Acabou de entrar no grupo</p>
+    <!-- Notificação Flutuante -->
+    <div id="notif" class="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-[320px] glass p-3 rounded-2xl flex items-center gap-3 z-50 hidden animate__animated">
+        <img id="notif-img" src="" class="w-10 h-10 rounded-full object-cover border-2 border-green-500">
+        <div class="text-sm">
+            <span id="notif-name" class="font-bold"></span>
+            <span class="text-gray-300"> entrou no grupo agora!</span>
         </div>
     </div>
 
-    <!-- Conteúdo Principal -->
-    <div class="max-w-md w-full text-center space-y-6">
+    <div class="max-w-md w-full space-y-6 text-center">
         
-        <!-- Header / Logo -->
-        <div class="relative inline-block">
-            <div class="absolute -inset-1 bg-green-500 rounded-full blur opacity-30"></div>
-            <img src="https://cdn-icons-png.flaticon.com/512/33/33736.png" alt="Logo Futebol" class="relative w-24 mx-auto filter invert">
+        <!-- Badges de Status -->
+        <div class="flex justify-center gap-2 mb-2">
+            <span class="bg-red-600 text-[10px] font-bold px-2 py-1 rounded animate-pulse">● AO VIVO</span>
+            <span class="bg-white/10 text-[10px] font-bold px-2 py-1 rounded text-gray-300 underline">RESTAM 7 VAGAS</span>
         </div>
 
-        <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter italic">
-            A Maior Comunidade de <span class="text-green-500 underline">Futebol</span> do Brasil
+        <!-- Título Impactante -->
+        <h1 class="text-4xl font-black italic uppercase leading-none tracking-tight">
+            COPIE NOSSAS <br> 
+            <span class="text-green-500">ENTRADAS VIP</span>
         </h1>
 
-        <p class="text-gray-300 text-lg">
-            Receba análises diárias, palpites e resenha exclusiva. 
-            <br><strong>Vagas limitadas para hoje!</strong>
+        <p class="text-gray-300 text-sm px-4">
+            Acompanhe o grupo onde os especialistas em futebol lucram todos os dias. 
+            <b>Acesso gratuito apenas hoje via TikTok.</b>
         </p>
 
-        <!-- Card de Informação -->
-        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm">
-            <div class="flex justify-around mb-4">
-                <div class="text-center">
-                    <p class="text-2xl font-bold text-green-400">14.7k</p>
-                    <p class="text-[10px] uppercase text-gray-400">Membros</p>
+        <!-- Container Principal -->
+        <div class="glass p-6 rounded-[2rem] space-y-6 relative overflow-hidden">
+            
+            <!-- Barra de Vagas -->
+            <div class="space-y-2">
+                <div class="flex justify-between text-[11px] font-bold text-gray-400">
+                    <span>VAGAS PREENCHIDAS</span>
+                    <span class="text-green-500">94%</span>
                 </div>
-                <div class="border-l border-white/10"></div>
-                <div class="text-center">
-                    <p class="text-2xl font-bold text-green-400">92%</p>
-                    <p class="text-[10px] uppercase text-gray-400">Assertividade</p>
+                <div class="w-full bg-white/10 h-3 rounded-full overflow-hidden border border-white/5">
+                    <div class="bg-green-500 h-full w-[94%] shadow-[0_0_10px_#22c55e]"></div>
                 </div>
             </div>
 
-            <!-- BOTÃO PRINCIPAL -->
-            <a href="SEU_LINK_DO_GRUPO_AQUI" class="btn-pulse inline-block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 rounded-xl text-xl uppercase transition-all transform active:scale-95 shadow-[0_0_20px_rgba(34,197,94,0.4)]">
-                Entrar no Grupo Agora!
-            </a>
-            
-            <p class="text-[10px] mt-4 text-gray-400 italic">
-                *Você será redirecionado para o WhatsApp com segurança.
-            </p>
+            <!-- Botão de Ação -->
+            <div class="space-y-4 pt-2">
+                <a href="SEU_LINK_DO_WHATSAPP_AQUI" class="btn-green pulse-fast block w-full py-5 rounded-2xl text-xl font-black uppercase tracking-wider text-white transition-all active:scale-95">
+                    Quero entrar no grupo!
+                </a>
+                
+                <!-- Verificadores -->
+                <div class="flex items-center justify-center gap-4 opacity-60">
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                        <span class="text-[10px] font-bold text-white uppercase">Acesso Seguro</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                        <span class="text-[10px] font-bold text-white uppercase">Grátis hoje</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Rodapé -->
-        <p class="text-gray-500 text-[10px]">
-            &copy; 2024 Comunidade Green Futebol - Todos os direitos reservados.
-        </p>
+        <!-- Rodapé Minimalista -->
+        <div class="text-[10px] text-gray-500 uppercase tracking-widest pt-4">
+            <p>Este link expira em <span id="timer" class="text-white">05:00</span></p>
+        </div>
     </div>
 
     <script>
-        // Configuração das Notificações
-        const pessoas = [
-            { nome: "Ricardo Silva", img: "https://randomuser.me/api/portraits/men/1.jpg" },
-            { nome: "Ana Paula", img: "https://randomuser.me/api/portraits/women/2.jpg" },
-            { nome: "Marcos Oliveira", img: "https://randomuser.me/api/portraits/men/3.jpg" },
-            { nome: "Julia Santos", img: "https://randomuser.me/api/portraits/women/4.jpg" },
-            { nome: "Felipe Costa", img: "https://randomuser.me/api/portraits/men/5.jpg" },
-            { nome: "Beatriz Lima", img: "https://randomuser.me/api/portraits/women/6.jpg" }
+        // Sistema de Notificações Fake
+        const usuarios = [
+            {n: "Matheus Oliveira", i: "https://i.pravatar.cc/100?u=1"},
+            {n: "Rodrigo Silva", i: "https://i.pravatar.cc/100?u=2"},
+            {n: "Juliana Costa", i: "https://i.pravatar.cc/100?u=3"},
+            {n: "Lucas Pereira", i: "https://i.pravatar.cc/100?u=4"},
+            {n: "Amanda Souza", i: "https://i.pravatar.cc/100?u=5"},
+            {n: "Bruno Henrique", i: "https://i.pravatar.cc/100?u=6"}
         ];
 
-        function showNotification() {
-            const notif = document.getElementById('notification');
-            const img = document.getElementById('notif-img');
-            const text = document.getElementById('notif-text');
+        function pushNotif() {
+            const el = document.getElementById('notif');
+            const user = usuarios[Math.floor(Math.random() * usuarios.length)];
             
-            const randomPessoa = pessoas[Math.floor(Math.random() * pessoas.length)];
-            
-            img.src = randomPessoa.img;
-            text.innerText = randomPessoa.nome;
-            
-            notif.style.display = 'flex';
-            notif.classList.remove('animate__fadeOutLeft');
-            notif.classList.add('animate__fadeInLeft');
+            document.getElementById('notif-img').src = user.i;
+            document.getElementById('notif-name').innerText = user.n;
+
+            el.classList.remove('hidden', 'animate__fadeOutUp');
+            el.classList.add('animate__fadeInDown');
 
             setTimeout(() => {
-                notif.classList.remove('animate__fadeInLeft');
-                notif.classList.add('animate__fadeOutLeft');
-            }, 4000);
+                el.classList.replace('animate__fadeInDown', 'animate__fadeOutUp');
+            }, 3000);
         }
 
-        // Inicia o ciclo de notificações a cada 7-10 segundos
-        setInterval(showNotification, 8000);
-        // Primeira notificação após 3 segundos
-        setTimeout(showNotification, 3000);
+        // Timer Regressivo
+        let time = 300;
+        setInterval(() => {
+            if(time <= 0) return;
+            time--;
+            const min = Math.floor(time / 60);
+            const sec = time % 60;
+            document.getElementById('timer').innerText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        }, 1000);
+
+        // Loop Notificações
+        setInterval(pushNotif, 7000);
+        setTimeout(pushNotif, 2000);
     </script>
 </body>
 </html>
