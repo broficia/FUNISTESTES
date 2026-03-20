@@ -4,154 +4,109 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Comunidade GoldBet VIP</title>
+<title>Comunidade GoldBet VIP - Futebol & Green</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
 <style>
-body{
-background:#050505;
-color:white;
-font-family:sans-serif;
-overflow-x:hidden;
+body {
+background: radial-gradient(ellipse at 50% 0%, hsla(142,71%,55%,0.12) 0%, transparent 60%),
+radial-gradient(ellipse at 80% 50%, hsla(43,90%,60%,0.08) 0%, transparent 50%),
+hsl(120,30%,3%);
+color: white;
+font-family: 'Outfit', sans-serif;
+overflow-x: hidden;
 }
 
-/* CORES MAIS VIVAS */
-.text-gold{color:#FFD700;}
-.text-green{color:#00FF88;}
+h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
 
-.btn-cta{
-background:linear-gradient(90deg,#00FF88,#00cc66);
-box-shadow:0 0 20px rgba(0,255,136,0.6);
-animation:pulse 2s infinite;
-}
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.05);}
-100%{transform:scale(1);}
+.text-gradient-gold {
+background: linear-gradient(135deg, hsl(43,90%,60%), hsl(43,100%,75%));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
 
-/* NOTIF */
-.notif{
-position:fixed;
-bottom:20px;
-left:20px;
-background:white;
-color:black;
-padding:10px 15px;
-border-radius:20px;
-font-size:14px;
-transform:translateX(-120%);
-transition:.4s;
-z-index:999;
-}
-.notif.show{transform:translateX(0);}
-
-/* CARROSSEL */
-.carousel-track{
-display:flex;
-width:max-content;
-animation:scroll 30s linear infinite;
-}
-@keyframes scroll{
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
-}
-.card{
-min-width:240px;
-margin:10px;
-padding:15px;
-background:#111;
-border-radius:12px;
+.text-gradient-green {
+background: linear-gradient(135deg, hsl(142,71%,55%), hsl(160,70%,65%));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
 
-/* CONTADOR */
-.count{
-font-weight:bold;
-color:#FFD700;
+.carousel-track {
+display: flex;
+width: max-content;
+animation: scroll 40s linear infinite;
+}
+
+.testimonial-card {
+min-width: 260px;
+max-width: 260px;
+margin: 0 10px;
+padding: 24px;
+border-radius: 16px;
+background: linear-gradient(135deg, hsla(120,15%,8%,0.9), hsla(120,15%,6%,0.95));
+border: 1px solid hsl(120,10%,22%);
+flex-shrink: 0;
 }
 </style>
 </head>
 
 <body>
 
-<div class="max-w-md mx-auto p-4 text-center">
+<div class="relative z-10 mx-auto max-w-2xl px-4 py-8">
 
-<!-- BANNER -->
-<img src="https://disrupty-uploads-20251016.s3.us-east-1.amazonaws.com/checkout-blocks/1773975365308_w4vwf5" style="width:100%;border-radius:15px;">
+<!-- BANNER CORRIGIDO -->
+<div class="mx-auto mb-8 flex justify-center">
+<div class="relative w-full max-w-md">
+<img src="https://disrupty-uploads-20251016.s3.us-east-1.amazonaws.com/checkout-blocks/1773975365308_w4vwf5"
+class="w-full rounded-2xl shadow-2xl">
+</div>
+</div>
 
-<h1 class="mt-4 text-xl font-bold text-green">
-COMUNIDADE REI DELAS 👑 A MAIOR COMUNIDADE DE SINAIS E HORÁRIOS PAGANTES DO BRASIL
+<h1 class="text-center text-3xl font-extrabold">
+COMUNIDADE <span class="text-gradient-green">REI DELAS 👑</span> A MAIOR COMUNIDADE DE SINAIS E HORÁRIOS PAGANTES DO BRASIL
 </h1>
 
-<p class="mt-3">
-receba análises diárias, horários pagantes, palpites exclusivos e acompanhe lives ao vivo operando nos melhores jogos do dia 💰
-</p>
-
-<!-- CONTADOR -->
-<p class="mt-3">
-⚠️ RESTAM APENAS <span class="count" id="vagas">27</span> VAGAS
+<p class="text-center mt-4">
+Receba análises diárias, horários pagantes, palpites exclusivos e acompanhe lives ao vivo operando nos melhores jogos do dia 💰
 </p>
 
 <!-- BOTÃO -->
-<a href="https://chat.whatsapp.com/Kzy2K3I1feOGVtQsBk3ZmD?mode=gi_t" class="btn-cta block mt-4 py-4 rounded-xl font-bold">
-ENTRAR NO GRUPO AGORA
+<div class="flex justify-center mt-6">
+<a href="https://chat.whatsapp.com/Kzy2K3I1feOGVtQsBk3ZmD?mode=gi_t"
+class="px-8 py-4 rounded-2xl font-bold text-black"
+style="background:#00FF88">
+Entrar no Grupo Agora!
 </a>
+</div>
 
 </div>
 
 <!-- CARROSSEL -->
-<div class="overflow-hidden mt-10">
-<div class="carousel-track" id="track"></div>
+<section class="py-16">
+<div class="overflow-hidden">
+<div class="carousel-track" id="carousel-track"></div>
 </div>
-
-<!-- NOTIF -->
-<div class="notif" id="notif"></div>
+</section>
 
 <script>
-
-/* CONTADOR DIMINUINDO */
-let vagas=27;
-setInterval(()=>{
-if(vagas>3){
-vagas--;
-document.getElementById("vagas").innerText=vagas;
-}
-},4000);
-
-/* NOTIFICAÇÕES */
-const nomes=["Lucas","Ana","Pedro","Julia","Carlos","Marina","Rafael","Bruna"];
-
-function showNotif(){
-let nome=nomes[Math.floor(Math.random()*nomes.length)];
-let el=document.getElementById("notif");
-el.innerText=nome+" entrou no grupo";
-el.classList.add("show");
-setTimeout(()=>el.classList.remove("show"),3000);
-}
-setInterval(showNotif,5000);
-
-/* CARROSSEL */
-const depo=[
-"lucrei muito 🔥",
-"grupo brabo demais",
-"só green aqui",
-"melhor que já vi",
-"entrei ontem e já bati meta",
-"simplesmente absurdo",
-"recomendo demais",
-"top top"
+const depoimentos=[
+"lucrei muito 🔥","grupo brabo","só green","melhor que já vi",
+"absurdo","recomendo","top demais","perfeito"
 ];
 
-let track=document.getElementById("track");
+let track=document.getElementById("carousel-track");
 
-[...depo,...depo].forEach(t=>{
+[...depoimentos,...depoimentos].forEach(t=>{
 let div=document.createElement("div");
-div.className="card";
+div.className="testimonial-card";
 div.innerText=t;
 track.appendChild(div);
 });
-
 </script>
 
 </body>
