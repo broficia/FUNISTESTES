@@ -60,7 +60,6 @@
 
         .progress-fill { transition: width 2.5s ease-out; }
 
-        /* Notification */
         .notif-entrou {
             position: fixed; bottom: 20px; left: 20px;
             background: rgba(255,255,255,0.95); color: #333;
@@ -73,23 +72,30 @@
         .notif-entrou.show { transform: translateX(0); }
         .notif-entrou img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
 
-        /* Carousel */
         .carousel-track {
             display: flex;
+            width: max-content;
             animation: scroll 40s linear infinite;
         }
         .carousel-track:hover { animation-play-state: paused; }
+
         @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
+
         .testimonial-card {
-            min-width: 300px; margin: 0 12px; padding: 24px; border-radius: 16px;
+            min-width: 260px;
+            max-width: 260px;
+            margin: 0 10px;
+            padding: 20px;
+            border-radius: 16px;
             background: linear-gradient(135deg, hsla(120,15%,8%,0.8), hsla(120,15%,6%,0.9));
-            border: 1px solid hsl(120,10%,18%); backdrop-filter: blur(20px); flex-shrink: 0;
+            border: 1px solid hsl(120,10%,18%);
+            backdrop-filter: blur(20px);
+            flex-shrink: 0;
         }
 
-        /* Particles */
         .particle {
             position: fixed; width: 4px; height: 4px; border-radius: 50%;
             background: hsla(142,71%,45%,0.3); pointer-events: none;
@@ -100,7 +106,6 @@
             50% { transform: translateY(-20px); opacity: 0.7; }
         }
 
-        /* Fade up animation */
         .fade-up {
             opacity: 0; transform: translateY(30px);
             animation: fadeUp 0.6s ease-out forwards;
@@ -125,170 +130,62 @@
 </head>
 <body>
 
-    <!-- Particles -->
-    <div class="particle" style="left:15%;top:10%;animation-duration:3s"></div>
-    <div class="particle" style="left:30%;top:22%;animation-duration:4s"></div>
-    <div class="particle" style="left:45%;top:34%;animation-duration:5s"></div>
-    <div class="particle" style="left:60%;top:46%;animation-duration:6s"></div>
-    <div class="particle" style="left:75%;top:58%;animation-duration:7s"></div>
-    <div class="particle" style="left:90%;top:70%;animation-duration:8s"></div>
+<div class="relative z-10 mx-auto max-w-2xl px-4 py-8 md:py-12">
 
-    <!-- Notification -->
-    <div class="notif-entrou" id="notif">
-        <img id="notif-avatar" src="" alt="">
-        <div>
-            <p class="text-sm font-semibold" id="notif-name"></p>
-            <p class="text-xs text-gray-500">Acabou de entrar no grupo</p>
-        </div>
+<!-- LOGO/BANNER CORRIGIDO -->
+<div class="logo-glow mx-auto mb-8 flex justify-center">
+    <div class="relative w-full max-w-md">
+        <div class="absolute -inset-2 rounded-2xl blur-xl" style="background: linear-gradient(to bottom right, hsla(142,71%,45%,0.3), hsla(43,74%,49%,0.2));"></div>
+        <img src="https://disrupty-uploads-20251016.s3.us-east-1.amazonaws.com/checkout-blocks/1773975365308_w4vwf5" class="relative w-full rounded-2xl border-2 object-cover shadow-2xl">
     </div>
+</div>
 
-    <div class="relative z-10 mx-auto max-w-2xl px-4 py-8 md:py-12">
+<h1 class="text-center text-3xl font-extrabold">
+COMUNIDADE REI DELAS 👑 A MAIOR COMUNIDADE DE SINAIS E HORÁRIOS PAGANTES DO BRASIL. 🔥
+</h1>
 
-        <!-- Logo -->
-        <div class="logo-glow mx-auto mb-8 flex justify-center">
-            <div class="relative">
-                <div class="absolute -inset-2 rounded-full blur-xl" style="background: linear-gradient(to bottom right, hsla(142,71%,45%,0.3), hsla(43,74%,49%,0.2));"></div>
-                <img src="https://disrupty-uploads-20251016.s3.us-east-1.amazonaws.com/checkout-blocks/1773975365308_w4vwf5" alt="GoldBet VIP Logo" class="relative h-32 w-32 rounded-full border-2 object-cover shadow-2xl md:h-40 md:w-40" style="border-color: hsla(142,71%,45%,0.4);">
-            </div>
-        </div>
+<p class="text-center mt-4">
+receba análises diárias, horários pagantes, palpites exclusivos e acompanhe lives ao vivo operando nos melhores jogos do dia 💰
+</p>
 
-        <!-- Badge AO VIVO -->
-        <div class="fade-up mb-6 flex justify-center">
-            <span class="inline-flex items-center gap-2.5 rounded-lg px-5 py-2.5 text-sm font-bold tracking-wide text-white shadow-lg" style="background:#dc2626;box-shadow:0 4px 15px rgba(220,38,38,0.3);">
-                <span class="relative flex" style="width:10px;height:10px;">
-                    <span class="absolute inline-flex h-full w-full rounded-full bg-white opacity-75" style="animation:ping 1s cubic-bezier(0,0,0.2,1) infinite;"></span>
-                    <span class="relative inline-flex rounded-full bg-white" style="width:10px;height:10px;"></span>
-                </span>
-                AO VIVO
-            </span>
-        </div>
+<!-- BOTÃO COM LINK -->
+<div class="mt-6 flex justify-center">
+<a href="https://chat.whatsapp.com/Kzy2K3I1feOGVtQsBk3ZmD?mode=gi_t" class="btn-cta px-8 py-4 rounded-2xl font-bold">
+Entrar no Grupo Agora!
+</a>
+</div>
 
-        <!-- Headline -->
-        <h1 class="fade-up delay-1 mb-6 text-center text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">
-            COMUNIDADE <span class="text-gradient-green">REI DELAS 👑</span> A MAIOR COMUNIDADE DE SINAIS E HORÁRIOS PAGANTES DO BRASIL. 🔥
-        </h1>
+</div>
 
-        <!-- Subtitle -->
-        <p class="fade-up delay-2 mb-8 text-center text-base leading-relaxed md:text-lg" style="color:hsl(120,5%,55%);">
-            Receba análises diárias de nossos analistas profissionais, horários pagantes, palpites exclusivos e acompanhe lives ao vivo operando nos melhores jogos do dia 💰
-            <span class="font-semibold" style="color:hsl(43,90%,70%);">Últimas vagas para entrar no grupo!</span>
-        </p>
-
-        <!-- Progress Bar -->
-        <div class="fade-up delay-3 mb-8">
-            <div class="glass-card glow-green rounded-2xl p-5">
-                <div class="mb-3 flex items-center justify-between">
-                    <span class="text-sm font-semibold" style="color:hsl(142,71%,45%);">⚠️ GRUPO NO WHATSAPP QUASE CHEIO</span>
-                    <span class="text-sm font-bold" style="color:hsl(43,90%,70%);" id="progress-text">0% PREENCHIDAS</span>
-                </div>
-                <div class="h-3 overflow-hidden rounded-full" style="background:hsl(120,10%,12%);">
-                    <div class="progress-fill h-full rounded-full" id="progress-bar" style="width:0%;background:linear-gradient(to right,hsl(142,71%,45%),hsl(142,71%,45%));"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Stats -->
-        <div class="fade-up delay-4 mb-8 grid grid-cols-2 gap-4">
-            <div class="glass-card rounded-2xl p-5 text-center">
-                <p class="text-3xl font-extrabold text-gradient-green" style="font-family:'Space Grotesk',sans-serif;">14.7k</p>
-                <p class="mt-1 text-sm" style="color:hsl(120,5%,55%);">Membros Ativos</p>
-            </div>
-            <div class="glass-card rounded-2xl p-5 text-center">
-                <p class="text-3xl font-extrabold text-gradient-gold" style="font-family:'Space Grotesk',sans-serif;">98%</p>
-                <p class="mt-1 text-sm" style="color:hsl(120,5%,55%);">Assertividade Média</p>
-            </div>
-        </div>
-
-        <!-- CTA Button -->
-        <div class="fade-up delay-5 mb-4 flex flex-col items-center">
-            <a href="#" class="btn-cta w-full max-w-md rounded-2xl px-8 py-5 text-center text-lg font-bold shadow-2xl transition-all duration-300 hover:scale-105 block" style="color:hsl(120,30%,3%);font-family:'Space Grotesk',sans-serif;text-decoration:none;">
-                <span class="relative z-10">Entrar no Grupo Agora!</span>
-            </a>
-            <p class="mt-3 text-sm" style="color:hsl(120,5%,55%);">🔓 Acesso 100% Gratuito ao grupo</p>
-        </div>
-    </div>
-
-    <!-- Testimonials -->
-    <section class="py-16">
-        <h2 class="mb-10 text-center text-2xl font-bold md:text-3xl" style="font-family:'Space Grotesk',sans-serif;">
-            💬 <span class="text-gradient-gold">O QUE DIZEM SOBRE A COMUNIDADE:</span>
-        </h2>
-        <div class="overflow-hidden">
-            <div class="carousel-track" id="carousel-track"></div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-6 text-center text-xs" style="border-top:1px solid hsla(120,10%,15%,0.3);color:hsl(120,5%,55%);">
-        © 2026 Comunidade GoldBet - Todos os direitos reservados.
-    </footer>
+<!-- CARROSSEL -->
+<section class="py-16">
+<div class="overflow-hidden">
+<div class="carousel-track" id="carousel-track"></div>
+</div>
+</section>
 
 <script>
-    // ===== AVATAR URLS (placeholder realistic faces) =====
-    const AVATAR_MALE = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face";
-    const AVATAR_FEMALE = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face";
+const testimonials = [
+{name:"Top demais"},
+{name:"Muito bom"},
+{name:"Lucrei muito"},
+{name:"Grupo brabo"},
+{name:"Só green"},
+{name:"Recomendo"},
+{name:"Surreal"},
+{name:"Perfeito"}
+];
 
-    // ===== NOTIFICATIONS =====
-    const people = [
-        { name: "Lucas M.", g: "m" }, { name: "Fernanda S.", g: "f" },
-        { name: "Pedro H.", g: "m" }, { name: "Camila R.", g: "f" },
-        { name: "Gustavo L.", g: "m" }, { name: "Isabela F.", g: "f" },
-        { name: "Rafael C.", g: "m" }, { name: "Larissa T.", g: "f" },
-        { name: "Bruno A.", g: "m" }, { name: "Amanda P.", g: "f" },
-        { name: "Diego S.", g: "m" }, { name: "Natália B.", g: "f" },
-        { name: "Matheus O.", g: "m" }, { name: "Juliana K.", g: "f" },
-        { name: "André V.", g: "m" },
-    ];
-    const notif = document.getElementById("notif");
-    const notifName = document.getElementById("notif-name");
-    const notifAvatar = document.getElementById("notif-avatar");
+const track = document.getElementById("carousel-track");
+const all = [...testimonials,...testimonials];
 
-    function showNotif() {
-        const p = people[Math.floor(Math.random() * people.length)];
-        notifName.textContent = p.name;
-        notifAvatar.src = p.g === "f" ? AVATAR_FEMALE : AVATAR_MALE;
-        notif.classList.add("show");
-        setTimeout(() => notif.classList.remove("show"), 3500);
-    }
-    setTimeout(showNotif, 3000);
-    setInterval(showNotif, 7000);
-
-    // ===== PROGRESS BAR =====
-    setTimeout(() => {
-        document.getElementById("progress-bar").style.width = "87%";
-        document.getElementById("progress-text").textContent = "87% PREENCHIDAS";
-    }, 800);
-
-    // ===== TESTIMONIALS =====
-    const testimonials = [
-        { name: "Felipe Almeida", title: "GoldBet é elite!", text: "Melhor grupo que já entrei! As análises da GoldBet são certeiras e a resenha no grupo é livre, geral se ajuda.", g: "m" },
-        { name: "Julia Ramos", title: "Green garantido!", text: "Gosto muito das lives e da liberdade de conversar com todos. O pessoal entende muito de futebol, ansiosa pra Copa!", g: "f" },
-        { name: "Marcos Paulo", title: "Resenha nota 10", text: "Não é só aposta, é amizade. A gente discute os jogos, troca ideia sobre escalação... sensacional a GoldBet.", g: "m" },
-        { name: "Beatriz Souza", title: "Muito transparente", text: "Adoro que o grupo é aberto. Você vê o que as outras pessoas estão pensando. As análises GoldBet são tops.", g: "f" },
-        { name: "Ricardo Silva", title: "Foco na Copa!", text: "O grupo ferve nas rodadas do Brasileirão e já estamos preparando tudo pra Copa 2026. Melhor comunidade.", g: "m" },
-        { name: "Ana Clara", title: "Super recomendo", text: "Eu não entendia muito de odds, mas no grupo a galera explica tudo. A GoldBet me ajudou a lucrar de verdade.", g: "f" },
-        { name: "Thiago G.", title: "Palpites Monstros", text: "Os palpites diários são muito bem fundamentados. E o melhor é que o grupo é grátis, sem enganação.", g: "m" },
-        { name: "Vanessa Oliveira", title: "Só Green!", text: "Comunidade nota mil. Resenha, futebol e lucro. O que mais a gente quer? Só vem!", g: "f" },
-    ];
-
-    const track = document.getElementById("carousel-track");
-    const allCards = [...testimonials, ...testimonials];
-    allCards.forEach(t => {
-        const card = document.createElement("div");
-        card.className = "testimonial-card";
-        card.innerHTML = `
-            <div class="mb-4 flex items-center gap-3">
-                <img src="${t.g === 'f' ? AVATAR_FEMALE : AVATAR_MALE}" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid hsla(142,71%,45%,0.4);">
-                <div>
-                    <p class="font-semibold" style="color:hsl(0,0%,95%);">${t.name}</p>
-                    <p class="text-sm" style="color:hsl(43,90%,70%);">"${t.title}"</p>
-                </div>
-            </div>
-            <p class="text-sm leading-relaxed" style="color:hsl(120,5%,55%);">"${t.text}"</p>
-            <div class="mt-3 flex gap-1">⭐⭐⭐⭐⭐</div>
-        `;
-        track.appendChild(card);
-    });
+all.forEach(t=>{
+let div=document.createElement("div");
+div.className="testimonial-card";
+div.innerHTML=`<p>${t.name}</p>`;
+track.appendChild(div);
+});
 </script>
+
 </body>
 </html>
