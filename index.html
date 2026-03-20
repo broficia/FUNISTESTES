@@ -1,113 +1,441 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade GoldBet VIP - Futebol & Green</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            background: radial-gradient(ellipse at 50% 0%, hsla(142,71%,45%,0.15) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 50%, hsla(43,74%,49%,0.10) 0%, transparent 50%),
+                        radial-gradient(ellipse at 20% 80%, hsla(142,71%,45%,0.08) 0%, transparent 40%),
+                        linear-gradient(180deg, hsl(140,35%,6%) 0%, hsl(145,40%,4%) 50%, hsl(40,30%,5%) 100%);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
 
-<title>Comunidade GoldBet VIP - Futebol & Green</title>
+        .text-gradient-gold {
+            background: linear-gradient(135deg, hsl(43,74%,49%), hsl(43,90%,70%));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .text-gradient-green {
+            background: linear-gradient(135deg, hsl(142,71%,45%), hsl(160,60%,55%));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .glass-card {
+            background: linear-gradient(135deg, hsla(142,30%,10%,0.85), hsla(43,20%,8%,0.9));
+            border: 1px solid hsla(142,50%,30%,0.3);
+            backdrop-filter: blur(20px);
+        }
+        .glow-green {
+            box-shadow: 0 0 30px hsla(142,71%,45%,0.3), 0 0 60px hsla(142,71%,45%,0.1);
+        }
 
-<script src="https://cdn.tailwindcss.com"></script>
+        .btn-cta {
+            background: linear-gradient(135deg, hsl(142,71%,40%), hsl(142,80%,50%), hsl(43,74%,49%));
+            background-size: 200% 200%;
+            animation: pulse-glow 2s infinite, gradient-shift 4s ease infinite;
+            position: relative; overflow: hidden;
+        }
+        .btn-cta::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px hsla(142,71%,45%,0.4), 0 0 40px hsla(142,71%,45%,0.2); }
+            50% { box-shadow: 0 0 30px hsla(142,71%,45%,0.6), 0 0 60px hsla(142,71%,45%,0.3), 0 0 80px hsla(43,74%,49%,0.2); }
+        }
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes ping {
+            75%, 100% { transform: scale(2); opacity: 0; }
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+        .progress-fill { transition: width 2.5s ease-out; }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        .notif-entrou {
+            position: fixed; bottom: 20px; left: 20px;
+            background: rgba(255,255,255,0.95); color: #333;
+            padding: 10px 15px; border-radius: 50px;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            z-index: 100; transform: translateX(-120%);
+            transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .notif-entrou.show { transform: translateX(0); }
+        .notif-entrou img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
 
-<style>
-body {
-background: radial-gradient(ellipse at 50% 0%, hsla(142,71%,55%,0.12) 0%, transparent 60%),
-radial-gradient(ellipse at 80% 50%, hsla(43,90%,60%,0.08) 0%, transparent 50%),
-hsl(120,30%,3%);
-color: white;
-font-family: 'Outfit', sans-serif;
-overflow-x: hidden;
-}
+        .carousel-track {
+            display: flex;
+            animation: scroll 40s linear infinite;
+        }
+        .carousel-track:hover { animation-play-state: paused; }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .testimonial-card {
+            min-width: 260px;
+            max-width: 300px;
+            margin: 0 8px;
+            padding: 20px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, hsla(142,25%,10%,0.85), hsla(43,15%,8%,0.9));
+            border: 1px solid hsla(142,40%,25%,0.3);
+            backdrop-filter: blur(20px);
+            flex-shrink: 0;
+        }
 
-h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+        @media (max-width: 640px) {
+            .testimonial-card {
+                min-width: 220px;
+                max-width: 260px;
+                margin: 0 6px;
+                padding: 16px;
+            }
+        }
 
-.text-gradient-gold {
-background: linear-gradient(135deg, hsl(43,90%,60%), hsl(43,100%,75%));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-}
+        .particle {
+            position: fixed; width: 4px; height: 4px; border-radius: 50%;
+            background: hsla(142,71%,45%,0.3); pointer-events: none;
+            animation: float-particle 4s ease-in-out infinite;
+        }
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0); opacity: 0.3; }
+            50% { transform: translateY(-20px); opacity: 0.7; }
+        }
 
-.text-gradient-green {
-background: linear-gradient(135deg, hsl(142,71%,55%), hsl(160,70%,65%));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-}
+        .fade-up {
+            opacity: 0; transform: translateY(30px);
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
+        .delay-4 { animation-delay: 0.6s; }
+        .delay-5 { animation-delay: 0.75s; }
 
-.carousel-track {
-display: flex;
-width: max-content;
-animation: scroll 40s linear infinite;
-}
+        .logo-glow {
+            animation: logoIn 0.6s ease-out forwards;
+            opacity: 0; transform: scale(0.8);
+        }
+        @keyframes logoIn {
+            to { opacity: 1; transform: scale(1); }
+        }
 
-.testimonial-card {
-min-width: 260px;
-max-width: 260px;
-margin: 0 10px;
-padding: 24px;
-border-radius: 16px;
-background: linear-gradient(135deg, hsla(120,15%,8%,0.9), hsla(120,15%,6%,0.95));
-border: 1px solid hsl(120,10%,22%);
-flex-shrink: 0;
-}
-</style>
+        .banner-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid hsla(142,50%,30%,0.4);
+            box-shadow: 0 8px 32px hsla(142,71%,45%,0.2), 0 0 60px hsla(43,74%,49%,0.1);
+        }
+        .banner-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, hsla(142,71%,45%,0.3), hsla(43,74%,49%,0.3), transparent);
+            margin: 2rem 0;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, hsla(142,30%,10%,0.7), hsla(43,20%,8%,0.7));
+            border: 1px solid hsla(142,50%,30%,0.25);
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Particles -->
+    <div class="particle" style="top:10%;left:5%;animation-delay:0s;"></div>
+    <div class="particle" style="top:30%;left:90%;animation-delay:1s;"></div>
+    <div class="particle" style="top:60%;left:15%;animation-delay:2s;"></div>
+    <div class="particle" style="top:80%;left:80%;animation-delay:3s;"></div>
+    <div class="particle" style="top:50%;left:50%;animation-delay:1.5s;"></div>
+    <div class="particle" style="top:20%;left:70%;animation-delay:0.5s;"></div>
 
-<div class="relative z-10 mx-auto max-w-2xl px-4 py-8">
+    <!-- Notification -->
+    <div class="notif-entrou" id="notif">
+        <img src="https://i.pravatar.cc/100?img=3" alt="avatar">
+        <div>
+            <div style="font-weight:600;font-size:13px;">Alguém</div>
+            <div style="font-size:11px;color:#888;">Acabou de entrar no grupo</div>
+        </div>
+    </div>
 
-<!-- BANNER CORRIGIDO -->
-<div class="mx-auto mb-8 flex justify-center">
-<div class="relative w-full max-w-md">
-<img src="https://disrupty-uploads-20251016.s3.us-east-1.amazonaws.com/checkout-blocks/1773975365308_w4vwf5"
-class="w-full rounded-2xl shadow-2xl">
-</div>
-</div>
+    <!-- Main Content -->
+    <div class="max-w-lg mx-auto px-4 py-8">
 
-<h1 class="text-center text-3xl font-extrabold">
-COMUNIDADE <span class="text-gradient-green">REI DELAS 👑</span> A MAIOR COMUNIDADE DE SINAIS E HORÁRIOS PAGANTES DO BRASIL
-</h1>
+        <!-- Banner -->
+        <div class="fade-up">
+            <div class="banner-container">
+                <img src="https://i.ibb.co/WvVQC3Sy/banner-goldbet.jpg" alt="GoldBet VIP Banner">
+            </div>
+        </div>
 
-<p class="text-center mt-4">
-Receba análises diárias, horários pagantes, palpites exclusivos e acompanhe lives ao vivo operando nos melhores jogos do dia 💰
-</p>
+        <!-- Live Badge -->
+        <div class="flex justify-center mt-6 fade-up delay-1">
+            <div class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold" style="background:hsla(0,80%,50%,0.15);border:1px solid hsla(0,80%,50%,0.3);color:hsl(0,80%,65%);">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="absolute inline-flex h-full w-full rounded-full opacity-75" style="background:hsl(0,80%,50%);animation:ping 1s cubic-bezier(0,0,0.2,1) infinite;"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5" style="background:hsl(0,80%,50%);"></span>
+                </span>
+                AO VIVO
+            </div>
+        </div>
 
-<!-- BOTÃO -->
-<div class="flex justify-center mt-6">
-<a href="https://chat.whatsapp.com/Kzy2K3I1feOGVtQsBk3ZmD?mode=gi_t"
-class="px-8 py-4 rounded-2xl font-bold text-black"
-style="background:#00FF88">
-Entrar no Grupo Agora!
-</a>
-</div>
+        <!-- Title -->
+        <div class="text-center mt-6 fade-up delay-2">
+            <h1 class="text-2xl sm:text-3xl font-black leading-tight">
+                <span class="text-gradient-gold">COMUNIDADE REI DELAS 👑</span><br>
+                <span class="text-gradient-green">A MAIOR COMUNIDADE DE SINAIS E HORÁRIOS PAGANTES DO BRASIL. 🔥</span>
+            </h1>
+        </div>
 
-</div>
+        <!-- Description -->
+        <div class="text-center mt-5 fade-up delay-3">
+            <p class="text-sm sm:text-base" style="color:hsla(0,0%,100%,0.75);line-height:1.7;">
+                Receba análises diárias de nossos analistas profissionais, horários pagantes, palpites exclusivos e acompanhe lives ao vivo operando nos melhores jogos do dia 💰
+            </p>
+            <p class="mt-3 font-semibold text-sm" style="color:hsl(43,90%,65%);">
+                Últimas vagas para entrar no grupo!
+            </p>
+        </div>
 
-<!-- CARROSSEL -->
-<section class="py-16">
-<div class="overflow-hidden">
-<div class="carousel-track" id="carousel-track"></div>
-</div>
-</section>
+        <!-- Progress Bar -->
+        <div class="mt-6 fade-up delay-4">
+            <div class="glass-card rounded-2xl p-5">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm font-semibold" style="color:hsl(43,90%,65%);">⚠️ GRUPO NO WHATSAPP QUASE CHEIO</span>
+                    <span class="text-sm font-bold text-gradient-green" id="progressText">0% PREENCHIDAS</span>
+                </div>
+                <div class="w-full rounded-full h-3 overflow-hidden" style="background:hsla(142,20%,15%,0.5);">
+                    <div class="progress-fill h-full rounded-full" id="progressBar" style="width:0%;background:linear-gradient(90deg,hsl(142,71%,45%),hsl(43,74%,49%));"></div>
+                </div>
+            </div>
+        </div>
 
-<script>
-const depoimentos=[
-"lucrei muito 🔥","grupo brabo","só green","melhor que já vi",
-"absurdo","recomendo","top demais","perfeito"
-];
+        <!-- Stats -->
+        <div class="grid grid-cols-2 gap-4 mt-6 fade-up delay-5">
+            <div class="stats-card rounded-2xl p-5 text-center">
+                <div class="text-2xl font-black text-gradient-green">14.7k</div>
+                <div class="text-xs mt-1" style="color:hsla(0,0%,100%,0.6);">Membros Ativos</div>
+            </div>
+            <div class="stats-card rounded-2xl p-5 text-center">
+                <div class="text-2xl font-black text-gradient-gold">98%</div>
+                <div class="text-xs mt-1" style="color:hsla(0,0%,100%,0.6);">Assertividade Média</div>
+            </div>
+        </div>
 
-let track=document.getElementById("carousel-track");
+        <!-- CTA Button -->
+        <div class="mt-8 fade-up delay-5">
+            <a href="https://chat.whatsapp.com/Kzy2K3I1feOGVtQsBk3ZmD?mode=gi_t" target="_blank" rel="noopener noreferrer" class="btn-cta block w-full text-center py-4 rounded-2xl text-lg font-bold text-white no-underline">
+                Entrar no Grupo Agora!
+            </a>
+            <p class="text-center text-xs mt-3" style="color:hsla(0,0%,100%,0.5);">🔓 Acesso 100% Gratuito ao grupo</p>
+        </div>
 
-[...depoimentos,...depoimentos].forEach(t=>{
-let div=document.createElement("div");
-div.className="testimonial-card";
-div.innerText=t;
-track.appendChild(div);
-});
-</script>
+    </div>
 
+    <!-- Testimonials Section -->
+    <div class="mt-12 mb-12">
+        <div class="section-divider"></div>
+        <h2 class="text-center text-xl sm:text-2xl font-bold mb-8 fade-up px-4">
+            💬 <span class="text-gradient-gold">O QUE DIZEM SOBRE A COMUNIDADE:</span>
+        </h2>
+
+        <div style="overflow:hidden;width:100%;padding:10px 0;">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Cards duplicados para loop infinito -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=1" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Lucas M.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Entrei sem acreditar muito, mas já no primeiro dia recebi sinais que me fizeram lucrar. Grupo sensacional!"</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=5" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Amanda S.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Melhor comunidade que já participei! Os analistas são muito competentes e as lives são incríveis."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=8" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Rafael C.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Taxa de acerto absurda! Fiz minha banca crescer 300% em duas semanas seguindo os sinais."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=12" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Juliana P.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Grupo top demais! Suporte incrível e os resultados falam por si. Recomendo de olhos fechados."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=15" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Pedro H.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Estava cético no início mas os resultados são reais. Melhor investimento que já fiz!"</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=20" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Carla F.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"As lives são o diferencial! Ver o analista operando ao vivo me deu muita confiança. Lucro todo dia!"</p>
+                </div>
+
+                <!-- Duplicados para loop -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=1" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Lucas M.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Entrei sem acreditar muito, mas já no primeiro dia recebi sinais que me fizeram lucrar. Grupo sensacional!"</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=5" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Amanda S.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Melhor comunidade que já participei! Os analistas são muito competentes e as lives são incríveis."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=8" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Rafael C.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Taxa de acerto absurda! Fiz minha banca crescer 300% em duas semanas seguindo os sinais."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=12" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Juliana P.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Grupo top demais! Suporte incrível e os resultados falam por si. Recomendo de olhos fechados."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=15" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Pedro H.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Estava cético no início mas os resultados são reais. Melhor investimento que já fiz!"</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/40?img=20" alt="" class="w-10 h-10 rounded-full">
+                        <div>
+                            <div class="font-semibold text-sm">Carla F.</div>
+                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"As lives são o diferencial! Ver o analista operando ao vivo me deu muita confiança. Lucro todo dia!"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center py-6 text-xs" style="color:hsla(0,0%,100%,0.3);border-top:1px solid hsla(142,40%,20%,0.2);">
+        ©️ 2026 Comunidade GoldBet - Todos os direitos reservados.
+    </div>
+
+    <script>
+        // Progress bar animation
+        setTimeout(() => {
+            const bar = document.getElementById('progressBar');
+            const text = document.getElementById('progressText');
+            if (bar && text) {
+                bar.style.width = '87%';
+                text.textContent = '87% PREENCHIDAS';
+            }
+        }, 800);
+
+        // Notification rotation
+        const nomes = ['Lucas M.','Amanda S.','Rafael C.','Juliana P.','Pedro H.','Carla F.','Bruno T.','Marina L.','Diego R.','Fernanda A.'];
+        const notif = document.getElementById('notif');
+        let ni = 0;
+        function showNotif() {
+            if (!notif) return;
+            const nome = nomes[ni % nomes.length];
+            const imgId = (ni % 30) + 1;
+            notif.querySelector('img').src = 'https://i.pravatar.cc/100?img=' + imgId;
+            notif.querySelector('div > div:first-child').textContent = nome;
+            notif.classList.add('show');
+            setTimeout(() => notif.classList.remove('show'), 3500);
+            ni++;
+        }
+        setTimeout(showNotif, 3000);
+        setInterval(showNotif, 8000);
+    </script>
 </body>
 </html>
