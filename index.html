@@ -1,856 +1,310 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apple Rewards</title>
-
-<style>
-    body {
-        background: #f5f5f7;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-    }
-
-    .shine {
-        animation: shine 0.6s ease-out;
-    }
-
-    @keyframes shine {
-        0% { text-shadow: 0 0 0px gold; }
-        50% { text-shadow: 0 0 14px gold; }
-        100% { text-shadow: 0 0 0px gold; }
-    }
-
-    .container, .resgate-container, .taxa-container, .envio-container {
-        width: 95%;
-        max-width: 420px;
-        background: #ffffff;
-        margin-top: 25px;
-        border-radius: 22px;
-        padding: 25px;
-        box-shadow: 0px 8px 22px rgba(0,0,0,0.08);
-    }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternity IA | Onde o Amor Não Tem Fim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Instrument+Serif:italic&display=swap" rel="stylesheet">
     
-    .taxa-container {
-        /* Remove o padding lateral padrão de .container para que o conteúdo possa se estender nas bordas, como na imagem de referência */
-        padding: 0px; 
-        margin-top: 0;
-        border-radius: 0;
-        box-shadow: none;
-        max-width: 500px;
-    }
-    
-    .envio-container { /* Estilos da Nova Tela */
-        margin-top: 0;
-        border-radius: 0;
-        box-shadow: none;
-        max-width: 500px;
-    }
+    <style>
+        :root {
+            --primary: #FF4A26; 
+            --gold: #D4AF37;
+            --bg: #030303;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: white; scroll-behavior: smooth; overflow-x: hidden; }
+        .serif { font-family: 'Instrument Serif', serif; }
+        
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-card { background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid rgba(255,255,255,0.1); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .glass-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(255, 74, 38, 0.15); }
+        
+        .glow-text { text-shadow: 0 0 20px rgba(255, 74, 38, 0.5); }
+        .gold-text { background: linear-gradient(135deg, #D4AF37 0%, #F4E0A1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .btn-cta { background: linear-gradient(90deg, #FF4A26, #FF8A00); position: relative; overflow: hidden; transition: 0.3s; }
+        .btn-cta:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 74, 38, 0.5); }
+        .btn-cta::after { content: ''; position: absolute; top: -50%; left: -100%; width: 200%; height: 200%; background: rgba(255,255,255,0.2); transform: rotate(45deg); transition: 0.5s; }
+        .btn-cta:hover::after { left: 100%; }
 
-    /* BARRA DE PROGRESSO */
-    .progress-wrapper {
-        width: 100%;
-        height: 10px;
-        background: #d9d9d9;
-        border-radius: 20px;
-        overflow: hidden;
-        margin-bottom: 20px;
-    }
+        #notif-box { position: fixed; bottom: 20px; left: 20px; z-index: 1000; transition: 0.5s; transform: translateX(-150%); }
+        .show-notif { transform: translateX(0) !important; }
 
-    .progress-bar {
-        height: 100%;
-        width: 0%;
-        background: #0071e3;
-        transition: 0.35s;
-    }
+        /* Ajuste do Carrossel para Velocidade e Mobile */
+        .scroller-container { width: 100%; overflow: hidden; display: flex; }
+        .scroller { display: flex; animation: scroll 25s linear infinite; width: max-content; }
+        .scroller:hover { animation-play-state: paused; }
 
-    .topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 25px;
-    }
-
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 600;
-        font-size: 18px;
-    }
-
-    .logo img {
-        width: 26px;
-    }
-
-    .money-box {
-        background: #f2f2f2;
-        padding: 6px 12px;
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .btn-sac {
-        background: #000;
-        color: #fff;
-        padding: 6px 14px;
-        border-radius: 10px;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-    h2 {
-        text-align: center;
-        font-size: 20px;
-        font-weight: 700;
-        color: #111;
-        margin-bottom: 10px;
-    }
-
-    .subtitle {
-        text-align: center;
-        color: #555;
-        margin-bottom: 20px;
-        font-size: 14px;
-    }
-
-    .option {
-        background: #fafafa;
-        padding: 14px;
-        border-radius: 14px;
-        border: 1px solid #e5e5e5;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        transition: 0.2s;
-        font-weight: 500;
-    }
-
-    .option:hover {
-        background: #eaeaea;
-    }
-
-    button {
-        width: 100%;
-        background: #000;
-        color: #fff;
-        padding: 14px;
-        border: none;
-        border-radius: 14px;
-        font-size: 15px;
-        font-weight: 700;
-        margin-top: 18px;
-        cursor: pointer;
-        opacity: 0.7;
-    }
-
-    button.enabled {
-        opacity: 1;
-    }
-
-    .bonus {
-        text-align: center;
-        margin-top: 10px;
-        font-size: 13px;
-        color: #0071e3;
-    }
-
-    footer {
-        margin-top: 25px;
-        text-align: center;
-        font-size: 11px;
-        color: #777;
-    }
-
-    footer span {
-        color: #c90000;
-        font-weight: 600;
-    }
-
-    .popup {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.55);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-    }
-
-    .popup-box {
-        background: #fff;
-        width: 90%;
-        max-width: 360px;
-        border-radius: 20px;
-        padding: 25px;
-        text-align: center;
-    }
-
-    .popup-box h3 {
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
-
-    .popup-valor {
-        font-size: 32px;
-        font-weight: 800;
-        color: #00c851;
-        margin-bottom: 15px;
-    }
-
-    .popup-btn {
-        background: #000;
-        color: #fff;
-        border: none;
-        width: 100%;
-        padding: 14px;
-        border-radius: 12px;
-        font-size: 14px;
-        font-weight: 700;
-        cursor: pointer;
-    }
-
-    .popup-final .popup-box {
-        background: #6a0dad;
-        color: #fff;
-    }
-
-    .popup-final .popup-btn {
-        background: #fff;
-        color: #6a0dad;
-    }
-
-    .resgate-container, .taxa-container, .envio-container { display:none; }
-
-    .resgate-title {
-        font-size:22px;
-        font-weight:700;
-        text-align:center;
-        margin-bottom:15px;
-    }
-
-    .saldo-box {
-        background:#000;
-        padding:12px;
-        border-radius:16px;
-        color:#fff;
-        font-size:18px;
-        text-align:center;
-        margin-bottom:22px;
-        font-weight:700;
-    }
-
-    .valores-box {
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:12px;
-        margin-bottom:25px;
-    }
-
-    .valor-btn {
-        background:#f5f5f7;
-        border:1px solid #ccc;
-        padding:14px;
-        border-radius:12px;
-        text-align:center;
-        font-size:15px;
-        font-weight:600;
-        cursor:pointer;
-        transition:0.3s;
-    }
-
-    .valor-btn:hover { background:#e7e7ea; }
-
-    select, input {
-        width:100%;
-        padding:12px;
-        border-radius:12px;
-        border:1px solid #ccc;
-        margin-bottom:18px;
-        font-size:15px;
-    }
-
-    #btnSaque {
-        background:#0071e3;
-        font-size:16px;
-        border-radius:12px;
-    }
-
-    /* ESTILOS DA TELA DE TAXA DE SEGURANÇA */
-    .taxa-header {
-        text-align: center;
-        padding: 40px 25px 30px;
-        background: #fff;
-    }
-
-    .taxa-logo-apple {
-        width: 30px;
-        margin-bottom: 20px;
-    }
-    
-    .taxa-icon-check {
-        width: 35px;
-        height: 35px;
-        margin: 0 auto 10px;
-        color: #0071e3; /* Azul Apple para o ícone de check */
-    }
-
-    .taxa-title {
-        font-size: 26px;
-        font-weight: 700;
-        margin-bottom: 15px;
-        color: #1c1c1c;
-    }
-
-    .taxa-description {
-        font-size: 16px;
-        line-height: 1.5;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .taxa-reembolso {
-        font-size: 15px;
-        color: #555;
-        margin-bottom: 30px;
-    }
-
-    .taxa-item-list {
-        padding: 0 25px 25px;
-        background: #fff;
-    }
-
-    .taxa-item {
-        display: flex;
-        align-items: flex-start;
-        padding: 16px;
-        background: #f5f5f7; /* Cor de fundo suave do corpo */
-        border-radius: 12px;
-        margin-bottom: 15px;
-    }
-
-    .taxa-item-icon {
-        width: 24px;
-        height: 24px;
-        margin-right: 15px;
-        color: #000; /* Ícones em preto */
-        flex-shrink: 0;
-    }
-
-    .taxa-item-content {
-        flex-grow: 1;
-    }
-
-    .taxa-item-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1c1c1c;
-        margin-bottom: 4px;
-    }
-
-    .taxa-item-text {
-        font-size: 14px;
-        color: #555;
-    }
-
-    .taxa-btn-sacar {
-        width: 100%;
-        background: #0071e3; /* Azul principal da Apple */
-        color: #fff;
-        padding: 18px;
-        border: none;
-        border-radius: 12px;
-        font-size: 18px;
-        font-weight: 700;
-        cursor: pointer;
-        margin: 0 auto 30px;
-        display: block;
-        max-width: 90%;
-    }
-    
-    /* ESTILOS DA NOVA TELA DE ENVIO */
-    .envio-header {
-        text-align: center;
-        padding-bottom: 20px;
-    }
-
-    .envio-header h2 {
-        font-size: 24px;
-        margin-bottom: 5px;
-    }
-
-    .envio-header p {
-        font-size: 15px;
-        color: #666;
-    }
-
-    .envio-icon-iphone {
-        width: 70px;
-        height: 70px;
-        color: #1c1c1c;
-        margin-bottom: 15px;
-    }
-
-    .envio-form label {
-        display: block;
-        font-size: 14px;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 6px;
-        margin-top: 15px;
-    }
-
-    .envio-form input {
-        width: calc(100% - 24px);
-        padding: 12px;
-        border-radius: 10px;
-        border: 1px solid #ddd;
-        font-size: 16px;
-        box-sizing: border-box;
-    }
-
-    .envio-btn-finalizar {
-        background: #0071e3;
-        font-size: 17px;
-        border-radius: 12px;
-        padding: 16px;
-        margin-top: 30px;
-    }
-    
-    /* Container para a VSL */
-    .vsl-container {
-        width: 100%;
-        max-width: 500px;
-        margin: 20px auto 0;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-    
-    .vsl-wrapper {
-        position: relative;
-        padding-top: 56.25%;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .vsl-wrapper iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-</style>
+        @keyframes scroll { 
+            from { transform: translateX(0); } 
+            to { transform: translateX(-50%); } 
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="vsl-container">
-    <div class="vsl-wrapper">
-        <iframe src="https://player-vz-71e4b53c-7bb.tv.pandavideo.com.br/embed/?v=5f73afe9-4ca3-4964-a476-f57d784ac591" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-</div>
-<audio id="coinSound">
-    <source src="media/mixkit-fairy-coin-voice-1089.mp3" type="audio/mpeg">
-</audio>
+    <header class="fixed top-0 w-full z-50 py-6 px-8 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-black tracking-tighter glow-text">ETERNITY<span class="text-[#FF4A26]">.AI</span></div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+                <a href="#processo" class="hover:text-white">Como funciona?</a>
+                <a href="#depoimentos" class="hover:text-white">Depoimentos</a>
+                <a href="#planos" class="hover:text-white">Planos</a>
+            </div>
+            <a href="#planos" class="btn-cta px-6 py-2 rounded-full text-xs font-bold uppercase">Reviver Agora</a>
+        </div>
+    </header>
 
-<div class="container" id="quizContainer">
-
-    <div class="topbar">
-        <div class="logo">
-            <img src="images/Apple_logo_black.svg">
-            Apple
+    <section class="relative pt-32 pb-20 px-4 min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-30 pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FF4A26] rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full blur-[150px]"></div>
         </div>
 
-        <div class="money-box">
-            <span id="saldoTopo">R$0,00</span>
-            <div class="btn-sac">SACAR</div>
+        <div class="z-10 animate__animated animate__fadeIn">
+            <span class="px-4 py-1 glass rounded-full text-[10px] font-bold tracking-[3px] uppercase text-gray-400 mb-6 inline-block border-white/10">Tecnologia Ultra-Realista de Resgate Mental</span>
+            <h1 class="serif text-5xl md:text-9xl leading-none mb-8">
+                Diga aquilo que ficou <br> <span class="gold-text italic">guardado no peito.</span>
+            </h1>
+            <p class="max-w-3xl mx-auto text-gray-400 text-lg md:text-2xl mb-12 font-light px-4">
+                Utilizamos redes neurais de última geração para recriar o rosto, a voz e a alma de quem você ama através de apenas uma foto. <span class="text-white font-medium">A morte não é o fim para quem pode ser visto e ouvido mais uma vez.</span>
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                <a href="#planos" class="btn-cta w-full md:w-auto px-12 py-5 rounded-2xl text-lg font-bold">REVER MEU ENTE QUERIDO</a>
+                <a href="#processo" class="glass w-full md:w-auto px-12 py-5 rounded-2xl text-lg font-bold hover:bg-white/5 transition">VER DEMONSTRAÇÃO</a>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="progress-wrapper">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
+    <section id="processo" class="py-24 px-8 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl md:text-6xl font-bold mb-8 serif italic">Como a mágica <br><span class="text-[#FF4A26]">acontece?</span></h2>
+                <div class="space-y-8">
+                    <div class="flex gap-6">
+                        <div class="w-12 h-12 glass rounded-full flex items-center justify-center text-[#FF4A26] font-bold shrink-0">1</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Você envia uma foto</h4>
+                            <p class="text-gray-400">Pode ser uma foto antiga, em baixa qualidade ou de anos atrás. Nossa IA reconstrói cada detalhe do rosto.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div class="w-12 h-12 glass rounded-full flex items-center justify-center text-[#FF4A26] font-bold shrink-0">2</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Resgate de Voz e Memória</h4>
+                            <p class="text-gray-400">Analisamos traços de personalidade para que o ente querido fale com a entonação e doçura que ele possuía.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div class="w-12 h-12 glass rounded-full flex items-center justify-center text-[#FF4A26] font-bold shrink-0">3</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Entrega Digital Segura</h4>
+                            <p class="text-gray-400">Você recebe um vídeo de alta definição em seu WhatsApp e E-mail para guardar e rever quando a saudade apertar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card p-4 rounded-[40px] relative">
+                <div class="bg-gray-900 w-full h-[400px] md:h-[500px] rounded-[30px] flex items-center justify-center overflow-hidden">
+                     <iframe src="https://player-vz-71e4b53c-7bb.tv.pandavideo.com.br/embed/?v=5f73afe9-4ca3-4964-a476-f57d784ac591" style="border:none;width:100%;height:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="absolute -bottom-6 -right-6 glass p-6 rounded-2xl animate-bounce hidden md:block">
+                    <p class="text-xs font-bold text-[#FF4A26]">100% Ultra-Realista</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <h2 id="question-title"></h2>
-    <div class="subtitle">Selecione uma opção para continuar:</div>
-    <div id="options"></div>
+    <section id="planos" class="py-24 px-4 bg-white/5">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 serif italic gold-text">Escolha seu Reencontro</h2>
+            <p class="text-gray-400 px-4">Preços simbólicos para tecnologia de valor inestimável.</p>
+        </div>
 
-    <button id="continuar">Continuar</button>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Plano Essencial</span>
+                    <h3 class="text-2xl font-bold mt-2">Visão Eterna</h3>
+                    <div class="text-4xl font-black my-6 text-[#FF4A26]">R$ 19,99</div>
+                    <ul class="text-sm text-gray-400 space-y-4 mb-8">
+                        <li>✓ Vídeo de 30s a 1 min</li>
+                        <li>✓ Resgate facial HD</li>
+                        <li>✓ Movimento natural de olhos</li>
+                        <li>✓ Entrega em até 24h</li>
+                    </ul>
+                </div>
+                <button class="w-full py-4 rounded-xl border border-white/10 hover:bg-white/10 font-bold">Escolher Este</button>
+            </div>
 
-    <div class="bonus">Concorra a um bônus especial Apple</div>
+            <div class="glass-card p-8 rounded-3xl border-[#FF4A26]/50 bg-[#FF4A26]/5 relative md:scale-105 flex flex-col justify-between">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FF4A26] text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase">O Mais Pedido</div>
+                <div>
+                    <span class="text-[10px] text-gray-300 font-bold uppercase tracking-widest">Plano Sensorial</span>
+                    <h3 class="text-2xl font-bold mt-2">Voz do Coração</h3>
+                    <div class="text-4xl font-black my-6 text-[#FF4A26]">R$ 26,89</div>
+                    <ul class="text-sm text-gray-300 space-y-4 mb-8">
+                        <li>✓ Vídeo de 1 minuto completo</li>
+                        <li class="text-white font-bold">✓ Resgate da Voz Real</li>
+                        <li>✓ Até 4 palavras personalizadas</li>
+                        <li>✓ Fundo musical emocionante</li>
+                    </ul>
+                </div>
+                <button class="btn-cta w-full py-4 rounded-xl font-bold">Escolher Reencontro</button>
+            </div>
 
-    <footer>
-        Ao participar das atividades de recompensa, você concorda com nossos <span>Termos e Condições</span>.
+            <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Plano Profundo</span>
+                    <h3 class="text-2xl font-bold mt-2">Mensagem de Luz</h3>
+                    <div class="text-4xl font-black my-6 text-[#FF4A26]">R$ 39,90</div>
+                    <ul class="text-sm text-gray-400 space-y-4 mb-8">
+                        <li>✓ Vídeo longo de 2 minutos</li>
+                        <li>✓ Até 10 palavras personalizadas</li>
+                        <li>✓ Roteiro criado por especialistas</li>
+                        <li>✓ Resgate facial e de voz 4K</li>
+                    </ul>
+                </div>
+                <button class="w-full py-4 rounded-xl border border-white/10 hover:bg-white/10 font-bold">Escolher Este</button>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl border-blue-500/30 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Plano Conexão</span>
+                    <h3 class="text-2xl font-bold mt-2">Chamada do Além</h3>
+                    <div class="text-4xl font-black my-6 text-[#FF4A26]">R$ 47,29</div>
+                    <ul class="text-sm text-gray-400 space-y-4 mb-8">
+                        <li>✓ Vídeo 30s de introdução</li>
+                        <li class="text-blue-400 font-bold">✓ Chamada de Vídeo IA (1min)</li>
+                        <li>✓ Áudio de 15s (WhatsApp)</li>
+                        <li>✓ Prioridade máxima na entrega</li>
+                    </ul>
+                </div>
+                <button class="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold">Viver Experiência</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="py-24 overflow-hidden border-y border-white/5">
+        <h2 class="text-center text-3xl font-bold mb-16 serif italic px-4">O que dizem os corações que <span class="gold-text">se reencontraram</span></h2>
+        <div class="scroller-container">
+            <div class="scroller">
+                <div class="glass p-8 mx-4 rounded-3xl w-[320px] md:w-[400px] shrink-0">
+                    <p class="italic text-gray-300 mb-6 font-light">"Achei que nunca mais ouviria meu filho me chamando de mãe. Quando o vídeo chegou, eu não conseguia parar de chorar de felicidade. É ele!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" class="w-12 h-12 rounded-full ring-2 ring-[#FF4A26]">
+                        <div><h5 class="font-bold">Dona Helena</h5><p class="text-xs text-gray-500">Plano Voz do Coração</p></div>
+                    </div>
+                </div>
+                <div class="glass p-8 mx-4 rounded-3xl w-[320px] md:w-[400px] shrink-0">
+                    <p class="italic text-gray-300 mb-6 font-light">"Trabalho impecável. Ver meu pai sorrindo e falando que está orgulhoso me deu forças para continuar."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/men/44.jpg" class="w-12 h-12 rounded-full ring-2 ring-[#FF4A26]">
+                        <div><h5 class="font-bold">Carlos Silva</h5><p class="text-xs text-gray-500">Plano Mensagem de Luz</p></div>
+                    </div>
+                </div>
+                <div class="glass p-8 mx-4 rounded-3xl w-[320px] md:w-[400px] shrink-0">
+                    <p class="italic text-gray-300 mb-6 font-light">"Rever minha esposa falando comigo foi o melhor remédio. Gratidão eterna à Eternity IA por este momento."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/men/12.jpg" class="w-12 h-12 rounded-full ring-2 ring-[#FF4A26]">
+                        <div><h5 class="font-bold">Roberto G.</h5><p class="text-xs text-gray-500">Plano Chamada do Além</p></div>
+                    </div>
+                </div>
+                <div class="glass p-8 mx-4 rounded-3xl w-[320px] md:w-[400px] shrink-0">
+                    <p class="italic text-gray-300 mb-6 font-light">"Inacreditável como a tecnologia pode trazer tanta paz para uma família. Recomendo de olhos fechados."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/women/50.jpg" class="w-12 h-12 rounded-full ring-2 ring-[#FF4A26]">
+                        <div><h5 class="font-bold">Marina F.</h5><p class="text-xs text-gray-500">Plano Essencial</p></div>
+                    </div>
+                </div>
+                <div class="glass p-8 mx-4 rounded-3xl w-[320px] md:w-[400px] shrink-0">
+                    <p class="italic text-gray-300 mb-6 font-light">"Achei que nunca mais ouviria meu filho me chamando de mãe. Quando o vídeo chegou, eu não conseguia parar de chorar de felicidade. É ele!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" class="w-12 h-12 rounded-full ring-2 ring-[#FF4A26]">
+                        <div><h5 class="font-bold">Dona Helena</h5><p class="text-xs text-gray-500">Plano Voz do Coração</p></div>
+                    </div>
+                </div>
+                <div class="glass p-8 mx-4 rounded-3xl w-[320px] md:w-[400px] shrink-0">
+                    <p class="italic text-gray-300 mb-6 font-light">"Trabalho impecável. Ver meu pai sorrindo e falando que está orgulhoso me deu forças para continuar."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/men/44.jpg" class="w-12 h-12 rounded-full ring-2 ring-[#FF4A26]">
+                        <div><h5 class="font-bold">Carlos Silva</h5><p class="text-xs text-gray-500">Plano Mensagem de Luz</p></div>
+                    </div>
+                </div>
+                <div class="glass p-8 mx-4 rounded-3xl w-[320px] md:w-[400px] shrink-0">
+                    <p class="italic text-gray-300 mb-6 font-light">"Rever minha esposa falando comigo foi o melhor remédio. Gratidão eterna à Eternity IA por este momento."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/men/12.jpg" class="w-12 h-12 rounded-full ring-2 ring-[#FF4A26]">
+                        <div><h5 class="font-bold">Roberto G.</h5><p class="text-xs text-gray-500">Plano Chamada do Além</p></div>
+                    </div>
+                </div>
+                <div class="glass p-8 mx-4 rounded-3xl w-[320px] md:w-[400px] shrink-0">
+                    <p class="italic text-gray-300 mb-6 font-light">"Inacreditável como a tecnologia pode trazer tanta paz para uma família. Recomendo de olhos fechados."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/women/50.jpg" class="w-12 h-12 rounded-full ring-2 ring-[#FF4A26]">
+                        <div><h5 class="font-bold">Marina F.</h5><p class="text-xs text-gray-500">Plano Essencial</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-8 max-w-4xl mx-auto">
+        <h2 class="text-center text-4xl font-bold mb-12 serif italic">Dúvidas Frequentes</h2>
+        <div class="space-y-4">
+            <details class="glass p-6 rounded-2xl group cursor-pointer">
+                <summary class="font-bold flex justify-between items-center">Por onde recebo o vídeo? <span class="group-open:rotate-180 transition">↓</span></summary>
+                <p class="mt-4 text-gray-400 text-sm">O link para download do vídeo é enviado diretamente para o seu WhatsApp e para o seu E-mail cadastrado em até 24 horas úteis.</p>
+            </details>
+            <details class="glass p-6 rounded-2xl group cursor-pointer">
+                <summary class="font-bold flex justify-between items-center">A foto precisa ser profissional? <span class="group-open:rotate-180 transition">↓</span></summary>
+                <p class="mt-4 text-gray-400 text-sm">Não. Nossa IA reconstrói fotos antigas, embaçadas ou de álbuns físicos com precisão impressionante.</p>
+            </details>
+            <details class="glass p-6 rounded-2xl group cursor-pointer">
+                <summary class="font-bold flex justify-between items-center">Como vocês conseguem a voz? <span class="group-open:rotate-180 transition">↓</span></summary>
+                <p class="mt-4 text-gray-400 text-sm">Usamos mapeamento craniofacial da foto para simular a caixa de ressonância. Se tiver um áudio antigo, o resultado fica 100% idêntico.</p>
+            </details>
+        </div>
+    </section>
+
+    <footer class="py-20 border-t border-white/5 text-center px-8">
+        <div class="text-2xl font-black mb-8 glow-text">ETERNITY<span class="text-[#FF4A26]">.AI</span></div>
+        <p class="text-gray-500 text-sm mb-4">© 2026 Eternity AI - Criatório RN. Tecnologia a serviço do amor.</p>
     </footer>
 
-</div>
-
-<div class="resgate-container" id="resgateContainer">
-
-    <div class="topbar">
-        <div class="logo">
-            <img src="images/Apple_logo_black.svg">
-            Apple
-        </div>
-
-        <div class="money-box">
-            R$559,51
+    <div id="notif-box" class="glass p-4 rounded-2xl flex items-center gap-4 w-[280px]">
+        <img id="notif-img" src="" class="w-12 h-12 rounded-full object-cover ring-2 ring-green-500">
+        <div>
+            <p id="notif-text" class="text-[11px] font-bold"></p>
+            <p class="text-[10px] text-gray-400">Acabou de rever quem ama.</p>
         </div>
     </div>
 
-    <div class="resgate-title">Resgatar Recompensa</div>
+    <script>
+        const users = [
+            { n: "Julia Ramos", i: "https://randomuser.me/api/portraits/women/11.jpg" },
+            { n: "Ricardo Almeida", i: "https://randomuser.me/api/portraits/men/22.jpg" },
+            { n: "Sandra Souza", i: "https://randomuser.me/api/portraits/women/44.jpg" },
+            { n: "Marcelo Peixoto", i: "https://randomuser.me/api/portraits/men/33.jpg" },
+            { n: "Beatriz Lima", i: "https://randomuser.me/api/portraits/women/55.jpg" }
+        ];
 
-    <div class="saldo-box">Saldo disponível: R$559,51</div>
-
-    <h3 style="font-size:16px;font-weight:600;">Últimas recompensas</h3>
-
-    <div class="valores-box">
-        <div class="valor-btn">R$10,50</div>
-        <div class="valor-btn">R$28,90</div>
-        <div class="valor-btn">R$56,10</div>
-        <div class="valor-btn">R$559,51</div>
-    </div>
-
-    <select id="tipoChave">
-        <option>Selecione o tipo de chave</option>
-        <option>Chave Aleatória</option>
-        <option>Celular</option>
-        <option>E-mail</option>
-        <option>CPF</option>
-    </select>
-
-    <input type="text" id="chavePix" placeholder="Digite sua chave PIX">
-
-    <button id="btnSaque">REALIZAR SAQUE AGORA</button>
-</div>
-
-<div class="taxa-container" id="taxaContainer">
-    <div class="taxa-header">
-        <img src="images/Apple_logo_black.svg" class="taxa-logo-apple">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" class="taxa-icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-        </svg>
-
-        <div class="taxa-title">Taxa de Segurança</div>
-        
-        <p class="taxa-description">
-            Seguindo as diretrizes do Banco Central do Brasil, solicitamos uma confirmação de identidade de **R$ 19,98** para garantir a autenticidade dos participantes.
-        </p>
-        
-        <p class="taxa-reembolso">
-            O dinheiro será totalmente reembolsado entre **1 a 5 minutos** junto ao saldo acumulado.
-        </p>
-    </div>
-
-    <div class="taxa-item-list">
-        
-        <div class="taxa-item">
-            <svg xmlns="http://www.w3.org/2000/svg" class="taxa-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-            <div class="taxa-item-content">
-                <div class="taxa-item-title">Taxa obrigatória</div>
-                <div class="taxa-item-text">Obrigatório para realizar o saque dos seus ganhos.</div>
-            </div>
-        </div>
-
-        <div class="taxa-item">
-            <svg xmlns="http://www.w3.org/2000/svg" class="taxa-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="1 4 1 10 7 10"></polyline>
-                <polyline points="23 20 23 14 17 14"></polyline>
-                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
-            </svg>
-            <div class="taxa-item-content">
-                <div class="taxa-item-title">Valor reembolsável</div>
-                <div class="taxa-item-text">Você recebe os **R$ 19,98** de volta após finalizar.</div>
-            </div>
-        </div>
-        
-        <div class="taxa-item">
-            <svg xmlns="http://www.w3.org/2000/svg" class="taxa-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-            <div class="taxa-item-content">
-                <div class="taxa-item-title">Garantia de segurança</div>
-                <div class="taxa-item-text">Seu pagamento é seguro e protegido por Banco Central do Brasil.</div>
-            </div>
-        </div>
-        
-        <button class="taxa-btn-sacar" id="btnTaxaSacar">REALIZAR SAQUE</button>
-    </div>
-</div>
-
-<div class="envio-container" id="envioContainer">
-    <div class="envio-header">
-        <svg xmlns="http://www.w3.org/2000/svg" class="envio-icon-iphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="12" y1="18" x2="12" y2="18"></line>
-        </svg>
-
-        <h2>🎉 Parabéns! Último Passo para o seu iPhone.</h2>
-        <p>Você confirmou sua elegibilidade. Agora, precisamos dos dados para **envio prioritário** do seu novo **iPhone 17** e a transferência do seu PIX de **R$559,51**.</p>
-        <p>Preencha com o endereço exato de entrega para que nossa logística Apple possa processar seu pedido.</p>
-    </div>
-
-    <form class="envio-form">
-        <label for="nomeCompleto">Nome Completo</label>
-        <input type="text" id="nomeCompleto" placeholder="Seu nome" required="">
-
-        <label for="cep">CEP</label>
-        <input type="text" id="cep" placeholder="00000-000" required="">
-
-        <label for="endereco">Endereço (Rua/Avenida, Número)</label>
-        <input type="text" id="endereco" placeholder="Ex: Rua das Maçãs, 100" required="">
-
-        <label for="bairro">Bairro</label>
-        <input type="text" id="bairro" placeholder="Ex: Centro" required="">
-
-        <label for="cidade">Cidade</label>
-        <input type="text" id="cidade" placeholder="Ex: São Paulo" required="">
-
-        <label for="estado">Estado (UF)</label>
-        <input type="text" id="estado" placeholder="Ex: SP" required="">
-
-        <button class="envio-btn-finalizar" id="btnFinalizarEnvio" type="button">FINALIZAR ENVIO E RECEBER PIX</button>
-    </form>
-</div>
-<div class="popup" id="popup">
-    <div class="popup-box">
-        <h3>Recompensa recebida!</h3>
-        <div class="popup-valor" id="popupValor">R$0,00</div>
-        <button class="popup-btn" id="popupBtn">Continuar recebendo</button>
-    </div>
-</div>
-
-<div class="popup popup-final" id="popupFinal">
-    <div class="popup-box">
-        <h3>Parabéns!</h3>
-        <p style="font-size:17px;font-weight:500;margin-bottom:10px;">
-            Você completou o quiz e ganhou:
-        </p>
-        <div class="popup-valor" style="color:#00ff8c;font-size:35px;">
-            R$559,51 + um iPhone 17
-        </div>
-        <button class="popup-btn" id="finalBtn">Receber recompensa</button>
-    </div>
-</div>
-
-<div class="popup" id="popupConquista">
-    <div class="popup-box" style="max-width:400px;border-radius:25px;padding:30px;background:#fefefe;">
-        <h3 style="font-size:24px;font-weight:700;color:#1c1c1c;margin-bottom:15px;">🎉 Parabéns pela sua conquista!</h3>
-        <p style="font-size:16px;color:#333;margin-bottom:15px;line-height:1.5;">
-            Você acaba de ganhar um <strong>iPhone 17</strong> e <strong>R$579,98</strong> na sua chave PIX.
-        </p>
-        <p style="font-size:15px;color:#555;margin-bottom:20px;line-height:1.5;">
-            Nossa equipe de logística já está preparando seu iPhone, e o envio para o seu endereço será realizado em breve.
-        </p>
-        <p style="font-size:15px;color:#555;margin-bottom:25px;line-height:1.5;">
-            Para receber seu PIX, basta clicar no botão abaixo e efetuar a taxa de segurança. Isso garante que a chave PIX fornecida realmente seja sua, validando seu recebimento imediato.
-        </p>
-        <button class="popup-btn" id="btnConquista" style="background:#0071e3;color:#fff;font-size:16px;font-weight:700;padding:16px;border-radius:14px;cursor:pointer;border:none;width:100%;">
-            Receber Recompensa Agora
-        </button>
-    </div>
-</div>
-<script>
-const coinSound = document.getElementById("coinSound");
-
-const perguntas = [
-    {
-        titulo: "Qual produto Apple você mais utiliza?",
-        opcoes: ["📱 iPhone", "💻 MacBook", "⌚ Apple Watch", "🎧 AirPods"]
-    },
-    {
-        titulo: "Qual cor de iPhone você mais gosta?",
-        opcoes: ["⚪ Branco", "⚫ Preto", "🩶 Titan Natural", "🔵 Azul"]
-    },
-    {
-        titulo: "Como você avalia a bateria dos iPhones?",
-        opcoes: ["🔋 Excelente", "👍 Boa", "🙂 Razoável", "😕 Pode melhorar"]
-    },
-    {
-        titulo: "Você usaria um Apple Vision Pro?",
-        opcoes: ["🤩 Com certeza!", "😎 Talvez", "🤔 Não sei", "🙅‍♂️ Não usaria"]
-    },
-    {
-        titulo: "Qual serviço Apple você mais usa?",
-        opcoes: ["🎵 Apple Music", "📦 iCloud", "📺 Apple TV+", "🎮 Arcade"]
-    }
-];
-
-const valores = [38.52, 42.71, 33.18, 45.90, 399.20];
-
-let etapa = 0;
-let selected = false;
-let saldoAtual = 0;
-
-const title = document.getElementById("question-title");
-const optionsBox = document.getElementById("options");
-const btn = document.getElementById("continuar");
-
-const popup = document.getElementById("popup");
-const popupValor = document.getElementById("popupValor");
-const popupBtn = document.getElementById("popupBtn");
-
-const popupFinal = document.getElementById("popupFinal");
-const finalBtn = document.getElementById("finalBtn");
-
-const saldoTopo = document.getElementById("saldoTopo");
-
-const progressBar = document.getElementById("progressBar");
-
-// Elementos das Telas
-const btnSaque = document.getElementById("btnSaque");
-const resgateContainer = document.getElementById("resgateContainer");
-const taxaContainer = document.getElementById("taxaContainer");
-const envioContainer = document.getElementById("envioContainer"); 
-const quizContainer = document.getElementById("quizContainer"); 
-
-const btnTaxaSacar = document.getElementById("btnTaxaSacar"); // Botão "REALIZAR SAQUE" da tela de taxa
-const btnFinalizarEnvio = document.getElementById("btnFinalizarEnvio"); // Botão da tela de envio
-
-// NOVO: Variáveis para o Pop-up de Conquista
-const popupConquista = document.getElementById("popupConquista");
-const btnConquista = document.getElementById("btnConquista");
-
-
-function atualizarProgresso() {
-    const progresso = ((etapa) / perguntas.length) * 100;
-    progressBar.style.width = progresso + "%";
-}
-
-function brilho(el) {
-    el.classList.remove("shine");
-    void el.offsetWidth;
-    el.classList.add("shine");
-}
-
-function carregarPergunta() {
-    atualizarProgresso();
-
-    const q = perguntas[etapa];
-    title.innerText = q.titulo;
-    optionsBox.innerHTML = "";
-    selected = false;
-    btn.classList.remove("enabled"); // Garante que o botão comece desabilitado
-
-    q.opcoes.forEach(op => {
-        const div = document.createElement("div");
-        div.className = "option";
-        div.innerHTML = op;
-        div.onclick = () => {
-            document.querySelectorAll(".option").forEach(o => o.style.border = "1px solid #e5e5e5");
-            div.style.border = "2px solid #000";
-            selected = true;
-            btn.classList.add("enabled");
-        };
-        optionsBox.appendChild(div);
-    });
-}
-
-btn.onclick = () => {
-    if (!selected) return;
-
-    const valor = valores[etapa];
-    popupValor.innerText = "R$0,00";
-    popup.style.display = "flex";
-
-    coinSound.currentTime = 0;
-    coinSound.play();
-
-    let atual = 0;
-    const anim = setInterval(() => {
-        atual += valor / 25;
-        if (atual >= valor) {
-            atual = valor;
-            clearInterval(anim);
+        function showNotification() {
+            const box = document.getElementById('notif-box');
+            const img = document.getElementById('notif-img');
+            const text = document.getElementById('notif-text');
+            const random = users[Math.floor(Math.random() * users.length)];
+            img.src = random.i;
+            text.innerText = random.n;
+            box.classList.add('show-notif');
+            setTimeout(() => { box.classList.remove('show-notif'); }, 6000);
         }
-        popupValor.innerText = "R$" + atual.toFixed(2).replace(".", ",");
-        brilho(popupValor);
-    }, 30);
 
-    saldoAtual += valor;
-    saldoTopo.innerText = "R$" + saldoAtual.toFixed(2).replace(".", ",");
-    brilho(saldoTopo);
-};
+        setInterval(showNotification, 15000);
+        setTimeout(showNotification, 4000);
+    </script>
 
-popupBtn.onclick = () => {
-    popup.style.display = "none";
-    etapa++;
-
-    if (etapa >= perguntas.length) {
-        progressBar.style.width = "100%";
-
-        popupFinal.style.display = "flex";
-
-        coinSound.currentTime = 0;
-        coinSound.play();
-
-        return;
-    }
-
-    btn.classList.remove("enabled");
-    carregarPergunta();
-};
-
-finalBtn.onclick = () => {
-    quizContainer.style.display = "none";
-    document.getElementById("popupFinal").style.display = "none";
-    resgateContainer.style.display = "block";
-
-    coinSound.currentTime = 0;
-    coinSound.play();
-};
-
-// 1. Botão da Tela de Resgate -> Tela de Taxa
-btnSaque.onclick = () => {
-    resgateContainer.style.display = "none";
-    taxaContainer.style.display = "block";
-};
-
-// 2. Botão da Tela de Taxa -> Tela de Envio
-btnTaxaSacar.onclick = () => {
-    // Avança para a tela de envio (após o suposto pagamento)
-    taxaContainer.style.display = "none";
-    envioContainer.style.display = "block";
-};
-
-// 3. NOVO: Botão da Tela de Envio -> MOSTRA POP-UP DE CONQUISTA
-btnFinalizarEnvio.onclick = () => {
-    // Oculta a tela de envio e mostra o novo pop-up (conforme solicitado)
-    envioContainer.style.display = "none";
-    popupConquista.style.display = "flex";
-};
-
-// 4. NOVO: Botão do Pop-up de Conquista -> Redirecionamento Final
-btnConquista.onclick = () => {
-    // Redireciona para o link fornecido após o clique no pop-up
-    window.location.href = "https://compraseguraonline.org.ua/c/d4df49a4ff";
-};
-
-carregarPergunta();
-</script>
-
-
-
-</body></html>
+</body>
+</html>
