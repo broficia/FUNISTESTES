@@ -3,1046 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apple Rewards México</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Panel Clash Royale - Domina las Arenas con Elixir Infinito</title>
+    <meta name="description" content="El mejor panel de elixir para Clash Royale. Sube de arena rápidamente, domina tus batallas y garantiza victorias con 100% de seguridad.">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --apple-blue: #0071e3;
-            --apple-blue-dark: #0059b3;
-            --apple-bg: #f5f5f7;
-            --white: #ffffff;
-            --text-dark: #1d1d1f;
-            --text-gray: #86868b;
-            --success: #00c851;
-            --success-dark: #00a040;
-            --gold: #f5a623;
-            --red: #ff3b30;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            display: flex; justify-content: center;
-            align-items: flex-start; min-height: 100vh;
-            color: var(--text-dark);
-            overflow-x: hidden;
-        }
-
-        /* ===== SPLASH SCREEN ===== */
-        #splashScreen {
-            position: fixed; inset: 0; z-index: 10000;
-            background: linear-gradient(145deg, #0a0a0f 0%, #111827 40%, #0f172a 100%);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-        #splashScreen.hidden {
-            opacity: 0; visibility: hidden; pointer-events: none;
-        }
-        .splash-bg-glow {
-            position: absolute; width: 300px; height: 300px;
-            border-radius: 50%; filter: blur(100px); opacity: 0.4;
-        }
-        .splash-glow-1 {
-            top: 10%; left: 20%;
-            background: radial-gradient(circle, #0071e3, transparent);
-            animation: splashFloat1 4s ease-in-out infinite;
-        }
-        .splash-glow-2 {
-            bottom: 15%; right: 15%;
-            background: radial-gradient(circle, #7c3aed, transparent);
-            animation: splashFloat2 5s ease-in-out infinite;
-        }
-        .splash-glow-3 {
-            top: 40%; right: 30%;
-            background: radial-gradient(circle, #06b6d4, transparent);
-            animation: splashFloat1 6s ease-in-out infinite reverse;
-            width: 200px; height: 200px; opacity: 0.2;
-        }
-        @keyframes splashFloat1 {
-            0%,100% { transform: translate(0,0) scale(1); }
-            50% { transform: translate(30px,-20px) scale(1.1); }
-        }
-        @keyframes splashFloat2 {
-            0%,100% { transform: translate(0,0) scale(1); }
-            50% { transform: translate(-20px,15px) scale(1.15); }
-        }
-
-        .splash-content {
-            position: relative; z-index: 2;
-            display: flex; flex-direction: column;
-            align-items: center; gap: 30px;
-            width: 85%; max-width: 360px;
-        }
-
-        .splash-logo-ring {
-            width: 110px; height: 110px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            position: relative;
-            animation: splashLogoIn 1s ease-out;
-        }
-        .splash-logo-ring::before {
-            content: '';
-            position: absolute; inset: -3px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, #0071e3, #7c3aed, #06b6d4, #0071e3);
-            animation: spinRing 3s linear infinite;
-            z-index: 0;
-        }
-        .splash-logo-ring::after {
-            content: '';
-            position: absolute; inset: 3px;
-            border-radius: 50%;
-            background: rgba(15,23,42,0.95);
-            z-index: 1;
-        }
-        @keyframes spinRing { to { transform: rotate(360deg); } }
-        @keyframes splashLogoIn {
-            0% { opacity: 0; transform: scale(0.5); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        .splash-logo-ring img {
-            width: 50px; height: 50px;
-            position: relative; z-index: 2;
-            filter: brightness(0) invert(1);
-        }
-
-        .splash-title {
-            color: #fff; font-size: 22px; font-weight: 800;
-            text-align: center; letter-spacing: -0.5px;
-            animation: splashFadeUp 0.8s ease-out 0.3s both;
-        }
-        .splash-subtitle {
-            color: rgba(255,255,255,0.5); font-size: 13px;
-            font-weight: 500; text-align: center; margin-top: -15px;
-            animation: splashFadeUp 0.8s ease-out 0.5s both;
-        }
-        @keyframes splashFadeUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .splash-progress-box {
-            width: 100%;
-            animation: splashFadeUp 0.8s ease-out 0.7s both;
-        }
-        .splash-progress-track {
-            width: 100%; height: 6px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px; overflow: hidden;
-        }
-        .splash-progress-fill {
-            height: 100%; width: 0%;
-            background: linear-gradient(90deg, #0071e3, #34aadc, #7c3aed);
-            border-radius: 10px;
-            transition: width 0.15s linear;
-            position: relative;
-        }
-        .splash-progress-fill::after {
-            content: '';
-            position: absolute; right: 0; top: -2px;
-            width: 10px; height: 10px;
-            background: #fff; border-radius: 50%;
-            box-shadow: 0 0 12px rgba(0,113,227,0.8);
-        }
-        .splash-progress-info {
-            display: flex; justify-content: space-between;
-            align-items: center; margin-top: 12px;
-        }
-        .splash-status {
-            color: rgba(255,255,255,0.6); font-size: 12px;
-            font-weight: 500; transition: opacity 0.3s;
-        }
-        .splash-pct {
-            color: #0071e3; font-size: 13px;
-            font-weight: 700; font-variant-numeric: tabular-nums;
-        }
-
-        .splash-flag {
-            display: flex; align-items: center; gap: 8px;
-            color: rgba(255,255,255,0.4); font-size: 12px;
-            animation: splashFadeUp 0.8s ease-out 0.9s both;
-        }
-
-        .splash-particles {
-            position: absolute; inset: 0;
-            overflow: hidden; z-index: 1;
-        }
-        .splash-particle {
-            position: absolute;
-            width: 3px; height: 3px;
-            background: rgba(0,113,227,0.4);
-            border-radius: 50%;
-            animation: particleFloat 4s ease-in-out infinite;
-        }
-        @keyframes particleFloat {
-            0%,100% { opacity: 0; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(-80px); }
-        }
-
-        /* ===== NOTIFICACIONES ===== */
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(150%);
-            width: 90%;
-            max-width: 370px;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 18px;
-            padding: 14px 18px;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            z-index: 9999;
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-left: 4px solid var(--success);
-        }
-        .notification.show { transform: translateX(-50%) translateY(0); }
-        .notif-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #e5e5e5; }
-        .notif-content { flex: 1; }
-        .notif-title { font-size: 13px; font-weight: 700; color: #1d1d1f; }
-        .notif-text { font-size: 12px; color: var(--text-gray); margin-top: 2px; }
-        .notif-badge { background: var(--success); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
-
-        /* ===== ANIMACIONES ===== */
-        .shine { animation: shine 0.8s ease-out; }
-        @keyframes shine {
-            0% { text-shadow: 0 0 0px gold; transform: scale(1); }
-            50% { text-shadow: 0 0 20px gold, 0 0 40px rgba(245,166,35,0.3); transform: scale(1.08); }
-            100% { text-shadow: 0 0 0px gold; transform: scale(1); }
-        }
-
-        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glow { 0%,100% { box-shadow: 0 0 5px rgba(0,113,227,0.3); } 50% { box-shadow: 0 0 20px rgba(0,113,227,0.6); } }
-        @keyframes coinDrop {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-60px) scale(0.5); }
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        @keyframes urgencyPulse {
-            0%,100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        @keyframes float {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .fade-in { animation: fadeInUp 0.5s ease-out; }
-        .slide-down { animation: slideDown 0.3s ease-out; }
-
-        /* ===== CONTENEDORES ===== */
-        .container, .resgate-container, .taxa-container, .envio-container {
-            width: 95%; max-width: 420px; background: var(--white);
-            margin: 20px auto; border-radius: 24px; padding: 28px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03);
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .urgencia-box {
-            background: linear-gradient(135deg, #ff3b30, #ff6259);
-            color: white; border-radius: 14px;
-            padding: 10px 16px; text-align: center; font-size: 12px;
-            font-weight: 700; margin-bottom: 22px;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            animation: urgencyPulse 2s ease-in-out infinite;
-            box-shadow: 0 4px 15px rgba(255,59,48,0.3);
-        }
-        .urgencia-box .dot {
-            width: 8px; height: 8px; background: #fff; border-radius: 50%;
-            animation: pulse 1s infinite;
-        }
-
-        .topbar {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 22px; padding-bottom: 16px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .logo {
-            display: flex; align-items: center; gap: 10px;
-            font-weight: 800; font-size: 17px; letter-spacing: -0.3px;
-        }
-        .logo img { width: 24px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
-        .money-box {
-            background: linear-gradient(135deg, #e8fdf0, #d4f5e0);
-            padding: 10px 18px; border-radius: 14px;
-            font-weight: 800; font-size: 15px; color: var(--success);
-            border: 1px solid rgba(0,200,81,0.2);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        .money-box::before {
-            content: '💰';
-            margin-right: 4px;
-        }
-
-        .coin-float {
-            position: absolute;
-            font-size: 20px;
-            pointer-events: none;
-            animation: coinDrop 1s ease-out forwards;
-        }
-
-        .progress-wrapper {
-            width: 100%; height: 8px; background: #e5e5ea;
-            border-radius: 10px; margin-bottom: 8px; overflow: hidden;
-            position: relative;
-        }
-        .progress-bar {
-            height: 100%; width: 0%;
-            background: linear-gradient(90deg, var(--apple-blue), #34aadc);
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 10px;
-            position: relative;
-        }
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-        }
-        .progress-text {
-            font-size: 12px; color: var(--text-gray);
-            text-align: right; margin-bottom: 20px; font-weight: 600;
-        }
-
-        h2 {
-            font-size: 20px; text-align: center; margin-bottom: 20px;
-            font-weight: 800; line-height: 1.4; letter-spacing: -0.3px;
-        }
-
-        .option {
-            background: #fafafa; padding: 16px 18px; border-radius: 16px;
-            border: 2px solid #ebebeb; margin-bottom: 10px; cursor: pointer;
-            transition: all 0.25s ease; font-weight: 600; font-size: 15px;
-            display: flex; align-items: center; gap: 12px;
-            position: relative; overflow: hidden;
-        }
-        .option::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 0; background: rgba(0,113,227,0.08);
-            transition: width 0.3s ease;
-        }
-        .option:hover {
-            background: #f0f5ff; border-color: #c5d9f0;
-            transform: translateX(4px);
-        }
-        .option:hover::before { width: 100%; }
-        .option:active { transform: scale(0.98); }
-        .option.selected {
-            border: 2px solid var(--apple-blue);
-            background: linear-gradient(135deg, #f0f7ff, #e8f4fd);
-            box-shadow: 0 4px 15px rgba(0,113,227,0.15);
-        }
-        .option.selected::after {
-            content: '✓';
-            position: absolute; right: 16px;
-            color: var(--apple-blue); font-weight: 900; font-size: 18px;
-        }
-
-        .btn-primary {
-            width: 100%;
-            background: linear-gradient(135deg, #1d1d1f, #333);
-            color: #fff; padding: 17px;
-            border: none; border-radius: 16px;
-            font-size: 16px; font-weight: 700;
-            cursor: pointer; transition: all 0.3s ease;
-            margin-top: 12px;
-            letter-spacing: 0.3px;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-        .btn-primary:hover::before { left: 100%; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
-        .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
-        .btn-primary:active { transform: scale(0.98); }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--success), var(--success-dark));
-            animation: glow 2s infinite;
-        }
-        .btn-success:hover {
-            box-shadow: 0 8px 30px rgba(0,200,81,0.4);
-        }
-
-        .btn-blue {
-            background: linear-gradient(135deg, var(--apple-blue), var(--apple-blue-dark));
-        }
-        .btn-blue:hover {
-            box-shadow: 0 8px 30px rgba(0,113,227,0.4);
-        }
-
-        .loader {
-            border: 3px solid #f3f3f3; border-top: 3px solid var(--apple-blue);
-            border-radius: 50%; width: 22px; height: 22px;
-            animation: spin 0.8s linear infinite;
-            display: inline-block; margin-right: 10px;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .popup {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-            display: none; justify-content: center; align-items: center; z-index: 1000;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-        .popup-box {
-            background: #fff; width: 88%; max-width: 360px;
-            padding: 35px 30px; border-radius: 28px; text-align: center;
-            animation: fadeInUp 0.4s ease-out;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-        }
-        .popup-icon {
-            font-size: 50px; margin-bottom: 10px;
-            animation: float 2s ease-in-out infinite;
-        }
-        .popup-valor {
-            font-size: 38px; font-weight: 900; color: var(--success);
-            margin: 12px 0; letter-spacing: -1px;
-        }
-        .popup-label {
-            font-size: 13px; color: var(--text-gray); font-weight: 500;
-            margin-bottom: 5px;
-        }
-        .popup-subtitle {
-            font-size: 14px; color: #666; margin-bottom: 20px;
-        }
-
-        .resgate-container, .taxa-container, .envio-container { display: none; }
-
-        .saldo-display {
-            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-            border: 2px solid rgba(0,200,81,0.2);
-            border-radius: 20px; padding: 24px; text-align: center;
-            margin-bottom: 24px;
-        }
-        .saldo-label {
-            font-size: 12px; font-weight: 700; color: var(--text-gray);
-            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;
-        }
-        .saldo-value {
-            font-size: 36px; font-weight: 900; color: var(--success);
-            letter-spacing: -1px;
-        }
-
-        .input-group { margin-bottom: 16px; }
-        .input-group label {
-            display: block; font-size: 13px; font-weight: 700;
-            color: var(--text-dark); margin-bottom: 6px;
-        }
-        input, select {
-            width: 100%; padding: 15px 16px; border-radius: 14px;
-            border: 2px solid #e5e5ea; font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-            background: #fafafa;
-            -webkit-appearance: none;
-        }
-        input:focus, select:focus {
-            outline: none; border-color: var(--apple-blue);
-            box-shadow: 0 0 0 4px rgba(0,113,227,0.1);
-            background: #fff;
-        }
-        select { cursor: pointer; }
-
-        .taxa-item {
-            display: flex; align-items: center; gap: 14px;
-            background: linear-gradient(135deg, #fafafa, #f5f5f7);
-            padding: 16px; border-radius: 16px; margin-bottom: 12px;
-            text-align: left; border: 1px solid #ebebeb;
-            transition: all 0.3s ease;
-        }
-        .taxa-item:hover { transform: translateX(4px); }
-        .taxa-item .icon {
-            font-size: 24px; width: 44px; height: 44px;
-            display: flex; align-items: center; justify-content: center;
-            background: #fff; border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-        .taxa-item b { font-size: 14px; display: block; margin-bottom: 2px; }
-        .taxa-item p { font-size: 12px; margin: 0; color: var(--text-gray); line-height: 1.4; }
-
-        .badge {
-            display: inline-flex; align-items: center; gap: 5px;
-            padding: 5px 12px; border-radius: 20px;
-            font-size: 11px; font-weight: 700;
-        }
-        .badge-secure {
-            background: #e8f5e9; color: #2e7d32;
-        }
-
-        .trust-bar {
-            display: flex; justify-content: center; gap: 16px;
-            margin-top: 16px; padding-top: 16px;
-            border-top: 1px solid #f0f0f0;
-        }
-        .trust-item {
-            display: flex; align-items: center; gap: 4px;
-            font-size: 11px; color: var(--text-gray); font-weight: 500;
-        }
-
-        .envio-header {
-            text-align: center; margin-bottom: 24px;
-        }
-        .envio-header h2 { margin-bottom: 8px; }
-        .envio-header p { font-size: 14px; color: var(--text-gray); }
-
-        .conquista-box {
-            background: linear-gradient(135deg, #1d1d1f, #2d2d2f);
-            color: #fff;
-        }
-        .conquista-box h2 { color: #fff; }
-        .conquista-box p { color: rgba(255,255,255,0.7); }
-        .conquista-valor {
-            font-size: 32px; font-weight: 900;
-            background: linear-gradient(135deg, var(--gold), #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 12px 0;
-        }
-
-        .validando-box {
-            display: none; align-items: center; justify-content: center;
-            gap: 10px; padding: 16px; background: #f8f9fa;
-            border-radius: 14px; margin-top: 12px;
-            font-size: 14px; color: var(--text-gray); font-weight: 500;
-        }
-
-        .security-footer {
-            display: flex; flex-direction: column; align-items: center;
-            gap: 8px; margin-top: 20px;
-        }
-        .security-badges {
-            display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
-        }
+        /* Mantendo os estilos originais para garantir que nada mude no visual */
+        :root { --primary: #ffcc00; --secondary: #007bff; --dark: #121212; --light: #ffffff; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: var(--light); margin: 0; overflow-x: hidden; }
+        .ticker-wrapper { background: var(--primary); color: #000; padding: 10px 0; overflow: hidden; font-weight: 800; font-size: 14px; text-transform: uppercase; }
+        .ticker-content { display: flex; white-space: nowrap; animation: ticker 30s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .hero { padding: 60px 20px; text-align: center; background: radial-gradient(circle, #1a1a1a 0%, #000 100%); }
+        .hero h1 { font-size: 3rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
+        .hero h1 span { color: var(--primary); }
+        .btn-main { background: var(--primary); color: #000; padding: 18px 40px; border-radius: 50px; font-weight: 800; font-size: 20px; text-decoration: none; display: inline-block; transition: 0.3s; box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3); }
+        .btn-main:hover { transform: scale(1.05); }
+        .card { background: #1e1e1e; padding: 30px; border-radius: 20px; border: 1px solid #333; margin-bottom: 20px; }
+        .price { font-size: 48px; font-weight: 900; color: var(--primary); }
+        .price span { font-size: 18px; color: #aaa; }
     </style>
 </head>
 <body>
 
-    <!-- ===== SPLASH SCREEN ===== -->
-    <div id="splashScreen">
-        <div class="splash-particles" id="splashParticles"></div>
-        <div class="splash-bg-glow splash-glow-1"></div>
-        <div class="splash-bg-glow splash-glow-2"></div>
-        <div class="splash-bg-glow splash-glow-3"></div>
-        <div class="splash-content">
-            <div class="splash-logo-ring">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
+    <!-- BARRA DE ANUNCIOS -->
+    <div class="ticker-wrapper">
+        <div class="ticker-content">
+            &nbsp; DOMINA LAS ARENAS • SUBE DE COPAS RÁPIDO • DESCUENTO SOLO HOY • ELIXIR INFINITO • 100% ANTI-BAN • PANEL 100% SEGURO • SUBE DE COPAS RÁPIDO • DESCUENTO SOLO HOY • ELIXIR INFINITO • 100% ANTI-BAN • PANEL 100% SEGURO • &nbsp;
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <p style="color: var(--primary); font-weight: 700; letter-spacing: 2px;">TE DAMOS LA VENTAJA TOTAL</p>
+            <h1>El Mejor Panel de <br><span>Elixir Infinito</span><br> de Clash Royale</h1>
+            
+            <div style="margin: 30px 0;">
+                <span style="background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 50px; font-size: 14px;">🛡️ 100% Anti-Ban</span>
             </div>
-            <div class="splash-title">Apple Rewards México</div>
-            <div class="splash-subtitle">Programa exclusivo para usuarios mexicanos</div>
-            <div class="splash-progress-box">
-                <div class="splash-progress-track">
-                    <div class="splash-progress-fill" id="splashFill"></div>
+
+            <a href="#precios" class="btn-main">ACCEDER AL PANEL</a>
+
+            <!-- MINI TESTIMONIOS SLIDER -->
+            <div style="margin-top: 50px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <div class="card" style="text-align: left; font-size: 14px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <strong>Fernando Silva</strong>
+                        <span style="color: #ffcc00;">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p>"¡Subí de 5.2k a 9.1k de copas en menos de 1 mes! El elixir infinito cambia el juego totalmente 🔥"</p>
+                    <small style="color: #666;">hace 2h</small>
                 </div>
-                <div class="splash-progress-info">
-                    <div class="splash-status" id="splashStatus">Iniciando...</div>
-                    <div class="splash-pct" id="splashPct">0%</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARA QUIÉN ES -->
+    <section style="padding: 60px 20px; background: #000;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <h2 style="font-size: 2rem; margin-bottom: 40px;">El Panel de Elixir Royale es para ti si:</h2>
+            <div style="text-align: left;">
+                <div class="card">✅ No aguantas más perder partidas y quieres subir de arena rápidamente.</div>
+                <div class="card">✅ Quieres tener ventajas competitivas y dominar todas las batallas.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section style="padding: 60px 20px; background: #121212;">
+        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+            <h2 style="margin-bottom: 40px;">Mira los Testimonios de Nuestros Jugadores</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div class="card">
+                    <strong>Thalesinho</strong>
+                    <p>"¡La ventaja competitiva es absurda! Suelto tropas sin parar mientras el otro cuenta el elixir. ¡Sistema 100% anti-ban funcionando perfectamente!"</p>
+                    <small>hace 5h</small>
+                </div>
+                <div class="card">
+                    <strong>Marcio</strong>
+                    <p>"¡Simplemente me ADICTÉ! Pongo 4 Golems en la arena y los tipos se vuelven locos jajaja. De 4.8k subí a 9.5k en 3 semanas. ¡DEMASIADO TOP!"</p>
+                    <small>hace 1 día</small>
+                </div>
+                <div class="card">
+                    <strong>ZappyBoy</strong>
+                    <p>"Amigo, ¡este panel cambió mi juego! Ahora puedo ciclar tropas mucho más rápido que el rival. Parece hasta injusto 😅"</p>
+                    <small>hace 8h</small>
                 </div>
             </div>
-            <div class="splash-flag">🇲🇽 Disponible en México</div>
         </div>
-    </div>
+    </section>
 
-    <!-- NOTIFICACION -->
-    <div class="notification" id="notification">
-        <img class="notif-img" id="notifImg" src="" alt="">
-        <div class="notif-content">
-            <div class="notif-title" id="notifTitle"></div>
-            <div class="notif-text" id="notifText"></div>
-        </div>
-        <div class="notif-badge">SPEI ✓</div>
-    </div>
+    <!-- PRECIOS -->
+    <section id="precios" style="padding: 80px 20px; background: #000; text-align: center;">
+        <h2 style="font-size: 2.5rem;">Elige tu Panel de <br><span style="color:var(--primary)">Elixir Infinito</span></h2>
+        <p style="margin-bottom: 50px;">⚡ ¡Domina las arenas, sube de copas y conviértete en un PRO PLAYER! 🔥</p>
 
-    <!-- QUIZ -->
-    <div class="container" id="quizContainer" style="display:none;">
-        <div class="urgencia-box">
-            <div class="dot"></div>
-            ⚠️ ÚLTIMOS <span id="vagas">12</span> CUPOS DISPONIBLES EN MÉXICO
-        </div>
-
-        <div class="topbar">
-            <div class="logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
-                Apple Rewards
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+            <!-- PLAN BASICO -->
+            <div class="card" style="width: 350px; border: 2px solid #333;">
+                <h3>Panel Básico</h3>
+                <p>Acceso por 1 Mes</p>
+                <div class="price"><span>$</span>5.99</div>
+                <p style="color: #aaa;">o 12 meses de $0.58</p>
+                <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
+                <a href="#" class="btn-main" style="font-size: 16px; width: 80%;">ELEGIR PANEL</a>
+                <p style="font-size: 12px; margin-top: 10px;">🔒 Pago 100% Seguro</p>
             </div>
-            <div class="money-box" id="saldoTopo">$0.00 MXN</div>
-        </div>
 
-        <div class="progress-wrapper">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <div class="progress-text" id="progressText">Pregunta 1 de 12</div>
-
-        <h2 id="qTitle"></h2>
-        <div id="options"></div>
-
-        <button class="btn-primary" id="btnNext" disabled>Continuar ➜</button>
-
-        <div class="trust-bar">
-            <div class="trust-item">🔒 Seguro</div>
-            <div class="trust-item">🇲🇽 México</div>
-            <div class="trust-item">⚡ Instantáneo</div>
-        </div>
-    </div>
-
-    <!-- RESGATE -->
-    <div class="resgate-container" id="resgateContainer">
-        <div class="topbar">
-            <div class="logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
-                Apple Rewards
+            <!-- PLAN VITALICIO -->
+            <div class="card" style="width: 350px; border: 2px solid var(--primary); position: relative;">
+                <span style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #000; padding: 5px 20px; border-radius: 50px; font-weight: 800; font-size: 12px;">🔥 MÁS VENDIDO</span>
+                <h3>Panel Permanente</h3>
+                <p>Acceso Vitalicio</p>
+                <div class="price"><span>$</span>12.97</div>
+                <p style="color: #aaa;">o 12 meses de $1.25</p>
+                <div style="text-align: left; margin: 20px 0; font-size: 14px;">
+                    <p>✓ Panel de Elixir Infinito</p>
+                    <p>✓ Acceso 24h a la Plataforma</p>
+                    <p>✓ 100% Seguro y Anti-Ban</p>
+                    <p>✓ Actualizaciones cada 7 días</p>
+                    <p>✓ Soporte prioritario</p>
+                    <p>✓ Recursos exclusivos VIP</p>
+                </div>
+                <a href="#" class="btn-main" style="font-size: 16px; width: 80%;">ELEGIR PANEL</a>
+                <p style="font-size: 12px; margin-top: 10px;">🔒 Pago Seguro | Acceso Instantáneo</p>
             </div>
         </div>
+    </section>
 
-        <h2>¡Retiro Disponible! 💸</h2>
-
-        <div class="saldo-display">
-            <div class="saldo-label">SALDO TOTAL ACUMULADO</div>
-            <div class="saldo-value" id="saldoFinal">$0.00 MXN</div>
-        </div>
-
-        <div class="input-group">
-            <label>Selecciona método de recepción (SPEI):</label>
-            <select id="metodoSelect">
-                <option value="curp">CURP</option>
-                <option value="clabe">CLABE Interbancaria</option>
-                <option value="tarjeta">Número de Tarjeta de Débito</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <label id="inputLabel">Ingresa tu CURP:</label>
-            <input type="text" id="chaveInput" placeholder="Ej: GARC850101HDFRRL09">
-        </div>
-
-        <div class="validando-box" id="validando">
-            <div class="loader"></div>
-            Consultando elegibilidad con Apple México...
-        </div>
-
-        <button class="btn-primary btn-success" id="btnSolicitar">REALIZAR RETIRO AHORA</button>
-
-        <div class="security-footer">
-            <div class="security-badges">
-                <span class="badge badge-secure">🔒 Cifrado SSL</span>
-                <span class="badge badge-secure">⚡ SPEI en minutos</span>
+    <!-- FAQ -->
+    <section style="padding: 60px 20px; background: #121212;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="text-align: center; margin-bottom: 40px;">Preguntas Frecuentes</h2>
+            <div class="card">
+                <strong>¿Me ayudarán con la instalación?</strong>
+                <p>¡Sí! Tenemos soporte completo para ayudarte en todo el proceso de instalación y configuración del panel.</p>
+            </div>
+            <div class="card">
+                <strong>¿Por dónde voy a acceder al Panel?</strong>
+                <p>Después de la compra, recibirás un enlace de acceso y todas las instrucciones necesarias por correo electrónico.</p>
+            </div>
+            <div class="card">
+                <strong>¿Es solo descargar y listo, ya funciona?</strong>
+                <p>¡Sí! Es muy simple. Después de la descarga, solo sigue los pasos básicos de instalación y ya puedes empezar a usarlo.</p>
+            </div>
+            <div class="card">
+                <strong>¿Es seguro? ¿Me van a banear?</strong>
+                <p>Nuestro panel es 100% seguro y anti-ban. Utilizamos las mejores tecnologías de protección para garantizar la seguridad de tu cuenta.</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- TAXA -->
-    <div class="taxa-container" id="taxaContainer">
-        <div style="text-align:center; margin-bottom:24px;">
-            <div style="font-size:40px; margin-bottom:10px;">🔐</div>
-            <h2>Verificación de Identidad</h2>
-            <p style="font-size:14px; color:var(--text-gray);">
-                Para liberar el depósito de <b id="valorComTaxa"></b>, se requiere validar tu cuenta mediante una tasa mínima reembolsable.
-            </p>
-        </div>
-
-        <div class="taxa-item">
-            <div class="icon">🔄</div>
-            <div>
-                <b>Importe Reembolsable</b>
-                <p>Los $69 MXN se sumarán a tu retiro automáticamente.</p>
+    <!-- FOOTER -->
+    <footer style="padding: 60px 20px; background: #000; border-top: 1px solid #333;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
+            <div style="width: 300px;">
+                <h3 style="color: var(--primary);">Elixir Royale</h3>
+                <p style="color: #aaa; font-size: 14px;">Domina las arenas con seguridad y conviértete en el mejor jugador.</p>
+            </div>
+            <div style="display: flex; gap: 50px;">
+                <div>
+                    <h4>Legal</h4>
+                    <p style="font-size: 14px; color: #666;">Términos de Uso<br>Privacidad<br>Reembolso</p>
+                </div>
+                <div>
+                    <h4>Soporte</h4>
+                    <p style="font-size: 14px; color: #666;">FAQ<br>Contacto<br>Ayuda</p>
+                </div>
             </div>
         </div>
-
-        <div class="taxa-item">
-            <div class="icon">⚡</div>
-            <div>
-                <b>SPEI Instantáneo</b>
-                <p>Liberación inmediata tras la validación de seguridad.</p>
-            </div>
+        <div style="text-align: center; margin-top: 50px; color: #444; font-size: 12px;">
+            <p>© 2025 Elixir Royale. Todos los derechos reservados. <br> Pago procesado de forma segura.</p>
         </div>
-
-        <div class="taxa-item">
-            <div class="icon">🛡️</div>
-            <div>
-                <b>Protegido por Apple México</b>
-                <p>Tu información está protegida con cifrado de extremo a extremo.</p>
-            </div>
-        </div>
-
-        <button class="btn-primary btn-blue" id="btnPagarTaxa">PAGAR VERIFICACIÓN Y RECIBIR</button>
-
-        <div class="trust-bar">
-            <div class="trust-item">🔒 256-bit SSL</div>
-            <div class="trust-item">🇲🇽 Banxico</div>
-            <div class="trust-item">✅ Verificado</div>
-        </div>
-    </div>
-
-    <!-- ENVÍO -->
-    <div class="envio-container" id="envioContainer">
-        <div class="envio-header">
-            <div style="font-size:40px; margin-bottom:10px;">📦</div>
-            <h2>Datos de Envío</h2>
-            <p>Has ganado un iPhone 15 Pro Max. Confirma tu dirección en México:</p>
-        </div>
-
-        <div class="input-group">
-            <label>Nombre completo</label>
-            <input type="text" placeholder="Tu nombre completo">
-        </div>
-        <div class="input-group">
-            <label>Calle y número</label>
-            <input type="text" placeholder="Ej: Av. Reforma 123">
-        </div>
-        <div class="input-group">
-            <label>Colonia</label>
-            <input type="text" placeholder="Ej: Juárez">
-        </div>
-        <div class="input-group">
-            <label>Ciudad y Estado</label>
-            <input type="text" placeholder="Ej: CDMX, Ciudad de México">
-        </div>
-        <div class="input-group">
-            <label>Código Postal</label>
-            <input type="text" placeholder="Ej: 06600" maxlength="5">
-        </div>
-
-        <button class="btn-primary btn-success" id="btnFinalizar">CONFIRMAR ENVÍO Y RECIBIR SPEI</button>
-    </div>
-
-    <!-- POPUP GANHOU -->
-    <div class="popup" id="popupGanhou">
-        <div class="popup-box">
-            <div class="popup-icon">🪙</div>
-            <div class="popup-label">¡Acabas de ganar!</div>
-            <div class="popup-valor" id="popupValor">$0.00 MXN</div>
-            <p class="popup-subtitle">Este monto se ha sumado a tu saldo</p>
-            <button class="btn-primary" onclick="proxima()">Continuar Quiz ➜</button>
-        </div>
-    </div>
-
-    <!-- POPUP CONQUISTA -->
-    <div class="popup" id="popupConquista">
-        <div class="popup-box conquista-box">
-            <div class="popup-icon">🎉</div>
-            <h2>¡Logro Completo!</h2>
-            <div class="conquista-valor" id="valorFinalTotal">$0.00 MXN</div>
-            <p>Tu iPhone 15 Pro y el depósito están listos.</p>
-            <p style="margin-top:10px;">Haz clic abajo para finalizar tu registro en la pasarela segura.</p>
-            <button class="btn-primary btn-success" id="btnFinalReal" style="margin-top:20px;">FINALIZAR AHORA ➜</button>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script>
-        // ===== SPLASH SCREEN LOGIC =====
-        (function() {
-            const fill = document.getElementById('splashFill');
-            const pct = document.getElementById('splashPct');
-            const status = document.getElementById('splashStatus');
-            const splash = document.getElementById('splashScreen');
-            const quiz = document.getElementById('quizContainer');
-            const particles = document.getElementById('splashParticles');
-
-            // Create particles
-            for (let i = 0; i < 20; i++) {
-                const p = document.createElement('div');
-                p.className = 'splash-particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.top = Math.random() * 100 + '%';
-                p.style.animationDelay = Math.random() * 4 + 's';
-                p.style.animationDuration = (3 + Math.random() * 3) + 's';
-                particles.appendChild(p);
-            }
-
-            const msgs = [
-                "Iniciando sistema...",
-                "Conectando con Apple México...",
-                "Verificando disponibilidad...",
-                "Validando región: México 🇲🇽",
-                "Cargando recompensas...",
-                "Preparando tu experiencia...",
-                "Casi listo..."
-            ];
-            let progress = 0;
-            let msgIdx = 0;
-
-            const interval = setInterval(function() {
-                progress += Math.random() * 5 + 2;
-                if (progress > 100) progress = 100;
-
-                fill.style.width = progress + '%';
-                pct.textContent = Math.round(progress) + '%';
-
-                const newIdx = Math.min(Math.floor(progress / (100 / msgs.length)), msgs.length - 1);
-                if (newIdx !== msgIdx) {
-                    msgIdx = newIdx;
-                    status.style.opacity = '0';
-                    setTimeout(function() {
-                        status.textContent = msgs[msgIdx];
-                        status.style.opacity = '1';
-                    }, 200);
-                }
-
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    setTimeout(function() {
-                        splash.classList.add('hidden');
-                        quiz.style.display = 'block';
-                    }, 600);
-                }
-            }, 120);
-        })();
-
-        // ===== COIN SOUND (Web Audio API) =====
-        var AudioCtx = window.AudioContext || window.webkitAudioContext;
-        var audioCtx = null;
-
-        function playCoinSound() {
-            if (!audioCtx) audioCtx = new AudioCtx();
-            var now = audioCtx.currentTime;
-
-            // Coin hit 1
-            var osc1 = audioCtx.createOscillator();
-            var gain1 = audioCtx.createGain();
-            osc1.type = 'sine';
-            osc1.frequency.setValueAtTime(1800, now);
-            osc1.frequency.exponentialRampToValueAtTime(2400, now + 0.05);
-            osc1.frequency.exponentialRampToValueAtTime(1200, now + 0.15);
-            gain1.gain.setValueAtTime(0.25, now);
-            gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-            osc1.connect(gain1); gain1.connect(audioCtx.destination);
-            osc1.start(now); osc1.stop(now + 0.4);
-
-            // Coin hit 2 (metallic ring)
-            var osc2 = audioCtx.createOscillator();
-            var gain2 = audioCtx.createGain();
-            osc2.type = 'square';
-            osc2.frequency.setValueAtTime(3200, now + 0.03);
-            osc2.frequency.exponentialRampToValueAtTime(4800, now + 0.08);
-            osc2.frequency.exponentialRampToValueAtTime(2000, now + 0.2);
-            gain2.gain.setValueAtTime(0.07, now + 0.03);
-            gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-            osc2.connect(gain2); gain2.connect(audioCtx.destination);
-            osc2.start(now + 0.03); osc2.stop(now + 0.35);
-
-            // Resonance
-            var osc3 = audioCtx.createOscillator();
-            var gain3 = audioCtx.createGain();
-            osc3.type = 'sine';
-            osc3.frequency.setValueAtTime(2600, now + 0.06);
-            osc3.frequency.exponentialRampToValueAtTime(3500, now + 0.12);
-            gain3.gain.setValueAtTime(0.12, now + 0.06);
-            gain3.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
-            osc3.connect(gain3); gain3.connect(audioCtx.destination);
-            osc3.start(now + 0.06); osc3.stop(now + 0.5);
-
-            // Bounce
-            var osc4 = audioCtx.createOscillator();
-            var gain4 = audioCtx.createGain();
-            osc4.type = 'sine';
-            osc4.frequency.setValueAtTime(1400, now + 0.15);
-            osc4.frequency.exponentialRampToValueAtTime(2000, now + 0.2);
-            gain4.gain.setValueAtTime(0.08, now + 0.15);
-            gain4.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
-            osc4.connect(gain4); gain4.connect(audioCtx.destination);
-            osc4.start(now + 0.15); osc4.stop(now + 0.45);
-        }
-
-        // ===== FLOATING COIN ANIMATION =====
-        function spawnCoinAnimation() {
-            var moneyBox = document.getElementById('saldoTopo');
-            var rect = moneyBox.getBoundingClientRect();
-            var emojis = ['🪙', '💰', '✨', '💵'];
-            for (var i = 0; i < 4; i++) {
-                var coin = document.createElement('span');
-                coin.className = 'coin-float';
-                coin.textContent = emojis[i % emojis.length];
-                coin.style.left = (rect.left + Math.random() * rect.width) + 'px';
-                coin.style.top = rect.top + 'px';
-                coin.style.position = 'fixed';
-                coin.style.zIndex = '9999';
-                coin.style.animationDelay = (i * 0.12) + 's';
-                document.body.appendChild(coin);
-                (function(c) { setTimeout(function() { c.remove(); }, 1200); })(coin);
-            }
-        }
-
-        // ===== NOTIFICACIONES =====
-        var mexicanNames = ["Ximena G.", "Alejandro M.", "Sofía R.", "Miguel Ángel L.", "Valentina H.", "Mateo S.", "Camila D.", "Diego F.", "Isabella P.", "Javier T.", "Lucía V.", "Carlos N.", "Renata O.", "Fernando C.", "Mariana B.", "Ana Karen Z.", "Roberto J.", "Guadalupe A.", "José Luis Q.", "Paola E."];
-        var mexicanCities = ["CDMX", "Guadalajara", "Monterrey", "Puebla", "Cancún", "Mérida", "Querétaro", "León", "Tijuana", "Oaxaca"];
-
-        function showNotification() {
-            var notif = document.getElementById('notification');
-            var name = mexicanNames[Math.floor(Math.random() * mexicanNames.length)];
-            var city = mexicanCities[Math.floor(Math.random() * mexicanCities.length)];
-            var amount = (Math.random() * 2000 + 1500).toFixed(2);
-            var imgId = Math.floor(Math.random() * 70);
-            document.getElementById('notifImg').src = 'https://i.pravatar.cc/100?u=' + imgId;
-            document.getElementById('notifTitle').innerText = name + ' de ' + city;
-            document.getElementById('notifText').innerText = 'Recibió $' + amount + ' MXN vía SPEI';
-            notif.classList.add('show');
-            setTimeout(function() { notif.classList.remove('show'); }, 4500);
-        }
-        setInterval(showNotification, 9000);
-        setTimeout(showNotification, 3000);
-
-        // ===== QUIZ =====
-        var perguntas = [
-            { t: "¿Qué producto Apple usas más?", o: ["📱 iPhone", "💻 MacBook", "⌚ Apple Watch", "🎧 AirPods"] },
-            { t: "¿Cómo calificas el rendimiento de iOS?", o: ["🚀 Excelente", "👍 Bueno", "🙂 Regular", "😕 Podría mejorar"] },
-            { t: "¿Te gustaría probar el Apple Vision Pro?", o: ["🤩 ¡Claro!", "🤔 Quizás", "😎 Ya lo quiero", "🙅‍♂️ No sé"] },
-            { t: "¿Qué color de iPhone prefieres?", o: ["⚪ Blanco", "⚫ Negro", "🩶 Titanio", "🔵 Azul"] },
-            { t: "¿Usas iCloud para tus fotos?", o: ["☁️ Sí, siempre", "📱 No, solo local", "🔄 Prefiero otra nube", "💎 Tengo el plan Pro"] },
-            { t: "¿Cuál es tu prioridad al comprar?", o: ["📸 Cámara", "🔋 Batería", "⚡ Velocidad", "🎨 Diseño"] },
-            { t: "¿Qué opinas de los nuevos AirPods?", o: ["🎧 Increíbles", "👌 Buenos", "🙂 Están bien", "💸 Muy caros"] },
-            { t: "¿Usas Apple Pay en México?", o: ["💳 Sí, todo el tiempo", "📱 A veces", "🏦 No sé usarlo", "❌ No"] },
-            { t: "¿Steve Jobs es tu inspiración?", o: ["🍎 Sí, totalmente", "👔 Prefiero a Wozniak", "📈 Un gran líder", "🤷‍♂️ Solo uso el cel"] },
-            { t: "¿Cuál será tu próximo Apple?", o: ["📱 iPhone 15", "⌚ Watch Ultra", "💻 Mac M3", "🕶️ Vision Pro"] },
-            { t: "¿Recomendarías Apple a un amigo?", o: ["✅ Al 100%", "🤔 Tal vez", "🙌 Definitivamente", "🌟 Sí"] },
-            { t: "¿Estás listo para tu recompensa?", o: ["🔥 ¡SÍ!", "🚀 ¡VAMOS!", "💰 ¡LISTO!", "🎁 ¡DÁMELA!"] }
-        ];
-
-        var valores = [142.20, 110.50, 195.30, 125.80, 150.40, 130.20, 165.90, 140.10, 180.50, 210.30, 155.70, 324.41];
-        var etapa = 0;
-        var saldoAcumulado = 0;
-
-        function formatMXN(v) { return "$" + v.toLocaleString('en-US', { minimumFractionDigits: 2 }) + " MXN"; }
-
-        function carregarPergunta() {
-            var q = perguntas[etapa];
-            document.getElementById('qTitle').innerText = q.t;
-            document.getElementById('progressText').innerText = 'Pregunta ' + (etapa + 1) + ' de ' + perguntas.length;
-            var box = document.getElementById('options');
-            box.innerHTML = '';
-            document.getElementById('btnNext').disabled = true;
-            document.getElementById('progressBar').style.width = (etapa / perguntas.length * 100) + '%';
-
-            q.o.forEach(function(opt, i) {
-                var d = document.createElement('div');
-                d.className = 'option fade-in';
-                d.style.animationDelay = (i * 0.08) + 's';
-                d.innerText = opt;
-                d.onclick = function() {
-                    document.querySelectorAll('.option').forEach(function(el) { el.classList.remove('selected'); });
-                    d.classList.add('selected');
-                    document.getElementById('btnNext').disabled = false;
-                };
-                box.appendChild(d);
-            });
-        }
-
-        document.getElementById('btnNext').onclick = function() {
-            var v = valores[etapa];
-            document.getElementById('popupGanhou').style.display = 'flex';
-
-            playCoinSound();
-            spawnCoinAnimation();
-
-            var atual = 0;
-            var anim = setInterval(function() {
-                atual += v / 20;
-                if (atual >= v) { atual = v; clearInterval(anim); }
-                document.getElementById('popupValor').innerText = formatMXN(atual);
-            }, 35);
-
-            saldoAcumulado += v;
-            setTimeout(function() {
-                document.getElementById('saldoTopo').innerText = formatMXN(saldoAcumulado);
-                document.getElementById('saldoTopo').classList.add('shine');
-                setTimeout(function() { document.getElementById('saldoTopo').classList.remove('shine'); }, 800);
-            }, 500);
-        };
-
-        function proxima() {
-            document.getElementById('popupGanhou').style.display = 'none';
-            etapa++;
-            if (etapa < perguntas.length) {
-                carregarPergunta();
-            } else {
-                document.getElementById('progressBar').style.width = '100%';
-                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
-                setTimeout(function() { confetti({ particleCount: 100, spread: 60, origin: { y: 0.5 } }); }, 300);
-                document.getElementById('quizContainer').style.display = 'none';
-                document.getElementById('resgateContainer').style.display = 'block';
-                document.getElementById('saldoFinal').innerText = formatMXN(saldoAcumulado);
-            }
-        }
-
-        // ===== MÉTODO SELECT =====
-        var metodoSelect = document.getElementById('metodoSelect');
-        var inputLabel = document.getElementById('inputLabel');
-        var chaveInput = document.getElementById('chaveInput');
-
-        metodoSelect.addEventListener('change', function() {
-            var val = metodoSelect.value;
-            if (val === 'curp') {
-                inputLabel.innerText = 'Ingresa tu CURP:';
-                chaveInput.placeholder = 'Ej: GARC850101HDFRRL09';
-            } else if (val === 'clabe') {
-                inputLabel.innerText = 'Ingresa tu CLABE Interbancaria:';
-                chaveInput.placeholder = 'Ej: 012345678901234567';
-            } else if (val === 'tarjeta') {
-                inputLabel.innerText = 'Ingresa tu número de tarjeta de débito:';
-                chaveInput.placeholder = 'Ej: 4152 3131 0000 0000';
-            }
-        });
-
-        // ===== SOLICITAR RETIRO =====
-        document.getElementById('btnSolicitar').onclick = function() {
-            if (document.getElementById('chaveInput').value.length < 5) return alert("Ingresa un dato válido para continuar.");
-            document.getElementById('btnSolicitar').style.display = 'none';
-            document.getElementById('validando').style.display = 'flex';
-            setTimeout(function() {
-                document.getElementById('resgateContainer').style.display = 'none';
-                document.getElementById('taxaContainer').style.display = 'block';
-                document.getElementById('valorComTaxa').innerText = formatMXN(saldoAcumulado + 69);
-            }, 3000);
-        };
-
-        document.getElementById('btnPagarTaxa').onclick = function() {
-            document.getElementById('taxaContainer').style.display = 'none';
-            document.getElementById('envioContainer').style.display = 'block';
-        };
-
-        document.getElementById('btnFinalizar').onclick = function() {
-            document.getElementById('envioContainer').style.display = 'none';
-            document.getElementById('popupConquista').style.display = 'flex';
-            document.getElementById('valorFinalTotal').innerText = formatMXN(saldoAcumulado + 69);
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-        };
-
-        document.getElementById('btnFinalReal').onclick = function() {
-            window.location.href = "https://pay.mycheckoutt.com/019d4084-87c4-7303-99ea-69a0a42ff9ea?ref=";
-        };
-
-        // ===== URGENCIA =====
-        var v_vagas = 12;
-        setInterval(function() {
-            if (v_vagas > 3) { v_vagas--; document.getElementById('vagas').innerText = v_vagas; }
-        }, 15000);
-
-        carregarPergunta();
-    </script>
+    </footer>
 
 </body>
 </html>
