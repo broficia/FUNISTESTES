@@ -11,20 +11,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        /* Mantendo os estilos originais para garantir que nada mude no visual */
         :root { --primary: #ffcc00; --secondary: #007bff; --dark: #121212; --light: #ffffff; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: var(--light); margin: 0; overflow-x: hidden; }
-        .ticker-wrapper { background: var(--primary); color: #000; padding: 10px 0; overflow: hidden; font-weight: 800; font-size: 14px; text-transform: uppercase; }
-        .ticker-content { display: flex; white-space: nowrap; animation: ticker 30s linear infinite; }
+        
+        .ticker-wrapper { background: var(--primary); color: #000; padding: 12px 0; overflow: hidden; font-weight: 800; font-size: 14px; text-transform: uppercase; border-bottom: 2px solid #000; }
+        .ticker-content { display: flex; white-space: nowrap; animation: ticker 40s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .hero { padding: 60px 20px; text-align: center; background: radial-gradient(circle, #1a1a1a 0%, #000 100%); }
-        .hero h1 { font-size: 3rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
-        .hero h1 span { color: var(--primary); }
-        .btn-main { background: var(--primary); color: #000; padding: 18px 40px; border-radius: 50px; font-weight: 800; font-size: 20px; text-decoration: none; display: inline-block; transition: 0.3s; box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3); }
-        .btn-main:hover { transform: scale(1.05); }
-        .card { background: #1e1e1e; padding: 30px; border-radius: 20px; border: 1px solid #333; margin-bottom: 20px; }
-        .price { font-size: 48px; font-weight: 900; color: var(--primary); }
-        .price span { font-size: 18px; color: #aaa; }
+
+        .hero { padding: 80px 20px; text-align: center; background: radial-gradient(circle, #1a1a1a 0%, #000 100%); position: relative; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; margin-bottom: 20px; line-height: 1.1; text-transform: uppercase; }
+        .hero h1 span { color: var(--primary); display: block; }
+        
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        .btn-main { background: var(--primary); color: #000; padding: 20px 50px; border-radius: 50px; font-weight: 800; font-size: 22px; text-decoration: none; display: inline-block; transition: 0.3s; box-shadow: 0 10px 30px rgba(255, 204, 0, 0.4); margin-top: 30px; }
+        .btn-main:hover { transform: scale(1.05); background: #fff; }
+
+        .card { background: #1e1e1e; padding: 30px; border-radius: 24px; border: 1px solid #333; margin-bottom: 20px; transition: 0.3s; }
+        .card:hover { border-color: var(--primary); }
+
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 40px; }
+        
+        .price-box { text-align: center; width: 100%; max-width: 400px; margin: 0 auto; }
+        .price-tag { font-size: 60px; font-weight: 900; color: var(--primary); margin: 10px 0; }
+        .price-tag span { font-size: 20px; vertical-align: top; margin-right: 5px; }
+
+        .faq-item { text-align: left; background: #1a1a1a; padding: 20px; border-radius: 15px; margin-bottom: 15px; cursor: pointer; }
+        .faq-item strong { display: flex; justify-content: space-between; color: var(--primary); }
+
+        footer { padding: 80px 20px; background: #000; border-top: 1px solid #222; margin-top: 50px; }
     </style>
 </head>
 <body>
@@ -32,152 +47,176 @@
     <!-- BARRA DE ANUNCIOS -->
     <div class="ticker-wrapper">
         <div class="ticker-content">
-            &nbsp; DOMINA LAS ARENAS • SUBE DE COPAS RÁPIDO • DESCUENTO SOLO HOY • ELIXIR INFINITO • 100% ANTI-BAN • PANEL 100% SEGURO • SUBE DE COPAS RÁPIDO • DESCUENTO SOLO HOY • ELIXIR INFINITO • 100% ANTI-BAN • PANEL 100% SEGURO • &nbsp;
+            DOMINA LAS ARENAS • SUBE DE COPAS RÁPIDO • DESCUENTO SOLO HOY • ELIXIR INFINITO • 100% ANTI-BAN • PANEL 100% SEGURO • SUBE DE COPAS RÁPIDO • DESCUENTO SOLO HOY • ELIXIR INFINITO • 100% ANTI-BAN • PANEL 100% SEGURO • 
+            DOMINA LAS ARENAS • SUBE DE COPAS RÁPIDO • DESCUENTO SOLO HOY • ELIXIR INFINITO • 100% ANTI-BAN • PANEL 100% SEGURO • SUBE DE COPAS RÁPIDO • DESCUENTO SOLO HOY • ELIXIR INFINITO • 100% ANTI-BAN • PANEL 100% SEGURO •
         </div>
     </div>
 
     <!-- HERO SECTION -->
     <section class="hero">
         <div class="container">
-            <p style="color: var(--primary); font-weight: 700; letter-spacing: 2px;">TE DAMOS LA VENTAJA TOTAL</p>
-            <h1>El Mejor Panel de <br><span>Elixir Infinito</span><br> de Clash Royale</h1>
+            <p style="color: var(--primary); font-weight: 800; letter-spacing: 3px; margin-bottom: 15px;">EL MEJOR SISTEMA DEL 2025</p>
+            <h1>El Mejor Panel de <span>Elixir Infinito</span> del Clash Royale</h1>
             
             <div style="margin: 30px 0;">
-                <span style="background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 50px; font-size: 14px;">🛡️ 100% Anti-Ban</span>
+                <span style="background: rgba(255,204,0,0.1); color: var(--primary); padding: 12px 25px; border-radius: 50px; font-weight: 700; border: 1px solid var(--primary);">🛡️ 100% Anti-Ban</span>
             </div>
 
             <a href="#precios" class="btn-main">ACCEDER AL PANEL</a>
 
-            <!-- MINI TESTIMONIOS SLIDER -->
-            <div style="margin-top: 50px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                <div class="card" style="text-align: left; font-size: 14px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <strong>Fernando Silva</strong>
-                        <span style="color: #ffcc00;">⭐⭐⭐⭐⭐</span>
-                    </div>
-                    <p>"¡Subí de 5.2k a 9.1k de copas en menos de 1 mes! El elixir infinito cambia el juego totalmente 🔥"</p>
-                    <small style="color: #666;">hace 2h</small>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PARA QUIÉN ES -->
-    <section style="padding: 60px 20px; background: #000;">
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-            <h2 style="font-size: 2rem; margin-bottom: 40px;">El Panel de Elixir Royale es para ti si:</h2>
-            <div style="text-align: left;">
-                <div class="card">✅ No aguantas más perder partidas y quieres subir de arena rápidamente.</div>
-                <div class="card">✅ Quieres tener ventajas competitivas y dominar todas las batallas.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIOS -->
-    <section style="padding: 60px 20px; background: #121212;">
-        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
-            <h2 style="margin-bottom: 40px;">Mira los Testimonios de Nuestros Jugadores</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <!-- TESTIMONIOS RÁPIDOS -->
+            <div class="testimonials-grid" style="max-width: 900px; margin: 50px auto 0;">
                 <div class="card">
-                    <strong>Thalesinho</strong>
-                    <p>"¡La ventaja competitiva es absurda! Suelto tropas sin parar mientras el otro cuenta el elixir. ¡Sistema 100% anti-ban funcionando perfectamente!"</p>
-                    <small>hace 5h</small>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <strong>Fernando Silva</strong>
+                        <span style="color:var(--primary)">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p>"¡Pasé de 5.2k a 9.1k de copas en menos de 1 mes! El elixir infinito hace que el juego sea totalmente diferente 🔥"</p>
+                    <small style="color:#777">hace 2h</small>
                 </div>
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <strong>Thalesinho</strong>
+                        <span style="color:var(--primary)">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p>"¡La ventaja competitiva es absurda! Suelto tropas sin parar mientras el otro cuenta el elixir. ¡Sistema 100% anti-ban!"</p>
+                    <small style="color:#777">hace 5h</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE BENEFICIOS -->
+    <section style="padding: 80px 20px; background: #000;">
+        <div class="container" style="max-width: 800px; text-align: center;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">El Panel de Elixir Royale es para ti que:</h2>
+            <div class="card" style="text-align: left; display: flex; align-items: center; gap: 20px;">
+                <span style="font-size: 40px;">❌</span>
+                <p>No aguantas más perder partidas y quieres subir de arena rápidamente.</p>
+            </div>
+            <div class="card" style="text-align: left; display: flex; align-items: center; gap: 20px;">
+                <span style="font-size: 40px;">🏆</span>
+                <p>Quieres tener ventajas competitivas y dominar todas las batallas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRUEBA SOCIAL COMPLETA -->
+    <section style="padding: 80px 20px;">
+        <div class="container" style="text-align: center;">
+            <h2 style="margin-bottom: 10px;">Resultados Reales de Nuestros Players</h2>
+            <p style="color: #aaa; margin-bottom: 40px;">Jugadores que ya están usando nuestro Panel de Elixir Infinito</p>
+            
+            <div class="testimonials-grid">
                 <div class="card">
                     <strong>Marcio</strong>
-                    <p>"¡Simplemente me ADICTÉ! Pongo 4 Golems en la arena y los tipos se vuelven locos jajaja. De 4.8k subí a 9.5k en 3 semanas. ¡DEMASIADO TOP!"</p>
+                    <p style="color:var(--primary)">⭐⭐⭐⭐⭐</p>
+                    <p>"¡Simplemente me ADICTÉ! Pongo 4 Golems en la arena y los tipos se vuelven locos jajaja. De 4.8k a 9.5k en 3 semanas. ¡DEMASIADO TOP!"</p>
                     <small>hace 1 día</small>
                 </div>
                 <div class="card">
                     <strong>ZappyBoy</strong>
+                    <p style="color:var(--primary)">⭐⭐⭐⭐⭐</p>
                     <p>"Amigo, ¡este panel cambió mi juego! Ahora puedo ciclar tropas mucho más rápido que el rival. Parece hasta injusto 😅"</p>
                     <small>hace 8h</small>
+                </div>
+                <div class="card">
+                    <strong>TheRealKing</strong>
+                    <p style="color:var(--primary)">⭐⭐⭐⭐⭐</p>
+                    <p>"Mi oponente ahí esperando a que suba el elixir... y yo ya solté tres Pekkas, dos Golems y un Zap para humillarlo. 🔥"</p>
+                    <small>hace 3h</small>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- PRECIOS -->
-    <section id="precios" style="padding: 80px 20px; background: #000; text-align: center;">
-        <h2 style="font-size: 2.5rem;">Elige tu Panel de <br><span style="color:var(--primary)">Elixir Infinito</span></h2>
-        <p style="margin-bottom: 50px;">⚡ ¡Domina las arenas, sube de copas y conviértete en un PRO PLAYER! 🔥</p>
+    <section id="precios" style="padding: 100px 20px; background: #000; text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 3rem; margin-bottom: 10px;">Elige tu Panel y <span>Domina</span></h2>
+            <p style="margin-bottom: 60px; color: #aaa;">⚡ ¡Conviértete en un PRO PLAYER hoy mismo! 🔥</p>
 
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
-            <!-- PLAN BASICO -->
-            <div class="card" style="width: 350px; border: 2px solid #333;">
-                <h3>Panel Básico</h3>
-                <p>Acceso por 1 Mes</p>
-                <div class="price"><span>$</span>5.99</div>
-                <p style="color: #aaa;">o 12 meses de $0.58</p>
-                <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
-                <a href="#" class="btn-main" style="font-size: 16px; width: 80%;">ELEGIR PANEL</a>
-                <p style="font-size: 12px; margin-top: 10px;">🔒 Pago 100% Seguro</p>
-            </div>
-
-            <!-- PLAN VITALICIO -->
-            <div class="card" style="width: 350px; border: 2px solid var(--primary); position: relative;">
-                <span style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #000; padding: 5px 20px; border-radius: 50px; font-weight: 800; font-size: 12px;">🔥 MÁS VENDIDO</span>
-                <h3>Panel Permanente</h3>
-                <p>Acceso Vitalicio</p>
-                <div class="price"><span>$</span>12.97</div>
-                <p style="color: #aaa;">o 12 meses de $1.25</p>
-                <div style="text-align: left; margin: 20px 0; font-size: 14px;">
-                    <p>✓ Panel de Elixir Infinito</p>
-                    <p>✓ Acceso 24h a la Plataforma</p>
-                    <p>✓ 100% Seguro y Anti-Ban</p>
-                    <p>✓ Actualizaciones cada 7 días</p>
-                    <p>✓ Soporte prioritario</p>
-                    <p>✓ Recursos exclusivos VIP</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+                <!-- PLAN BÁSICO -->
+                <div class="card" style="width: 100%; max-width: 380px;">
+                    <h3 style="text-transform: uppercase; letter-spacing: 2px;">Panel Basic</h3>
+                    <p>Acceso por 1 Mes</p>
+                    <div class="price-tag"><span>$</span>5.99</div>
+                    <p style="color: #777;">o 12 mensualidades de $0.58</p>
+                    <a href="#" class="btn-main" style="font-size: 18px; width: 80%;">ELEGIR PANEL</a>
+                    <p style="font-size: 12px; margin-top: 15px; color: #555;">🔒 Pago 100% Seguro</p>
                 </div>
-                <a href="#" class="btn-main" style="font-size: 16px; width: 80%;">ELEGIR PANEL</a>
-                <p style="font-size: 12px; margin-top: 10px;">🔒 Pago Seguro | Acceso Instantáneo</p>
+
+                <!-- PLAN PERMANENTE -->
+                <div class="card" style="width: 100%; max-width: 380px; border: 2px solid var(--primary); position: relative;">
+                    <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #000; padding: 5px 25px; border-radius: 50px; font-weight: 900; font-size: 12px;">🔥 EL MÁS VENDIDO</div>
+                    <h3 style="text-transform: uppercase; letter-spacing: 2px;">Panel Permanente</h3>
+                    <p>Acceso Vitalicio</p>
+                    <div class="price-tag"><span>$</span>12.97</div>
+                    <p style="color: #777;">o 12 mensualidades de $1.25</p>
+                    
+                    <div style="text-align: left; margin: 30px 0; font-size: 14px; line-height: 2;">
+                        <p>✓ Panel de Elixir Infinito</p>
+                        <p>✓ Acceso 24h a la Plataforma</p>
+                        <p>✓ 100% Seguro y Anti-Ban</p>
+                        <p>✓ Actualizaciones cada 7 días</p>
+                        <p>✓ Soporte Prioritario</p>
+                        <p>✓ Recursos Exclusivos VIP</p>
+                    </div>
+
+                    <a href="#" class="btn-main" style="font-size: 18px; width: 80%;">ELEGIR PANEL</a>
+                    <p style="font-size: 12px; margin-top: 15px; color: #555;">🔒 Pago Seguro | Acceso Instantáneo</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section style="padding: 60px 20px; background: #121212;">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <h2 style="text-align: center; margin-bottom: 40px;">Preguntas Frecuentes</h2>
-            <div class="card">
-                <strong>¿Me ayudarán con la instalación?</strong>
-                <p>¡Sí! Tenemos soporte completo para ayudarte en todo el proceso de instalación y configuración del panel.</p>
+    <section style="padding: 80px 20px;">
+        <div class="container" style="max-width: 800px; text-align: center;">
+            <h2 style="margin-bottom: 40px;">Preguntas Frecuentes</h2>
+            
+            <div class="faq-item">
+                <strong>¿Me ayudarán con la instalación? <span>+</span></strong>
+                <p style="margin-top: 10px; color: #aaa;">¡Sí! Tenemos un equipo de soporte completo para ayudarte en todo el proceso de instalación y configuración del panel.</p>
             </div>
-            <div class="card">
-                <strong>¿Por dónde voy a acceder al Panel?</strong>
-                <p>Después de la compra, recibirás un enlace de acceso y todas las instrucciones necesarias por correo electrónico.</p>
+            <div class="faq-item">
+                <strong>¿Por dónde voy a acceder al Panel? <span>+</span></strong>
+                <p style="margin-top: 10px; color: #aaa;">Después de tu compra, recibirás un enlace de acceso y todas las instrucciones necesarias directamente en tu correo electrónico.</p>
             </div>
-            <div class="card">
-                <strong>¿Es solo descargar y listo, ya funciona?</strong>
-                <p>¡Sí! Es muy simple. Después de la descarga, solo sigue los pasos básicos de instalación y ya puedes empezar a usarlo.</p>
+            <div class="faq-item">
+                <strong>¿Es solo descargar y listo? <span>+</span></strong>
+                <p style="margin-top: 10px; color: #aaa;">¡Sí! Es muy simple. Después de la descarga, solo sigues los pasos básicos de instalación y ya puedes empezar a ganar.</p>
             </div>
-            <div class="card">
-                <strong>¿Es seguro? ¿Me van a banear?</strong>
-                <p>Nuestro panel es 100% seguro y anti-ban. Utilizamos las mejores tecnologías de protección para garantizar la seguridad de tu cuenta.</p>
+            <div class="faq-item">
+                <strong>¿Es seguro? ¿Me van a banear? <span>+</span></strong>
+                <p style="margin-top: 10px; color: #aaa;">Nuestro panel es 100% seguro y cuenta con tecnología Anti-Ban. Utilizamos los mejores sistemas de protección para tu cuenta.</p>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer style="padding: 60px 20px; background: #000; border-top: 1px solid #333;">
-        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
-            <div style="width: 300px;">
-                <h3 style="color: var(--primary);">Elixir Royale</h3>
-                <p style="color: #aaa; font-size: 14px;">Domina las arenas con seguridad y conviértete en el mejor jugador.</p>
-            </div>
-            <div style="display: flex; gap: 50px;">
+    <footer>
+        <div class="container">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;">
                 <div>
-                    <h4>Legal</h4>
-                    <p style="font-size: 14px; color: #666;">Términos de Uso<br>Privacidad<br>Reembolso</p>
+                    <h3 style="color: var(--primary); font-size: 24px;">Elixir Royale</h3>
+                    <p style="color: #666;">Domina las arenas con seguridad absoluta.</p>
                 </div>
-                <div>
-                    <h4>Soporte</h4>
-                    <p style="font-size: 14px; color: #666;">FAQ<br>Contacto<br>Ayuda</p>
+                <div style="display: flex; gap: 60px;">
+                    <div>
+                        <h4 style="margin-bottom: 20px;">Legal</h4>
+                        <p style="color: #444; font-size: 14px;">Términos de Uso<br>Privacidad<br>Reembolso</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 20px;">Soporte</h4>
+                        <p style="color: #444; font-size: 14px;">FAQ<br>Contacto<br>Ayuda</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div style="text-align: center; margin-top: 50px; color: #444; font-size: 12px;">
-            <p>© 2025 Elixir Royale. Todos los derechos reservados. <br> Pago procesado de forma segura.</p>
+            <div style="margin-top: 60px; text-align: center; border-top: 1px solid #111; padding-top: 30px; color: #333; font-size: 13px;">
+                <p>© 2025 Elixir Royale. Todos los derechos reservados. <br> Pago procesado de forma segura.</p>
+            </div>
         </div>
     </footer>
 
