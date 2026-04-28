@@ -4,173 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>G1 - HERANÇA MONAIA: Doações de até R$ 15 mil liberadas</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --g1-red: #c4170c; --wpp-green: #25d366; --bg-body: #f1f2f3; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Open Sans', sans-serif; }
-        body { background: var(--bg-body); color: #333; line-height: 1.6; }
+        :root { --g1-red: #c4170c; --wpp-green: #25d366; --text-dark: #1a1a1a; --text-light: #555; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background: #f4f4f4; color: var(--text-dark); line-height: 1.5; }
 
-        /* Header Estilo G1 */
-        .g1-header { background: var(--g1-red); padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 9999; }
-        .g1-logo { background: #fff; color: var(--g1-red); font-family: 'Montserrat', sans-serif; font-weight: 900; padding: 2px 10px; border-radius: 3px; font-size: 22px; font-style: italic; }
-        .live-label { color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 5px; text-transform: uppercase; }
-        .live-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: blink 1s infinite; }
+        /* HEADER G1 */
+        .g1-nav { background: var(--g1-red); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .g1-logo { color: #fff; font-weight: 900; font-size: 24px; font-style: italic; letter-spacing: -1px; }
+        .live { color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px; }
+        .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        .container { max-width: 600px; margin: 0 auto; background: #fff; min-height: 100vh; padding-bottom: 120px; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; min-height: 100vh; padding-bottom: 120px; }
+
+        /* NOTIFICAÇÃO ESTILO IPHONE */
+        #notif-container { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; z-index: 9999; pointer-events: none; }
+        .pop-notif { background: rgba(255, 255, 255, 0.98); border-radius: 14px; padding: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 1px solid #eee; transform: translateY(-120%); opacity: 0; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .pop-notif.show { transform: translateY(0); opacity: 1; }
+        .pop-notif img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--wpp-green); }
+        .pop-txt b { font-size: 13px; display: block; color: #111; }
+        .pop-txt span { font-size: 12px; color: var(--text-light); }
+        .pop-txt i { color: #2e7d32; font-weight: 800; font-style: normal; }
+
+        /* CONTEÚDO */
+        .content { padding: 20px; }
+        .kicker { color: var(--g1-red); font-weight: 700; font-size: 12px; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        h1 { font-size: 26px; line-height: 1.2; font-weight: 800; color: #000; margin-bottom: 15px; letter-spacing: -0.5px; }
+        .lead { font-size: 18px; color: var(--text-light); font-weight: 500; margin-bottom: 20px; line-height: 1.4; }
         
-        .main-content { padding: 20px; }
-        .kicker { color: var(--g1-red); font-weight: 700; font-size: 12px; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        h1 { font-family: 'Montserrat', sans-serif; font-size: 26px; line-height: 1.2; font-weight: 900; color: #000; margin-bottom: 20px; letter-spacing: -1px; }
-        .lead { font-size: 18px; color: #555; font-weight: 600; margin-bottom: 25px; line-height: 1.4; border-left: 4px solid #eee; padding-left: 15px; }
+        .story p { margin-bottom: 18px; font-size: 16px; color: #333; }
+        .story b { color: #000; }
 
-        /* Storytelling Text */
-        .text-body p { margin-bottom: 20px; font-size: 16px; color: #333; text-align: justify; }
-        .text-body b { color: #000; }
+        /* CARROSSEL */
+        .testi-box { background: #f9f9f9; border: 1px solid #eee; border-radius: 16px; padding: 20px 10px; margin: 30px 0; }
+        .t-title { font-weight: 800; text-align: center; margin-bottom: 15px; font-size: 16px; color: #444; }
+        .carousel { overflow: hidden; width: 100%; position: relative; }
+        .track { display: flex; transition: transform 0.6s ease; }
+        .slide { min-width: 100%; padding: 0 10px; }
+        .slide-card { background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .s-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .s-info b { font-size: 14px; display: block; }
+        .s-info span { font-size: 11px; color: #999; }
+        .s-val { margin-left: auto; background: #e8f5e9; color: #2e7d32; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 10px; }
+        .s-txt { font-size: 14px; color: #555; font-style: italic; }
 
-        /* Carrossel de Depoimentos Profissional */
-        .testimonials-area { background: #f8f9fa; padding: 25px 15px; margin: 30px 0; border-radius: 15px; border: 1px solid #eee; }
-        .section-title { font-weight: 900; font-size: 18px; color: #222; margin-bottom: 20px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .carousel-wrapper { overflow: hidden; width: 100%; border-radius: 12px; }
-        .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.45, 0, 0.55, 1); }
-        .testimonial-card { min-width: 100%; padding: 5px; }
-        .card-content { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .user-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
-        .user-avatar { width: 50px; height: 50px; border-radius: 50%; background: #eee; object-fit: cover; border: 2px solid var(--g1-red); }
-        .user-details b { display: block; font-size: 14px; }
-        .user-details span { font-size: 12px; color: #777; }
-        .amount-tag { margin-left: auto; background: #e8f5e9; color: #2e7d32; padding: 5px 12px; border-radius: 20px; font-weight: 900; font-size: 13px; }
-        .user-comment { font-style: italic; font-size: 14px; color: #444; }
-
-        /* Notificações no Topo */
-        #notif-box { position: fixed; top: 75px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; z-index: 9999; pointer-events: none; }
-        .notif-item { background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-radius: 12px; padding: 15px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05); transform: translateY(-150%); opacity: 0; transition: 0.5s; }
-        .notif-item.show { transform: translateY(0); opacity: 1; }
-        .notif-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--wpp-green); }
-        .notif-info b { font-size: 13px; color: #111; display: block; }
-        .notif-info span { font-size: 12px; color: #666; }
-        .notif-info i { color: #2e7d32; font-weight: 900; font-style: normal; }
-
-        /* CTA Fixo */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px 20px; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); text-align: center; z-index: 999; }
-        .btn-main { background: var(--wpp-green); color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px; border-radius: 50px; font-weight: 900; font-size: 18px; box-shadow: 0 8px 20px rgba(37,211,102,0.4); animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
-        .vagas-text { font-size: 12px; font-weight: 700; color: var(--g1-red); margin-top: 10px; text-transform: uppercase; }
-
+        /* FOOTER CTA */
+        .footer-cta { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px 20px; box-shadow: 0 -5px 20px rgba(0,0,0,0.08); text-align: center; z-index: 1000; }
+        .btn { background: var(--wpp-green); color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px; border-radius: 50px; font-weight: 800; font-size: 18px; box-shadow: 0 8px 20px rgba(37,211,102,0.3); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+        .vagas { font-size: 12px; font-weight: 700; color: var(--g1-red); margin-top: 10px; }
     </style>
 </head>
 <body>
 
-<header class="g1-header">
+<nav class="g1-nav">
     <div class="g1-logo">g1</div>
-    <div class="live-label"><div class="live-dot"></div> AO VIVO</div>
-</header>
+    <div class="live"><div class="dot"></div> AO VIVO</div>
+</nav>
 
-<div id="notif-box"></div>
+<div id="notif-container"></div>
 
 <div class="container">
-    <div class="main-content">
-        <span class="kicker">Solidariedade e Herança</span>
-        <h1>Filho de magnata brasileiro decide doar fortuna e iPhones para ajudar famílias endividadas</h1>
+    <div class="content">
+        <span class="kicker">Plantão de Ajuda Social</span>
+        <h1>Herdeiro Monaia libera canal direto no WhatsApp para doações imediatas de até R$ 15.000</h1>
         
-        <p class="lead">"Não levarei esse dinheiro para o túmulo", diz herdeiro do Grupo Monaia ao anunciar canal direto no WhatsApp para abençoar 6 brasileiros por dia.</p>
+        <p class="lead">Cansado de ver o sofrimento de famílias trabalhadoras, filho de bilionário decide abençoar quem está com contas de luz, agiota e Serasa acumulados.</p>
 
-        <div class="text-body">
-            <p>A história que parou o Brasil esta semana: Após herdar uma fortuna incalculável, o herdeiro direto da família <b>Monaia</b> decidiu que sua missão de vida será ajudar quem realmente precisa. Ele não quer saber de burocracia bancária ou análise de crédito.</p>
+        <div class="story">
+            <p>Se você chegou nesta página, sua vida está prestes a mudar. O herdeiro da fortuna <b>Monaia</b> decidiu não deixar o dinheiro parado em bancos. Ele quer ver o brasileiro respirar de novo.</p>
 
-            <p>Se você chegou até aqui, é porque o nosso sistema detectou que você é um forte candidato a ser um dos <b>6 escolhidos de hoje</b>. Ele está distribuindo valores que variam de <b>R$ 2.000 a R$ 15.000</b>, além de aparelhos de última geração.</p>
-
-            <p>Ele quer ajudar você a: <b>quitar aquele agiota</b> que está te ameaçando, limpar seu nome no <b>Serasa</b>, pagar as contas de <b>luz e gás</b> atrasadas, ou até consertar sua <b>moto ou carro</b> para você voltar a trabalhar com dignidade. </p>
-
-            <p><b>Atenção:</b> Ele atende apenas as primeiras 6 pessoas que entrarem em contato no WhatsApp pessoal dele abaixo. Se o botão ainda estiver ativo, você ainda tem chance de ser abençoado agora.</p>
+            <p>Ele está selecionando pessoalmente <b>6 pessoas por dia</b> para receber transferências via PIX que ajudam a quitar dívidas com agiotas, consertar veículos de trabalho, pagar aluguéis atrasados e encher a despensa de comida.</p>
+            
+            <p><b>Importante:</b> Não é sorteio. É uma conversa direta. Ele quer saber como essa herança pode te salvar hoje.</p>
         </div>
 
-        <div class="testimonials-area">
-            <div class="section-title"><i class="fas fa-check-circle"></i> Vidas Transformadas</div>
-            <div class="carousel-wrapper">
-                <div class="carousel-track" id="track">
+        <div class="testi-box">
+            <div class="t-title">❤️ Relatos de quem já recebeu</div>
+            <div class="carousel">
+                <div class="track" id="track">
                     </div>
             </div>
         </div>
-
+        
+        <p style="font-size: 14px; color: #888; text-align: center;">"Abençoe para ser abençoado." - Família Monaia</p>
     </div>
 </div>
 
-<div class="bottom-nav">
-    <a href="https://wa.me/message/ULEXJ2WNGPB4N1" class="btn-main">
-        <i class="fab fa-whatsapp"></i> CHAMAR O HERDEIRO NO WHATSAPP
+<div class="footer-cta">
+    <a href="https://wa.me/message/ULEXJ2WNGPB4N1" class="btn">
+        FALAR COM O HERDEIRO NO WHATSAPP
     </a>
-    <div class="vagas-text">Restam apenas <span id="vagas-count">6</span> vagas para hoje</div>
+    <div class="vagas">RESTAM APENAS <span id="v-count">6</span> VAGAS PARA HOJE</div>
 </div>
 
 <script>
-    const dep = [
-        {n:'Ricardo Silva', c:'São Paulo/SP', v:'R$ 5.000', t:'Paguei o agiota que tava me cercando e ainda sobrou pra feira. Deus abençoe o Monaia!', img:'https://randomuser.me/api/portraits/men/1.jpg'},
-        {n:'Marta Souza', c:'Rio de Janeiro/RJ', v:'R$ 2.500', t:'Consegui pagar 3 meses de aluguel e luz atrasada. Minha família está em paz hoje.', img:'https://randomuser.me/api/portraits/women/2.jpg'},
-        {n:'João Marcos', c:'Salvador/BA', v:'R$ 10.000', t:'Arrumei o motor da minha moto pra voltar a fazer entregas. O dinheiro caiu na hora!', img:'https://randomuser.me/api/portraits/men/3.jpg'},
-        {n:'Leticia F.', c:'Curitiba/PR', v:'iPhone 16 Pro', t:'Recebi o celular e mais R$ 2 mil pra investir no meu pequeno negócio. Inacreditável!', img:'https://randomuser.me/api/portraits/women/4.jpg'},
-        {n:'Carlos Alberto', c:'Belo Horizonte/MG', v:'R$ 8.000', t:'Limpei meu nome no Serasa depois de 5 anos. Vou poder financiar minha casinha agora.', img:'https://randomuser.me/api/portraits/men/5.jpg'},
-        {n:'Sandra Mendes', c:'Fortaleza/CE', v:'R$ 4.500', t:'Comprei os remédios caros do meu filho e paguei o que devia no mercadinho.', img:'https://randomuser.me/api/portraits/women/6.jpg'},
-        {n:'Felipe Luz', c:'Manaus/AM', v:'R$ 3.000', t:'Paguei o conserto do meu carro de Uber que tava parado. Monaia é um anjo na terra.', img:'https://randomuser.me/api/portraits/men/7.jpg'},
-        {n:'Beatriz R.', c:'Brasília/DF', v:'R$ 12.000', t:'Quitei todas as parcelas do meu cartão que tavam com juros abusivos. Gratidão eterna!', img:'https://randomuser.me/api/portraits/women/8.jpg'},
-        {n:'Paulo Vitor', c:'Goiânia/GO', v:'R$ 6.000', t:'Troquei minha geladeira e fogão que tavam quebrados e paguei meu agiota.', img:'https://randomuser.me/api/portraits/men/9.jpg'},
-        {n:'Elena Gomes', c:'Osasco/SP', v:'R$ 15.000', t:'Paguei minha dívida de banco e agora vou abrir meu próprio salão. Sonho realizado!', img:'https://randomuser.me/api/portraits/women/10.jpg'}
+    const data = [
+        {n:'Marcos Silva', c:'São Paulo/SP', v:'R$ 5.000', t:'Paguei o agiota que ameaçava meu filho. Deus seja louvado!', img:'https://randomuser.me/api/portraits/men/1.jpg'},
+        {n:'Lúcia Santos', c:'Rio de Janeiro/RJ', v:'R$ 2.500', t:'Minha luz tava cortada. Paguei tudo e ainda fiz mercado!', img:'https://randomuser.me/api/portraits/women/2.jpg'},
+        {n:'Tiago Mendes', c:'BH/MG', v:'R$ 10.000', t:'Arrumei meu carro de Uber e saí do sufoco. Gratidão eterna!', img:'https://randomuser.me/api/portraits/men/3.jpg'},
+        {n:'Fabiana L.', c:'Curitiba/PR', v:'R$ 3.800', t:'Quitei o cartão e o Serasa. Meu nome tá limpo de novo!', img:'https://randomuser.me/api/portraits/women/4.jpg'},
+        {n:'Roberto F.', c:'Salvador/BA', v:'iPhone 16 + 5k', t:'Nunca imaginei. Recebi o celular e dinheiro pra investir!', img:'https://randomuser.me/api/portraits/men/5.jpg'},
+        {n:'Carla Dias', c:'Osasco/SP', v:'R$ 15.000', t:'Paguei meu tratamento e limpei minhas dívidas. Um anjo!', img:'https://randomuser.me/api/portraits/women/6.jpg'},
+        {n:'José Vitor', c:'Manaus/AM', v:'R$ 4.000', t:'Consertei minha moto de entrega. Agora volto a trabalhar!', img:'https://randomuser.me/api/portraits/men/7.jpg'},
+        {n:'Bia Nunes', c:'Brasília/DF', v:'R$ 8.500', t:'Enchi o armário e paguei 2 aluguéis atrasados. Obrigada!', img:'https://randomuser.me/api/portraits/women/8.jpg'},
+        {n:'Alexandre G.', c:'Goiânia/GO', v:'R$ 6.000', t:'O PIX caiu em 10 minutos. Paguei o banco e respirei!', img:'https://randomuser.me/api/portraits/men/9.jpg'},
+        {n:'Sônia M.', c:'Fortaleza/CE', v:'R$ 12.000', t:'Comprei móveis novos pra minha mãe e quitei o Serasa.', img:'https://randomuser.me/api/portraits/women/10.jpg'}
     ];
 
     const track = document.getElementById('track');
-    dep.forEach(item => {
+    data.forEach(d => {
         track.innerHTML += `
-            <div class="testimonial-card">
-                <div class="card-content">
-                    <div class="user-meta">
-                        <img src="${item.img}" class="user-avatar">
-                        <div class="user-details">
-                            <b>${item.n}</b>
-                            <span>${item.c}</span>
-                        </div>
-                        <div class="amount-tag">${item.v}</div>
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="s-head">
+                        <img src="${d.img}" style="width:40px;height:40px;border-radius:50%">
+                        <div class="s-info"><b>${d.n}</b><span>${d.c}</span></div>
+                        <div class="s-val">${d.v}</div>
                     </div>
-                    <p class="user-comment">"${item.t}"</p>
+                    <p class="s-txt">"${d.t}"</p>
                 </div>
             </div>
         `;
     });
 
-    // Carrossel Loop
-    let i = 0;
-    setInterval(() => {
-        i = (i + 1) % dep.length;
-        track.style.transform = `translateX(-${i * 100}%)`;
-    }, 4500);
+    let idx = 0;
+    setInterval(() => { idx = (idx + 1) % data.length; track.style.transform = `translateX(-${idx * 100}%)`; }, 4000);
 
-    // Notificações
-    const nBox = document.getElementById('notif-box');
-    function showNotif() {
-        const d = dep[Math.floor(Math.random() * dep.length)];
+    const nCon = document.getElementById('notif-container');
+    function showN() {
+        const d = data[Math.floor(Math.random()*data.length)];
         const el = document.createElement('div');
-        el.className = 'notif-item';
+        el.className = 'pop-notif';
         el.innerHTML = `
-            <img src="${d.img}" class="notif-img">
-            <div class="notif-info">
-                <b>${d.n} foi selecionado(a)!</b>
-                <span>Recebeu <i>${d.v}</i> em ${d.c}</span>
-            </div>
+            <img src="${d.img}">
+            <div class="pop-txt"><b>${d.n} foi selecionado(a)!</b><span>Recebeu <i>${d.v}</i> em ${d.c}</span></div>
         `;
-        nBox.appendChild(el);
+        nCon.appendChild(el);
         setTimeout(() => el.classList.add('show'), 100);
-        setTimeout(() => {
-            el.classList.remove('show');
-            setTimeout(() => el.remove(), 600);
-        }, 5000);
+        setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 600); }, 4500);
     }
-    setInterval(showNotif, 9000);
-    setTimeout(showNotif, 2000);
+    setInterval(showN, 8000);
+    setTimeout(showN, 2000);
 
-    // Contador Vagas
     let v = 6;
-    setInterval(() => { if(v > 1) { v--; document.getElementById('vagas-count').innerText = v; } }, 40000);
+    setInterval(() => { if(v > 1) { v--; document.getElementById('v-count').innerText = v; } }, 45000);
 </script>
 
 </body>
