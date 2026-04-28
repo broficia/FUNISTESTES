@@ -18,10 +18,10 @@
 
         .container { max-width: 500px; margin: 0 auto; background: #fff; min-height: 100vh; position: relative; padding-bottom: 120px; }
 
-        /* NOTIFICAÇÕES - AGORA NO CANTO ESQUERDO E MAIS BONITAS */
+        /* NOTIFICAÇÕES - COM DESTAQUES SOLICITADOS */
         #notif-stack { 
             position: fixed; 
-            bottom: 120px; /* Acima do botão de CTA */
+            bottom: 120px; 
             left: 15px; 
             width: 85%; 
             max-width: 320px; 
@@ -29,7 +29,7 @@
             pointer-events: none; 
         }
         .notif-ios { 
-            background: rgba(255, 255, 255, 0.9); 
+            background: rgba(255, 255, 255, 0.94); 
             backdrop-filter: blur(20px); 
             -webkit-backdrop-filter: blur(20px);
             border-radius: 18px; 
@@ -46,8 +46,11 @@
         .notif-ios.show { transform: translateX(0); }
         .notif-ios img { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .n-info b { font-size: 13px; display: block; color: #111; margin-bottom: 1px; }
-        .n-info span { font-size: 11px; color: #555; line-height: 1.2; display: block; }
-        .n-info i { color: #1b5e20; font-weight: 800; font-style: normal; }
+        .n-info span { font-size: 11px; color: #666; line-height: 1.2; display: block; }
+        
+        /* DESTAQUES ESPECÍFICOS */
+        .n-info i { color: #00a859; font-weight: 900; font-style: normal; font-size: 13px; text-shadow: 0px 0px 1px rgba(0,168,89,0.2); }
+        .city-bold { color: #000; font-weight: 800; }
 
         /* CONTEÚDO STORYTELLING */
         .article { padding: 25px 20px; }
@@ -111,11 +114,8 @@
 
         <div class="story-box">
             <p>Meu nome é <b>Monaia</b>. Meu pai construiu um império através do <b>Monaia Heritage Group</b>, mas ele sempre disse que o verdadeiro sucesso não está no que você acumula, mas no que você transforma.</p>
-            
             <p>Após a partida dele, herdei não apenas recursos, mas a responsabilidade de honrar esse legado. Eu sei que o sistema financeiro do Brasil é feito para te esmagar com juros e dívidas que nunca acabam. <b>Eu decidi que não serei cúmplice disso.</b></p>
-            
             <p>Hoje, eu separo uma parte da minha reserva pessoal para abençoar <b>6 famílias por dia</b>. Eu não sou um banco e não me importa se seu nome está no Serasa. Eu quero ajudar você a quitar o agiota que te ameaça, consertar seu instrumento de trabalho ou simplesmente colocar comida na mesa com dignidade.</p>
-
             <p><b>Se você chegou aqui, o algoritmo te selecionou pela sua necessidade. Não desperdice sua chance.</b></p>
         </div>
 
@@ -168,8 +168,8 @@
     fetch('https://ipapi.co/json/')
         .then(r => r.json())
         .then(d => {
-            local = d.city + "/" + d.region_code;
-            document.getElementById('geo-text').innerText = `⚠️ 6 vagas de auxílio liberadas para ${local}`;
+            local = d.city;
+            document.getElementById('geo-text').innerText = `⚠️ 6 vagas de auxílio liberadas para ${d.city}/${d.region_code}`;
             initNotifs();
         });
 
@@ -213,10 +213,10 @@
     }
 
     const depoimentos = [
-        {n:'Ricardo S.', c:'SP', v:'R$ 5.000', t:'Paguei o agiota que me ameaçava. Obrigado Monaia!', i:'https://i.pravatar.cc/150?u=1'},
-        {n:'Marcos Uber', c:'MG', v:'R$ 10.000', t:'Consertei o carro pra voltar a rodar. Vida nova!', i:'https://i.pravatar.cc/150?u=3'},
-        {n:'Sandra R.', c:'CE', v:'R$ 3.500', t:'Paguei os remédios da minha mãe e fiz a feira.', i:'https://i.pravatar.cc/150?u=6'},
-        {n:'Lúcia M.', c:'RJ', v:'R$ 2.800', t:'Quitei minha luz e aluguel. O PIX caiu rápido!', i:'https://i.pravatar.cc/150?u=2'}
+        {n:'Ricardo S.', c:'SP', v:'R$ 5.000', t:'Paguei o agiota que me ameaçava.', i:'https://i.pravatar.cc/150?u=1'},
+        {n:'Marcos Uber', c:'MG', v:'R$ 10.000', t:'Consertei o carro pra voltar a rodar.', i:'https://i.pravatar.cc/150?u=3'},
+        {n:'Sandra R.', c:'CE', v:'R$ 3.500', t:'Paguei os remédios da minha mãe.', i:'https://i.pravatar.cc/150?u=6'},
+        {n:'Lúcia M.', c:'RJ', v:'R$ 2.800', t:'Quitei minha luz e aluguel.', i:'https://i.pravatar.cc/150?u=2'}
     ];
 
     const track = document.getElementById('track');
@@ -233,7 +233,7 @@
             const d = depoimentos[Math.floor(Math.random()*depoimentos.length)];
             const el = document.createElement('div');
             el.className = 'notif-ios';
-            el.innerHTML = `<img src="${d.i}"><div class="n-info"><b>${d.n} foi selecionado(a)!</b><span>Recebeu <i>${d.v}</i> em ${local}</span></div>`;
+            el.innerHTML = `<img src="${d.i}"><div class="n-info"><b>${d.n} foi selecionado(a)!</b><span>Recebeu <i>${d.v}</i> em <span class="city-bold">${local}</span></span></div>`;
             stack.appendChild(el);
             setTimeout(() => el.classList.add('show'), 100);
             setTimeout(() => { el.classList.remove('show'); setTimeout(()=>el.remove(), 800); }, 5000);
