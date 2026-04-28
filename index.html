@@ -7,7 +7,7 @@
     <style>
         :root { --primary: #c4170c; --accent: #25d366; --gold: #d4af37; --bg: #f8f9fa; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background: var(--bg); color: #222; }
+        body { background: var(--bg); color: #222; overflow-x: hidden; }
 
         /* HEADER G1 */
         header { background: var(--primary); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -16,16 +16,38 @@
         .pulse-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        .container { max-width: 500px; margin: 0 auto; background: #fff; min-height: 100vh; position: relative; padding-bottom: 100px; }
+        .container { max-width: 500px; margin: 0 auto; background: #fff; min-height: 100vh; position: relative; padding-bottom: 120px; }
 
-        /* NOTIFICAÇÕES TIPO IOS */
-        #notif-stack { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 420px; z-index: 9999; pointer-events: none; }
-        .notif-ios { background: rgba(255,255,255,0.95); backdrop-filter: blur(15px); border-radius: 20px; padding: 15px; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05); transform: translateY(-150%); transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1); }
-        .notif-ios.show { transform: translateY(0); }
-        .notif-ios img { width: 48px; height: 48px; border-radius: 14px; object-fit: cover; }
-        .n-info b { font-size: 14px; display: block; margin-bottom: 2px; }
-        .n-info span { font-size: 12px; color: #666; }
-        .n-info i { color: #2e7d32; font-weight: 900; font-style: normal; }
+        /* NOTIFICAÇÕES - AGORA NO CANTO ESQUERDO E MAIS BONITAS */
+        #notif-stack { 
+            position: fixed; 
+            bottom: 120px; /* Acima do botão de CTA */
+            left: 15px; 
+            width: 85%; 
+            max-width: 320px; 
+            z-index: 9999; 
+            pointer-events: none; 
+        }
+        .notif-ios { 
+            background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 18px; 
+            padding: 12px; 
+            margin-bottom: 10px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            border: 1px solid rgba(255,255,255,0.4); 
+            transform: translateX(-120%); 
+            transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .notif-ios.show { transform: translateX(0); }
+        .notif-ios img { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .n-info b { font-size: 13px; display: block; color: #111; margin-bottom: 1px; }
+        .n-info span { font-size: 11px; color: #555; line-height: 1.2; display: block; }
+        .n-info i { color: #1b5e20; font-weight: 800; font-style: normal; }
 
         /* CONTEÚDO STORYTELLING */
         .article { padding: 25px 20px; }
@@ -36,7 +58,7 @@
         .story-box p { margin-bottom: 18px; font-size: 16px; color: #333; line-height: 1.7; }
         .story-box b { color: #000; font-weight: 700; }
 
-        /* CARROSSEL DE DEPOIMENTOS */
+        /* CARROSSEL */
         .testimonial-carousel { margin: 30px 0; background: #f0f2f5; padding: 25px 15px; border-radius: 25px; }
         .t-header { font-weight: 800; text-align: center; margin-bottom: 20px; font-size: 18px; color: #1c1e21; }
         .track-container { overflow: hidden; position: relative; border-radius: 15px; }
@@ -50,7 +72,7 @@
         .u-val { margin-left: auto; background: #e8f5e9; color: #2e7d32; font-weight: 900; font-size: 13px; padding: 5px 12px; border-radius: 20px; }
         .u-txt { font-size: 14px; color: #444; font-style: italic; line-height: 1.5; }
 
-        /* MODAL STEPS & LOADING */
+        /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; }
         .step-box { background: #fff; width: 100%; max-width: 400px; border-radius: 30px; padding: 35px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
         .step { display: none; }
@@ -62,13 +84,12 @@
         .timer-text { color: #c4170c; font-weight: 800; font-size: 14px; margin-bottom: 15px; display: block; }
 
         input, textarea { width: 100%; padding: 18px; border: 2px solid #f0f0f0; border-radius: 15px; margin: 20px 0; font-size: 16px; outline: none; background: #fafafa; }
-        input:focus { border-color: var(--primary); background: #fff; }
         .btn-go { background: var(--primary); color: #fff; border: none; width: 100%; padding: 20px; border-radius: 15px; font-weight: 800; font-size: 16px; cursor: pointer; }
         .btn-wpp { background: var(--accent); color: #fff; border: none; width: 100%; padding: 20px; border-radius: 15px; font-weight: 900; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        /* FOOTER CTA */
+        /* FOOTER */
         .footer-action { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; border-top: 1px solid #eee; text-align: center; z-index: 900; }
-        .main-cta { background: var(--accent); color: #fff; padding: 20px; border-radius: 50px; text-decoration: none; display: block; font-weight: 900; font-size: 18px; box-shadow: 0 12px 24px rgba(37,211,102,0.3); animation: float 2s infinite; }
+        .main-cta { background: var(--accent); color: #fff; padding: 18px; border-radius: 50px; text-decoration: none; display: block; font-weight: 900; font-size: 18px; animation: float 2s infinite; box-shadow: 0 10px 20px rgba(37,211,102,0.3); }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
     </style>
 </head>
@@ -105,7 +126,7 @@
             </div>
         </div>
 
-        <p style="text-align: center; font-size: 12px; color: #999;">O Monaia Heritage Group não possui fins lucrativos nesta operação.</p>
+        <p style="text-align: center; font-size: 12px; color: #999; margin-bottom: 20px;">O Monaia Heritage Group não possui fins lucrativos nesta operação.</p>
     </div>
 </div>
 
@@ -124,13 +145,11 @@
         </div>
         <div class="step" id="s2">
             <h2>De quanto você precisa?</h2>
-            <p style="font-size: 14px; color: #666;">Seja honesto para ser aprovado.</p>
             <input type="text" id="in_valor" placeholder="Ex: 5000">
             <button class="btn-go" onclick="startAnalysis()">ANALISAR DISPONIBILIDADE</button>
         </div>
         <div class="step" id="s_loading">
             <h2>Analisando Perfil...</h2>
-            <p id="loading_msg" style="font-size:13px; color:#666; margin-bottom:10px;">Consultando fundos do Heritage Group...</p>
             <div class="loader-container" id="l_c" style="display:block;">
                 <div class="loader-bar" id="l_b"></div>
             </div>
@@ -138,11 +157,8 @@
         <div class="step" id="s3">
             <span class="timer-text">Sua vaga expira em: <span id="timer">05:00</span></span>
             <h2 style="color:var(--accent)">APROVADO! 🙏</h2>
-            <p style="font-size: 14px; color: #666; margin-bottom: 15px;">Conte sua história para liberar o recebimento.</p>
-            <textarea id="in_historia" rows="3" placeholder="Ex: Agiota me ameaçando, aluguel atrasado..."></textarea>
-            <button class="btn-wpp" onclick="finish()">
-                FALAR COM O MONAIA 🙏
-            </button>
+            <textarea id="in_historia" rows="3" placeholder="Resuma sua necessidade..."></textarea>
+            <button class="btn-wpp" onclick="finish()">FALAR COM O MONAIA 🙏</button>
         </div>
     </div>
 </div>
@@ -166,10 +182,7 @@
     function startAnalysis() {
         go('_loading');
         const bar = document.getElementById('l_b');
-        const msg = document.getElementById('loading_msg');
         setTimeout(() => { bar.style.width = "100%"; }, 100);
-        setTimeout(() => { msg.innerText = "Verificando limites de PIX para sua região..."; }, 1200);
-        setTimeout(() => { msg.innerText = "Vaga confirmada! Redirecionando..."; }, 2600);
         setTimeout(() => { 
             go(3); 
             startTimer(300, document.getElementById('timer'));
@@ -183,69 +196,36 @@
     }
 
     function startTimer(duration, display) {
-        let timer = duration, minutes, seconds;
-        setInterval(function () {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-            display.textContent = minutes + ":" + seconds;
+        let timer = duration, m, s;
+        setInterval(() => {
+            m = parseInt(timer / 60, 10); s = parseInt(timer % 60, 10);
+            display.textContent = (m < 10 ? "0"+m : m) + ":" + (s < 10 ? "0"+s : s);
             if (--timer < 0) timer = 0;
         }, 1000);
     }
 
     function finish() {
         const n = document.getElementById('in_nome').value;
-        const vRaw = document.getElementById('in_valor').value;
-        const vFormatted = formatMoney(vRaw);
+        const v = formatMoney(document.getElementById('in_valor').value);
         const h = document.getElementById('in_historia').value;
-        const num = "5581995850167";
-        
-        const msg = `Olá Monaia, fui uma das 6 pessoas selecionadas para a ajuda de hoje! 🙏
-
-📌 *DADOS DO MEU PERFIL:*
-👤 *Nome:* ${n}
-💰 *Valor solicitado:* ${vFormatted}
-
-📝 *MINHA HISTÓRIA:*
-"${h}"
-
-oq devo fazer pra receber minha ajuda agora e ser abençoado?`;
-
-        window.location.href = `https://api.whatsapp.com/send?phone=${num}&text=${encodeURIComponent(msg)}`;
+        const msg = `Olá Monaia, fui uma das 6 pessoas selecionadas para a ajuda de hoje! 🙏\n\n📌 *DADOS DO MEU PERFIL:*\n👤 *Nome:* ${n}\n💰 *Valor solicitado:* ${v}\n\n📝 *MINHA HISTÓRIA:*\n"${h}"\n\noq devo fazer pra receber minha ajuda agora e ser abençoado?`;
+        window.location.href = `https://api.whatsapp.com/send?phone=5581995850167&text=${encodeURIComponent(msg)}`;
     }
 
     const depoimentos = [
-        {n:'Ricardo S.', c:'SP', v:'R$ 5.000', t:'Paguei o agiota que ameaçava minha família. O Monaia salvou minha vida!', i:'https://i.pravatar.cc/150?u=a1'},
-        {n:'Lúcia M.', c:'RJ', v:'R$ 2.800', t:'Minha luz tava cortada e eu sem saber o que fazer. O PIX caiu em minutos!', i:'https://i.pravatar.cc/150?u=a2'},
-        {n:'Marcos Uber', c:'MG', v:'R$ 10.000', t:'Consertei o câmbio do carro pra voltar a rodar. Agora o sustento voltou.', i:'https://i.pravatar.cc/150?u=a3'},
-        {n:'Fabiana L.', c:'PR', v:'R$ 4.500', t:'Quitei o Serasa e o cartão de crédito. Nome limpo depois de 4 anos!', i:'https://i.pravatar.cc/150?u=a4'},
-        {n:'Tiago G.', c:'BA', v:'R$ 7.200', t:'Reformei o telhado da minha casa que tava caindo. Gratidão ao Heritage!', i:'https://i.pravatar.cc/150?u=a5'},
-        {n:'Sandra R.', c:'CE', v:'R$ 3.500', t:'Paguei os medicamentos caros da minha mãe e fiz a feira do mês.', i:'https://i.pravatar.cc/150?u=a6'},
-        {n:'Felipe M.', c:'GO', v:'R$ 6.000', t:'Paguei 3 aluguéis atrasados e saí do despejo. Um milagre!', i:'https://i.pravatar.cc/150?u=a7'},
-        {n:'Beatriz V.', c:'DF', v:'R$ 15.000', t:'Quitei as dívidas de banco e vou abrir meu pequeno salão. Um sonho!', i:'https://i.pravatar.cc/150?u=a8'},
-        {n:'Paulo Motoboy', c:'SC', v:'R$ 2.200', t:'Troquei o pneu e fiz a revisão da moto. O trabalho não pode parar!', i:'https://i.pravatar.cc/150?u=a9'},
-        {n:'Elena P.', c:'AM', v:'R$ 8.000', t:'Paguei a faculdade do meu filho que tava trancada. Deus abençoe!', i:'https://i.pravatar.cc/150?u=a10'}
+        {n:'Ricardo S.', c:'SP', v:'R$ 5.000', t:'Paguei o agiota que me ameaçava. Obrigado Monaia!', i:'https://i.pravatar.cc/150?u=1'},
+        {n:'Marcos Uber', c:'MG', v:'R$ 10.000', t:'Consertei o carro pra voltar a rodar. Vida nova!', i:'https://i.pravatar.cc/150?u=3'},
+        {n:'Sandra R.', c:'CE', v:'R$ 3.500', t:'Paguei os remédios da minha mãe e fiz a feira.', i:'https://i.pravatar.cc/150?u=6'},
+        {n:'Lúcia M.', c:'RJ', v:'R$ 2.800', t:'Quitei minha luz e aluguel. O PIX caiu rápido!', i:'https://i.pravatar.cc/150?u=2'}
     ];
 
     const track = document.getElementById('track');
     depoimentos.forEach(d => {
-        track.innerHTML += `
-            <div class="slide">
-                <div class="slide-inner">
-                    <div class="u-meta">
-                        <img src="${d.i}" class="u-img">
-                        <div class="u-name"><b>${d.n}</b><span>${d.c}</span></div>
-                        <div class="u-val">${d.v}</div>
-                    </div>
-                    <p class="u-txt">"${d.t}"</p>
-                </div>
-            </div>
-        `;
+        track.innerHTML += `<div class="slide"><div class="slide-inner"><div class="u-meta"><img src="${d.i}" class="u-img"><div class="u-name"><b>${d.n}</b><span>${d.c}</span></div><div class="u-val">${d.v}</div></div><p class="u-txt">"${d.t}"</p></div></div>`;
     });
 
-    let s = 0;
-    setInterval(() => { s = (s + 1) % depoimentos.length; track.style.transform = `translateX(-${s * 100}%)`; }, 4500);
+    let slide = 0;
+    setInterval(() => { slide = (slide + 1) % depoimentos.length; track.style.transform = `translateX(-${slide * 100}%)`; }, 4500);
 
     function initNotifs() {
         const stack = document.getElementById('notif-stack');
@@ -253,19 +233,13 @@ oq devo fazer pra receber minha ajuda agora e ser abençoado?`;
             const d = depoimentos[Math.floor(Math.random()*depoimentos.length)];
             const el = document.createElement('div');
             el.className = 'notif-ios';
-            el.innerHTML = `
-                <img src="${d.i}">
-                <div class="n-info">
-                    <b>${d.n} foi selecionado(a)!</b>
-                    <span>Recebeu <i>${d.v}</i> em ${local}</span>
-                </div>
-            `;
+            el.innerHTML = `<img src="${d.i}"><div class="n-info"><b>${d.n} foi selecionado(a)!</b><span>Recebeu <i>${d.v}</i> em ${local}</span></div>`;
             stack.appendChild(el);
             setTimeout(() => el.classList.add('show'), 100);
-            setTimeout(() => { el.classList.remove('show'); setTimeout(()=>el.remove(), 700); }, 5000);
+            setTimeout(() => { el.classList.remove('show'); setTimeout(()=>el.remove(), 800); }, 5000);
         }
-        setInterval(show, 9000);
-        show();
+        setInterval(show, 8000);
+        setTimeout(show, 1500);
     }
 
     let vc = 6;
