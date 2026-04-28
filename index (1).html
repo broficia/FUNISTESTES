@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Monaia Solidário — Programa de Ajuda 2025 | G1 Notícias</title>
+<meta name="description" content="Monaia já distribuiu mais de R$ 12 milhões para famílias brasileiras em 2025. Restam apenas 2 vagas. Cadastre-se agora pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Roboto',sans-serif;background:#f4f4f4;color:#333;line-height:1.55;overflow-x:hidden}
+
+/* Barra de progresso de leitura */
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#c4170c,#ff4d4d);width:0%;z-index:9999;transition:width .1s}
+
+/* Header tipo G1 */
+.g1-header{background:#c4170c;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.news-logo{background:#fff;padding:5px 11px;border-radius:6px;display:inline-flex;align-items:baseline;gap:0;font-family:'Roboto',sans-serif;font-weight:900;line-height:1}
+.news-logo .g{color:#c4170c;font-size:22px;letter-spacing:-1px}
+.news-logo .one{color:#c4170c;font-size:24px;font-style:italic;font-weight:900;margin-left:1px}
+.live-badge{background:#fff;color:#c4170c;font-size:10px;font-weight:900;padding:3px 7px;border-radius:3px;display:inline-flex;align-items:center;gap:4px;letter-spacing:.5px}
+.live-dot{width:6px;height:6px;background:#c4170c;border-radius:50%;animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Container principal */
+.container{max-width:680px;margin:0 auto;background:#fff}
+
+/* Hero da matéria */
+.hero{position:relative}
+.hero img{width:100%;display:block}
+.hero-tag{position:absolute;top:14px;left:14px;background:#c4170c;color:#fff;padding:5px 12px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:3px}
+
+.article{padding:22px 18px}
+.breadcrumb{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-weight:500}
+.breadcrumb span{color:#c4170c;font-weight:700}
+h1{font-size:26px;line-height:1.25;margin-bottom:14px;color:#111;font-weight:900;letter-spacing:-.5px}
+.subtitle{font-size:16px;color:#555;margin-bottom:18px;font-weight:400;line-height:1.5}
+.meta{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8;margin-bottom:20px;font-size:13px;color:#666}
+.meta-author{font-weight:700;color:#222}
+.meta i{color:#c4170c}
+
+/* Estatísticas grid */
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:22px 0}
+.stat-box{background:linear-gradient(135deg,#fff5f5,#ffe8e8);border-left:4px solid #c4170c;padding:14px;border-radius:6px}
+.stat-num{font-size:24px;font-weight:900;color:#c4170c;line-height:1}
+.stat-label{font-size:11px;color:#666;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+
+/* Texto do artigo */
+.article p{margin-bottom:16px;font-size:16px;line-height:1.7;color:#222}
+.article p strong{color:#c4170c}
+blockquote{border-left:4px solid #c4170c;background:#fafafa;padding:16px 18px;margin:20px 0;font-style:italic;font-size:17px;color:#444;border-radius:0 6px 6px 0}
+blockquote cite{display:block;margin-top:8px;font-size:13px;color:#888;font-style:normal;font-weight:700}
+
+/* Selos de autoridade */
+.authority{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0;padding:14px;background:#f9f9f9;border-radius:8px;border:1px solid #eee}
+.auth-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;padding:6px 11px;border-radius:20px;font-size:11px;font-weight:700;color:#444;border:1px solid #ddd}
+.auth-badge i{color:#10b981}
+
+/* Vagas */
+.vagas-card{background:linear-gradient(135deg,#fff8e1,#ffecb3);border:2px solid #ff9800;border-radius:12px;padding:18px;margin:22px 0;text-align:center;position:relative;overflow:hidden}
+.vagas-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:shine 3s infinite}
+@keyframes shine{to{left:100%}}
+.vagas-title{font-size:13px;font-weight:700;color:#e65100;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.vagas-num{font-size:34px;font-weight:900;color:#c4170c;line-height:1;margin:6px 0}
+.vagas-bar{background:#fff;height:10px;border-radius:5px;overflow:hidden;margin:10px 0;border:1px solid #ddd}
+.vagas-fill{height:100%;background:linear-gradient(90deg,#c4170c,#ff5722);border-radius:5px;transition:width 1s}
+.vagas-info{font-size:12px;color:#666;margin-top:6px}
+
+/* Carrossel de depoimentos */
+.testimonials{margin:26px 0}
+.section-title{font-size:20px;font-weight:900;color:#111;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-title i{color:#c4170c}
+.carousel{position:relative;overflow:hidden;border-radius:12px}
+.carousel-track{display:flex;transition:transform .5s ease}
+.testimonial{min-width:100%;padding:18px;background:linear-gradient(135deg,#f8f9fa,#fff);border:1px solid #eee;border-radius:12px}
+.test-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.test-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#c4170c,#ff5722);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
+.test-info{flex:1}
+.test-name{font-weight:700;color:#222;font-size:14px}
+.test-loc{font-size:11px;color:#888}
+.test-stars{color:#ffc107;font-size:12px;margin-top:2px}
+.test-value{background:#10b981;color:#fff;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:900;white-space:nowrap}
+.test-text{font-size:14px;color:#444;line-height:1.6;font-style:italic}
+.carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:12px}
+.dot{width:8px;height:8px;border-radius:50%;background:#ddd;cursor:pointer;transition:all .3s}
+.dot.active{background:#c4170c;width:22px;border-radius:4px}
+
+/* CTA WhatsApp */
+.cta-block{background:linear-gradient(135deg,#25d366,#128c7e);padding:22px 18px;border-radius:14px;margin:26px 0;text-align:center;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.35)}
+.cta-block h2{font-size:22px;font-weight:900;margin-bottom:8px}
+.cta-block p{color:rgba(255,255,255,.95);margin-bottom:14px;font-size:14px}
+.btn-whatsapp{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#128c7e;padding:14px 28px;border-radius:50px;font-weight:900;font-size:16px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:transform .2s;animation:wpp-pulse 2s infinite}
+.btn-whatsapp:hover{transform:scale(1.05)}
+@keyframes wpp-pulse{0%,100%{box-shadow:0 4px 12px rgba(0,0,0,.2),0 0 0 0 rgba(255,255,255,.7)}50%{box-shadow:0 4px 12px rgba(0,0,0,.2),0 0 0 15px rgba(255,255,255,0)}}
+.btn-whatsapp i{font-size:22px;color:#25d366}
+
+.cta-urgency{background:#fff3cd;border:2px dashed #c4170c;padding:12px;border-radius:8px;margin:18px 0;font-size:13px;color:#c4170c;font-weight:700;text-align:center}
+.cta-urgency i{margin-right:6px}
+
+/* FAQ */
+.faq{margin:26px 0}
+.faq-item{background:#fafafa;border:1px solid #eee;border-radius:8px;margin-bottom:8px;overflow:hidden}
+.faq-q{padding:14px 16px;font-weight:700;color:#222;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.faq-q i{color:#c4170c;transition:transform .3s}
+.faq-item.open .faq-q i{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 16px;font-size:14px;color:#555;line-height:1.6}
+.faq-item.open .faq-a{max-height:300px;padding:0 16px 14px}
+
+/* Footer */
+.footer{background:#222;color:#aaa;padding:22px 18px;text-align:center;font-size:12px;line-height:1.6}
+.footer strong{color:#fff}
+
+/* Modal exit-intent */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9998;padding:20px}
+.modal-overlay.show{display:flex;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:#fff;border-radius:14px;padding:26px 22px;max-width:380px;width:100%;text-align:center;position:relative;animation:slideUp .4s}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:10px;right:14px;background:none;border:none;font-size:24px;color:#999;cursor:pointer}
+.modal h3{color:#c4170c;font-size:22px;font-weight:900;margin-bottom:10px}
+.modal p{color:#444;margin-bottom:16px;font-size:14px}
+
+@media(max-width:480px){
+  h1{font-size:22px}
+  .vagas-num{font-size:28px}
+  .stat-num{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="g1-header">
+  <span class="news-logo"><span class="g">g</span><span class="one">1</span></span>
+  <span class="live-badge"><span class="live-dot"></span>AO VIVO</span>
+</header>
+
+<div class="container">
+
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80" alt="Programa Monaia Solidário 2025">
+    <span class="hero-tag">Economia · Solidariedade</span>
+  </div>
+
+  <article class="article">
+    <div class="breadcrumb">G1 › Economia › <span>Programa Solidário</span></div>
+
+    <h1>Monaia anuncia novo lote de R$ 5 mil para famílias brasileiras; restam apenas 2 vagas</h1>
+    <p class="subtitle">Programa já beneficiou mais de 14 mil famílias em 2025 e segue com inscrições abertas via WhatsApp oficial até o fim do dia.</p>
+
+    <div class="meta">
+      <i class="fas fa-user-circle" style="font-size:28px"></i>
+      <div>
+        <div class="meta-author">Por Redação G1</div>
+        <div id="metaTime">Publicado há 12 minutos · Atualizado agora</div>
+      </div>
+    </div>
+
+    <p>O programa solidário <strong>Monaia</strong>, que vem mobilizando milhões de brasileiros nas redes sociais, abriu nesta semana um novo lote de auxílio financeiro no valor de <strong>R$ 5.000,00</strong> destinado a famílias em situação de vulnerabilidade.</p>
+
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-num">14.328</div><div class="stat-label">Famílias ajudadas</div></div>
+      <div class="stat-box"><div class="stat-num">R$ 12,4 mi</div><div class="stat-label">Já distribuídos</div></div>
+      <div class="stat-box"><div class="stat-num">98%</div><div class="stat-label">Aprovação</div></div>
+      <div class="stat-box"><div class="stat-num">24h</div><div class="stat-label">Pagamento</div></div>
+    </div>
+
+    <p>Segundo a equipe responsável, a triagem dos novos contemplados é feita exclusivamente pelo <strong>WhatsApp oficial</strong>, onde o solicitante conversa diretamente com a equipe Monaia para validar os dados e agendar o recebimento via PIX.</p>
+
+    <blockquote>
+      "Quando recebi a ligação dizendo que fui aprovada, chorei muito. Consegui pagar o aluguel atrasado e ainda comprar comida pros meus filhos."
+      <cite>— Maria S., contemplada em março/2025</cite>
+    </blockquote>
+
+    <div class="authority">
+      <span class="auth-badge"><i class="fas fa-shield-check"></i> Verificado SIBS</span>
+      <span class="auth-badge"><i class="fas fa-lock"></i> Pagamento PIX seguro</span>
+      <span class="auth-badge"><i class="fas fa-check-circle"></i> Cadastro CNPJ ativo</span>
+      <span class="auth-badge"><i class="fas fa-award"></i> Selo Reclame Aqui</span>
+    </div>
+
+    <div class="vagas-card">
+      <div class="vagas-title">⚠️ Atenção: vagas limitadas</div>
+      <div class="vagas-num" id="vagasNum">2</div>
+      <div style="font-size:13px;color:#666;font-weight:700">vagas restantes para hoje</div>
+      <div class="vagas-bar"><div class="vagas-fill" id="vagasFill" style="width:66%"></div></div>
+      <div class="vagas-info">4 de 6 vagas já preenchidas nas últimas 2 horas</div>
+    </div>
+
+    <div class="testimonials">
+      <div class="section-title"><i class="fas fa-comments"></i> Quem já foi contemplado</div>
+      <div class="carousel">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- Depoimentos gerados via JS -->
+        </div>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+
+    <div class="cta-block">
+      <h2>📲 Fale com a equipe Monaia</h2>
+      <p>Clique no botão abaixo e converse direto comigo no WhatsApp para garantir sua vaga antes que acabe.</p>
+      <a href="https://wa.me/message/ULEXJ2WNGPB4N1" class="btn-whatsapp" onclick="track()">
+        <i class="fab fa-whatsapp"></i> CHAMAR NO WHATSAPP
+      </a>
+    </div>
+
+    <div class="cta-urgency">
+      <i class="fas fa-clock"></i> Última chamada: as vagas se encerram quando o contador zerar.
+    </div>
+
+    <p>O atendimento é feito de forma <strong>100% gratuita</strong> e personalizada. Após o contato inicial, a equipe valida os documentos e libera o pagamento em até 24 horas direto na conta bancária do beneficiário.</p>
+
+    <div class="faq">
+      <div class="section-title"><i class="fas fa-question-circle"></i> Dúvidas frequentes</div>
+
+      <div class="faq-item">
+        <div class="faq-q">É realmente gratuito? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Sim. O cadastro e o atendimento pelo WhatsApp são totalmente gratuitos. O Monaia é um programa solidário financiado por parceiros.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quanto tempo leva pra receber? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Após a validação dos seus dados pelo WhatsApp, o pagamento via PIX é liberado em até 24 horas úteis.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso participar mesmo com nome sujo? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Sim. O programa Monaia não consulta SPC/Serasa. O auxílio é destinado justamente a quem mais precisa.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Como faço para garantir minha vaga? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Basta clicar no botão verde acima e enviar a mensagem inicial pelo WhatsApp. Nossa equipe responde em poucos minutos.</div>
+      </div>
+    </div>
+
+    <div class="cta-block" style="background:linear-gradient(135deg,#c4170c,#ff5722);box-shadow:0 8px 24px rgba(196,23,12,.35)">
+      <h2>🔥 Não perca essa oportunidade</h2>
+      <p>Restam apenas 2 vagas. Clique e fale agora antes que outra pessoa garanta a sua.</p>
+      <a href="https://wa.me/message/ULEXJ2WNGPB4N1" class="btn-whatsapp" onclick="track()">
+        <i class="fab fa-whatsapp"></i> QUERO MINHA VAGA AGORA
+      </a>
+    </div>
+
+  </article>
+
+  <footer class="footer">
+    <strong>© 2025 Monaia Solidário</strong><br>
+    Programa de ajuda financeira regulamentado.<br>
+    Atendimento exclusivo via WhatsApp oficial.
+  </footer>
+</div>
+
+<!-- Exit intent modal -->
+<div class="modal-overlay" id="exitModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3>⚠️ Espera! Sua vaga ainda está reservada</h3>
+    <p>Você está prestes a perder R$ 5.000,00. Restam apenas <strong>2 vagas</strong> e o atendimento pelo WhatsApp leva menos de 2 minutos.</p>
+    <a href="https://wa.me/message/ULEXJ2WNGPB4N1" class="btn-whatsapp" style="background:#25d366;color:#fff">
+      <i class="fab fa-whatsapp" style="color:#fff"></i> GARANTIR AGORA
+    </a>
+  </div>
+</div>
+
+<script>
+// Depoimentos
+const depoimentos = [
+  {n:'Ana Paula',l:'São Paulo/SP',v:'R$ 5.000',t:'Recebi em menos de 24h! Paguei o aluguel e ainda sobrou pra mercado. Deus abençoe o Monaia!'},
+  {n:'Carlos Eduardo',l:'Rio de Janeiro/RJ',v:'R$ 2.000',t:'Estava desempregado há 6 meses. Esse dinheiro me salvou nesse momento difícil.'},
+  {n:'Juliana Mendes',l:'Belo Horizonte/MG',v:'R$ 10.000',t:'Não acreditei quando o PIX caiu! Consegui quitar minhas dívidas. Muito obrigada!'},
+  {n:'Roberto Silva',l:'Curitiba/PR',v:'R$ 8.000',t:'Atendimento rápido pelo WhatsApp, super atencioso. Recebi tudo certinho.'},
+  {n:'Fernanda Costa',l:'Salvador/BA',v:'R$ 3.500',t:'Comprei material escolar dos meus 3 filhos. Que projeto maravilhoso!'},
+  {n:'Marcos Oliveira',l:'Recife/PE',v:'R$ 5.000',t:'Cheguei a duvidar, mas é tudo verdade. Recebi e troquei a geladeira que tinha quebrado.'},
+  {n:'Patrícia Almeida',l:'Fortaleza/CE',v:'R$ 6.500',t:'Paguei contas atrasadas e ainda fiz uma feira completa. Gratidão eterna!'},
+  {n:'Lucas Pereira',l:'Porto Alegre/RS',v:'R$ 4.000',t:'Em 2 dias o dinheiro caiu na conta. Consegui ajudar minha mãe com remédios.'},
+  {n:'Camila Santos',l:'Brasília/DF',v:'R$ 7.000',t:'Time atencioso, processo simples. Recebi e investi no meu pequeno negócio.'},
+  {n:'Rafael Souza',l:'Manaus/AM',v:'R$ 5.500',t:'Mudou minha vida! Consegui pagar a faculdade do meu filho. Obrigado Monaia!'}
+];
+
+const track = document.getElementById('carouselTrack');
+const dots = document.getElementById('carouselDots');
+depoimentos.forEach((d,i)=>{
+  const init = d.n.split(' ').map(x=>x[0]).slice(0,2).join('');
+  track.innerHTML += `
+    <div class="testimonial">
+      <div class="test-header">
+        <div class="test-avatar">${init}</div>
+        <div class="test-info">
+          <div class="test-name">${d.n}</div>
+          <div class="test-loc">${d.l}</div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+        <div class="test-value">${d.v}</div>
+      </div>
+      <div class="test-text">"${d.t}"</div>
+    </div>`;
+  dots.innerHTML += `<div class="dot ${i===0?'active':''}" onclick="goTo(${i})"></div>`;
+});
+
+let cur = 0;
+function goTo(i){
+  cur = i;
+  track.style.transform = `translateX(-${i*100}%)`;
+  document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===i));
+}
+setInterval(()=>goTo((cur+1)%depoimentos.length), 4500);
+
+// FAQ
+document.querySelectorAll('.faq-item').forEach(it=>{
+  it.querySelector('.faq-q').addEventListener('click',()=>it.classList.toggle('open'));
+});
+
+// Vagas dinâmicas
+let vagas = 2;
+function updateVagas(){
+  document.getElementById('vagasNum').textContent = vagas;
+  document.getElementById('vagasFill').style.width = ((6-vagas)/6*100)+'%';
+}
+updateVagas();
+
+// Tempo dinâmico
+const start = Date.now();
+setInterval(()=>{
+  const min = Math.floor((Date.now()-start)/60000)+12;
+  document.getElementById('metaTime').textContent = `Publicado há ${min} minutos · Atualizado agora`;
+},60000);
+
+// Progress bar
+window.addEventListener('scroll',()=>{
+  const h = document.documentElement;
+  const pct = (h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progressBar').style.width = pct+'%';
+});
+
+// Exit intent
+let shown = false;
+function showModal(){if(!shown){document.getElementById('exitModal').classList.add('show');shown=true}}
+function closeModal(){document.getElementById('exitModal').classList.remove('show')}
+document.addEventListener('mouseleave',e=>{if(e.clientY<10)showModal()});
+let lastScroll = 0;
+window.addEventListener('scroll',()=>{
+  const cur = window.scrollY;
+  if(lastScroll-cur>100 && cur<300)showModal();
+  lastScroll = cur;
+});
+
+function track(){if(navigator.vibrate)try{navigator.vibrate(40)}catch(e){}}
+</script>
+</body>
+</html>
