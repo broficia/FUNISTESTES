@@ -3,195 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>G1 - Programa de Apoio Social 2026</title>
-    <meta name="description" content="Saiba como famílias brasileiras estão reorganizando suas finanças com o apoio Monaia.">
+    <title>G1 - OPORTUNIDADE: Herança Monaia beneficia brasileiros</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-        body{font-family:'Roboto',sans-serif;background:#ececec;color:#333;line-height:1.5;overflow-x:hidden}
-        
-        /* G1 Style Header */
-        .g1-header{background:#c4170c;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.2)}
-        .news-logo{background:#fff;padding:4px 10px;border-radius:4px;font-weight:900;display:flex;align-items:baseline}
-        .news-logo .g{color:#c4170c;font-size:22px}
-        .news-logo .one{color:#c4170c;font-size:24px;font-style:italic}
-        .live-badge{background:#fff;color:#c4170c;font-size:10px;font-weight:900;padding:4px 8px;border-radius:3px;display:flex;align-items:center;gap:5px}
-        .live-dot{width:7px;height:7px;background:#c4170c;border-radius:50%;animation:pulse 1.2s infinite}
-        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+        :root { --g1-red: #c4170c; --wpp-green: #25d366; --bg-gray: #f2f2f2; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Open Sans', sans-serif; background: var(--bg-gray); color: #222; line-height: 1.6; }
 
-        .container{max-width:640px;margin:0 auto;background:#fff;min-height:100vh;box-shadow: 0 0 20px rgba(0,0,0,0.05)}
-        
-        /* Article Content */
-        .article{padding:20px 18px}
-        .category{color:#c4170c;font-weight:700;font-size:12px;text-transform:uppercase;margin-bottom:8px;display:block}
-        h1{font-size:26px;line-height:1.2;font-weight:900;color:#111;margin-bottom:15px;letter-spacing:-0.5px}
-        .subtitle{font-size:17px;color:#555;margin-bottom:20px;line-height:1.4}
-        
-        .author-box{display:flex;align-items:center;gap:12px;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;margin-bottom:20px}
-        .author-img{width:40px;height:40px;background:#ddd;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:#999}
-        .author-info{font-size:13px;color:#666}
-        .author-info b{color:#333;display:block}
+        /* Header G1 Estilizado */
+        .header { background: var(--g1-red); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .logo-g1 { background: #fff; color: var(--g1-red); font-family: 'Montserrat', sans-serif; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 20px; font-style: italic; }
+        .live { color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 6px; text-transform: uppercase; }
+        .dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* Storytelling Elements */
-        .main-img{width:100%;border-radius:4px;margin-bottom:20px}
-        p{margin-bottom:18px;font-size:16px;color:#333;line-height:1.7}
-        .highlight{background:#fff3cd;padding:2px 5px;font-weight:700;border-radius:3px}
+        .wrapper { max-width: 600px; margin: 0 auto; background: #fff; min-height: 100vh; padding-bottom: 100px; }
+        
+        /* Banner e Headline */
+        .hero-img { width: 100%; height: 250px; object-fit: cover; }
+        .content { padding: 20px; }
+        .kicker { color: var(--g1-red); font-weight: 700; font-size: 12px; text-transform: uppercase; margin-bottom: 5px; display: block; }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 24px; line-height: 1.2; font-weight: 900; color: #111; margin-bottom: 15px; }
+        .lead { font-size: 17px; color: #555; font-weight: 600; margin-bottom: 20px; border-left: 3px solid #ddd; padding-left: 15px; }
 
-        /* Vagas Box */
-        .urgency-box{background:#fdf2f2;border:2px solid #c4170c;border-radius:10px;padding:20px;text-align:center;margin:25px 0}
-        .vagas-count{font-size:40px;font-weight:900;color:#c4170c;display:block}
-        .vagas-text{font-weight:700;text-transform:uppercase;font-size:13px;color:#c4170c}
+        /* Storytelling */
+        .story-text p { margin-bottom: 20px; font-size: 16px; color: #333; }
+        .highlight-box { background: #fff9e6; border: 1px solid #ffeeba; padding: 15px; border-radius: 8px; margin: 20px 0; }
+        
+        /* Carrossel de Depoimentos */
+        .testimonials-section { margin: 30px 0; background: #f9f9f9; padding: 20px 10px; border-radius: 12px; }
+        .section-title { font-weight: 900; font-size: 18px; margin-bottom: 15px; text-align: center; color: #333; }
+        .carousel-container { overflow: hidden; position: relative; width: 100%; }
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .card { min-width: 100%; padding: 15px; }
+        .card-inner { background: #fff; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .user-info { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .user-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--g1-red); }
+        .user-name { font-weight: 700; font-size: 14px; }
+        .user-city { font-size: 11px; color: #888; display: block; }
+        .user-value { background: #e8f5e9; color: #2e7d32; font-weight: 900; font-size: 12px; padding: 4px 10px; border-radius: 20px; margin-left: auto; }
+        .comment { font-style: italic; font-size: 14px; color: #444; line-height: 1.5; }
 
         /* CTA */
-        .cta-container{position:sticky;bottom:20px;padding:0 18px;z-index:999}
-        .btn-wpp{display:flex;align-items:center;justify-content:center;gap:12px;background:#25d366;color:#fff;text-decoration:none;padding:18px;border-radius:12px;font-weight:900;font-size:18px;box-shadow:0 10px 25px rgba(37,211,102,0.4);animation:shake 3s infinite}
-        @keyframes shake {0%,100%{transform:scale(1)} 10%,20%{transform:scale(1.05) rotate(-1deg)} 30%,50%,70%,90%{transform:scale(1.05) rotate(1deg)} 40%,60%,80%{transform:scale(1.05) rotate(-1deg)}}
+        .cta-box { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px 20px; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); z-index: 999; text-align: center; }
+        .btn-wpp { background: var(--wpp-green); color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px; border-radius: 50px; font-weight: 900; font-size: 18px; animation: pulseWpp 2s infinite; }
+        @keyframes pulseWpp { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102, 0.7); } 70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(37,211,102, 0); } 100% { transform: scale(1); } }
 
-        /* Notificações */
-        #notification-container{position:fixed;bottom:100px;left:15px;z-index:10000;width:calc(100% - 30px);max-width:320px;pointer-events:none}
-        .notif{background:#fff;border-radius:10px;padding:12px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 30px rgba(0,0,0,0.15);margin-top:10px;border-left:5px solid #25d366;transform:translateX(-120%);transition:all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
-        .notif.show{transform:translateX(0)}
-        .notif-img{width:45px;height:45px;border-radius:50%;object-fit:cover}
-        .notif-content{font-size:12px;color:#444}
-        .notif-content b{color:#111;display:block;font-size:13px}
-        .notif-val{color:#128c7e;font-weight:900}
+        /* Urgência */
+        .vagas-alert { background: #fff5f5; color: var(--g1-red); padding: 8px; border-radius: 6px; font-weight: 700; font-size: 13px; margin-top: 10px; display: inline-block; }
 
-        .faq{margin-top:30px;background:#f9f9f9;padding:20px;border-radius:10px}
-        .faq h3{margin-bottom:15px;font-size:18px}
-        .faq-item{margin-bottom:15px;font-size:14px;color:#555}
-        .faq-item b{color:#333;display:block;margin-bottom:3px}
-
-        footer{padding:40px 18px;text-align:center;font-size:12px;color:#999;background:#f1f1f1}
+        /* Notificações Premium */
+        #notif-group { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 350px; z-index: 2000; pointer-events: none; }
+        .notif-item { background: rgba(255,255,255,0.98); backdrop-filter: blur(5px); border-radius: 12px; padding: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05); transform: translateY(-100px); opacity: 0; transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        .notif-item.show { transform: translateY(0); opacity: 1; }
+        .notif-icon { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .notif-text { font-size: 12px; color: #444; }
+        .notif-text b { color: #111; display: block; font-size: 13px; }
+        .notif-price { color: #2e7d32; font-weight: 900; }
     </style>
 </head>
 <body>
 
-<header class="g1-header">
-    <span class="news-logo"><span class="g">g</span><span class="one">1</span></span>
-    <span class="live-badge"><span class="live-dot"></span> AO VIVO</span>
+<header class="header">
+    <div class="logo-g1">g1</div>
+    <div class="live"><div class="dot"></div> Ao Vivo: Brasil</div>
 </header>
 
-<div class="container">
-    <article class="article">
-        <span class="category">Economia Social</span>
-        <h1>Monaia abre análise de perfil para liberação de cotas de até R$ 5.000 via PIX</h1>
-        <p class="subtitle">Com foco em famílias com contas atrasadas e nome restrito, programa já liberou mais de R$ 12 milhões em auxílio direto apenas em 2026.</p>
+<div id="notif-group"></div>
 
-        <div class="author-box">
-            <div class="author-img"><i class="fas fa-user-edit"></i></div>
-            <div class="author-info">
-                Por <b>Redação G1</b>
-                <span id="data-atual">28/04/2026 13:05</span> • Atualizado há 2 minutos
+<div class="wrapper">
+    <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80" class="hero-img" alt="Fortuna Monaia">
+    
+    <div class="content">
+        <span class="kicker">Solidariedade Extraordinária</span>
+        <h1>Filho de bilionário brasileiro inicia doações de até R$ 15 mil e iPhones 16 Pro Max para famílias em urgência</h1>
+        
+        <p class="lead">Após o falecimento de seu pai, o herdeiro do grupo Monaia decidiu que não manteria a fortuna parada enquanto milhares de brasileiros sofrem com dívidas e falta de perspectiva.</p>
+
+        <div class="story-text">
+            <p>Se você está lendo esta página, você não chegou aqui por acaso. Nosso sistema de localização identificou que você pode ser um dos <b>6 escolhidos de hoje</b> para receber uma parte da herança Monaia.</p>
+            
+            <p>O objetivo é simples: o herdeiro acredita que o dinheiro deve circular para quem trabalha. Seja para pagar aquele <b>agiota</b> que está tirando seu sono, quitar o <b>Serasa</b>, consertar sua <b>moto/carro</b> para voltar a trabalhar ou simplesmente encher o armário de comida e pagar as contas de luz e gás atrasadas.</p>
+
+            <div class="highlight-box">
+                <b>⚠️ AVISO:</b> O herdeiro atende pessoalmente apenas os <b>6 primeiros</b> que chamarem no WhatsApp agora. Ele quer ouvir a sua história e decidir como vai te abençoar.
             </div>
         </div>
 
-        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" class="main-img" alt="Dinheiro na mão">
-
-        <p>Você já sentiu aquele aperto no peito ao ver o dia do aluguel chegando e a conta bancária zerada? Ou a frustração de querer fazer uma feira digna para seus filhos e ter que escolher o que deixar para trás no mercado?</p>
-
-        <p>O <strong>Monaia</strong> nasceu para ser o respiro de quem o sistema financeiro esqueceu. Não somos um banco e não consultamos SPC ou Serasa. Nossa missão é redistribuir recursos para quem realmente precisa de um <b>pontapé inicial</b> para sair da lama.</p>
-
-        <p>Através de uma triagem humanizada via WhatsApp, nossa equipe analisa o seu perfil hoje mesmo. <span class="highlight">O valor liberado cai na sua conta em até 24 horas</span>, sem burocracia excessiva.</p>
-
-        <div class="urgency-box">
-            <span class="vagas-text">⚠️ Restam Apenas</span>
-            <span class="vagas-count" id="contagem-vagas">3</span>
-            <span class="vagas-text">Vagas para sua região hoje</span>
-        </div>
-
-        <p><strong>Como funciona o processo?</strong></p>
-        <p>Ao clicar no botão abaixo, você será direcionado para o nosso atendimento oficial. Lá, um consultor fará 3 perguntas básicas para entender sua urgência. Se o seu perfil for compatível com a cota disponível, a liberação é imediata.</p>
-
-        <blockquote>
-            <i>"Eu já não dormia mais por causa das dívidas. O Monaia me ouviu e em poucas horas o PIX de R$ 3.500 estava na minha conta. Paguei meu aluguel e respirei fundo pela primeira vez no ano."</i>
-            <br>— <b>Marcos S., São Paulo/SP</b>
-        </blockquote>
-
-        <div class="faq">
-            <h3>Dúvidas Rápidas:</h3>
-            <div class="faq-item">
-                <b>Preciso pagar algo para me cadastrar?</b>
-                O atendimento inicial e a análise são gratuitos. Caso seja aprovado, você será informado sobre os passos para ativação da sua cota.
-            </div>
-            <div class="faq-item">
-                <b>Tenho nome sujo, posso participar?</b>
-                Sim! O programa é focado justamente em quem não consegue crédito em bancos tradicionais.
+        <div class="testimonials-section">
+            <div class="section-title">Quem já foi abençoado:</div>
+            <div class="carousel-container">
+                <div class="carousel-track" id="track">
+                    </div>
             </div>
         </div>
-    </article>
 
-    <div class="cta-container">
-        <a href="https://wa.me/message/ULEXJ2WNGPB4N1" class="btn-wpp">
-            <i class="fab fa-whatsapp"></i> QUERO MINHA ANÁLISE AGORA
-        </a>
+        <p>Não é sorteio. É uma decisão pessoal de quem recebeu muito e quer devolver ao povo. Você terá menos de 2 minutos para garantir sua vaga antes que o próximo da fila assuma seu lugar.</p>
     </div>
-
-    <footer>
-        <b>© 2026 Monaia Solidário</b><br>
-        Todos os direitos reservados. O programa Monaia não possui vínculo com órgãos governamentais. A liberação de valores está sujeita à disponibilidade de cotas diárias e análise de perfil social.
-    </footer>
 </div>
 
-<div id="notification-container"></div>
+<div class="cta-box">
+    <a href="https://wa.me/message/ULEXJ2WNGPB4N1" class="btn-wpp">
+        <i class="fab fa-whatsapp"></i> FALAR COM O HERDEIRO AGORA
+    </a>
+    <div class="vagas-alert">Restam apenas <span id="vagas">6</span> vagas disponíveis</div>
+</div>
 
 <script>
-    // Atualiza a data
-    const now = new Date();
-    document.getElementById('data-atual').textContent = now.toLocaleDateString('pt-BR') + ' ' + now.getHours() + ':' + (now.getMinutes()<10?'0':'') + now.getMinutes();
-
-    // Lógica de Vagas Decrescentes
-    let vagas = 3;
-    const timerVagas = setInterval(() => {
-        if(vagas > 1) {
-            vagas--;
-            document.getElementById('contagem-vagas').textContent = vagas;
-        } else {
-            clearInterval(timerVagas);
-        }
-    }, 45000);
-
-    // Sistema de Notificações Pop-up
-    const dadosNotif = [
-        {n: 'Ricardo Alves', c: 'Sorocaba/SP', v: 'R$ 5.000', img: 'https://randomuser.me/api/portraits/men/1.jpg'},
-        {n: 'Ana Beatriz', c: 'Salvador/BA', v: 'R$ 2.500', img: 'https://randomuser.me/api/portraits/women/2.jpg'},
-        {n: 'Marcos Oliveira', c: 'Curitiba/PR', v: 'R$ 1.200', img: 'https://randomuser.me/api/portraits/men/3.jpg'},
-        {n: 'Julia Mendes', c: 'Manaus/AM', v: 'R$ 4.300', img: 'https://randomuser.me/api/portraits/women/4.jpg'},
-        {n: 'Carlos Eduardo', c: 'Belo Horizonte/MG', v: 'R$ 5.000', img: 'https://randomuser.me/api/portraits/men/5.jpg'},
-        {n: 'Fernanda Costa', c: 'Osasco/SP', v: 'R$ 3.000', img: 'https://randomuser.me/api/portraits/women/6.jpg'}
+    const depoimentos = [
+        {n: 'Ricardo S.', c: 'São Paulo/SP', v: 'R$ 5.000', t: 'Paguei o agiota que tava ameaçando minha família. Hoje durmo em paz. Obrigado Monaia!', img: 'https://randomuser.me/api/portraits/men/32.jpg'},
+        {n: 'Marta Lima', c: 'Recife/PE', v: 'R$ 2.000', t: 'Minha luz tava cortada há 3 dias. Fiz as compras do mês e ainda sobrou pro gás!', img: 'https://randomuser.me/api/portraits/women/44.jpg'},
+        {n: 'João Paulo', c: 'Goiânia/GO', v: 'R$ 10.000', t: 'Consegui arrumar o motor do meu carro pra voltar a rodar de Uber. Minha vida recomeçou!', img: 'https://randomuser.me/api/portraits/men/46.jpg'},
+        {n: 'Bia Mendes', c: 'Curitiba/PR', v: 'R$ 8.500', t: 'Limpei meu nome no Serasa e comprei os móveis do quarto do meu filho que estavam faltando.', img: 'https://randomuser.me/api/portraits/women/68.jpg'},
+        {n: 'Roberto F.', c: 'Salvador/BA', v: 'iPhone 16 + R$ 3k', t: 'Não acreditei quando chegou! Agora posso trabalhar com marketing digital com celular bom.', img: 'https://randomuser.me/api/portraits/men/85.jpg'},
+        {n: 'Carla Dias', c: 'Rio de Janeiro/RJ', v: 'R$ 15.000', t: 'Paguei a cirurgia da minha mãe que o SUS não liberava. Serei eternamente grata.', img: 'https://randomuser.me/api/portraits/women/22.jpg'},
+        {n: 'Tiago Luz', c: 'Manaus/AM', v: 'R$ 4.000', t: 'Quitei o cartão de crédito que os juros tavam me matando. Dinheiro caiu na hora!', img: 'https://randomuser.me/api/portraits/men/11.jpg'},
+        {n: 'Sandra R.', c: 'Fortaleza/CE', v: 'R$ 2.500', t: 'Fiz a feira completa e paguei 3 meses de aluguel atrasado. Deus abençoe!', img: 'https://randomuser.me/api/portraits/women/17.jpg'},
+        {n: 'Lucas V.', c: 'Porto Alegre/RS', v: 'R$ 6.000', t: 'Consertei minha moto de entrega e paguei o IPVA. Agora o trabalho não para!', img: 'https://randomuser.me/api/portraits/men/52.jpg'},
+        {n: 'Elena P.', c: 'Brasília/DF', v: 'R$ 9.000', t: 'Comprei geladeira e fogão novos pra minha mãe. Um sonho realizado.', img: 'https://randomuser.me/api/portraits/women/50.jpg'}
     ];
 
-    const container = document.getElementById('notification-container');
-
-    function showNotification() {
-        const item = dadosNotif[Math.floor(Math.random() * dadosNotif.length)];
-        const div = document.createElement('div');
-        div.className = 'notif';
-        div.innerHTML = `
-            <img src="${item.img}" class="notif-img">
-            <div class="notif-content">
-                <b>${item.n}</b>
-                Recebeu <span class="notif-val">${item.v}</span> agora em ${item.c}
+    const track = document.getElementById('track');
+    depoimentos.forEach(d => {
+        track.innerHTML += `
+            <div class="card">
+                <div class="card-inner">
+                    <div class="user-info">
+                        <img src="${d.img}" class="user-img">
+                        <div>
+                            <span class="user-name">${d.n}</span>
+                            <span class="user-city">${d.c}</span>
+                        </div>
+                        <span class="user-value">${d.v}</span>
+                    </div>
+                    <p class="comment">"${d.t}"</p>
+                </div>
             </div>
         `;
-        container.appendChild(div);
+    });
 
+    let index = 0;
+    setInterval(() => {
+        index = (index + 1) % depoimentos.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+    }, 4000);
+
+    // Notificações Premium
+    const notifGroup = document.getElementById('notif-group');
+    function spawnNotif() {
+        const d = depoimentos[Math.floor(Math.random()*depoimentos.length)];
+        const div = document.createElement('div');
+        div.className = 'notif-item';
+        div.innerHTML = `
+            <img src="${d.img}" class="notif-icon">
+            <div class="notif-text">
+                <b>${d.n} acabou de ser abençoado(a)</b>
+                Recebeu <span class="notif-price">${d.v}</span> em ${d.c}
+            </div>
+        `;
+        notifGroup.appendChild(div);
         setTimeout(() => div.classList.add('show'), 100);
-
         setTimeout(() => {
             div.classList.remove('show');
             setTimeout(() => div.remove(), 600);
-        }, 5000);
+        }, 4000);
     }
+    setInterval(spawnNotif, 8000);
+    setTimeout(spawnNotif, 2000);
 
-    // Inicia notificações após 3 segundos
-    setTimeout(() => {
-        showNotification();
-        setInterval(showNotification, 10000);
-    }, 3000);
-
+    // Vagas Fake
+    let v = 6;
+    setInterval(() => { if(v > 1) { v--; document.getElementById('vagas').innerText = v; } }, 35000);
 </script>
 
 </body>
